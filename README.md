@@ -7,3 +7,5 @@ Run an aircraft company in the jet age: research a tech tree, draw your own airf
 ## Status
 
 Early concept stage. See the [game design document](docs/game_design.md).
+
+Aerodynamics prototype (AeroSandbox, validated on the F-86E): see [docs/aero_prototype.md](docs/aero_prototype.md).

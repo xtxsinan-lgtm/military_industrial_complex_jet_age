@@ -1,0 +1,6 @@
+AeroSandbox==4.2.8
+casadi==3.7.2
+matplotlib==3.9.4
+NeuralFoil==0.3.2
+numpy==2.0.2
+scipy==1.13.1
