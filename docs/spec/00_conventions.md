@@ -1,6 +1,6 @@
 # 00 — Conventions, Shared Contracts, and Spec Template
 
-> Status: v1.0 (spine document — all module specs MUST conform). Owner: lead designer agent.
+> Status: v1.2 (spine document — all module specs MUST conform). Owner: lead designer agent.
 > Language: specs may be written in Chinese or English; **identifiers, schema keys, formulas, and code are always English**.
 
 This document is the single source of truth for things that cross module boundaries. If a module spec needs to change anything here, it must NOT silently diverge — instead add an entry to its own "Cross-module change requests" section; the lead will reconcile and bump this file's version.
@@ -16,6 +16,11 @@ This document is the single source of truth for things that cross module boundar
 | D3 | Validation: physics calibration vs. historical aircraft; design-space search for exploits; Monte-Carlo bot-player balance; text-mode paper prototype; "dumb agent" ticket test. |
 | D4 | Naming: **real names** for companies, aircraft, engines, programs. **All display names live in data files** (`data/names/*.json`), never hard-coded, so a rename patch is trivial. |
 | D5 | Tone: neutral simulation. Player strictly plays a manufacturer (cannot declare war, cannot choose export customers unilaterally). |
+| D6 | Procurement flow (A1): **Default ALL procurement programs in gameplay mode to the two-stage `flyoff` flow** (*Proposal Downselect → Build Prototypes → Hardware Fly-Off Evaluation*). Keep historical `paper_award` and `sole_source` modes in code via a campaign setting (`historical_acquisition_styles: bool = false` by default; `true` for historical replay validation or optional "Strict Historical Cook-Craigie" campaign rule). |
+| D7 | Tech & Flaw Fog of War (A2): **Full 1945–1960 tech tree is visible from Day 1** (showing historical year & ahead-of-time penalties); era-unknown flaws before their `known_from_year` display as generic *"Uncharted High-Speed Regime Risks"* until first encountered in testing/service, with an optional *"Historical Hindsight"* campaign setup toggle. |
+| D8 | Post-1960 Continuation (A3): At `1960-12-31`, lock the official 1945–1960 campaign score/epilogue and allow clicking **"Continue in Sandbox"** with dynamic procedural RFPs. |
+| D9 | Test Pilots & Engine Vendors (A4): Use **fictional period-authentic test pilot names** (`data/testing/pilot_names.json`) so fatal crashes never kill real historical figures; external custom engine commissions explicitly select a **named historical engine vendor** (`Pratt & Whitney`, `General Electric`, `Allison`, `Curtiss-Wright`, `Westinghouse` from `data/companies/engine_makers_us_1945_1960.json`) with vendor specialty traits. |
+| D10 | Pre-Bid Competitor Intelligence (A5): Before `proposal_due`, **trade-press rumors / intelligence** show approximate rival performance & price ranges (with large error bars); full score breakdown (`S_perf`, `S_cost`, `S_sched`, `S_risk`, `S_pol`) is revealed in the post-award **Source Selection Debrief**. |
 
 ## 2. Repository layout (target)
 

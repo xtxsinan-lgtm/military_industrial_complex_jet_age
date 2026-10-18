@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "module": "07_competitor_ai",
+  "tolerance_rel": 1e-06,
+  "initial_ai_company_count": 12,
+  "month_1_step_reports": {
+    "lockheed": {
+      "company_id": "lockheed",
+      "active_designer_id": "designer_kelly_johnson",
+      "research_allocations": [
+        [
+          "aero_1945_swept_wing_theory",
+          36
+        ],
+        [
+          "test_1946_wallops_rocket_models",
+          24
+        ],
+        [
+          "mfg_1947_flush_riveting_aerodynamic_smoothing",
+          20
+        ]
+      ],
+      "ending_cash_usd": 33787160.11,
+      "active_in_fighter_market": true
+    },
+    "convair": {
+      "company_id": "convair",
+      "active_designer_id": "designer_frank_davis",
+      "research_allocations": [
+        [
+          "aero_1945_swept_wing_theory",
+          38
+        ],
+        [
+          "sys_1946_hydraulic_boost_controls",
+          25
+        ],
+        [
+          "sys_1946_ejection_seat",
+          24
+        ]
+      ],
+      "ending_cash_usd": 33757492.03,
+      "active_in_fighter_market": true
+    },
+    "grumman": {
+      "company_id": "grumman",
+      "active_designer_id": "designer_william_schwendler",
+      "research_allocations": [
+        [
+          "aero_1945_swept_wing_theory",
+          25
+        ],
+        [
+          "struct_1946_thick_skin_box_spar",
+          24
+        ],
+        [
+          "mfg_1947_flush_riveting_aerodynamic_smoothing",
+          21
+        ]
+      ],
+      "ending_cash_usd": 27785864.51,
+      "active_in_fighter_market": true
+    },
+    "curtiss_wright": {
+      "company_id": "curtiss_wright",
+      "active_designer_id": "designer_donovan_berlin",
+      "research_allocations": [
+        [
+          "aero_1945_swept_wing_theory",
+          21
+        ],
+        [
+          "mfg_1947_flush_riveting_aerodynamic_smoothing",
+          18
+        ],
+        [
+          "struct_1946_thick_skin_box_spar",
+          18
+        ]
+      ],
+      "ending_cash_usd": 31852471.39,
+      "active_in_fighter_market": true
+    }
+  },
+  "rfp_1946_entries": [
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "lockheed",
+      "company_name": "company.lockheed.name",
+      "design_name": "Lockheed CL-100",
+      "entry_score": 1.695,
+      "unit_price_bid_usd": 223657.0,
+      "dev_cost_bid_usd": 9393594.13,
+      "true_max_mach_alt": 0.8091,
+      "true_combat_radius_m": 1025412.3,
+      "promised": {
+        "climb_rate_sl_mps": 40.3645,
+        "combat_radius_m": 1203800.0,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14497.7815
+      },
+      "flyoff_completed": false,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": null
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "mcdonnell",
+      "company_name": "company.mcdonnell.name",
+      "design_name": "Mcdonnell Model-100",
+      "entry_score": 1.453,
+      "unit_price_bid_usd": 226411.21,
+      "dev_cost_bid_usd": 9509270.64,
+      "true_max_mach_alt": 0.8448,
+      "true_combat_radius_m": 1283683.1,
+      "promised": {
+        "climb_rate_sl_mps": 36.5214,
+        "combat_radius_m": 1332410.6621,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14404.4142
+      },
+      "flyoff_completed": false,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": null
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "boeing",
+      "company_name": "company.boeing.name",
+      "design_name": "Boeing Model-100",
+      "entry_score": 1.2625,
+      "unit_price_bid_usd": 224523.67,
+      "dev_cost_bid_usd": 9307958.81,
+      "true_max_mach_alt": 0.7624,
+      "true_combat_radius_m": 1297813.9,
+      "promised": {
+        "climb_rate_sl_mps": 35.8311,
+        "combat_radius_m": 1358726.0718,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14353.9711
+      },
+      "flyoff_completed": false,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": null
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "republic",
+      "company_name": "company.republic.name",
+      "design_name": "Republic AP-100",
+      "entry_score": 1.231,
+      "unit_price_bid_usd": 219523.6,
+      "dev_cost_bid_usd": 9100673.53,
+      "true_max_mach_alt": 0.8196,
+      "true_combat_radius_m": 1479224.7,
+      "promised": {
+        "climb_rate_sl_mps": 37.0309,
+        "combat_radius_m": 1453950.2454,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14559.9876
+      },
+      "flyoff_completed": false,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": null
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "convair",
+      "company_name": "company.convair.name",
+      "design_name": "Convair Model-100",
+      "entry_score": 1.224,
+      "unit_price_bid_usd": 215785.12,
+      "dev_cost_bid_usd": 9000000.0,
+      "true_max_mach_alt": 0.8021,
+      "true_combat_radius_m": 1161578.7,
+      "promised": {
+        "climb_rate_sl_mps": 38.6297,
+        "combat_radius_m": 1268759.4828,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14335.8912
+      },
+      "flyoff_completed": false,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": null
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "northrop",
+      "company_name": "company.northrop.name",
+      "design_name": "Northrop N-100",
+      "entry_score": 1.196,
+      "unit_price_bid_usd": 218048.03,
+      "dev_cost_bid_usd": 9039501.71,
+      "true_max_mach_alt": 0.7858,
+      "true_combat_radius_m": 1187487.5,
+      "promised": {
+        "climb_rate_sl_mps": 40.6897,
+        "combat_radius_m": 1311372.0006,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 15176.1361
+      },
+      "flyoff_completed": false,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": null
+    }
+  ],
+  "rfp_1946_proposal_finalists": [
+    "usaf_pen_fighter_1946__republic",
+    "usaf_pen_fighter_1946__boeing",
+    "usaf_pen_fighter_1946__northrop"
+  ],
+  "rfp_1946_flyoff_finalists": [
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "boeing",
+      "company_name": "company.boeing.name",
+      "design_name": "Boeing Model-100",
+      "entry_score": 1.2625,
+      "unit_price_bid_usd": 224523.67,
+      "dev_cost_bid_usd": 9307958.81,
+      "true_max_mach_alt": 0.7624,
+      "true_combat_radius_m": 1297813.9,
+      "promised": {
+        "climb_rate_sl_mps": 35.8311,
+        "combat_radius_m": 1358726.0718,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14353.9711
+      },
+      "flyoff_completed": true,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": 810
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "republic",
+      "company_name": "company.republic.name",
+      "design_name": "Republic AP-100",
+      "entry_score": 1.231,
+      "unit_price_bid_usd": 219523.6,
+      "dev_cost_bid_usd": 9100673.53,
+      "true_max_mach_alt": 0.818,
+      "true_combat_radius_m": 1467893.1,
+      "promised": {
+        "climb_rate_sl_mps": 37.0309,
+        "combat_radius_m": 1453950.2454,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 14559.9876
+      },
+      "flyoff_completed": true,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": 824
+    },
+    {
+      "program_id": "usaf_pen_fighter_1946",
+      "company_id": "northrop",
+      "company_name": "company.northrop.name",
+      "design_name": "Northrop N-100",
+      "entry_score": 1.196,
+      "unit_price_bid_usd": 218048.03,
+      "dev_cost_bid_usd": 9039501.71,
+      "true_max_mach_alt": 0.7858,
+      "true_combat_radius_m": 1187487.5,
+      "promised": {
+        "climb_rate_sl_mps": 40.6897,
+        "combat_radius_m": 1311372.0006,
+        "max_mach_alt": 0.88,
+        "service_ceiling_m": 15176.1361
+      },
+      "flyoff_completed": true,
+      "unfixed_flaw_severity_sum": 0,
+      "actual_first_flight_day": 800
+    }
+  ],
+  "rfp_1946_flyoff_winners": [
+    "republic"
+  ]
+}

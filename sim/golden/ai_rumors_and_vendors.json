@@ -1,0 +1,1191 @@
+{
+  "schema_version": 1,
+  "module": "07_competitor_ai",
+  "tolerance_rel": 1e-06,
+  "rumors_by_inquiry_level": {
+    "0": [
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "lockheed",
+        "company_name": "company.lockheed.name",
+        "rumored_design_name": "company.lockheed.name Entry",
+        "inquiry_level": 0,
+        "inquiry_cost_usd": 0.0,
+        "inquiry_pc_cost": 0.0,
+        "participation_confidence": 0.68,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing layout",
+        "engine_hint": "classified turbojet",
+        "max_mach_alt": {
+          "value": 0.812,
+          "sigma": 0.089,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 853594.2,
+          "sigma": 184574.2,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 232651.97,
+          "sigma": 44731.4,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.812,
+            "sigma": 0.089,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 853594.2,
+            "sigma": 184574.2,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 232651.97,
+            "sigma": 44731.4,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 232651.97,
+            "sigma": 44731.4,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.lockheed.name is readying the Lockheed CL-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.81 \u00b1 0.09, unit price ~$232,652."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "mcdonnell",
+        "company_name": "company.mcdonnell.name",
+        "rumored_design_name": "company.mcdonnell.name Entry",
+        "inquiry_level": 0,
+        "inquiry_cost_usd": 0.0,
+        "inquiry_pc_cost": 0.0,
+        "participation_confidence": 0.66,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing layout",
+        "engine_hint": "classified turbojet",
+        "max_mach_alt": {
+          "value": 0.997,
+          "sigma": 0.0929,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1387711.5,
+          "sigma": 231063.0,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 213927.38,
+          "sigma": 45282.24,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.997,
+            "sigma": 0.0929,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1387711.5,
+            "sigma": 231063.0,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 213927.38,
+            "sigma": 45282.24,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 213927.38,
+            "sigma": 45282.24,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.mcdonnell.name is readying the Mcdonnell Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 1.00 \u00b1 0.09, unit price ~$213,927."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "boeing",
+        "company_name": "company.boeing.name",
+        "rumored_design_name": "company.boeing.name Entry",
+        "inquiry_level": 0,
+        "inquiry_cost_usd": 0.0,
+        "inquiry_pc_cost": 0.0,
+        "participation_confidence": 0.64,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing layout",
+        "engine_hint": "classified turbojet",
+        "max_mach_alt": {
+          "value": 0.743,
+          "sigma": 0.0839,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1158978.0,
+          "sigma": 233606.5,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 281679.73,
+          "sigma": 44904.73,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.743,
+            "sigma": 0.0839,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1158978.0,
+            "sigma": 233606.5,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 281679.73,
+            "sigma": 44904.73,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 281679.73,
+            "sigma": 44904.73,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.boeing.name is readying the Boeing Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.74 \u00b1 0.08, unit price ~$281,680."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "republic",
+        "company_name": "company.republic.name",
+        "rumored_design_name": "company.republic.name Entry",
+        "inquiry_level": 0,
+        "inquiry_cost_usd": 0.0,
+        "inquiry_pc_cost": 0.0,
+        "participation_confidence": 0.62,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing layout",
+        "engine_hint": "classified turbojet",
+        "max_mach_alt": {
+          "value": 0.802,
+          "sigma": 0.0902,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1731564.2,
+          "sigma": 266260.4,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 209078.16,
+          "sigma": 43904.72,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.802,
+            "sigma": 0.0902,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1731564.2,
+            "sigma": 266260.4,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 209078.16,
+            "sigma": 43904.72,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 209078.16,
+            "sigma": 43904.72,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.republic.name is readying the Republic AP-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.80 \u00b1 0.09, unit price ~$209,078."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "convair",
+        "company_name": "company.convair.name",
+        "rumored_design_name": "company.convair.name Entry",
+        "inquiry_level": 0,
+        "inquiry_cost_usd": 0.0,
+        "inquiry_pc_cost": 0.0,
+        "participation_confidence": 0.6,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing layout",
+        "engine_hint": "classified turbojet",
+        "max_mach_alt": {
+          "value": 0.661,
+          "sigma": 0.0882,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1382588.9,
+          "sigma": 209084.2,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 235982.18,
+          "sigma": 43157.02,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.661,
+            "sigma": 0.0882,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1382588.9,
+            "sigma": 209084.2,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 235982.18,
+            "sigma": 43157.02,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 235982.18,
+            "sigma": 43157.02,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.convair.name is readying the Convair Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.66 \u00b1 0.09, unit price ~$235,982."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "northrop",
+        "company_name": "company.northrop.name",
+        "rumored_design_name": "company.northrop.name Entry",
+        "inquiry_level": 0,
+        "inquiry_cost_usd": 0.0,
+        "inquiry_pc_cost": 0.0,
+        "participation_confidence": 0.58,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing layout",
+        "engine_hint": "classified turbojet",
+        "max_mach_alt": {
+          "value": 0.784,
+          "sigma": 0.0864,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1047786.1,
+          "sigma": 213747.7,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 198766.34,
+          "sigma": 43609.61,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.784,
+            "sigma": 0.0864,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1047786.1,
+            "sigma": 213747.7,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 198766.34,
+            "sigma": 43609.61,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 198766.34,
+            "sigma": 43609.61,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.northrop.name is readying the Northrop N-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.78 \u00b1 0.09, unit price ~$198,766."
+      }
+    ],
+    "1": [
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "lockheed",
+        "company_name": "company.lockheed.name",
+        "rumored_design_name": "Lockheed CL-100",
+        "inquiry_level": 1,
+        "inquiry_cost_usd": 25000.0,
+        "inquiry_pc_cost": 2.0,
+        "participation_confidence": 0.86,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.836,
+          "sigma": 0.0526,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 952558.9,
+          "sigma": 112795.3,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 241394.99,
+          "sigma": 26838.84,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.836,
+            "sigma": 0.0526,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 952558.9,
+            "sigma": 112795.3,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 241394.99,
+            "sigma": 26838.84,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 241394.99,
+            "sigma": 26838.84,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.lockheed.name is readying the Lockheed CL-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.84 \u00b1 0.05, unit price ~$241,395."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "mcdonnell",
+        "company_name": "company.mcdonnell.name",
+        "rumored_design_name": "Mcdonnell Model-100",
+        "inquiry_level": 1,
+        "inquiry_cost_usd": 25000.0,
+        "inquiry_pc_cost": 2.0,
+        "participation_confidence": 0.84,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.811,
+          "sigma": 0.0549,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1084496.3,
+          "sigma": 141205.1,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 257639.32,
+          "sigma": 27169.34,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.811,
+            "sigma": 0.0549,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1084496.3,
+            "sigma": 141205.1,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 257639.32,
+            "sigma": 27169.34,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 257639.32,
+            "sigma": 27169.34,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.mcdonnell.name is readying the Mcdonnell Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.81 \u00b1 0.05, unit price ~$257,639."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "boeing",
+        "company_name": "company.boeing.name",
+        "rumored_design_name": "Boeing Model-100",
+        "inquiry_level": 1,
+        "inquiry_cost_usd": 25000.0,
+        "inquiry_pc_cost": 2.0,
+        "participation_confidence": 0.82,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.71,
+          "sigma": 0.0496,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1282677.3,
+          "sigma": 142759.5,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 203984.36,
+          "sigma": 26942.84,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.71,
+            "sigma": 0.0496,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1282677.3,
+            "sigma": 142759.5,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 203984.36,
+            "sigma": 26942.84,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 203984.36,
+            "sigma": 26942.84,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.boeing.name is readying the Boeing Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.71 \u00b1 0.05, unit price ~$203,984."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "republic",
+        "company_name": "company.republic.name",
+        "rumored_design_name": "Republic AP-100",
+        "inquiry_level": 1,
+        "inquiry_cost_usd": 25000.0,
+        "inquiry_pc_cost": 2.0,
+        "participation_confidence": 0.8,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.83,
+          "sigma": 0.0533,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1549237.6,
+          "sigma": 162714.7,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 219121.72,
+          "sigma": 26342.83,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.83,
+            "sigma": 0.0533,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1549237.6,
+            "sigma": 162714.7,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 219121.72,
+            "sigma": 26342.83,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 219121.72,
+            "sigma": 26342.83,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.republic.name is readying the Republic AP-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.83 \u00b1 0.05, unit price ~$219,122."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "convair",
+        "company_name": "company.convair.name",
+        "rumored_design_name": "Convair Model-100",
+        "inquiry_level": 1,
+        "inquiry_cost_usd": 25000.0,
+        "inquiry_pc_cost": 2.0,
+        "participation_confidence": 0.78,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.812,
+          "sigma": 0.0521,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1242803.3,
+          "sigma": 127773.7,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 227374.84,
+          "sigma": 25894.21,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.812,
+            "sigma": 0.0521,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1242803.3,
+            "sigma": 127773.7,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 227374.84,
+            "sigma": 25894.21,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 227374.84,
+            "sigma": 25894.21,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.convair.name is readying the Convair Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.81 \u00b1 0.05, unit price ~$227,375."
+      }
+    ],
+    "2": [
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "lockheed",
+        "company_name": "company.lockheed.name",
+        "rumored_design_name": "Lockheed CL-100",
+        "inquiry_level": 2,
+        "inquiry_cost_usd": 85000.0,
+        "inquiry_pc_cost": 6.0,
+        "participation_confidence": 0.96,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.79,
+          "sigma": 0.0324,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 933106.1,
+          "sigma": 71778.9,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 197599.45,
+          "sigma": 17892.56,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.79,
+            "sigma": 0.0324,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 933106.1,
+            "sigma": 71778.9,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 197599.45,
+            "sigma": 17892.56,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 197599.45,
+            "sigma": 17892.56,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.lockheed.name is readying the Lockheed CL-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.79 \u00b1 0.03, unit price ~$197,599."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "mcdonnell",
+        "company_name": "company.mcdonnell.name",
+        "rumored_design_name": "Mcdonnell Model-100",
+        "inquiry_level": 2,
+        "inquiry_cost_usd": 85000.0,
+        "inquiry_pc_cost": 6.0,
+        "participation_confidence": 0.94,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.872,
+          "sigma": 0.0338,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1265317.3,
+          "sigma": 89857.8,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 233801.72,
+          "sigma": 18112.9,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.872,
+            "sigma": 0.0338,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1265317.3,
+            "sigma": 89857.8,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 233801.72,
+            "sigma": 18112.9,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 233801.72,
+            "sigma": 18112.9,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.mcdonnell.name is readying the Mcdonnell Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.87 \u00b1 0.03, unit price ~$233,802."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "boeing",
+        "company_name": "company.boeing.name",
+        "rumored_design_name": "Boeing Model-100",
+        "inquiry_level": 2,
+        "inquiry_cost_usd": 85000.0,
+        "inquiry_pc_cost": 6.0,
+        "participation_confidence": 0.92,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.766,
+          "sigma": 0.0305,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1457126.3,
+          "sigma": 90847.0,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 233580.04,
+          "sigma": 17961.89,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.766,
+            "sigma": 0.0305,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1457126.3,
+            "sigma": 90847.0,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 233580.04,
+            "sigma": 17961.89,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 233580.04,
+            "sigma": 17961.89,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.boeing.name is readying the Boeing Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.77 \u00b1 0.03, unit price ~$233,580."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "republic",
+        "company_name": "company.republic.name",
+        "rumored_design_name": "Republic AP-100",
+        "inquiry_level": 2,
+        "inquiry_cost_usd": 85000.0,
+        "inquiry_pc_cost": 6.0,
+        "participation_confidence": 0.9,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.892,
+          "sigma": 0.0328,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1659276.3,
+          "sigma": 103545.7,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 218379.6,
+          "sigma": 17561.89,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.892,
+            "sigma": 0.0328,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1659276.3,
+            "sigma": 103545.7,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 218379.6,
+            "sigma": 17561.89,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 218379.6,
+            "sigma": 17561.89,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.republic.name is readying the Republic AP-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.89 \u00b1 0.03, unit price ~$218,380."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "convair",
+        "company_name": "company.convair.name",
+        "rumored_design_name": "Convair Model-100",
+        "inquiry_level": 2,
+        "inquiry_cost_usd": 85000.0,
+        "inquiry_pc_cost": 6.0,
+        "participation_confidence": 0.88,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.812,
+          "sigma": 0.0321,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1066844.8,
+          "sigma": 81310.5,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 210110.86,
+          "sigma": 17262.81,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.812,
+            "sigma": 0.0321,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1066844.8,
+            "sigma": 81310.5,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 210110.86,
+            "sigma": 17262.81,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 210110.86,
+            "sigma": 17262.81,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.convair.name is readying the Convair Model-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.81 \u00b1 0.03, unit price ~$210,111."
+      },
+      {
+        "rfp_id": "usaf_pen_fighter_1946",
+        "program_id": "usaf_pen_fighter_1946",
+        "company_id": "northrop",
+        "company_name": "company.northrop.name",
+        "rumored_design_name": "Northrop N-100",
+        "inquiry_level": 2,
+        "inquiry_cost_usd": 85000.0,
+        "inquiry_pc_cost": 6.0,
+        "participation_confidence": 0.86,
+        "is_false_lead": false,
+        "configuration_hint": "swept-wing twin-jet",
+        "engine_hint": "J35-A-29 (dry)",
+        "max_mach_alt": {
+          "value": 0.836,
+          "sigma": 0.0314,
+          "source": "rumor",
+          "unit": "mach"
+        },
+        "combat_radius_m": {
+          "value": 1285730.1,
+          "sigma": 83124.1,
+          "source": "rumor",
+          "unit": "m"
+        },
+        "unit_flyaway_price_usd": {
+          "value": 203353.44,
+          "sigma": 17443.84,
+          "source": "rumor",
+          "unit": "usd"
+        },
+        "estimates": {
+          "max_mach_alt": {
+            "value": 0.836,
+            "sigma": 0.0314,
+            "source": "rumor",
+            "unit": "mach"
+          },
+          "combat_radius_m": {
+            "value": 1285730.1,
+            "sigma": 83124.1,
+            "source": "rumor",
+            "unit": "m"
+          },
+          "unit_flyaway_price_usd": {
+            "value": 203353.44,
+            "sigma": 17443.84,
+            "source": "rumor",
+            "unit": "usd"
+          },
+          "unit_price_bid_usd": {
+            "value": 203353.44,
+            "sigma": 17443.84,
+            "source": "rumor",
+            "unit": "usd"
+          }
+        },
+        "headline": "Trade press reports company.northrop.name is readying the Northrop N-100 (swept-wing twin-jet, J35-A-29 (dry)) for 1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off: est. Mach 0.84 \u00b1 0.03, unit price ~$203,353."
+      }
+    ]
+  },
+  "vendor_quotes_1952_clean_sheet": [
+    {
+      "quote_id": "quote_pratt_whitney_2708_44000",
+      "vendor_id": "pratt_whitney",
+      "vendor_name": "Pratt & Whitney Aircraft",
+      "us_code": "P",
+      "specialty": "twin_spool_high_opr_durability",
+      "designation": "XJ91-P-1",
+      "date_quoted": "1952-06-01",
+      "is_derivative": false,
+      "promised_dry_thrust_sl_N": 45320.0,
+      "promised_ab_thrust_sl_N": 67320.0,
+      "has_afterburner": true,
+      "promised_tsfc_dry_sl": 2.534e-05,
+      "promised_tsfc_ab_sl": 5.75e-05,
+      "promised_mass_kg": 2013.4,
+      "promised_diameter_m": 0.985,
+      "promised_length_m": 6.73,
+      "promised_mtbf_h": 215.1,
+      "unit_price_usd": 164407.87,
+      "total_dev_cost_usd": 20620401.58,
+      "airframer_commission_fee_usd": 7217140.55,
+      "promised_delivery_days": 577,
+      "development_risk_index": 0.2052,
+      "schedule_slip_prob": 0.1745,
+      "shortfall_risk_prob": 0.1539,
+      "vendor_notes": "Dual-spool high-OPR architecture with Willgoos altitude test cell verification; lowest dry SFC and highest fleet TBO/MTBF."
+    },
+    {
+      "quote_id": "quote_general_electric_2708_44000",
+      "vendor_id": "general_electric",
+      "vendor_name": "General Electric (AGTD)",
+      "us_code": "GE",
+      "specialty": "high_mach_variable_stator_afterburner",
+      "designation": "XJ91-GE-1",
+      "date_quoted": "1952-06-01",
+      "is_derivative": false,
+      "promised_dry_thrust_sl_N": 44440.0,
+      "promised_ab_thrust_sl_N": 70620.0,
+      "has_afterburner": true,
+      "promised_tsfc_dry_sl": 2.669e-05,
+      "promised_tsfc_ab_sl": 5.632e-05,
+      "promised_mass_kg": 1913.87,
+      "promised_diameter_m": 0.967,
+      "promised_length_m": 6.679,
+      "promised_mtbf_h": 180.7,
+      "unit_price_usd": 158920.06,
+      "total_dev_cost_usd": 20047612.65,
+      "airframer_commission_fee_usd": 7016664.43,
+      "promised_delivery_days": 594,
+      "development_risk_index": 0.2258,
+      "schedule_slip_prob": 0.1919,
+      "shortfall_risk_prob": 0.1693,
+      "vendor_notes": "High-Mach variable-stator / afterburner design optimized for supersonic dash and fast altitude climb."
+    },
+    {
+      "quote_id": "quote_allison_2708_44000",
+      "vendor_id": "allison",
+      "vendor_name": "Allison Division (General Motors)",
+      "us_code": "A",
+      "specialty": "production_economy_and_low_sfc",
+      "designation": "XJ91-A-1",
+      "date_quoted": "1952-06-01",
+      "is_derivative": false,
+      "promised_dry_thrust_sl_N": 44000.0,
+      "promised_ab_thrust_sl_N": 66000.0,
+      "has_afterburner": true,
+      "promised_tsfc_dry_sl": 2.588e-05,
+      "promised_tsfc_ab_sl": 5.867e-05,
+      "promised_mass_kg": 1994.65,
+      "promised_diameter_m": 0.978,
+      "promised_length_m": 6.653,
+      "promised_mtbf_h": 192.7,
+      "unit_price_usd": 136494.67,
+      "total_dev_cost_usd": 17183667.98,
+      "airframer_commission_fee_usd": 6014283.79,
+      "promised_delivery_days": 604,
+      "development_risk_index": 0.2309,
+      "schedule_slip_prob": 0.1963,
+      "shortfall_risk_prob": 0.1732,
+      "vendor_notes": "General Motors high-rate production tooling; lowest recurring unit price and dependable subsonic cruise economy."
+    },
+    {
+      "quote_id": "quote_wright_2708_44000",
+      "vendor_id": "wright",
+      "vendor_name": "Curtiss-Wright (Wright Aeronautical)",
+      "us_code": "W",
+      "specialty": "licensed_derivative_fast_tooling",
+      "designation": "XJ91-W-1",
+      "date_quoted": "1952-06-01",
+      "is_derivative": false,
+      "promised_dry_thrust_sl_N": 44440.0,
+      "promised_ab_thrust_sl_N": 66000.0,
+      "has_afterburner": true,
+      "promised_tsfc_dry_sl": 2.642e-05,
+      "promised_tsfc_ab_sl": 5.926e-05,
+      "promised_mass_kg": 1934.01,
+      "promised_diameter_m": 0.98,
+      "promised_length_m": 6.679,
+      "promised_mtbf_h": 163.5,
+      "unit_price_usd": 142111.21,
+      "total_dev_cost_usd": 16419949.41,
+      "airframer_commission_fee_usd": 5746982.29,
+      "promised_delivery_days": 632,
+      "development_risk_index": 0.272,
+      "schedule_slip_prob": 0.2312,
+      "shortfall_risk_prob": 0.204,
+      "vendor_notes": "Fast-tracked licensed derivative tooling with reduced R&D cost and early prototype delivery."
+    },
+    {
+      "quote_id": "quote_westinghouse_2708_44000",
+      "vendor_id": "westinghouse",
+      "vendor_name": "Westinghouse Aviation Gas Turbine Div.",
+      "us_code": "WE",
+      "specialty": "compact_lightweight_axial_high_risk",
+      "designation": "XJ91-WE-1",
+      "date_quoted": "1952-06-01",
+      "is_derivative": false,
+      "promised_dry_thrust_sl_N": 43560.0,
+      "promised_ab_thrust_sl_N": 64680.0,
+      "has_afterburner": true,
+      "promised_tsfc_dry_sl": 2.723e-05,
+      "promised_tsfc_ab_sl": 6.043e-05,
+      "promised_mass_kg": 1777.23,
+      "promised_diameter_m": 0.948,
+      "promised_length_m": 6.627,
+      "promised_mtbf_h": 141.1,
+      "unit_price_usd": 138472.63,
+      "total_dev_cost_usd": 16801808.69,
+      "airframer_commission_fee_usd": 5880633.04,
+      "promised_delivery_days": 806,
+      "development_risk_index": 0.4539,
+      "schedule_slip_prob": 0.3858,
+      "shortfall_risk_prob": 0.3404,
+      "vendor_notes": "Ultra-compact small-diameter axial layout with low dry weight, but limited altitude test-cell capacity increases schedule & thrust shortfall risk."
+    }
+  ],
+  "wright_1952_derivative_quote": {
+    "quote_id": "quote_wright_2708_44000",
+    "vendor_id": "wright",
+    "vendor_name": "Curtiss-Wright (Wright Aeronautical)",
+    "us_code": "W",
+    "specialty": "licensed_derivative_fast_tooling",
+    "designation": "XJ91-W-3",
+    "date_quoted": "1952-06-01",
+    "is_derivative": true,
+    "promised_dry_thrust_sl_N": 44440.0,
+    "promised_ab_thrust_sl_N": 66000.0,
+    "has_afterburner": true,
+    "promised_tsfc_dry_sl": 2.642e-05,
+    "promised_tsfc_ab_sl": 5.926e-05,
+    "promised_mass_kg": 1934.01,
+    "promised_diameter_m": 0.98,
+    "promised_length_m": 6.679,
+    "promised_mtbf_h": 163.5,
+    "unit_price_usd": 142111.21,
+    "total_dev_cost_usd": 7495142.08,
+    "airframer_commission_fee_usd": 2623299.73,
+    "promised_delivery_days": 340,
+    "development_risk_index": 0.2244,
+    "schedule_slip_prob": 0.1907,
+    "shortfall_risk_prob": 0.1683,
+    "vendor_notes": "Fast-tracked licensed derivative tooling with reduced R&D cost and early prototype delivery."
+  },
+  "available_catalog_engines_1952_06_01": [
+    "J33-A-9",
+    "J47-GE-13",
+    "J35-A-29",
+    "J47-GE-27",
+    "J35-A-35",
+    "J65-W-3",
+    "J73-GE-3",
+    "J71-A-2",
+    "J57-P-7"
+  ]
+}

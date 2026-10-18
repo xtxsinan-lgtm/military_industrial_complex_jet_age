@@ -231,7 +231,14 @@ def compute_true_performance_report(state: LineageTestState) -> Dict[str, Any]:
     if "ps_grid" in state.nominal_perf and "ps_mps_m09_4572m_1g" in out:
         nom_ps = max(1.0, float(state.nominal_perf.get("ps_mps_m09_4572m_1g", 50.0)))
         ratio = out["ps_mps_m09_4572m_1g"] / nom_ps
-        out["ps_grid"] = [[float(cell) * ratio for cell in row] for row in state.nominal_perf["ps_grid"]]
+        raw_grid = state.nominal_perf["ps_grid"]
+        if isinstance(raw_grid, list):
+            out["ps_grid"] = [[float(cell) * ratio for cell in row] for row in raw_grid]
+        elif isinstance(raw_grid, dict):
+            out["ps_grid"] = {
+                k: ([[float(cell) * ratio for cell in row] for row in v] if isinstance(v, list) and v and isinstance(v[0], list) else v)
+                for k, v in raw_grid.items()
+            }
 
     # carrier_suitability
     nom_cs = state.nominal_perf.get("carrier_suitability", {"suitable": bool(true_ac.feature_vector["carrier_capable"] > 0.5), "reasons": []})
