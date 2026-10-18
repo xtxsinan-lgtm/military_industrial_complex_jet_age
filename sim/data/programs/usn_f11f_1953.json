@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "id": "usn_f11f_1953",
+  "name_key": "program.usn_f11f_1953.name",
+  "program_name": "1953 BuAer Lightweight Area-Ruled Carrier Day Fighter (XF9F-9)",
+  "customer": "USN",
+  "role": "carrier_day_fighter",
+  "mvp_core": false,
+  "issue_date": "1953-03-01",
+  "proposal_due": "1953-04-20",
+  "first_flight_due": "1954-08-01",
+  "ioc_due": "1956-10-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": false,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": [
+      "ir"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1.05,
+      "objective_value": 1.2,
+      "weight": 0.35,
+      "unit": "mach",
+      "description": "Transonic/supersonic speed with J65 (Mach 1.05-1.20)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 71.12,
+      "objective_value": 91.44,
+      "weight": 0.3,
+      "unit": "mps",
+      "description": "Rate of climb (14,000-18,000 ft/min)"
+    },
+    {
+      "key": "stall_speed_mps",
+      "kind": "objective",
+      "op": "<=",
+      "value": 52.47,
+      "objective_value": 48.36,
+      "weight": 0.2,
+      "unit": "mps",
+      "description": "Carrier approach stall speed"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 444480.0,
+      "objective_value": 592640.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Day intercept combat radius (240-320 nmi)"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Carrier deck suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 18000000.0,
+    "unit_price_ceiling_usd": 1150000.0,
+    "quantity_planned": 200
+  },
+  "acquisition": {
+    "style": "sole_source",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 3,
+    "urgency": 0.5
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.2,
+      "risk": 0.15
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "grumman": 0.6,
+      "vought": 0.2
+    },
+    "congressional_interest": 0.35,
+    "industrial_base_need": {
+      "grumman": 0.45
+    }
+  },
+  "historical": {
+    "winner_company_id": "grumman",
+    "winner_design_name": "Design 98 (XF9F-9 / F11F-1 Tiger)",
+    "award_date": "1953-04-27",
+    "outcome": "produced",
+    "production_delivered": 201,
+    "notes": "Ordered in April 1953 as a lightweight Whitcomb area-ruled 'Jet Bearcat' hedge under the XF9F-9 Cougar budget cover. Outclassed by the F8U Crusader in range and speed, serving briefly in fleet squadrons before becoming the iconic Blue Angels mount.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Grumman_F-11_Tiger",
+      "https://tailhooktopics.blogspot.com/2018/01/the-grumman-xf9f-9-too-little-too-soon.html"
+    ],
+    "competitors": [
+      {
+        "company_id": "grumman",
+        "design_name": "Design 98 (XF9F-9 / F11F-1 Tiger)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1954-07-30",
+        "unit_price_bid_usd": 980000.0,
+        "dev_cost_bid_usd": 15000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 84.0,
+        "track_record_at_bid": 0.78,
+        "district_weight": 0.48,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.12,
+          "climb_rate_sl_mps": 82.8,
+          "stall_speed_mps": 49.39,
+          "combat_radius_m": 472260.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 1,
+        "published_notes": "631 kt (M1.1) at 35k ft, 16,300 ft/min climb, 250 nmi radius, 1st area-ruled Navy fighter."
+      },
+      {
+        "company_id": "vought",
+        "design_name": "V-384 Lightweight J65 Study",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1020000.0,
+        "dev_cost_bid_usd": 16500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 70.0,
+        "track_record_at_bid": 0.6,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.08,
+          "climb_rate_sl_mps": 76.2,
+          "stall_speed_mps": 50.42,
+          "combat_radius_m": 463000.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Vought's smaller Wright J65 alternative to the J57-powered V-383."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": null,
+    "suppress_if_role_satisfied": true,
+    "historical_cancellation_shock": 0.0
+  }
+}

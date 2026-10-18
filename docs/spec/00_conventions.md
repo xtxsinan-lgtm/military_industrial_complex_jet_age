@@ -45,7 +45,7 @@ Python: 3.9 compatible (system python is 3.9.6). Allowed deps: numpy, scipy, mat
 - Atmosphere: **ISA 1976** up to 25 km (`sim/mic/atmosphere.py`), owned by module 01.
 - Angles: radians in code, degrees in data files when key name ends with `_deg`.
 - Money: **then-year US dollars** (nominal), stored as `float64` dollars. Inflation index table in `data/economy/inflation_usd.json` (owned by module 04) for "constant-1950-dollar" displays.
-- Randomness: all stochastic systems take an explicit `rng` (Python `numpy.random.Generator`; C# a seeded PCG32 — module 09 specifies the exact algorithm so Python and C# produce **identical streams**). Never use global random.
+- Randomness: all stochastic systems take an explicit deterministic `PCG32` stream from `sim.mic.rng.RngStreamRegistry` (keyed by FNV-1a 64 stream name hash; Module 09 specifies the bit-exact algorithm so Python and C# produce **identical streams**). Never use global random.
 - Time: **simulation tick = 1 day**. Calendar is real-time-with-pause (Paradox-style), speeds 1–5. Most economic processes settle **monthly** (1st of month); projects progress daily. Date type = days since 1945-01-01 (int) + helper conversions.
 
 ## 4. Shared data contracts (authoritative top-level shapes)
@@ -54,7 +54,7 @@ Module owners fill in details; top-level keys below must not be renamed without 
 
 ### 4.1 `Estimate` — every performance number the player sees carries uncertainty
 ```json
-{ "value": 1.82, "sigma": 0.07, "source": "sim|tunnel|flight|service", "unit": "mach" }
+{ "value": 1.82, "sigma": 0.07, "source": "sim|tunnel|ground|flight|service", "unit": "mach" }
 ```
 `value` = the player's current best estimate; the **true** value is hidden in `TrueAircraft` (module 06). `sigma` shrinks as better sources are used.
 
@@ -93,18 +93,24 @@ unit_flyaway_cost_usd, dev_cost_usd_estimate, maint_mh_per_fh, carrier_suitabili
 
 ### 4.5 `Requirement` (military request for proposals; owned by module 05)
 ```
-Requirement { id, program_name, customer: USAF|USN, issue_date, proposal_due, first_flight_due, ioc_due,
-  criteria: [ { key: <PerformanceReport key>, kind: threshold|objective|weighted, op: ">="|"<=", value, weight } ],
+Requirement { id, program_name, name_key, customer: USAF|USN, role, mvp_core:bool,
+  issue_date, proposal_due, first_flight_due, ioc_due,
+  criteria: [ { key: <PerformanceReport key>, kind: threshold|objective|weighted, op: ">="|"<=", value, objective_value, weight } ],
+  equipment: { carrier_capable, radar_required, min_crew, min_engines, internal_bay_required, min_guns_20mm, missile_capability },
   budget: { dev_usd, unit_price_ceiling_usd, quantity_planned },
+  acquisition: { style: flyoff|paper_award|sole_source, contract_type_dev, contract_type_prod },
+  eval_weights: { perf, cost, sched, risk },
   politics: { incumbent_bias{company_id: float}, congressional_interest: float },
+  alt_history: { follow_on_to, suppress_if_mach_in_service },
   historical: { winner_company_id, winner_design_name, competitors[] } }
 ```
 
 ### 4.6 `CompanyState` (owned by module 04)
 ```
-CompanyState { id, name, is_player, cash_usd, debt_usd, reputation{USAF,USN,export}, political_capital,
+CompanyState { id, name, is_player, cash_usd, debt_usd,
+  reputation{USAF,USN,export} (0..100, neutral 50), track_record (0..1, neutral 0.50), political_capital,
   engineers{aero,structures,propulsion,systems}, facilities{wind_tunnel_level, factory_floor_m2, test_site:bool},
-  projects[], aircraft_in_production[], tech_unlocked[], ... }
+  projects[], aircraft_in_production[], tech_unlocked[], tech_maturity{tech_id: float}, ... }
 ```
 
 ### 4.7 `HiddenFlaw` (owned by module 06)

@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "era": "1945-1960",
+  "country": "USA",
+  "description": "Historical US jet engine manufacturers (1945-1960): starting propulsion tech maturities, test facilities, engineering staff, and architectural focus.",
+  "engine_makers": [
+    {
+      "id": "general_electric",
+      "name_key": "company.general_electric.name",
+      "short_name_key": "company.general_electric.short",
+      "manufacturer_code_us": "GE",
+      "hq_location": "Lynn, Massachusetts & Evendale, Ohio",
+      "cash_usd": 40000000.0,
+      "reputation": {
+        "USAF": 0.92,
+        "USN": 0.72,
+        "export": 0.85
+      },
+      "propulsion_engineers": 120,
+      "altitude_test_cell_level": 2,
+      "chief_designer_id": "designer_gerhard_neumann",
+      "starting_tech_overrides": {
+        "prop_1945_centrifugal_turbojet": 0.92,
+        "prop_1945_early_axial_compressor": 0.70
+      },
+      "architecture_focus": ["axial_single_spool", "variable_stators", "afterburner", "turbofan"],
+      "historical_engines_1945_1960": ["I-16 (J31)", "I-40 (J33)", "TG-180 (J35)", "J47", "J73", "J79", "J85", "J93"],
+      "historical_summary": "Chosen by Gen. Hap Arnold in 1941 to build Whittle's jet; developed the axial TG-180 (J35), workhorse J47 (F-86), variable-stator Mach-2 J79 (F-104, F4H-1, B-58), and Mach-3 J93."
+    },
+    {
+      "id": "pratt_whitney",
+      "name_key": "company.pratt_whitney.name",
+      "short_name_key": "company.pratt_whitney.short",
+      "manufacturer_code_us": "P",
+      "hq_location": "East Hartford, Connecticut",
+      "cash_usd": 48000000.0,
+      "reputation": {
+        "USAF": 0.90,
+        "USN": 0.94,
+        "export": 0.88
+      },
+      "propulsion_engineers": 135,
+      "altitude_test_cell_level": 3,
+      "chief_designer_id": "designer_luke_hobbs",
+      "starting_tech_overrides": {
+        "prop_1945_centrifugal_turbojet": 0.65,
+        "prop_1945_early_axial_compressor": 0.45
+      },
+      "architecture_focus": ["twin_spool", "high_opr", "high_massflow", "turbofan"],
+      "historical_engines_1945_1960": ["J42 (Nene)", "J48 (Tay)", "J57 (JT3)", "J75 (JT4)", "J52", "J58 (JT11)", "TF33 (JT3D)"],
+      "historical_summary": "Barred from wartime jet work to focus on R-2800/R-4360 radials; licensed Rolls-Royce Nene/Tay (J42/J48) to catch up, built the Willgoos Turbine Lab, and leapfrogged the world with the twin-spool J57 and J75."
+    },
+    {
+      "id": "allison",
+      "name_key": "company.allison.name",
+      "short_name_key": "company.allison.short",
+      "manufacturer_code_us": "A",
+      "hq_location": "Indianapolis, Indiana",
+      "cash_usd": 35000000.0,
+      "reputation": {
+        "USAF": 0.85,
+        "USN": 0.78,
+        "export": 0.75
+      },
+      "propulsion_engineers": 95,
+      "altitude_test_cell_level": 2,
+      "chief_designer_id": "designer_ronald_hazen",
+      "starting_tech_overrides": {
+        "prop_1945_centrifugal_turbojet": 0.88,
+        "prop_1945_early_axial_compressor": 0.65
+      },
+      "architecture_focus": ["centrifugal", "axial_single_spool", "turboprop"],
+      "historical_engines_1945_1960": ["J33", "J35", "J71", "T40", "T56"],
+      "historical_summary": "General Motors division handed mass production and development of both the J33 (P-80, F9F-2/5) and J35 (F-84, F-89) in 1945, later developing the J71 (F3H-2, B-66)."
+    },
+    {
+      "id": "westinghouse",
+      "name_key": "company.westinghouse.name",
+      "short_name_key": "company.westinghouse.short",
+      "manufacturer_code_us": "WE",
+      "hq_location": "Essington / South Philadelphia, Pennsylvania & Kansas City, Missouri",
+      "cash_usd": 25000000.0,
+      "reputation": {
+        "USAF": 0.45,
+        "USN": 0.86,
+        "export": 0.50
+      },
+      "propulsion_engineers": 75,
+      "altitude_test_cell_level": 1,
+      "chief_designer_id": "designer_reinout_kroon",
+      "starting_tech_overrides": {
+        "prop_1945_centrifugal_turbojet": 0.60,
+        "prop_1945_early_axial_compressor": 0.75
+      },
+      "architecture_focus": ["axial_single_spool", "afterburner"],
+      "historical_engines_1945_1960": ["J30 (19XB)", "J34 (24C)", "J46", "J40"],
+      "historical_summary": "Pioneered indigenous US axial-flow turbojets for the Navy (J30 on FH-1, J34 on F2H/F3D/F7U), but catastrophic development delays on the ambitious J40 crippled a generation of USN fighters."
+    },
+    {
+      "id": "wright",
+      "name_key": "company.wright.name",
+      "short_name_key": "company.wright.short",
+      "manufacturer_code_us": "W",
+      "hq_location": "Wood-Ridge, New Jersey",
+      "cash_usd": 28000000.0,
+      "reputation": {
+        "USAF": 0.75,
+        "USN": 0.75,
+        "export": 0.70
+      },
+      "propulsion_engineers": 70,
+      "altitude_test_cell_level": 1,
+      "chief_designer_id": "designer_william_lundquist",
+      "starting_tech_overrides": {
+        "prop_1945_centrifugal_turbojet": 0.65,
+        "prop_1945_early_axial_compressor": 0.50
+      },
+      "architecture_focus": ["axial_single_spool"],
+      "historical_engines_1945_1960": ["XJ37", "J65 (Sapphire)", "J67 (Olympus)"],
+      "historical_summary": "Engine arm of Curtiss-Wright; entered the jet race late by licensing the Armstrong Siddeley Sapphire as the Wright J65 (powering the F-84F, B-57, FJ-3/4, F11F-1, and A4D-1/2)."
+    }
+  ]
+}

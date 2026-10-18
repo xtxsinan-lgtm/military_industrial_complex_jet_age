@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "description": "US military procurement contract types (Armed Services Procurement Act of 1947 & Renegotiation Act of 1951), GOCO plant catalog, and facility tier definitions (1945-1960).",
+  "contract_types": {
+    "CPFF": {
+      "code": "CPFF",
+      "name": "Cost-Plus-Fixed-Fee",
+      "typical_phase": "RDT&E / Prototype / High-Risk Initial Production",
+      "allowable_cost_reimbursement": 1.0,
+      "overrun_reimbursement_cap_mult": 1.25,
+      "default_fixed_fee_rate": 0.07,
+      "statutory_max_fee_rate_rd": 0.15,
+      "statutory_max_fee_rate_prod": 0.10,
+      "fee_withhold_fraction": 0.15,
+      "progress_payment_rate": 1.00,
+      "late_penalty_pct_per_month": 0.0,
+      "late_reputation_hit_per_month": 1.0,
+      "description": "Government reimburses 100% of allowable incurred direct and indirect costs up to the funding ceiling (125% of target cost) plus a fixed dollar fee negotiated at award (typically 7% of estimated cost; statutory ASPA 1947 cap is 15% for experimental R&D, 10% for production). Fee does not grow if costs overrun."
+    },
+    "FPIF": {
+      "code": "FPIF",
+      "name": "Fixed-Price-Incentive-Firm",
+      "typical_phase": "Low-Rate & Full-Rate Production (Century Series standard)",
+      "target_profit_rate": 0.09,
+      "govt_share_ratio": 0.80,
+      "contractor_share_ratio": 0.20,
+      "ceiling_price_mult": 1.25,
+      "progress_payment_rate": 0.75,
+      "progress_payment_liquidation_cap": 0.80,
+      "late_penalty_pct_per_month": 0.01,
+      "late_reputation_hit_per_month": 1.5,
+      "description": "Negotiated target cost, target profit (9%), share ratio (80% government / 20% contractor), and ceiling price (125% of target cost). Underruns increase contractor profit by 20% of savings; overruns reduce profit by 20% of excess cost up to ceiling price, beyond which contractor absorbs 100% of losses."
+    },
+    "FFP": {
+      "code": "FFP",
+      "name": "Firm-Fixed-Price",
+      "typical_phase": "Mature Follow-On Production Lots / Spares / Export",
+      "default_profit_rate": 0.11,
+      "govt_share_ratio": 0.0,
+      "contractor_share_ratio": 1.0,
+      "ceiling_price_mult": 1.0,
+      "progress_payment_rate": 0.75,
+      "progress_payment_liquidation_cap": 0.80,
+      "late_penalty_pct_per_month": 0.015,
+      "late_reputation_hit_per_month": 1.5,
+      "description": "Fixed unit delivery price regardless of actual contractor cost. Contractor retains 100% of learning/efficiency savings (subject to Renegotiation Act of 1951 excess-profit review above 12% ROS) and bears 100% of cost overruns."
+    },
+    "LETTER": {
+      "code": "LETTER",
+      "name": "Undefinitized Letter Contract",
+      "typical_phase": "Korean War Emergency Surge / Urgent Prototype Start",
+      "nte_funding_fraction": 0.25,
+      "max_undefinitized_months": 6,
+      "provisional_reimbursement_rate": 0.85,
+      "definitizes_to": "CPFF_or_FPIF",
+      "description": "Urgent authorization to proceed immediately before full price definitization. Government advances up to 25% of estimated contract value over up to 6 months at 85% provisional cost reimbursement before converting into a definitized CPFF or FPIF contract."
+    }
+  },
+  "goco_plants": [
+    {
+      "id": "afp_04_fort_worth",
+      "name": "Air Force Plant #4 (Fort Worth, TX)",
+      "owner": "USAF",
+      "floor_area_m2": 120000.0,
+      "lease_1950_usd_per_m2_month": 0.18,
+      "political_capital_cost": 18.0,
+      "min_reputation_required": 55.0
+    },
+    {
+      "id": "afp_06_marietta",
+      "name": "Air Force Plant #6 (Marietta, GA)",
+      "owner": "USAF",
+      "floor_area_m2": 140000.0,
+      "lease_1950_usd_per_m2_month": 0.18,
+      "political_capital_cost": 18.0,
+      "min_reputation_required": 55.0
+    },
+    {
+      "id": "afp_42_palmdale",
+      "name": "Air Force Plant #42 (Palmdale, CA)",
+      "owner": "USAF",
+      "floor_area_m2": 75000.0,
+      "lease_1950_usd_per_m2_month": 0.18,
+      "political_capital_cost": 15.0,
+      "min_reputation_required": 50.0
+    },
+    {
+      "id": "nirap_columbus",
+      "name": "Naval Industrial Reserve Aircraft Plant (Columbus, OH)",
+      "owner": "USN",
+      "floor_area_m2": 95000.0,
+      "lease_1950_usd_per_m2_month": 0.18,
+      "political_capital_cost": 16.0,
+      "min_reputation_required": 50.0
+    }
+  ],
+  "wind_tunnel_levels": {
+    "0": {
+      "level": 0,
+      "name": "None (External NACA Tunnel Queue Only)",
+      "max_mach_tested": 0.0,
+      "capex_1950_usd": 0.0,
+      "monthly_upkeep_1950_usd": 0.0,
+      "build_months": 0
+    },
+    "1": {
+      "level": 1,
+      "name": "Low-Speed Subsonic Wind Tunnel (M <= 0.4)",
+      "max_mach_tested": 0.40,
+      "capex_1950_usd": 650000.0,
+      "monthly_upkeep_1950_usd": 4500.0,
+      "build_months": 6
+    },
+    "2": {
+      "level": 2,
+      "name": "High-Speed Subsonic Pressure Tunnel (M <= 0.85)",
+      "max_mach_tested": 0.85,
+      "capex_1950_usd": 1850000.0,
+      "monthly_upkeep_1950_usd": 12000.0,
+      "build_months": 10
+    },
+    "3": {
+      "level": 3,
+      "name": "Slotted-Throat Transonic Tunnel (M <= 1.30, requires testing.transonic_tunnel)",
+      "max_mach_tested": 1.30,
+      "capex_1950_usd": 4200000.0,
+      "monthly_upkeep_1950_usd": 26000.0,
+      "build_months": 14
+    },
+    "4": {
+      "level": 4,
+      "name": "Supersonic Trisonic Blowdown/Continuous Tunnel (M <= 2.50)",
+      "max_mach_tested": 2.50,
+      "capex_1950_usd": 7800000.0,
+      "monthly_upkeep_1950_usd": 48000.0,
+      "build_months": 18
+    }
+  }
+}

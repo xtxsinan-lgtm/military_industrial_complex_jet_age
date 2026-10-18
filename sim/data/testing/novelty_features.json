@@ -1,0 +1,95 @@
+{
+  "novelty_features": [
+    {
+      "id": "swept_wing",
+      "name": "Swept Wing Planform (20°–38°)",
+      "predicate": {"type": "ramp", "feature": "sweep_deg", "x0": 18.0, "x1": 35.0},
+      "driver_weights": {"cd0": 0.35, "cdw": 0.65, "kind": 0.55, "clmax": 0.60, "mass": 0.30},
+      "historical_first_flights": ["1947-10-01", "1948-09-01", "1950-06-03", "1951-09-20", "1952-04-30"]
+    },
+    {
+      "id": "high_sweep",
+      "name": "High Wing Sweep (≥40°)",
+      "predicate": {"type": "ramp", "feature": "sweep_deg", "x0": 37.0, "x1": 48.0},
+      "driver_weights": {"cdw": 0.70, "kind": 0.75, "clmax": 0.80, "mass": 0.45, "cost_unit": 0.30},
+      "historical_first_flights": ["1951-06-20", "1953-05-25", "1954-09-29", "1955-03-25", "1955-10-22"]
+    },
+    {
+      "id": "delta_wing",
+      "name": "Delta / Tailless Delta Planform",
+      "predicate": {"type": "flag", "feature": "is_delta"},
+      "driver_weights": {"cd0": 0.40, "cdw": 0.85, "kind": 0.80, "clmax": 0.75, "mass": 0.40, "cost_dev": 0.45},
+      "historical_first_flights": ["1948-09-18", "1951-01-23", "1953-10-24", "1956-11-11", "1956-12-26"]
+    },
+    {
+      "id": "thin_wing",
+      "name": "Ultra-Thin Wing Section (t/c ≤ 7%)",
+      "predicate": {"type": "ramp", "feature": "tc_ratio", "x0": 0.085, "x1": 0.045},
+      "driver_weights": {"cdw": 0.45, "clmax": 0.55, "mass": 0.75, "cost_unit": 0.60, "cost_dev": 0.40},
+      "historical_first_flights": ["1952-10-20", "1953-05-25", "1953-10-24", "1954-03-04", "1955-10-22"]
+    },
+    {
+      "id": "transonic_target",
+      "name": "Transonic Flight Envelope (M ≥ 0.88)",
+      "predicate": {"type": "ramp", "feature": "max_mach_nom", "x0": 0.84, "x1": 0.98},
+      "driver_weights": {"cd0": 0.40, "cdw": 0.85, "thrust": 0.35, "cost_dev": 0.35},
+      "historical_first_flights": ["1947-10-01", "1947-10-14", "1950-06-03", "1951-01-23", "1951-09-20"]
+    },
+    {
+      "id": "supersonic_level",
+      "name": "Supersonic Level Flight (M ≥ 1.05)",
+      "predicate": {"type": "ramp", "feature": "max_mach_nom", "x0": 1.00, "x1": 1.35},
+      "driver_weights": {"cd0": 0.45, "cdw": 1.05, "thrust": 0.65, "tsfc": 0.40, "mass": 0.40, "cost_dev": 0.60},
+      "historical_first_flights": ["1953-05-25", "1953-10-24", "1954-03-04", "1954-07-30", "1954-09-29"]
+    },
+    {
+      "id": "mach2_regime",
+      "name": "Mach 2+ Thermal & Inlet Regime (M ≥ 1.75)",
+      "predicate": {"type": "ramp", "feature": "max_mach_nom", "x0": 1.60, "x1": 2.05},
+      "driver_weights": {"cdw": 0.95, "thrust": 0.85, "tsfc": 0.55, "mass": 0.55, "cost_unit": 0.65, "cost_dev": 0.80, "maint": 0.60},
+      "historical_first_flights": ["1954-03-04", "1956-11-11", "1956-12-26", "1957-05-26", "1958-05-27"]
+    },
+    {
+      "id": "afterburner",
+      "name": "Afterburning Reheat Propulsion",
+      "predicate": {"type": "flag", "feature": "has_afterburner"},
+      "driver_weights": {"thrust": 0.60, "tsfc": 0.65, "mass": 0.25, "maint": 0.55, "cost_dev": 0.35},
+      "historical_first_flights": ["1948-10-20", "1949-07-01", "1951-01-23", "1953-05-25", "1954-03-04"]
+    },
+    {
+      "id": "area_ruled",
+      "name": "Whitcomb Area-Ruled Fuselage Shaping",
+      "predicate": {"type": "flag", "feature": "is_area_ruled"},
+      "driver_weights": {"cdw": 0.50, "mass": 0.35, "cost_unit": 0.40, "cost_dev": 0.35},
+      "historical_first_flights": ["1954-07-30", "1954-12-20", "1955-10-22", "1956-11-11", "1956-12-26"]
+    },
+    {
+      "id": "t_tail",
+      "name": "T-Tail Empennage Configuration",
+      "predicate": {"type": "flag", "feature": "is_t_tail"},
+      "driver_weights": {"kind": 0.30, "clmax": 0.35, "mass": 0.45, "cost_dev": 0.30},
+      "historical_first_flights": ["1948-08-16", "1948-10-20", "1951-08-07", "1954-03-04", "1954-09-29"]
+    },
+    {
+      "id": "variable_intake",
+      "name": "Variable-Geometry Supersonic Inlet",
+      "predicate": {"type": "flag", "feature": "is_variable_intake"},
+      "driver_weights": {"thrust": 0.55, "cdw": 0.35, "mass": 0.40, "cost_unit": 0.45, "maint": 0.50},
+      "historical_first_flights": ["1955-10-22", "1956-02-17", "1956-11-11", "1956-12-26", "1958-05-27"]
+    },
+    {
+      "id": "radar_fcs",
+      "name": "Integrated All-Weather Radar Fire-Control System",
+      "predicate": {"type": "ramp", "feature": "avionics_level", "x0": 2.0, "x1": 4.5},
+      "driver_weights": {"mass": 0.30, "cost_unit": 0.65, "cost_dev": 0.75, "maint": 0.85},
+      "historical_first_flights": ["1949-07-01", "1949-12-22", "1951-08-07", "1953-10-24", "1956-12-26"]
+    },
+    {
+      "id": "titanium_structure",
+      "name": "Titanium Primary/Hot-Section Structure",
+      "predicate": {"type": "ramp", "feature": "ti_fraction", "x0": 0.03, "x1": 0.20},
+      "driver_weights": {"mass": 0.50, "cost_unit": 0.75, "cost_dev": 0.55},
+      "historical_first_flights": ["1952-10-20", "1953-05-25", "1954-03-04", "1954-09-29", "1958-05-27"]
+    }
+  ]
+}

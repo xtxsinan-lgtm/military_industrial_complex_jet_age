@@ -1,0 +1,116 @@
+{
+  "id": "p80a_shooting_star",
+  "name": "Lockheed P-80A Shooting Star",
+  "company_id": "lockheed",
+  "created_date": "1945-02-01",
+  "crew_count": 1,
+  "role_tags": [
+    "day_fighter"
+  ],
+  "wing": {
+    "area_m2": 22.07,
+    "aspect_ratio": 6.37,
+    "sweep_qc_deg": 4.8,
+    "taper_ratio": 0.38,
+    "tc_root": 0.13,
+    "tc_tip": 0.13,
+    "airfoil_ref": "65-213",
+    "planform_type": "conventional",
+    "position": "low",
+    "x_le_root_frac": 0.35,
+    "dihedral_deg": 3.8,
+    "incidence_deg": 1.0,
+    "twist_deg": -1.5,
+    "devices": [
+      "split_flaps",
+      "plain_flaps"
+    ]
+  },
+  "fuselage": {
+    "length_m": 10.52,
+    "max_diameter_m": 1.32,
+    "nose_fineness": 2.4,
+    "tail_fineness": 3.0,
+    "canopy_type": "bubble",
+    "area_ruled": false
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": false,
+    "all_moving_tail": false,
+    "ht_area_m2": 3.5,
+    "ht_aspect_ratio": 4.2,
+    "ht_sweep_qc_deg": 6.0,
+    "vt_area_m2": 2.1,
+    "vt_aspect_ratio": 1.6,
+    "vt_sweep_qc_deg": 18.0
+  },
+  "intake": {
+    "type": "cheek",
+    "compression": "pitot",
+    "variable": false,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J33-A-9",
+    "count": 1,
+    "afterburner": false,
+    "x_cg_frac": 0.56
+  },
+  "structure": {
+    "design_load_factor_g": 7.33,
+    "material_mix": {
+      "al": 0.9,
+      "steel": 0.1,
+      "ti": 0.0
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 1220.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 470.0,
+    "combat_uses_drop_tanks": false
+  },
+  "systems": {
+    "radar_id": null,
+    "fire_control_id": null,
+    "avionics_level": 1,
+    "powered_controls": true,
+    "stability_augmentation": false,
+    "ejection_seat": false,
+    "inflight_refuel": false,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "an_m2_50",
+        "count": 6,
+        "rounds_per_gun": 300
+      }
+    ],
+    "hardpoints": 2,
+    "internal_bay": false,
+    "missile_ids": []
+  },
+  "published_performance": {
+    "empty_mass_kg": 3592.0,
+    "combat_mass_kg": 4650.0,
+    "mtow_kg": 6350.0,
+    "max_mach_sl": 0.73,
+    "max_mach_alt": 0.76,
+    "alt_of_max_mach_m": 6096.0,
+    "climb_rate_sl_mps": 23.3,
+    "service_ceiling_m": 12500.0,
+    "combat_radius_m": 440000.0,
+    "ferry_range_m": 1930000.0,
+    "stall_speed_mps": 51.0,
+    "takeoff_distance_m": 1150.0,
+    "sources": [
+      "USAAF Standard Aircraft Characteristics: P-80A-1-LO (1946)",
+      "Loftin, Quest for Performance, NASA SP-468, Table V (1985)",
+      "Knaack, Encyclopedia of US Air Force Aircraft and Missile Systems Vol. 1 (1978)"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "engine_id": "j65_w_3",
+  "name": "Wright J65-W-3",
+  "manufacturer": "Curtiss-Wright",
+  "country": "USA",
+  "first_run_year": 1951,
+  "service_entry_year": 1954,
+  "applications": ["Republic F-84F Thunderstreak", "North American FJ-3 Fury"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": false,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 54.0,
+    "opr": 7.0,
+    "tit_K": 1110.0,
+    "ab_temp_K": 0.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.855,
+    "eta_t_poly": 0.87,
+    "eta_burner": 0.965,
+    "pi_burner": 0.955,
+    "specific_weight_factor": 1.07,
+    "mtbf_factor": 0.95,
+    "length_factor": 0.84,
+    "diameter_factor": 1.01,
+    "cumulative_test_hours": 1500.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 32116.2,
+    "sls_ab_thrust_N": null,
+    "sls_dry_tsfc_kg_per_Ns": 2.60028e-5,
+    "sls_ab_tsfc_kg_per_Ns": null,
+    "mass_kg": 1259.2,
+    "diameter_m": 0.9530,
+    "length_m": 3.2258,
+    "unit_cost_usd": 75000.0,
+    "tbo_hours_service": 400.0,
+    "sources": [
+      "Flight, 6 Jan 1956, pp. 20-22",
+      "Gunston, World Encyclopaedia of Aero Engines (1989)"
+    ]
+  }
+}

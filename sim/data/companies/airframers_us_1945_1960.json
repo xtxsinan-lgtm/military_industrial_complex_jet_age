@@ -1,0 +1,567 @@
+{
+  "schema_version": "1.0",
+  "era": "1945-1960",
+  "country": "USA",
+  "description": "Historical US fighter airframe manufacturers (1945-01-01 starting state, facilities, reputations, engineering staff, and AI design doctrine).",
+  "airframers": [
+    {
+      "id": "north_american",
+      "name_key": "company.north_american.name",
+      "short_name_key": "company.north_american.short",
+      "hq_location": "Inglewood, California",
+      "company_code_usn": "J",
+      "playable_default": true,
+      "tier": "major_prime",
+      "cash_usd": 38000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.92,
+        "USN": 0.55,
+        "export": 0.80
+      },
+      "political_capital": 0.85,
+      "engineers": {
+        "aero": 65,
+        "structures": 70,
+        "propulsion": 20,
+        "systems": 45
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 260000.0,
+        "test_site": true
+      },
+      "chief_designer_id": "designer_edgar_schmued",
+      "secondary_designer_id": "designer_harrison_storms",
+      "starting_tech_overrides": {
+        "aero_1945_compressible_subsonic": 0.95,
+        "struct_1945_stressed_skin_7075": 0.94,
+        "mfg_1945_ww2_mass_production_line": 0.95
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF", "USN"],
+        "speed_vs_maneuver_bias": 0.35,
+        "production_scalability_focus": 0.90,
+        "aerodynamic_ambition": 0.85,
+        "risk_tolerance": 0.65
+      },
+      "historical_aircraft_1945_1960": ["FJ-1 Fury", "F-86 Sabre", "F-86D Sabre Dog", "FJ-2/3/4 Fury", "F-100 Super Sabre", "F-107A", "XF-108 Rapier"],
+      "historical_summary": "Wartime mass-production titan (P-51 Mustang, B-25) that pivoted fastest to swept-wing transonic and supersonic fighters with the F-86 Sabre and F-100 Super Sabre."
+    },
+    {
+      "id": "lockheed",
+      "name_key": "company.lockheed.name",
+      "short_name_key": "company.lockheed.short",
+      "hq_location": "Burbank, California",
+      "company_code_usn": "V",
+      "playable_default": true,
+      "tier": "major_prime",
+      "cash_usd": 34000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.90,
+        "USN": 0.50,
+        "export": 0.82
+      },
+      "political_capital": 0.82,
+      "engineers": {
+        "aero": 62,
+        "structures": 58,
+        "propulsion": 18,
+        "systems": 42
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 220000.0,
+        "test_site": true
+      },
+      "chief_designer_id": "designer_kelly_johnson",
+      "secondary_designer_id": "designer_willis_hawkins",
+      "starting_tech_overrides": {
+        "aero_1945_compressible_subsonic": 0.94,
+        "struct_1945_stressed_skin_7075": 0.92,
+        "sys_1946_hydraulic_boost_controls": 0.45
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF"],
+        "speed_vs_maneuver_bias": 0.80,
+        "production_scalability_focus": 0.75,
+        "aerodynamic_ambition": 0.92,
+        "risk_tolerance": 0.78
+      },
+      "historical_aircraft_1945_1960": ["P-80 / F-80 Shooting Star", "T-33", "F-94 Starfire", "XF-90", "XFV-1", "F-104 Starfighter", "U-2"],
+      "historical_summary": "Builder of America's first operational jet fighter (P-80 Shooting Star); Kelly Johnson's Advanced Development Projects unit excelled at rapid, extreme-speed prototypes."
+    },
+    {
+      "id": "republic",
+      "name_key": "company.republic.name",
+      "short_name_key": "company.republic.short",
+      "hq_location": "Farmingdale, Long Island, New York",
+      "company_code_usn": "P",
+      "playable_default": true,
+      "tier": "major_prime",
+      "cash_usd": 24000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.86,
+        "USN": 0.25,
+        "export": 0.75
+      },
+      "political_capital": 0.76,
+      "engineers": {
+        "aero": 45,
+        "structures": 58,
+        "propulsion": 22,
+        "systems": 38
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 175000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_alexander_kartveli",
+      "secondary_designer_id": null,
+      "starting_tech_overrides": {
+        "struct_1945_stressed_skin_7075": 0.95,
+        "prop_1945_early_axial_compressor": 0.65
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF"],
+        "speed_vs_maneuver_bias": 0.70,
+        "production_scalability_focus": 0.80,
+        "aerodynamic_ambition": 0.75,
+        "risk_tolerance": 0.72
+      },
+      "historical_aircraft_1945_1960": ["F-84 Thunderjet", "F-84F Thunderstreak", "XF-91 Thunderceptor", "XF-84H", "F-105 Thunderchief", "XF-103"],
+      "historical_summary": "TAC's premier heavy fighter-bomber house; Kartveli's designs combined rugged structural strength, massive internal fuel/payload, and high low-altitude dash speed."
+    },
+    {
+      "id": "convair",
+      "name_key": "company.convair.name",
+      "short_name_key": "company.convair.short",
+      "hq_location": "San Diego, California",
+      "company_code_usn": "Y",
+      "playable_default": true,
+      "tier": "major_prime",
+      "cash_usd": 36000000.0,
+      "debt_usd": 2000000.0,
+      "reputation": {
+        "USAF": 0.84,
+        "USN": 0.52,
+        "export": 0.60
+      },
+      "political_capital": 0.88,
+      "engineers": {
+        "aero": 60,
+        "structures": 62,
+        "propulsion": 18,
+        "systems": 55
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 250000.0,
+        "test_site": true
+      },
+      "chief_designer_id": "designer_frank_davis",
+      "secondary_designer_id": "designer_ralph_shick",
+      "starting_tech_overrides": {
+        "struct_1945_stressed_skin_7075": 0.92,
+        "av_1945_vhf_gyro_sight_scr720": 0.88
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF", "USN"],
+        "speed_vs_maneuver_bias": 0.75,
+        "production_scalability_focus": 0.72,
+        "aerodynamic_ambition": 0.95,
+        "risk_tolerance": 0.85
+      },
+      "historical_aircraft_1945_1960": ["XF-92A", "F2Y Sea Dart", "XFY-1 Pogo", "F-102 Delta Dagger", "F-106 Delta Dart", "B-58 Hustler"],
+      "historical_summary": "Pioneer of the tailless 60-degree delta wing, Weapon System concept integration (WS-201A), area-ruled interceptors, and Mach 2 honeycomb structures."
+    },
+    {
+      "id": "mcdonnell",
+      "name_key": "company.mcdonnell.name",
+      "short_name_key": "company.mcdonnell.short",
+      "hq_location": "St. Louis, Missouri",
+      "company_code_usn": "H",
+      "playable_default": true,
+      "tier": "rising_prime",
+      "cash_usd": 14000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.62,
+        "USN": 0.78,
+        "export": 0.55
+      },
+      "political_capital": 0.68,
+      "engineers": {
+        "aero": 42,
+        "structures": 46,
+        "propulsion": 16,
+        "systems": 36
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 115000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_kendall_perkins",
+      "secondary_designer_id": "designer_herman_barkey",
+      "starting_tech_overrides": {
+        "prop_1945_early_axial_compressor": 0.65,
+        "aero_1945_compressible_subsonic": 0.92
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USN", "USAF"],
+        "speed_vs_maneuver_bias": 0.60,
+        "production_scalability_focus": 0.78,
+        "aerodynamic_ambition": 0.82,
+        "risk_tolerance": 0.75
+      },
+      "historical_aircraft_1945_1960": ["FH-1 Phantom", "F2H Banshee", "XF-85 Goblin", "XF-88 Voodoo", "F3H Demon", "F-101 Voodoo", "F4H-1 (F-4) Phantom II"],
+      "historical_summary": "Founded in 1939; rose from a small St. Louis newcomer with the Navy's first carrier jet (FH-1) to dominate the late 1950s with the F-101 Voodoo and F4H Phantom II."
+    },
+    {
+      "id": "grumman",
+      "name_key": "company.grumman.name",
+      "short_name_key": "company.grumman.short",
+      "hq_location": "Bethpage, Long Island, New York",
+      "company_code_usn": "F",
+      "playable_default": true,
+      "tier": "major_prime",
+      "cash_usd": 28000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.35,
+        "USN": 0.95,
+        "export": 0.60
+      },
+      "political_capital": 0.80,
+      "engineers": {
+        "aero": 46,
+        "structures": 56,
+        "propulsion": 15,
+        "systems": 38
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 180000.0,
+        "test_site": true
+      },
+      "chief_designer_id": "designer_william_schwendler",
+      "secondary_designer_id": "designer_richard_hutton",
+      "starting_tech_overrides": {
+        "struct_1945_stressed_skin_7075": 0.95,
+        "struct_1948_jet_carrier_suitability": 0.55
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USN"],
+        "speed_vs_maneuver_bias": 0.30,
+        "production_scalability_focus": 0.85,
+        "aerodynamic_ambition": 0.72,
+        "risk_tolerance": 0.55
+      },
+      "historical_aircraft_1945_1960": ["F9F-2/5 Panther", "F9F-6/8 Cougar", "XF10F-1 Jaguar", "F11F-1 Tiger", "F11F-1F Super Tiger"],
+      "historical_summary": "The 'Iron Works' of US Naval Aviation; unmatched carrier deck ruggedness and BuAer trust, transitioning from the F9F Panther/Cougar to the area-ruled F11F Tiger."
+    },
+    {
+      "id": "douglas",
+      "name_key": "company.douglas.name",
+      "short_name_key": "company.douglas.short",
+      "hq_location": "El Segundo & Santa Monica, California",
+      "company_code_usn": "D",
+      "playable_default": true,
+      "tier": "major_prime",
+      "cash_usd": 42000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.72,
+        "USN": 0.90,
+        "export": 0.85
+      },
+      "political_capital": 0.86,
+      "engineers": {
+        "aero": 60,
+        "structures": 64,
+        "propulsion": 18,
+        "systems": 44
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 270000.0,
+        "test_site": true
+      },
+      "chief_designer_id": "designer_ed_heinemann",
+      "secondary_designer_id": null,
+      "starting_tech_overrides": {
+        "aero_1945_compressible_subsonic": 0.94,
+        "struct_1945_stressed_skin_7075": 0.94
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USN", "USAF"],
+        "speed_vs_maneuver_bias": 0.45,
+        "production_scalability_focus": 0.88,
+        "aerodynamic_ambition": 0.86,
+        "risk_tolerance": 0.65
+      },
+      "historical_aircraft_1945_1960": ["D-558-1 Skystreak", "D-558-2 Skyrocket", "F3D Skyknight", "X-3 Stiletto", "F4D Skyray", "F5D Skylancer", "A4D Skyhawk"],
+      "historical_summary": "Ed Heinemann's El Segundo division championed structural simplicity and weight discipline ('Simplicate and add lightness'), building the F3D, F4D Skyray, A4D Skyhawk, and NACA D-558 research aircraft."
+    },
+    {
+      "id": "vought",
+      "name_key": "company.vought.name",
+      "short_name_key": "company.vought.short",
+      "hq_location": "Stratford, Connecticut (Dallas, Texas from 1948)",
+      "company_code_usn": "U",
+      "playable_default": true,
+      "tier": "mid_prime",
+      "cash_usd": 19000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.30,
+        "USN": 0.84,
+        "export": 0.58
+      },
+      "political_capital": 0.66,
+      "engineers": {
+        "aero": 42,
+        "structures": 44,
+        "propulsion": 14,
+        "systems": 32
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 135000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_john_russell_clark",
+      "secondary_designer_id": "designer_rex_beisel",
+      "starting_tech_overrides": {
+        "struct_1945_stressed_skin_7075": 0.90
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USN"],
+        "speed_vs_maneuver_bias": 0.65,
+        "production_scalability_focus": 0.70,
+        "aerodynamic_ambition": 0.90,
+        "risk_tolerance": 0.85
+      },
+      "historical_aircraft_1945_1960": ["F6U Pirate", "F7U Cutlass", "F8U (F-8) Crusader", "XF8U-3 Crusader III"],
+      "historical_summary": "Bold naval innovator that gambled on the radical tailless F7U Cutlass before redeeming itself with the Collier-Trophy-winning supersonic F8U Crusader and Mach 2.3+ XF8U-3."
+    },
+    {
+      "id": "northrop",
+      "name_key": "company.northrop.name",
+      "short_name_key": "company.northrop.short",
+      "hq_location": "Hawthorne, California",
+      "company_code_usn": "N",
+      "playable_default": true,
+      "tier": "mid_prime",
+      "cash_usd": 17000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.76,
+        "USN": 0.30,
+        "export": 0.72
+      },
+      "political_capital": 0.64,
+      "engineers": {
+        "aero": 46,
+        "structures": 40,
+        "propulsion": 14,
+        "systems": 38
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 125000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_jack_northrop",
+      "secondary_designer_id": "designer_welko_gasich",
+      "starting_tech_overrides": {
+        "av_1945_vhf_gyro_sight_scr720": 0.92,
+        "aero_1945_compressible_subsonic": 0.92
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF"],
+        "speed_vs_maneuver_bias": 0.40,
+        "production_scalability_focus": 0.76,
+        "aerodynamic_ambition": 0.88,
+        "risk_tolerance": 0.74
+      },
+      "historical_aircraft_1945_1960": ["XP-79B", "X-4 Bantam", "F-89 Scorpion", "N-156F / F-5A Freedom Fighter", "T-38 Talon"],
+      "historical_summary": "Night/all-weather fighter specialist (P-61 Black Widow, F-89 Scorpion) and flying-wing pioneer that pivoted in the mid-1950s to lightweight, high-agility supersonic fighters (N-156F / F-5)."
+    },
+    {
+      "id": "bell",
+      "name_key": "company.bell.name",
+      "short_name_key": "company.bell.short",
+      "hq_location": "Buffalo / Niagara Falls, New York",
+      "company_code_usn": "L",
+      "playable_default": true,
+      "tier": "specialist_prime",
+      "cash_usd": 15000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.70,
+        "USN": 0.42,
+        "export": 0.50
+      },
+      "political_capital": 0.62,
+      "engineers": {
+        "aero": 44,
+        "structures": 36,
+        "propulsion": 18,
+        "systems": 28
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 110000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_robert_woods",
+      "secondary_designer_id": null,
+      "starting_tech_overrides": {
+        "test_1945_sub_and_supersonic_blowdown_tunnels": 0.92,
+        "aero_1945_compressible_subsonic": 0.90
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF"],
+        "speed_vs_maneuver_bias": 0.75,
+        "production_scalability_focus": 0.55,
+        "aerodynamic_ambition": 0.96,
+        "risk_tolerance": 0.90
+      },
+      "historical_aircraft_1945_1960": ["P-59 Airacomet", "XP-83", "X-1", "X-1A/E", "X-2", "X-5", "X-14", "XF-109 (D188A)"],
+      "historical_summary": "Builder of America's very first jet (P-59) and the legendary X-1, X-2, and X-5 supersonic/variable-sweep research aircraft; brilliant at X-planes but struggled to win postwar series fighter production."
+    },
+    {
+      "id": "curtiss_wright",
+      "name_key": "company.curtiss_wright.name",
+      "short_name_key": "company.curtiss_wright.short",
+      "hq_location": "Columbus, Ohio & Buffalo, New York",
+      "company_code_usn": "C",
+      "playable_default": true,
+      "tier": "legacy_giant",
+      "cash_usd": 32000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.65,
+        "USN": 0.62,
+        "export": 0.68
+      },
+      "political_capital": 0.70,
+      "engineers": {
+        "aero": 34,
+        "structures": 42,
+        "propulsion": 20,
+        "systems": 28
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 195000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_donovan_berlin",
+      "secondary_designer_id": null,
+      "starting_tech_overrides": {
+        "mfg_1945_ww2_mass_production_line": 0.90
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF", "USN"],
+        "speed_vs_maneuver_bias": 0.40,
+        "production_scalability_focus": 0.75,
+        "aerodynamic_ambition": 0.50,
+        "risk_tolerance": 0.45
+      },
+      "historical_aircraft_1945_1960": ["XF15C-1", "XP-87 / XF-87 Blackhawk"],
+      "historical_summary": "America's second-largest WWII industrial corporation; conservative management starved jet R&D, making the XF-87 Blackhawk its final stand as an airframe builder in 1948."
+    },
+    {
+      "id": "martin",
+      "name_key": "company.martin.name",
+      "short_name_key": "company.martin.short",
+      "hq_location": "Middle River, Maryland",
+      "company_code_usn": "M",
+      "playable_default": false,
+      "tier": "mid_prime",
+      "cash_usd": 26000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.74,
+        "USN": 0.76,
+        "export": 0.55
+      },
+      "political_capital": 0.75,
+      "engineers": {
+        "aero": 38,
+        "structures": 48,
+        "propulsion": 16,
+        "systems": 36
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 165000.0,
+        "test_site": false
+      },
+      "chief_designer_id": "designer_george_trimble",
+      "secondary_designer_id": null,
+      "starting_tech_overrides": {
+        "struct_1945_stressed_skin_7075": 0.90
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF", "USN"],
+        "speed_vs_maneuver_bias": 0.60,
+        "production_scalability_focus": 0.78,
+        "aerodynamic_ambition": 0.68,
+        "risk_tolerance": 0.60
+      },
+      "historical_aircraft_1945_1960": ["XB-48", "XB-51", "B-57 Canberra"],
+      "historical_summary": "Major tactical bomber and patrol-plane house that competed for USAF tactical strike contracts (XB-51, B-57) before pivoting toward missiles and space."
+    },
+    {
+      "id": "boeing",
+      "name_key": "company.boeing.name",
+      "short_name_key": "company.boeing.short",
+      "hq_location": "Seattle, Washington & Wichita, Kansas",
+      "company_code_usn": "B",
+      "playable_default": false,
+      "tier": "major_prime",
+      "cash_usd": 45000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.95,
+        "USN": 0.40,
+        "export": 0.80
+      },
+      "political_capital": 0.92,
+      "engineers": {
+        "aero": 68,
+        "structures": 72,
+        "propulsion": 22,
+        "systems": 48
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 290000.0,
+        "test_site": true
+      },
+      "chief_designer_id": "designer_george_schairer",
+      "secondary_designer_id": null,
+      "starting_tech_overrides": {
+        "aero_1945_compressible_subsonic": 0.95,
+        "test_1945_sub_and_supersonic_blowdown_tunnels": 0.92,
+        "struct_1945_stressed_skin_7075": 0.95
+      },
+      "ai_doctrine": {
+        "preferred_customers": ["USAF"],
+        "speed_vs_maneuver_bias": 0.65,
+        "production_scalability_focus": 0.92,
+        "aerodynamic_ambition": 0.88,
+        "risk_tolerance": 0.62
+      },
+      "historical_aircraft_1945_1960": ["XF8B-1", "B-47 Stratojet", "B-52 Stratofortress", "XF-99 Bowmarc"],
+      "historical_summary": "Strategic bomber powerhouse whose private high-speed wind tunnel and George Schairer's immediate 1945 adoption of German swept-wing data produced the revolutionary XB-47."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "tolerance_rel": 1e-06,
+  "rnd_estimate": {
+    "procurement_mode": "custom_commission",
+    "ambition": 0.7650140487519268,
+    "total_dev_cost_usd": 127411734.98444058,
+    "player_cost_share_usd": 76447040.99066435,
+    "expected_duration_days": 1903,
+    "thrust_sigma_rel": 0.08856641534035004,
+    "tsfc_sigma_rel": 0.07018401211080266,
+    "mass_sigma_rel": 0.0835296129181895,
+    "schedule_sigma_rel": 0.18044162906592637,
+    "catastrophic_flaw_prob": 0.03503356931513206
+  },
+  "diagnostics_j57": {
+    "engine_id": "j57_p_21",
+    "compressor_surge_margin": 0.232,
+    "high_alt_flameout_risk": 0.05,
+    "ab_lightoff_reliability": 0.87,
+    "intake_compatibility": 1.0,
+    "thermal_margin_K": -9.0,
+    "flaw_incidence_multipliers": {
+      "engine_stall": 0.7069,
+      "inlet": 1.0
+    }
+  },
+  "third_party_sale_j57_100": {
+    "gross_revenue_usd": 29362982.158638902,
+    "net_profit_usd": 4479098.973351694,
+    "royalty_usd": 2986065.982234465
+  }
+}

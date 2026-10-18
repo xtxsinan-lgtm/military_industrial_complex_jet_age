@@ -1,0 +1,267 @@
+{
+  "schema_version": "1.0",
+  "base_year": 1950,
+  "description": "US historical CPI-U (BLS 1982-84=100 normalized to 1950=1.0), aerospace industry cost escalation index (65% SIC 372 labor + 35% industrial commodities), benchmark salaries/wages, and prime/corporate interest rates (1945-2030).",
+  "years": {
+    "1945": {
+      "cpi_1982_84": 18.0,
+      "cpi_index_1950": 0.7469,
+      "aero_cost_index_1950": 0.7350,
+      "eng_salary_usd_yr": 4200.0,
+      "mfg_wage_usd_hr": 1.19,
+      "prime_rate": 0.0150,
+      "corporate_aaa_rate": 0.0262,
+      "labor_market_tightness": 0.65
+    },
+    "1946": {
+      "cpi_1982_84": 19.5,
+      "cpi_index_1950": 0.8091,
+      "aero_cost_index_1950": 0.7950,
+      "eng_salary_usd_yr": 4450.0,
+      "mfg_wage_usd_hr": 1.28,
+      "prime_rate": 0.0150,
+      "corporate_aaa_rate": 0.0253,
+      "labor_market_tightness": 0.55
+    },
+    "1947": {
+      "cpi_1982_84": 22.3,
+      "cpi_index_1950": 0.9253,
+      "aero_cost_index_1950": 0.8650,
+      "eng_salary_usd_yr": 4700.0,
+      "mfg_wage_usd_hr": 1.38,
+      "prime_rate": 0.0163,
+      "corporate_aaa_rate": 0.0261,
+      "labor_market_tightness": 0.60
+    },
+    "1948": {
+      "cpi_1982_84": 24.1,
+      "cpi_index_1950": 1.0000,
+      "aero_cost_index_1950": 0.9250,
+      "eng_salary_usd_yr": 4950.0,
+      "mfg_wage_usd_hr": 1.49,
+      "prime_rate": 0.0188,
+      "corporate_aaa_rate": 0.0282,
+      "labor_market_tightness": 0.70
+    },
+    "1949": {
+      "cpi_1982_84": 23.8,
+      "cpi_index_1950": 0.9876,
+      "aero_cost_index_1950": 0.9550,
+      "eng_salary_usd_yr": 5150.0,
+      "mfg_wage_usd_hr": 1.55,
+      "prime_rate": 0.0200,
+      "corporate_aaa_rate": 0.0266,
+      "labor_market_tightness": 0.75
+    },
+    "1950": {
+      "cpi_1982_84": 24.1,
+      "cpi_index_1950": 1.0000,
+      "aero_cost_index_1950": 1.0000,
+      "eng_salary_usd_yr": 5400.0,
+      "mfg_wage_usd_hr": 1.62,
+      "prime_rate": 0.0207,
+      "corporate_aaa_rate": 0.0262,
+      "labor_market_tightness": 0.95
+    },
+    "1951": {
+      "cpi_1982_84": 26.0,
+      "cpi_index_1950": 1.0788,
+      "aero_cost_index_1950": 1.0950,
+      "eng_salary_usd_yr": 5850.0,
+      "mfg_wage_usd_hr": 1.76,
+      "prime_rate": 0.0256,
+      "corporate_aaa_rate": 0.0286,
+      "labor_market_tightness": 1.35
+    },
+    "1952": {
+      "cpi_1982_84": 26.5,
+      "cpi_index_1950": 1.0996,
+      "aero_cost_index_1950": 1.1550,
+      "eng_salary_usd_yr": 6250.0,
+      "mfg_wage_usd_hr": 1.88,
+      "prime_rate": 0.0300,
+      "corporate_aaa_rate": 0.0296,
+      "labor_market_tightness": 1.45
+    },
+    "1953": {
+      "cpi_1982_84": 26.7,
+      "cpi_index_1950": 1.1079,
+      "aero_cost_index_1950": 1.2150,
+      "eng_salary_usd_yr": 6600.0,
+      "mfg_wage_usd_hr": 1.99,
+      "prime_rate": 0.0317,
+      "corporate_aaa_rate": 0.0320,
+      "labor_market_tightness": 1.30
+    },
+    "1954": {
+      "cpi_1982_84": 26.9,
+      "cpi_index_1950": 1.1162,
+      "aero_cost_index_1950": 1.2600,
+      "eng_salary_usd_yr": 6900.0,
+      "mfg_wage_usd_hr": 2.08,
+      "prime_rate": 0.0305,
+      "corporate_aaa_rate": 0.0290,
+      "labor_market_tightness": 1.05
+    },
+    "1955": {
+      "cpi_1982_84": 26.8,
+      "cpi_index_1950": 1.1120,
+      "aero_cost_index_1950": 1.3150,
+      "eng_salary_usd_yr": 7250.0,
+      "mfg_wage_usd_hr": 2.17,
+      "prime_rate": 0.0316,
+      "corporate_aaa_rate": 0.0306,
+      "labor_market_tightness": 1.10
+    },
+    "1956": {
+      "cpi_1982_84": 27.2,
+      "cpi_index_1950": 1.1286,
+      "aero_cost_index_1950": 1.3850,
+      "eng_salary_usd_yr": 7700.0,
+      "mfg_wage_usd_hr": 2.28,
+      "prime_rate": 0.0377,
+      "corporate_aaa_rate": 0.0336,
+      "labor_market_tightness": 1.20
+    },
+    "1957": {
+      "cpi_1982_84": 28.1,
+      "cpi_index_1950": 1.1660,
+      "aero_cost_index_1950": 1.4550,
+      "eng_salary_usd_yr": 8150.0,
+      "mfg_wage_usd_hr": 2.38,
+      "prime_rate": 0.0420,
+      "corporate_aaa_rate": 0.0389,
+      "labor_market_tightness": 1.15
+    },
+    "1958": {
+      "cpi_1982_84": 28.9,
+      "cpi_index_1950": 1.1992,
+      "aero_cost_index_1950": 1.5200,
+      "eng_salary_usd_yr": 8600.0,
+      "mfg_wage_usd_hr": 2.50,
+      "prime_rate": 0.0383,
+      "corporate_aaa_rate": 0.0379,
+      "labor_market_tightness": 0.95
+    },
+    "1959": {
+      "cpi_1982_84": 29.1,
+      "cpi_index_1950": 1.2075,
+      "aero_cost_index_1950": 1.5850,
+      "eng_salary_usd_yr": 9100.0,
+      "mfg_wage_usd_hr": 2.61,
+      "prime_rate": 0.0448,
+      "corporate_aaa_rate": 0.0438,
+      "labor_market_tightness": 1.00
+    },
+    "1960": {
+      "cpi_1982_84": 29.6,
+      "cpi_index_1950": 1.2282,
+      "aero_cost_index_1950": 1.6500,
+      "eng_salary_usd_yr": 9600.0,
+      "mfg_wage_usd_hr": 2.70,
+      "prime_rate": 0.0482,
+      "corporate_aaa_rate": 0.0441,
+      "labor_market_tightness": 1.00
+    },
+    "1965": {
+      "cpi_1982_84": 31.5,
+      "cpi_index_1950": 1.3071,
+      "aero_cost_index_1950": 1.9800,
+      "eng_salary_usd_yr": 11800.0,
+      "mfg_wage_usd_hr": 3.22,
+      "prime_rate": 0.0454,
+      "corporate_aaa_rate": 0.0449,
+      "labor_market_tightness": 1.10
+    },
+    "1970": {
+      "cpi_1982_84": 38.8,
+      "cpi_index_1950": 1.6100,
+      "aero_cost_index_1950": 2.6500,
+      "eng_salary_usd_yr": 15200.0,
+      "mfg_wage_usd_hr": 4.15,
+      "prime_rate": 0.0791,
+      "corporate_aaa_rate": 0.0804,
+      "labor_market_tightness": 0.90
+    },
+    "1975": {
+      "cpi_1982_84": 53.8,
+      "cpi_index_1950": 2.2324,
+      "aero_cost_index_1950": 3.8500,
+      "eng_salary_usd_yr": 20500.0,
+      "mfg_wage_usd_hr": 5.80,
+      "prime_rate": 0.0786,
+      "corporate_aaa_rate": 0.0883,
+      "labor_market_tightness": 0.85
+    },
+    "1980": {
+      "cpi_1982_84": 82.4,
+      "cpi_index_1950": 3.4191,
+      "aero_cost_index_1950": 6.1000,
+      "eng_salary_usd_yr": 30200.0,
+      "mfg_wage_usd_hr": 9.30,
+      "prime_rate": 0.1527,
+      "corporate_aaa_rate": 0.1194,
+      "labor_market_tightness": 1.05
+    },
+    "1986": {
+      "cpi_1982_84": 109.6,
+      "cpi_index_1950": 4.5477,
+      "aero_cost_index_1950": 8.6500,
+      "eng_salary_usd_yr": 43500.0,
+      "mfg_wage_usd_hr": 12.85,
+      "prime_rate": 0.0833,
+      "corporate_aaa_rate": 0.0902,
+      "labor_market_tightness": 1.15
+    },
+    "1990": {
+      "cpi_1982_84": 130.7,
+      "cpi_index_1950": 5.4232,
+      "aero_cost_index_1950": 10.3000,
+      "eng_salary_usd_yr": 51000.0,
+      "mfg_wage_usd_hr": 15.20,
+      "prime_rate": 0.1001,
+      "corporate_aaa_rate": 0.0932,
+      "labor_market_tightness": 0.90
+    },
+    "2000": {
+      "cpi_1982_84": 172.2,
+      "cpi_index_1950": 7.1452,
+      "aero_cost_index_1950": 14.5000,
+      "eng_salary_usd_yr": 72000.0,
+      "mfg_wage_usd_hr": 21.50,
+      "prime_rate": 0.0923,
+      "corporate_aaa_rate": 0.0762,
+      "labor_market_tightness": 1.00
+    },
+    "2010": {
+      "cpi_1982_84": 218.1,
+      "cpi_index_1950": 9.0498,
+      "aero_cost_index_1950": 19.8000,
+      "eng_salary_usd_yr": 98000.0,
+      "mfg_wage_usd_hr": 29.00,
+      "prime_rate": 0.0325,
+      "corporate_aaa_rate": 0.0494,
+      "labor_market_tightness": 0.95
+    },
+    "2020": {
+      "cpi_1982_84": 258.8,
+      "cpi_index_1950": 10.7386,
+      "aero_cost_index_1950": 25.4000,
+      "eng_salary_usd_yr": 124000.0,
+      "mfg_wage_usd_hr": 36.50,
+      "prime_rate": 0.0354,
+      "corporate_aaa_rate": 0.0248,
+      "labor_market_tightness": 1.00
+    },
+    "2030": {
+      "cpi_1982_84": 330.0,
+      "cpi_index_1950": 13.6929,
+      "aero_cost_index_1950": 33.5000,
+      "eng_salary_usd_yr": 162000.0,
+      "mfg_wage_usd_hr": 47.00,
+      "prime_rate": 0.0450,
+      "corporate_aaa_rate": 0.0420,
+      "labor_market_tightness": 1.00
+    }
+  }
+}

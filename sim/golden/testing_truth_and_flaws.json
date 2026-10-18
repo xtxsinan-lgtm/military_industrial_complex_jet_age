@@ -1,0 +1,825 @@
+{
+  "campaign_seed": 19531024,
+  "tolerance_rel": 1e-06,
+  "archetypes": {
+    "straight_wing_1946": {
+      "date_day": 516,
+      "categorical_sig": "lockheed_co:straight:0:cheek:0:j33_a_35",
+      "coords_5d": [
+        0.6,
+        4.333333333333334,
+        4.2,
+        1.8481183648098112,
+        3.2
+      ],
+      "driver_priors": {
+        "cd0": {
+          "mu0": 0.0,
+          "sigma_prior": 0.06514520833333334,
+          "z_draw": -1.9843847169821076,
+          "N_d": 0.0,
+          "R_d": 1.0916666666666668,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "cdw": {
+          "mu0": 0.0,
+          "sigma_prior": 0.12025416666666668,
+          "z_draw": 0.14008503314694143,
+          "N_d": 0.0,
+          "R_d": 1.1666666666666667,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "kind": {
+          "mu0": 0.0,
+          "sigma_prior": 0.058318749999999996,
+          "z_draw": 0.3361075780848611,
+          "N_d": 0.0,
+          "R_d": 1.075,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "clmax": {
+          "mu0": -0.0,
+          "sigma_prior": 0.06315604166666666,
+          "z_draw": -1.7235534411056734,
+          "N_d": 0.0,
+          "R_d": 1.0583333333333333,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "mass": {
+          "mu0": 0.0,
+          "sigma_prior": 0.044846666666666674,
+          "z_draw": 1.326484177635456,
+          "N_d": 0.0,
+          "R_d": 1.0333333333333334,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "thrust": {
+          "mu0": -0.0,
+          "sigma_prior": 0.047740000000000005,
+          "z_draw": 1.1145709967913953,
+          "N_d": 0.0,
+          "R_d": 1.1,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "tsfc": {
+          "mu0": 0.0,
+          "sigma_prior": 0.04019020833333334,
+          "z_draw": 0.9961234053591239,
+          "N_d": 0.0,
+          "R_d": 1.0583333333333333,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "cost_unit": {
+          "mu0": 0.0,
+          "sigma_prior": 0.10171875,
+          "z_draw": 0.06968634725565567,
+          "N_d": 0.0,
+          "R_d": 1.0416666666666667,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "cost_dev": {
+          "mu0": 0.0,
+          "sigma_prior": 0.13888,
+          "z_draw": -1.3185548596706012,
+          "N_d": 0.0,
+          "R_d": 1.0666666666666667,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        },
+        "maint": {
+          "mu0": 0.0,
+          "sigma_prior": 0.1253175,
+          "z_draw": 0.41568048100830984,
+          "N_d": 0.0,
+          "R_d": 1.05,
+          "M_tech": 1.085,
+          "Q_d": 1.0
+        }
+      },
+      "driver_theta_true": {
+        "cd0": -0.12927315580128212,
+        "cdw": 0.01684580892355782,
+        "kind": 0.01960137381943649,
+        "clmax": -0.10885281294119661,
+        "mass": 0.059488393753024754,
+        "thrust": 0.053209619386821214,
+        "tsfc": 0.04003440718709265,
+        "cost_unit": 0.0070884081349112255,
+        "cost_dev": -0.1831208989110531,
+        "maint": 0.05209203867875887
+      },
+      "flaw_trigger_probabilities": {
+        "swept_wing_pitch_up": 0.0,
+        "deep_stall_t_tail": 0.0,
+        "inertia_roll_coupling": 0.0,
+        "supersonic_directional_instability": 0.0,
+        "transonic_mach_tuck": 0.0,
+        "transonic_control_heaviness": 0.0,
+        "transonic_buffet_boundary": 0.11235079565384054,
+        "control_surface_buzz": 0.05045600000000006,
+        "aileron_reversal": 0.02308636831414063,
+        "wing_bending_torsion_flutter": 0.007753007248242914,
+        "empennage_t_tail_flutter": 0.004111238302086695,
+        "panel_transonic_flutter": 0.0,
+        "unrecoverable_flat_spin": 0.0,
+        "swept_wing_dutch_roll": 0.0,
+        "high_aoa_adverse_yaw": 0.0,
+        "tip_stall_wing_drop": 0.0,
+        "delta_high_sink_approach": 0.0021000000000000003,
+        "area_rule_drag_pinch": 0.0,
+        "supersonic_intake_buzz": 0.0,
+        "inlet_distortion_recoverable": 0.042134814814814806,
+        "compressor_surge_stall": 0.08976,
+        "gun_gas_ingestion_surge": 0.17612000000000003,
+        "high_altitude_flameout": 0.020268533333333335,
+        "afterburner_lightoff_instability": 0.0,
+        "prototype_engine_teething": 0.0,
+        "wing_root_fatigue_cracking": 0.04474178995855062,
+        "landing_gear_shimmy_collapse": 0.023799999999999998,
+        "aft_fuselage_ab_overheating": 0.0,
+        "stores_separation_strike": 0.0,
+        "hydraulic_single_point_failure": 0.0,
+        "fuel_cg_shift_venting": 0.023799999999999998,
+        "radar_fcs_immaturity": 0.0,
+        "ejection_envelope_deficiency": 0.009520000000000011,
+        "carrier_hook_visibility_deficiency": 0.030878296296296286
+      },
+      "realized_flaws": {
+        "gun_gas_ingestion_surge": {
+          "severity": 4,
+          "trigger_prob": 0.17612000000000003,
+          "u_draw": 0.1188954043645492
+        }
+      },
+      "true_perf_selected": {
+        "max_mach_alt": 0.8258034747662806,
+        "max_mach_sl": 0.8084081253984496,
+        "service_ceiling_m": 13799.258988465672,
+        "climb_rate_sl_mps": 24.040240927080728,
+        "sustained_turn_dps_m08_4572m": 11.777209466960024,
+        "instantaneous_turn_dps_m08_4572m": 16.68145773185945,
+        "combat_radius_m": 572067.2231857823,
+        "empty_mass_kg": 4053.079659864321,
+        "unit_flyaway_cost_usd": 149993.49518825967
+      },
+      "sim_estimate_selected": {
+        "max_mach_alt": {
+          "value": 0.8,
+          "sigma": 0.03262847371911517,
+          "source": "sim",
+          "unit": "mach"
+        },
+        "sustained_turn_dps_m08_4572m": {
+          "value": 11.8,
+          "sigma": 0.6154026355710819,
+          "source": "sim",
+          "unit": "deg/s"
+        },
+        "combat_radius_m": {
+          "value": 580000.0,
+          "sigma": 33326.5875359716,
+          "source": "sim",
+          "unit": "m"
+        },
+        "empty_mass_kg": {
+          "value": 3819.0,
+          "sigma": 171.26942000000003,
+          "source": "sim",
+          "unit": "kg"
+        }
+      }
+    },
+    "swept_transonic_1950": {
+      "date_day": 1885,
+      "categorical_sig": "north_american_co:swept:0:nose:0:j47_ge_27",
+      "coords_5d": [
+        2.3333333333333335,
+        3.166666666666667,
+        3.1933333333333334,
+        2.583480430399674,
+        3.72
+      ],
+      "driver_priors": {
+        "cd0": {
+          "mu0": 0.017201905597082293,
+          "sigma_prior": 0.11901164110856711,
+          "z_draw": 1.2218771639455237,
+          "N_d": 0.5192538242681193,
+          "R_d": 1.3405769230769233,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "cdw": {
+          "mu0": 0.07457532014735087,
+          "sigma_prior": 0.2914419133516214,
+          "z_draw": -1.496076645417303,
+          "N_d": 1.023235477234235,
+          "R_d": 1.6192307692307697,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "kind": {
+          "mu0": 0.012466322173885516,
+          "sigma_prior": 0.10145592522901407,
+          "z_draw": 0.35461502929916894,
+          "N_d": 0.4703828761017079,
+          "R_d": 1.2786538461538464,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "clmax": {
+          "mu0": -0.014959586608662616,
+          "sigma_prior": 0.1077894986195498,
+          "z_draw": -0.9329837403626743,
+          "N_d": 0.5131449557473177,
+          "R_d": 1.2167307692307694,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "mass": {
+          "mu0": 0.010199718142269967,
+          "sigma_prior": 0.06598869722713817,
+          "z_draw": 0.012828039204450886,
+          "N_d": 0.25657247787365883,
+          "R_d": 1.123846153846154,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "thrust": {
+          "mu0": -0.005099859071134987,
+          "sigma_prior": 0.07857390456001563,
+          "z_draw": 1.5619523630517131,
+          "N_d": 0.19242935840524425,
+          "R_d": 1.3715384615384618,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "tsfc": {
+          "mu0": 0.0,
+          "sigma_prior": 0.05643121262019233,
+          "z_draw": 1.1160167586750003,
+          "N_d": 0.0,
+          "R_d": 1.2167307692307694,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "cost_unit": {
+          "mu0": 0.0,
+          "sigma_prior": 0.13772380889423078,
+          "z_draw": -2.2820353810187632,
+          "N_d": 0.0,
+          "R_d": 1.1548076923076924,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "cost_dev": {
+          "mu0": 0.016574541981188705,
+          "sigma_prior": 0.2144366907397847,
+          "z_draw": -0.43078741508432494,
+          "N_d": 0.19242935840524425,
+          "R_d": 1.2476923076923079,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        },
+        "maint": {
+          "mu0": 0.0,
+          "sigma_prior": 0.17284216971153848,
+          "z_draw": 0.36517607191744195,
+          "N_d": 0.0,
+          "R_d": 1.185769230769231,
+          "M_tech": 1.325125,
+          "Q_d": 1.0
+        }
+      },
+      "driver_theta_true": {
+        "cd0": 0.16261951211132078,
+        "cdw": -0.36144411991374314,
+        "kind": 0.04844411807154664,
+        "clmax": -0.1155254362025475,
+        "mass": 0.011046223737350334,
+        "thrust": 0.11762883683058122,
+        "tsfc": 0.06297817899648682,
+        "cost_unit": -0.31429060470530124,
+        "cost_dev": -0.07580208572183994,
+        "maint": 0.06311782459694748
+      },
+      "flaw_trigger_probabilities": {
+        "swept_wing_pitch_up": 0.20914924022363593,
+        "deep_stall_t_tail": 0.0,
+        "inertia_roll_coupling": 0.0,
+        "supersonic_directional_instability": 0.0,
+        "transonic_mach_tuck": 0.15875095470018596,
+        "transonic_control_heaviness": 0.020421091625992503,
+        "transonic_buffet_boundary": 0.17455325030522514,
+        "control_surface_buzz": 0.030148169819081132,
+        "aileron_reversal": 0.22496879735761002,
+        "wing_bending_torsion_flutter": 0.1382587592827001,
+        "empennage_t_tail_flutter": 0.018738124712528625,
+        "panel_transonic_flutter": 0.0,
+        "unrecoverable_flat_spin": 0.05815566589585637,
+        "swept_wing_dutch_roll": 0.21456895723203526,
+        "high_aoa_adverse_yaw": 0.10967011047517916,
+        "tip_stall_wing_drop": 0.15640142664571124,
+        "delta_high_sink_approach": 0.004117776363273312,
+        "area_rule_drag_pinch": 0.0,
+        "supersonic_intake_buzz": 0.0,
+        "inlet_distortion_recoverable": 0.0,
+        "compressor_surge_stall": 0.14095842863657582,
+        "gun_gas_ingestion_surge": 0.20853523552761494,
+        "high_altitude_flameout": 0.1238725584988091,
+        "afterburner_lightoff_instability": 0.0,
+        "prototype_engine_teething": 0.01705848893562291,
+        "wing_root_fatigue_cracking": 0.1184435564618726,
+        "landing_gear_shimmy_collapse": 0.023799999999999998,
+        "aft_fuselage_ab_overheating": 0.0,
+        "stores_separation_strike": 0.10551482448421011,
+        "hydraulic_single_point_failure": 0.060579014121596754,
+        "fuel_cg_shift_venting": 0.023000209800839888,
+        "radar_fcs_immaturity": 0.06734127279176197,
+        "ejection_envelope_deficiency": 0.016228948035472635,
+        "carrier_hook_visibility_deficiency": 0.0264141627782772
+      },
+      "realized_flaws": {},
+      "true_perf_selected": {
+        "max_mach_alt": 1.0338608555590132,
+        "max_mach_sl": 0.979362289157382,
+        "service_ceiling_m": 15077.242296488363,
+        "climb_rate_sl_mps": 49.03588555105449,
+        "sustained_turn_dps_m08_4572m": 13.157791178109719,
+        "instantaneous_turn_dps_m08_4572m": 18.25638681210851,
+        "combat_radius_m": 529611.9913854001,
+        "empty_mass_kg": 4994.870845138936,
+        "unit_flyaway_cost_usd": 190825.9635365363
+      },
+      "sim_estimate_selected": {
+        "max_mach_alt": {
+          "value": 0.93,
+          "sigma": 0.0894286414804987,
+          "source": "sim",
+          "unit": "mach"
+        },
+        "sustained_turn_dps_m08_4572m": {
+          "value": 12.5,
+          "sigma": 1.1192798526333914,
+          "source": "sim",
+          "unit": "deg/s"
+        },
+        "combat_radius_m": {
+          "value": 620000.0,
+          "sigma": 56977.669968873095,
+          "source": "sim",
+          "unit": "m"
+        },
+        "empty_mass_kg": {
+          "value": 4940.0,
+          "sigma": 329.85524947080876,
+          "source": "sim",
+          "unit": "kg"
+        }
+      }
+    },
+    "early_supersonic_delta_1953": {
+      "date_day": 3012,
+      "categorical_sig": "convair_co:delta:0:cheek:0:j57_p_21",
+      "coords_5d": [
+        4.0,
+        1.5,
+        1.4666666666666668,
+        4.216875770884508,
+        4.96
+      ],
+      "driver_priors": {
+        "cd0": {
+          "mu0": 0.04688548963048034,
+          "sigma_prior": 0.17431620639150247,
+          "z_draw": -1.4277416987914546,
+          "N_d": 1.219685934619438,
+          "R_d": 1.363,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "cdw": {
+          "mu0": 0.30766417835819954,
+          "sigma_prior": 0.6129894477613999,
+          "z_draw": 1.2772793205424693,
+          "N_d": 3.638009366371686,
+          "R_d": 1.66,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "kind": {
+          "mu0": 0.05499236143584556,
+          "sigma_prior": 0.17460632867140627,
+          "z_draw": 0.8199465702129358,
+          "N_d": 1.7882240935158298,
+          "R_d": 1.297,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "clmax": {
+          "mu0": -0.07891328648333777,
+          "sigma_prior": 0.2061042690690382,
+          "z_draw": -0.2857890544123335,
+          "N_d": 2.33279737739985,
+          "R_d": 1.2309999999999999,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "mass": {
+          "mu0": 0.10921328524915891,
+          "sigma_prior": 0.1388561457851468,
+          "z_draw": 0.09306819249024134,
+          "N_d": 2.367575216088858,
+          "R_d": 1.132,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "thrust": {
+          "mu0": -0.03685448602794238,
+          "sigma_prior": 0.12907802449580635,
+          "z_draw": -0.561861642308901,
+          "N_d": 1.198422438108849,
+          "R_d": 1.396,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "tsfc": {
+          "mu0": 0.022198521789978293,
+          "sigma_prior": 0.08856511705582835,
+          "z_draw": 0.3643939736267512,
+          "N_d": 0.8020494012222419,
+          "R_d": 1.2309999999999999,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "cost_unit": {
+          "mu0": 0.08903143940317654,
+          "sigma_prior": 0.24834614784994855,
+          "z_draw": 1.5287816923898978,
+          "N_d": 1.2867093284654587,
+          "R_d": 1.165,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "cost_dev": {
+          "mu0": 0.22278556128999072,
+          "sigma_prior": 0.4515760038971636,
+          "z_draw": -0.10624174453869417,
+          "N_d": 2.229067668444624,
+          "R_d": 1.264,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        },
+        "maint": {
+          "mu0": 0.0767806343172852,
+          "sigma_prior": 0.28762069921878747,
+          "z_draw": 1.0476156816402682,
+          "N_d": 0.9986912845106601,
+          "R_d": 1.198,
+          "M_tech": 1.537625,
+          "Q_d": 1.0
+        }
+      },
+      "driver_theta_true": {
+        "cd0": -0.17199302700980523,
+        "cdw": 0.65,
+        "kind": 0.19816022176743775,
+        "clmax": -0.21781563065092335,
+        "mass": 0.12213637575354397,
+        "thrust": -0.10937847685714469,
+        "tsfc": 0.05447111671866994,
+        "cost_unit": 0.46869848361173266,
+        "cost_dev": 0.1748093388441439,
+        "maint": 0.47809658918322584
+      },
+      "flaw_trigger_probabilities": {
+        "swept_wing_pitch_up": 0.20155251050501627,
+        "deep_stall_t_tail": 0.0,
+        "inertia_roll_coupling": 0.315833588251111,
+        "supersonic_directional_instability": 0.01620515555555557,
+        "transonic_mach_tuck": 0.04480308346194164,
+        "transonic_control_heaviness": 0.028737280628549695,
+        "transonic_buffet_boundary": 0.02113352993487813,
+        "control_surface_buzz": 0.007396735477207345,
+        "aileron_reversal": 0.33880695712330405,
+        "wing_bending_torsion_flutter": 0.20047279174165222,
+        "empennage_t_tail_flutter": 0.08973465853461965,
+        "panel_transonic_flutter": 0.019851212751841558,
+        "unrecoverable_flat_spin": 0.21795133328144542,
+        "swept_wing_dutch_roll": 0.3023794216211767,
+        "high_aoa_adverse_yaw": 0.2839318758282969,
+        "tip_stall_wing_drop": 0.30361146815863194,
+        "delta_high_sink_approach": 0.007688164704967889,
+        "area_rule_drag_pinch": 0.18692746341873226,
+        "supersonic_intake_buzz": 0.0,
+        "inlet_distortion_recoverable": 0.1813614421749919,
+        "compressor_surge_stall": 0.27248976367651095,
+        "gun_gas_ingestion_surge": 0.32511966100644846,
+        "high_altitude_flameout": 0.2100749509050636,
+        "afterburner_lightoff_instability": 0.251411407189775,
+        "prototype_engine_teething": 0.14928365194440718,
+        "wing_root_fatigue_cracking": 0.06835578959505256,
+        "landing_gear_shimmy_collapse": 0.14452659498005627,
+        "aft_fuselage_ab_overheating": 0.16944243622107022,
+        "stores_separation_strike": 0.18697192804649726,
+        "hydraulic_single_point_failure": 0.14917931938379542,
+        "fuel_cg_shift_venting": 0.08976339058603033,
+        "radar_fcs_immaturity": 0.22518455376111413,
+        "ejection_envelope_deficiency": 0.037601157691962726,
+        "carrier_hook_visibility_deficiency": 0.2214144861805605
+      },
+      "realized_flaws": {
+        "inertia_roll_coupling": {
+          "severity": 5,
+          "trigger_prob": 0.315833588251111,
+          "u_draw": 0.21335723330876494
+        },
+        "unrecoverable_flat_spin": {
+          "severity": 5,
+          "trigger_prob": 0.21795133328144542,
+          "u_draw": 0.1742084786830677
+        },
+        "tip_stall_wing_drop": {
+          "severity": 3,
+          "trigger_prob": 0.30361146815863194,
+          "u_draw": 0.12372011827257828
+        },
+        "high_altitude_flameout": {
+          "severity": 3,
+          "trigger_prob": 0.2100749509050636,
+          "u_draw": 0.13917780565219234
+        },
+        "aft_fuselage_ab_overheating": {
+          "severity": 4,
+          "trigger_prob": 0.16944243622107022,
+          "u_draw": 0.03153439239674388
+        },
+        "stores_separation_strike": {
+          "severity": 2,
+          "trigger_prob": 0.18697192804649726,
+          "u_draw": 0.059908412634897934
+        }
+      },
+      "true_perf_selected": {
+        "max_mach_alt": 0.8836324691026214,
+        "max_mach_sl": 0.7399853011017578,
+        "service_ceiling_m": 12435.459888167135,
+        "climb_rate_sl_mps": 63.37518326205323,
+        "sustained_turn_dps_m08_4572m": 7.0144301840383925,
+        "instantaneous_turn_dps_m08_4572m": 13.29390835437777,
+        "combat_radius_m": 593861.6955656706,
+        "empty_mass_kg": 9886.696604343344,
+        "unit_flyaway_cost_usd": 1080444.737196039
+      },
+      "sim_estimate_selected": {
+        "max_mach_alt": {
+          "value": 1.24,
+          "sigma": 0.4000708967555073,
+          "source": "sim",
+          "unit": "mach"
+        },
+        "sustained_turn_dps_m08_4572m": {
+          "value": 10.8,
+          "sigma": 2.2266743819348798,
+          "source": "sim",
+          "unit": "deg/s"
+        },
+        "combat_radius_m": {
+          "value": 740000.0,
+          "sigma": 152393.99543950945,
+          "source": "sim",
+          "unit": "m"
+        },
+        "empty_mass_kg": {
+          "value": 8750.0,
+          "sigma": 1545.7704258131002,
+          "source": "sim",
+          "unit": "kg"
+        }
+      }
+    },
+    "mach2_interceptor_1957": {
+      "date_day": 4414,
+      "categorical_sig": "lockheed_co:swept:1:cheek:0:j79_ge_3",
+      "coords_5d": [
+        1.7333333333333334,
+        1.1199999999999999,
+        1.6333333333333335,
+        3.153142371940425,
+        8.08
+      ],
+      "driver_priors": {
+        "cd0": {
+          "mu0": 0.029450283375819036,
+          "sigma_prior": 0.15271936831270586,
+          "z_draw": -0.33378530589170924,
+          "N_d": 0.7698477049595303,
+          "R_d": 1.3712499999999999,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "cdw": {
+          "mu0": 0.26209724066832807,
+          "sigma_prior": 0.561974973882337,
+          "z_draw": 0.12989832179874072,
+          "N_d": 3.114261733145633,
+          "R_d": 1.6749999999999998,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "kind": {
+          "mu0": 0.012975197313404328,
+          "sigma_prior": 0.11751133182846843,
+          "z_draw": -0.5918985099540055,
+          "N_d": 0.4239740983835094,
+          "R_d": 1.30375,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "clmax": {
+          "mu0": -0.030198064484144173,
+          "sigma_prior": 0.1432421614075744,
+          "z_draw": 0.12472060077829314,
+          "N_d": 0.897039934474583,
+          "R_d": 1.2362499999999998,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "mass": {
+          "mu0": 0.11852034496880226,
+          "sigma_prior": 0.1448020437621707,
+          "z_draw": 0.19166787360829268,
+          "N_d": 2.5818261916443195,
+          "R_d": 1.135,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "thrust": {
+          "mu0": -0.056863209948318456,
+          "sigma_prior": 0.15310649788100544,
+          "z_draw": 0.9088609625737754,
+          "N_d": 1.8580471330578263,
+          "R_d": 1.4049999999999998,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "tsfc": {
+          "mu0": 0.03342176486292955,
+          "sigma_prior": 0.09995205345359226,
+          "z_draw": 0.01986929881487108,
+          "N_d": 1.213423005093949,
+          "R_d": 1.2362499999999998,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "cost_unit": {
+          "mu0": 0.13467747900772317,
+          "sigma_prior": 0.29317621267208216,
+          "z_draw": 0.1996903717768898,
+          "N_d": 1.9558602242132368,
+          "R_d": 1.16875,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "cost_dev": {
+          "mu0": 0.30552537581679545,
+          "sigma_prior": 0.5340631635427914,
+          "z_draw": -3.055361188143662,
+          "N_d": 3.071774143483376,
+          "R_d": 1.27,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        },
+        "maint": {
+          "mu0": 0.10618567987629982,
+          "sigma_prior": 0.3203895223298555,
+          "z_draw": 0.12822492056073714,
+          "N_d": 1.3878780198674976,
+          "R_d": 1.2025,
+          "M_tech": 1.5301875,
+          "Q_d": 1.0
+        }
+      },
+      "driver_theta_true": {
+        "cd0": 0.008474802307973907,
+        "cdw": 0.3350968466685348,
+        "kind": 0.06342041510142316,
+        "clmax": -0.012332816056610258,
+        "mass": 0.14627424479083245,
+        "thrust": 0.03228930909211185,
+        "tsfc": 0.03540774208015894,
+        "cost_unit": 0.27322194591235177,
+        "cost_dev": -0.55,
+        "maint": 0.507267600925538
+      },
+      "flaw_trigger_probabilities": {
+        "swept_wing_pitch_up": 0.0723243606232757,
+        "deep_stall_t_tail": 0.02028723826814482,
+        "inertia_roll_coupling": 0.3465898909320014,
+        "supersonic_directional_instability": 0.24513353214521094,
+        "transonic_mach_tuck": 0.07016331938379541,
+        "transonic_control_heaviness": 0.030939487824661587,
+        "transonic_buffet_boundary": 0.14793470954414692,
+        "control_surface_buzz": 0.007396735477207345,
+        "aileron_reversal": 0.2409222412576107,
+        "wing_bending_torsion_flutter": 0.24092224125761066,
+        "empennage_t_tail_flutter": 0.28318930112736695,
+        "panel_transonic_flutter": 0.20999201180271562,
+        "unrecoverable_flat_spin": 0.1039769672796004,
+        "swept_wing_dutch_roll": 0.08541847668447974,
+        "high_aoa_adverse_yaw": 0.0,
+        "tip_stall_wing_drop": 0.0315930479683453,
+        "delta_high_sink_approach": 0.22430360180882014,
+        "area_rule_drag_pinch": 0.02282421232966838,
+        "supersonic_intake_buzz": 0.21866555736708315,
+        "inlet_distortion_recoverable": 0.2747358891534156,
+        "compressor_surge_stall": 0.24575276238558283,
+        "gun_gas_ingestion_surge": 0.29702059510913675,
+        "high_altitude_flameout": 0.18178861178268502,
+        "afterburner_lightoff_instability": 0.21942642223813466,
+        "prototype_engine_teething": 0.172352742256404,
+        "wing_root_fatigue_cracking": 0.1520205253315567,
+        "landing_gear_shimmy_collapse": 0.25288051134389233,
+        "aft_fuselage_ab_overheating": 0.025507618546074792,
+        "stores_separation_strike": 0.2176753583292447,
+        "hydraulic_single_point_failure": 0.04226705986975626,
+        "fuel_cg_shift_venting": 0.11728827333458232,
+        "radar_fcs_immaturity": 0.2190842603249033,
+        "ejection_envelope_deficiency": 0.09899623413556592,
+        "carrier_hook_visibility_deficiency": 0.2113352993487813
+      },
+      "realized_flaws": {
+        "transonic_buffet_boundary": {
+          "severity": 3,
+          "trigger_prob": 0.14793470954414692,
+          "u_draw": 0.0441436191553321
+        },
+        "delta_high_sink_approach": {
+          "severity": 3,
+          "trigger_prob": 0.22430360180882014,
+          "u_draw": 0.17081928404544128
+        },
+        "compressor_surge_stall": {
+          "severity": 4,
+          "trigger_prob": 0.24575276238558283,
+          "u_draw": 0.19244126367541264
+        },
+        "stores_separation_strike": {
+          "severity": 3,
+          "trigger_prob": 0.2176753583292447,
+          "u_draw": 0.031304109606649144
+        },
+        "radar_fcs_immaturity": {
+          "severity": 3,
+          "trigger_prob": 0.2190842603249033,
+          "u_draw": 0.21514723195161994
+        }
+      },
+      "true_perf_selected": {
+        "max_mach_alt": 1.7319061278721484,
+        "max_mach_sl": 1.0168126254949608,
+        "service_ceiling_m": 16160.403092710136,
+        "climb_rate_sl_mps": 211.05497186823425,
+        "sustained_turn_dps_m08_4572m": 6.906124125327555,
+        "instantaneous_turn_dps_m08_4572m": 11.679651187203957,
+        "combat_radius_m": 556418.8820098174,
+        "empty_mass_kg": 6979.806927184734,
+        "unit_flyaway_cost_usd": 1291318.4453950066
+      },
+      "sim_estimate_selected": {
+        "max_mach_alt": {
+          "value": 2.02,
+          "sigma": 0.5969174370289897,
+          "source": "sim",
+          "unit": "mach"
+        },
+        "sustained_turn_dps_m08_4572m": {
+          "value": 9.2,
+          "sigma": 1.8402935614968954,
+          "source": "sim",
+          "unit": "deg/s"
+        },
+        "combat_radius_m": {
+          "value": 680000.0,
+          "sigma": 135650.98321267552,
+          "source": "sim",
+          "unit": "m"
+        },
+        "empty_mass_kg": {
+          "value": 6030.0,
+          "sigma": 1128.3466455232112,
+          "source": "sim",
+          "unit": "kg"
+        }
+      }
+    }
+  }
+}

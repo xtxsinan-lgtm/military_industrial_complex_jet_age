@@ -1,0 +1,49 @@
+{
+  "engine_id": "j79_ge_11a",
+  "name": "General Electric J79-GE-11A",
+  "manufacturer": "General Electric",
+  "country": "USA",
+  "first_run_year": 1954,
+  "service_entry_year": 1958,
+  "applications": ["Lockheed F-104G Starfighter", "McDonnell F4H-1 / F-4B Phantom II"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 1,
+    "variable_stators": true,
+    "has_afterburner": true,
+    "nozzle_type": "convergent_divergent",
+    "mass_flow_kgps": 74.00,
+    "opr": 12.5,
+    "tit_K": 1160.0,
+    "ab_temp_K": 1965.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.845,
+    "eta_t_poly": 0.86,
+    "eta_burner": 0.955,
+    "pi_burner": 0.945,
+    "eta_ab": 0.88,
+    "pi_ab_dry": 0.955,
+    "specific_weight_factor": 0.89,
+    "mtbf_factor": 1.30,
+    "length_factor": 0.92,
+    "diameter_factor": 0.98,
+    "cumulative_test_hours": 3000.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 44482.2,
+    "sls_ab_thrust_N": 70281.9,
+    "sls_dry_tsfc_kg_per_Ns": 2.37934e-5,
+    "sls_ab_tsfc_kg_per_Ns": 5.58011e-5,
+    "mass_kg": 1626.1,
+    "diameter_m": 0.9830,
+    "length_m": 5.2781,
+    "unit_cost_usd": 200000.0,
+    "tbo_hours_service": 1000.0,
+    "sources": [
+      "Jane's All the World's Aircraft 1974-75, pp. 747-748",
+      "Lockheed F-104G Flight Manual",
+      "NMUSAF Fact Sheet: General Electric J79"
+    ]
+  }
+}

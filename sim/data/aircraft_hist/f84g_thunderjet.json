@@ -1,0 +1,115 @@
+{
+  "id": "f84g_thunderjet",
+  "name": "Republic F-84G Thunderjet",
+  "company_id": "republic",
+  "created_date": "1951-06-01",
+  "crew_count": 1,
+  "role_tags": [
+    "fighter_bomber",
+    "day_fighter"
+  ],
+  "wing": {
+    "area_m2": 24.15,
+    "aspect_ratio": 5.1,
+    "sweep_qc_deg": 3.5,
+    "taper_ratio": 0.56,
+    "tc_root": 0.12,
+    "tc_tip": 0.12,
+    "airfoil_ref": "0012",
+    "planform_type": "conventional",
+    "position": "mid",
+    "x_le_root_frac": 0.36,
+    "dihedral_deg": 5.0,
+    "incidence_deg": 1.5,
+    "twist_deg": -1.5,
+    "devices": [
+      "slotted_flaps"
+    ]
+  },
+  "fuselage": {
+    "length_m": 11.6,
+    "max_diameter_m": 1.42,
+    "nose_fineness": 2.5,
+    "tail_fineness": 2.9,
+    "canopy_type": "bubble",
+    "area_ruled": false
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": false,
+    "all_moving_tail": false,
+    "ht_area_m2": 4.45,
+    "ht_aspect_ratio": 4.1,
+    "ht_sweep_qc_deg": 5.0,
+    "vt_area_m2": 2.85,
+    "vt_aspect_ratio": 1.5,
+    "vt_sweep_qc_deg": 15.0
+  },
+  "intake": {
+    "type": "nose",
+    "compression": "pitot",
+    "variable": false,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J35-A-29",
+    "count": 1,
+    "afterburner": false,
+    "x_cg_frac": 0.58
+  },
+  "structure": {
+    "design_load_factor_g": 7.33,
+    "material_mix": {
+      "al": 0.88,
+      "steel": 0.12,
+      "ti": 0.0
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 1365.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 660.0,
+    "combat_uses_drop_tanks": true
+  },
+  "systems": {
+    "radar_id": "apg30",
+    "fire_control_id": null,
+    "avionics_level": 2,
+    "powered_controls": true,
+    "stability_augmentation": false,
+    "ejection_seat": true,
+    "inflight_refuel": true,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "m3_50",
+        "count": 6,
+        "rounds_per_gun": 300
+      }
+    ],
+    "hardpoints": 4,
+    "internal_bay": false,
+    "missile_ids": []
+  },
+  "published_performance": {
+    "empty_mass_kg": 5203.0,
+    "combat_mass_kg": 6450.0,
+    "mtow_kg": 8650.0,
+    "max_mach_sl": 0.81,
+    "max_mach_alt": 0.82,
+    "alt_of_max_mach_m": 3048.0,
+    "climb_rate_sl_mps": 19.1,
+    "service_ceiling_m": 12344.0,
+    "combat_radius_m": 1150000.0,
+    "ferry_range_m": 2750000.0,
+    "stall_speed_mps": 58.0,
+    "takeoff_distance_m": 1450.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-84G Thunderjet (1952)",
+      "Knaack, Encyclopedia of US Air Force Aircraft and Missile Systems Vol. 1, pp. 38-42 (1978)"
+    ]
+  }
+}

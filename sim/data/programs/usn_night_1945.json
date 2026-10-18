@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "id": "usn_night_1945",
+  "name_key": "program.usn_night_1945.name",
+  "program_name": "1945 BuAer Carrier Night / All-Weather Fighter",
+  "customer": "USN",
+  "role": "carrier_interceptor",
+  "mvp_core": true,
+  "issue_date": "1945-10-15",
+  "proposal_due": "1946-03-15",
+  "first_flight_due": "1948-04-01",
+  "ioc_due": "1950-10-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": true,
+    "min_crew": 2,
+    "min_engines": 2,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 777840.0,
+      "objective_value": 963040.0,
+      "weight": 0.3,
+      "unit": "m",
+      "description": "Over-water night patrol radius (420 nmi threshold, 520 nmi objective)"
+    },
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 0.68,
+      "objective_value": 0.78,
+      "weight": 0.25,
+      "unit": "mach",
+      "description": "Maximum level Mach at altitude (430-490 kt)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 14.22,
+      "objective_value": 21.34,
+      "weight": 0.2,
+      "unit": "mps",
+      "description": "Initial climb rate (2,800-4,200 ft/min)"
+    },
+    {
+      "key": "stall_speed_mps",
+      "kind": "objective",
+      "op": "<=",
+      "value": 45.27,
+      "objective_value": 40.13,
+      "weight": 0.25,
+      "unit": "mps",
+      "description": "Essex-class night carrier approach/stall speed (<= 88 kt)"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Straight-deck Essex carrier suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 8500000.0,
+    "unit_price_ceiling_usd": 500000.0,
+    "quantity_planned": 250
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 3,
+    "allow_dual_award": false,
+    "production_lots": 4,
+    "urgency": 0.6
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "grumman": 0.4,
+      "douglas": 0.35,
+      "curtiss_wright": 0.15
+    },
+    "congressional_interest": 0.3,
+    "industrial_base_need": {
+      "douglas": 0.3,
+      "grumman": 0.3
+    }
+  },
+  "historical": {
+    "winner_company_id": "douglas",
+    "winner_design_name": "Model 548 (XF3D-1 Skyknight)",
+    "award_date": "1946-04-03",
+    "outcome": "produced",
+    "production_delivered": 268,
+    "notes": "Ed Heinemann's Douglas Model 548 won on April 3, 1946 with a clean twin-J34 layout, side-by-side cockpit for APQ-35 radar, and ventral escape chute, beating Grumman's heavy 4-engine G-75.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Douglas_F3D_Skyknight",
+      "https://thanlont.blogspot.com/2011/12/grumman-comes-from-behind-to-win.html"
+    ],
+    "competitors": [
+      {
+        "company_id": "douglas",
+        "design_name": "Model 548 (XF3D-1 Skyknight)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1948-03-23",
+        "unit_price_bid_usd": 390000.0,
+        "dev_cost_bid_usd": 6800000.0,
+        "novelty": {
+          "unproven_tech_count": 0,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 78.0,
+        "track_record_at_bid": 0.72,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "combat_radius_m": 926000.0,
+          "max_mach_alt": 0.76,
+          "climb_rate_sl_mps": 20.32,
+          "stall_speed_mps": 41.16,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "460-491 kt, 500 nmi combat radius, 2x Westinghouse J34, $390k unit cost."
+      },
+      {
+        "company_id": "grumman",
+        "design_name": "Design 75 (XF9F-1 Four-Jet Night Fighter)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 475000.0,
+        "dev_cost_bid_usd": 8200000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 4,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 82.0,
+        "track_record_at_bid": 0.75,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "combat_radius_m": 814880.0,
+          "max_mach_alt": 0.69,
+          "climb_rate_sl_mps": 15.24,
+          "stall_speed_mps": 43.73,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "4x Westinghouse J30 in paired nacelles; excessive weight/drag led to cancellation in Oct 1946 in favor of G-79 Panther."
+      },
+      {
+        "company_id": "curtiss_wright",
+        "design_name": "Model 29N (Naval XP-87 Adaptation)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 620000.0,
+        "dev_cost_bid_usd": 9500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 4,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 50.0,
+        "track_record_at_bid": 0.45,
+        "district_weight": 0.4,
+        "cross_service_derivative": true,
+        "anchor_performance": {
+          "combat_radius_m": 888960.0,
+          "max_mach_alt": 0.74,
+          "climb_rate_sl_mps": 15.75,
+          "stall_speed_mps": 49.39,
+          "carrier_suitability": 0.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Rejected by BuAer as far too large and heavy for Essex-class carrier decks."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": "usn_gp_fighter_1949",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

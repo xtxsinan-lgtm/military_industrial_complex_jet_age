@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "id": "usaf_aw_int_1945",
+  "name_key": "program.usaf_aw_int_1945.name",
+  "program_name": "1945 USAAF All-Weather Interceptor (MX-785)",
+  "customer": "USAF",
+  "role": "interceptor",
+  "mvp_core": true,
+  "issue_date": "1945-08-28",
+  "proposal_due": "1946-03-15",
+  "first_flight_due": "1948-09-01",
+  "ioc_due": "1950-09-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": true,
+    "min_crew": 2,
+    "min_engines": 2,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 0.78,
+      "objective_value": 0.88,
+      "weight": 0.35,
+      "unit": "mach",
+      "description": "Max speed >= 525 mph (M0.78) threshold, 600+ mph (M0.88) objective"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 15.24,
+      "objective_value": 35.56,
+      "weight": 0.3,
+      "unit": "mps",
+      "description": "Rate of climb (3,000 ft/min threshold, 7,000 ft/min objective)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 10972.8,
+      "objective_value": 14630.4,
+      "weight": 0.2,
+      "unit": "m",
+      "description": "Service ceiling (36,000 ft threshold, 48,000 ft objective)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 666720.0,
+      "objective_value": 926000.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "All-weather intercept radius (360-500 nmi)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 14000000.0,
+    "unit_price_ceiling_usd": 1150000.0,
+    "quantity_planned": 450
+  },
+  "acquisition": {
+    "style": "flyoff",
+    "downselect_count": 2,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.7
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "northrop": 0.45,
+      "curtiss_wright": 0.35,
+      "douglas": 0.2,
+      "convair": 0.15
+    },
+    "congressional_interest": 0.4,
+    "industrial_base_need": {
+      "northrop": 0.4,
+      "curtiss_wright": 0.5
+    }
+  },
+  "historical": {
+    "winner_company_id": "northrop",
+    "winner_design_name": "N-24 (XP-89 / F-89 Scorpion)",
+    "award_date": "1948-10-14",
+    "outcome": "produced",
+    "production_delivered": 1050,
+    "notes": "Northrop N-24 (XP-89) and Curtiss Model 29A (XP-87) were built for fly-off. In Oct 1948 the board selected Northrop F-89 over the overweight 4-engine Curtiss XF-87, forcing Curtiss-Wright to exit aviation manufacturing.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Northrop_F-89_Scorpion",
+      "https://en.wikipedia.org/wiki/Curtiss_XF-87_Blackhawk",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195815/northrop-f-89-scorpion/"
+    ],
+    "competitors": [
+      {
+        "company_id": "northrop",
+        "design_name": "N-24 (XP-89 Scorpion)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1948-08-16",
+        "unit_price_bid_usd": 980000.0,
+        "dev_cost_bid_usd": 10500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 6,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 74.0,
+        "track_record_at_bid": 0.65,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 0.87,
+          "climb_rate_sl_mps": 37.8,
+          "service_ceiling_m": 14996.2,
+          "combat_radius_m": 707464.0
+        },
+        "flyoff_flaws_unfixed_severity": 1,
+        "published_notes": "636 mph (552 kn) at 10,600 ft, 49,200 ft ceiling, 7,440 ft/min climb, 2x Allison J35."
+      },
+      {
+        "company_id": "curtiss_wright",
+        "design_name": "Model 29A (XP-87 Blackhawk)",
+        "is_historical_winner": false,
+        "built_prototype": true,
+        "first_flight_date": "1948-02-15",
+        "unit_price_bid_usd": 1080000.0,
+        "dev_cost_bid_usd": 11300000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 4,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 52.0,
+        "track_record_at_bid": 0.42,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "promised_overrides": {
+          "max_mach_alt": 0.84,
+          "climb_rate_sl_mps": 29.46,
+          "service_ceiling_m": 13106.4
+        },
+        "anchor_performance": {
+          "max_mach_alt": 0.79,
+          "climb_rate_sl_mps": 22.86,
+          "service_ceiling_m": 12496.8,
+          "combat_radius_m": 966744.0
+        },
+        "flyoff_flaws_unfixed_severity": 3,
+        "published_notes": "600 mph (451.5 kn at alt), 41,000 ft ceiling, ~4,500 ft/min climb, 49,687 lb gross, tail buffeting."
+      },
+      {
+        "company_id": "douglas",
+        "design_name": "Model 560 (USAF F3D Proposal)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": "1948-03-23",
+        "unit_price_bid_usd": 780000.0,
+        "dev_cost_bid_usd": 9500000.0,
+        "novelty": {
+          "unproven_tech_count": 0,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 68.0,
+        "track_record_at_bid": 0.6,
+        "district_weight": 0.5,
+        "cross_service_derivative": true,
+        "promised_overrides": {
+          "max_mach_alt": 0.79,
+          "service_ceiling_m": 11582.4
+        },
+        "anchor_performance": {
+          "max_mach_alt": 0.77,
+          "climb_rate_sl_mps": 22.86,
+          "service_ceiling_m": 11186.2,
+          "combat_radius_m": 926000.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Subsonic Navy night fighter adaptation, 565 mph, 36,700 ft ceiling."
+      },
+      {
+        "company_id": "convair",
+        "design_name": "Model 7002 (XP-92 Delta Proposal)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": "1948-09-18",
+        "unit_price_bid_usd": 1120000.0,
+        "dev_cost_bid_usd": 13500000.0,
+        "novelty": {
+          "unproven_tech_count": 3,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 60.0,
+        "track_record_at_bid": 0.5,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 0.92,
+          "climb_rate_sl_mps": 40.64,
+          "service_ceiling_m": 13716.0,
+          "combat_radius_m": 574120.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Single-seat ramjet/turbojet delta proposal; rejected for all-weather role (single crew/engine), built as XF-92A research aircraft."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": "usaf_ws201a_1950",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

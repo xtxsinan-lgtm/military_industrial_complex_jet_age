@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "id": "usn_gp_fighter_1949",
+  "name_key": "program.usn_gp_fighter_1949.name",
+  "program_name": "1949 BuAer Carrier General-Purpose All-Weather Fighter",
+  "customer": "USN",
+  "role": "carrier_interceptor",
+  "mvp_core": false,
+  "issue_date": "1949-01-15",
+  "proposal_due": "1949-05-01",
+  "first_flight_due": "1951-08-15",
+  "ioc_due": "1955-03-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": true,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 0.9,
+      "objective_value": 0.98,
+      "weight": 0.35,
+      "unit": "mach",
+      "description": "High transonic speed (>600 kt)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 740800.0,
+      "objective_value": 926000.0,
+      "weight": 0.3,
+      "unit": "m",
+      "description": "Fleet defense combat radius (400-500 nmi)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 50.8,
+      "objective_value": 71.12,
+      "weight": 0.2,
+      "unit": "mps",
+      "description": "Sea-level climb rate (10,000-14,000 ft/min)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 10668.0,
+      "objective_value": 13716.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Service ceiling"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Carrier deck suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 22000000.0,
+    "unit_price_ceiling_usd": 1350000.0,
+    "quantity_planned": 500
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.65
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "mcdonnell": 0.45,
+      "grumman": 0.3,
+      "douglas": 0.25
+    },
+    "congressional_interest": 0.4,
+    "industrial_base_need": {
+      "mcdonnell": 0.4
+    }
+  },
+  "historical": {
+    "winner_company_id": "mcdonnell",
+    "winner_design_name": "Model 58 (XF3H-1 Demon)",
+    "award_date": "1949-05-21",
+    "outcome": "produced",
+    "production_delivered": 519,
+    "notes": "Six companies submitted 11 designs; McDonnell Model 58 won on May 21, 1949. Plagued by the Westinghouse J40 engine fiasco in F3H-1N, it was re-engined with Allison J71 as F3H-2 with Sparrow III missiles.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/McDonnell_F3H_Demon",
+      "https://thanlont.blogspot.com/2011/03/from-hero-to-zero.html"
+    ],
+    "competitors": [
+      {
+        "company_id": "mcdonnell",
+        "design_name": "Model 58 (XF3H-1 Demon)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1951-08-07",
+        "unit_price_bid_usd": 1150000.0,
+        "dev_cost_bid_usd": 18500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 80.0,
+        "track_record_at_bid": 0.72,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 0.95,
+          "combat_radius_m": 926000.0,
+          "climb_rate_sl_mps": 65.0,
+          "service_ceiling_m": 12801.6,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 2,
+        "published_notes": "622 kt (M0.94), 500 nmi radius, 12,795 ft/min climb."
+      },
+      {
+        "company_id": "grumman",
+        "design_name": "G-89 Swept Fighter Study",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1220000.0,
+        "dev_cost_bid_usd": 19500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 76.0,
+        "track_record_at_bid": 0.68,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 0.91,
+          "combat_radius_m": 796360.0,
+          "climb_rate_sl_mps": 56.9,
+          "service_ceiling_m": 12344.4,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Smaller internal fuel volume and nose radar bay than McDonnell Model 58."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usn_night_1945",
+    "follow_on_program_id": "usn_fad_1955",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

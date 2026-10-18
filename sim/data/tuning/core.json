@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "module": "09_core_loop",
+  "campaign_bounds": {
+    "mvp_start_date": "1945-01-01",
+    "mvp_end_date": "1960-12-31",
+    "mvp_start_day": 0,
+    "mvp_end_day": 5843
+  },
+  "speeds": {
+    "seconds_per_day": {
+      "1": 2.0,
+      "2": 1.0,
+      "3": 0.4,
+      "4": 0.15,
+      "5": 0.05
+    },
+    "smart_speed": {
+      "enabled_default": false,
+      "lookahead_days": 14,
+      "slowdown_lead_days": 3,
+      "cruise_speed": 5,
+      "approach_speed": 2
+    }
+  },
+  "autopause_defaults": {
+    "rfp_issued": true,
+    "proposal_due_7d": true,
+    "contract_awarded": true,
+    "prototype_first_flight": true,
+    "major_flaw_discovered": true,
+    "prototype_crash": true,
+    "tech_unlocked": false,
+    "engine_rd_complete": true,
+    "historical_event_major": true,
+    "event_choice_required": true,
+    "low_cash_warning": true
+  },
+  "events": {
+    "choice_timeout_days": 30,
+    "max_mtth_events_per_month": 2
+  },
+  "autosave": {
+    "enabled_default": true,
+    "monthly_rotating_slots": 3,
+    "yearly_archive_on_jan1": true
+  },
+  "bankruptcy_and_takeover": {
+    "insolvency_cash_threshold_usd": 0.0,
+    "grace_period_days_by_difficulty": {
+      "easy": 180,
+      "normal": 90,
+      "hard": 60,
+      "historical": 90
+    },
+    "emergency_bailout_debt_ratio_limit": 0.85,
+    "takeover_min_year": 1948,
+    "takeover_idle_months_threshold": 24,
+    "takeover_net_worth_fraction_of_start": 0.25,
+    "takeover_warning_months": 18
+  },
+  "difficulty_presets": {
+    "easy": {
+      "id": "easy",
+      "label_key": "diff.easy.name",
+      "starting_cash_mult": 1.5,
+      "ai_competence_mult": 0.85,
+      "estimate_sigma_mult": 0.75,
+      "flaw_incidence_mult": 0.7,
+      "incumbent_bias_mult": 0.5,
+      "loan_interest_rate_mult": 0.75,
+      "dev_cost_mult": 0.85,
+      "bankruptcy_grace_days": 180,
+      "score_multiplier": 0.8
+    },
+    "normal": {
+      "id": "normal",
+      "label_key": "diff.normal.name",
+      "starting_cash_mult": 1.0,
+      "ai_competence_mult": 1.0,
+      "estimate_sigma_mult": 1.0,
+      "flaw_incidence_mult": 1.0,
+      "incumbent_bias_mult": 1.0,
+      "loan_interest_rate_mult": 1.0,
+      "dev_cost_mult": 1.0,
+      "bankruptcy_grace_days": 90,
+      "score_multiplier": 1.0
+    },
+    "hard": {
+      "id": "hard",
+      "label_key": "diff.hard.name",
+      "starting_cash_mult": 0.75,
+      "ai_competence_mult": 1.15,
+      "estimate_sigma_mult": 1.25,
+      "flaw_incidence_mult": 1.3,
+      "incumbent_bias_mult": 1.25,
+      "loan_interest_rate_mult": 1.25,
+      "dev_cost_mult": 1.15,
+      "bankruptcy_grace_days": 60,
+      "score_multiplier": 1.25
+    },
+    "historical": {
+      "id": "historical",
+      "label_key": "diff.historical.name",
+      "starting_cash_mult": 1.0,
+      "ai_competence_mult": 1.05,
+      "estimate_sigma_mult": 1.0,
+      "flaw_incidence_mult": 1.0,
+      "incumbent_bias_mult": 1.35,
+      "loan_interest_rate_mult": 1.0,
+      "dev_cost_mult": 1.0,
+      "bankruptcy_grace_days": 90,
+      "score_multiplier": 1.1
+    }
+  },
+  "startup_packages": {
+    "historical_companies": [
+      {
+        "company_id": "lockheed",
+        "display_name_key": "company.lockheed.name",
+        "hq_state": "CA",
+        "starting_cash_usd": 18000000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.78, "USN": 0.45, "export": 0.60 },
+        "political_capital": 45.0,
+        "engineers": { "aero": 45, "structures": 40, "propulsion": 20, "systems": 25 },
+        "facilities": { "wind_tunnel_level": 2, "factory_floor_m2": 85000.0, "test_site": true }
+      },
+      {
+        "company_id": "north_american",
+        "display_name_key": "company.north_american.name",
+        "hq_state": "CA",
+        "starting_cash_usd": 20000000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.82, "USN": 0.50, "export": 0.55 },
+        "political_capital": 50.0,
+        "engineers": { "aero": 50, "structures": 45, "propulsion": 20, "systems": 25 },
+        "facilities": { "wind_tunnel_level": 2, "factory_floor_m2": 95000.0, "test_site": true }
+      },
+      {
+        "company_id": "republic",
+        "display_name_key": "company.republic.name",
+        "hq_state": "NY",
+        "starting_cash_usd": 14000000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.75, "USN": 0.25, "export": 0.45 },
+        "political_capital": 40.0,
+        "engineers": { "aero": 35, "structures": 40, "propulsion": 18, "systems": 20 },
+        "facilities": { "wind_tunnel_level": 1, "factory_floor_m2": 70000.0, "test_site": true }
+      },
+      {
+        "company_id": "grumman",
+        "display_name_key": "company.grumman.name",
+        "hq_state": "NY",
+        "starting_cash_usd": 16000000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.30, "USN": 0.85, "export": 0.45 },
+        "political_capital": 42.0,
+        "engineers": { "aero": 38, "structures": 42, "propulsion": 18, "systems": 22 },
+        "facilities": { "wind_tunnel_level": 1, "factory_floor_m2": 75000.0, "test_site": true }
+      },
+      {
+        "company_id": "mcdonnell",
+        "display_name_key": "company.mcdonnell.name",
+        "hq_state": "MO",
+        "starting_cash_usd": 8500000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.40, "USN": 0.62, "export": 0.30 },
+        "political_capital": 28.0,
+        "engineers": { "aero": 28, "structures": 26, "propulsion": 14, "systems": 18 },
+        "facilities": { "wind_tunnel_level": 1, "factory_floor_m2": 42000.0, "test_site": false }
+      },
+      {
+        "company_id": "northrop",
+        "display_name_key": "company.northrop.name",
+        "hq_state": "CA",
+        "starting_cash_usd": 9500000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.58, "USN": 0.35, "export": 0.40 },
+        "political_capital": 25.0,
+        "engineers": { "aero": 34, "structures": 28, "propulsion": 14, "systems": 18 },
+        "facilities": { "wind_tunnel_level": 1, "factory_floor_m2": 45000.0, "test_site": false }
+      },
+      {
+        "company_id": "convair",
+        "display_name_key": "company.convair.name",
+        "hq_state": "CA",
+        "starting_cash_usd": 17000000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.72, "USN": 0.48, "export": 0.45 },
+        "political_capital": 44.0,
+        "engineers": { "aero": 42, "structures": 40, "propulsion": 18, "systems": 24 },
+        "facilities": { "wind_tunnel_level": 2, "factory_floor_m2": 88000.0, "test_site": true }
+      },
+      {
+        "company_id": "vought",
+        "display_name_key": "company.vought.name",
+        "hq_state": "TX",
+        "starting_cash_usd": 11500000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.30, "USN": 0.76, "export": 0.40 },
+        "political_capital": 34.0,
+        "engineers": { "aero": 32, "structures": 32, "propulsion": 15, "systems": 18 },
+        "facilities": { "wind_tunnel_level": 1, "factory_floor_m2": 55000.0, "test_site": false }
+      },
+      {
+        "company_id": "douglas",
+        "display_name_key": "company.douglas.name",
+        "hq_state": "CA",
+        "starting_cash_usd": 19000000.0,
+        "starting_debt_usd": 0.0,
+        "reputation": { "USAF": 0.65, "USN": 0.80, "export": 0.65 },
+        "political_capital": 46.0,
+        "engineers": { "aero": 44, "structures": 42, "propulsion": 18, "systems": 24 },
+        "facilities": { "wind_tunnel_level": 2, "factory_floor_m2": 90000.0, "test_site": true }
+      }
+    ],
+    "custom_startup_base": {
+      "starting_cash_usd": 6500000.0,
+      "starting_debt_usd": 0.0,
+      "reputation": { "USAF": 0.35, "USN": 0.35, "export": 0.25 },
+      "political_capital": 15.0,
+      "engineers": { "aero": 18, "structures": 16, "propulsion": 10, "systems": 12 },
+      "facilities": { "wind_tunnel_level": 1, "factory_floor_m2": 25000.0, "test_site": false }
+    },
+    "founder_backgrounds": {
+      "ex_naca_aerodynamicist": {
+        "cash_delta_usd": 0.0,
+        "reputation_delta": { "USAF": 0.05, "USN": 0.05, "export": 0.0 },
+        "political_capital_delta": 0.0,
+        "engineers_delta": { "aero": 8, "structures": 2, "propulsion": 0, "systems": 0 }
+      },
+      "wartime_production_exec": {
+        "cash_delta_usd": 1500000.0,
+        "reputation_delta": { "USAF": 0.05, "USN": 0.05, "export": 0.0 },
+        "political_capital_delta": 10.0,
+        "engineers_delta": { "aero": 0, "structures": 6, "propulsion": 0, "systems": 2 },
+        "factory_floor_delta_m2": 10000.0
+      },
+      "test_pilot_entrepreneur": {
+        "cash_delta_usd": -500000.0,
+        "reputation_delta": { "USAF": 0.08, "USN": 0.08, "export": 0.05 },
+        "political_capital_delta": 5.0,
+        "engineers_delta": { "aero": 4, "structures": 2, "propulsion": 2, "systems": 2 },
+        "grant_test_site": true
+      },
+      "wall_street_syndicate": {
+        "cash_delta_usd": 4500000.0,
+        "reputation_delta": { "USAF": -0.05, "USN": -0.05, "export": 0.05 },
+        "political_capital_delta": 15.0,
+        "engineers_delta": { "aero": -2, "structures": -2, "propulsion": 0, "systems": 0 }
+      }
+    }
+  },
+  "scoring": {
+    "weights": {
+      "net_worth_1950_usd_per_point": 50000.0,
+      "aircraft_delivered_points_each": 1.2,
+      "prime_contract_won_points": 250.0,
+      "reputation_avg_points_full": 600.0,
+      "tech_leadership_points_each": 35.0,
+      "world_record_points_each": 120.0
+    },
+    "grade_thresholds": [
+      { "tier": "S", "title_key": "score.tier.skunk_works_legend", "min_score": 4500.0 },
+      { "tier": "A", "title_key": "score.tier.prime_titan", "min_score": 3000.0 },
+      { "tier": "B", "title_key": "score.tier.established_prime", "min_score": 1800.0 },
+      { "tier": "C", "title_key": "score.tier.niche_contractor", "min_score": 900.0 },
+      { "tier": "D", "title_key": "score.tier.subcontractor", "min_score": 0.0 }
+    ]
+  },
+  "us_defense_budget_fy1945_1961": {
+    "source_notes": "OMB Historical Table 3.1 (National Defense Outlays), DoD National Defense Budget Estimates (Green Book), and USAF/USN Historical Statistical Digests. Nominal then-year millions USD; deflator_1950 converts nominal USD to constant 1950 USD (divide by deflator_1950).",
+    "fiscal_years": {
+      "1945": {
+        "fy": 1945,
+        "dod_total_musd": 82965.0,
+        "usaf_total_musd": 18500.0,
+        "usn_aviation_musd": 5700.0,
+        "aircraft_procurement_total_musd": 13800.0,
+        "aircraft_procurement_usaf_musd": 10600.0,
+        "aircraft_procurement_usn_musd": 3200.0,
+        "aviation_rd_musd": 520.0,
+        "deflator_1950": 0.746,
+        "era_note": "WWII peak war production (B-29, P-51, F4U, P-80A initial batch)"
+      },
+      "1946": {
+        "fy": 1946,
+        "dod_total_musd": 42681.0,
+        "usaf_total_musd": 4300.0,
+        "usn_aviation_musd": 1800.0,
+        "aircraft_procurement_total_musd": 1450.0,
+        "aircraft_procurement_usaf_musd": 1000.0,
+        "aircraft_procurement_usn_musd": 450.0,
+        "aviation_rd_musd": 310.0,
+        "deflator_1950": 0.810,
+        "era_note": "V-J Day demobilization and mass wartime contract cancellations"
+      },
+      "1947": {
+        "fy": 1947,
+        "dod_total_musd": 12808.0,
+        "usaf_total_musd": 2350.0,
+        "usn_aviation_musd": 1000.0,
+        "aircraft_procurement_total_musd": 590.0,
+        "aircraft_procurement_usaf_musd": 410.0,
+        "aircraft_procurement_usn_musd": 180.0,
+        "aviation_rd_musd": 250.0,
+        "deflator_1950": 0.926,
+        "era_note": "Postwar aviation industry trough; experimental X-planes and early jet prototypes"
+      },
+      "1948": {
+        "fy": 1948,
+        "dod_total_musd": 9105.0,
+        "usaf_total_musd": 2750.0,
+        "usn_aviation_musd": 1100.0,
+        "aircraft_procurement_total_musd": 1150.0,
+        "aircraft_procurement_usaf_musd": 820.0,
+        "aircraft_procurement_usn_musd": 330.0,
+        "aviation_rd_musd": 320.0,
+        "deflator_1950": 0.999,
+        "era_note": "National Security Act creates independent USAF; Finletter Commission recommends 70-Group USAF"
+      },
+      "1949": {
+        "fy": 1949,
+        "dod_total_musd": 13150.0,
+        "usaf_total_musd": 3550.0,
+        "usn_aviation_musd": 1400.0,
+        "aircraft_procurement_total_musd": 1750.0,
+        "aircraft_procurement_usaf_musd": 1250.0,
+        "aircraft_procurement_usn_musd": 500.0,
+        "aviation_rd_musd": 390.0,
+        "deflator_1950": 0.990,
+        "era_note": "Berlin Blockade & Airlift; F-86A Sabre, F-84, F9F Panther enter production"
+      },
+      "1950": {
+        "fy": 1950,
+        "dod_total_musd": 13724.0,
+        "usaf_total_musd": 3600.0,
+        "usn_aviation_musd": 1300.0,
+        "aircraft_procurement_total_musd": 1920.0,
+        "aircraft_procurement_usaf_musd": 1380.0,
+        "aircraft_procurement_usn_musd": 540.0,
+        "aviation_rd_musd": 410.0,
+        "deflator_1950": 1.000,
+        "era_note": "Louis Johnson budget cap; Revolt of the Admirals; Soviet Joe-1 atomic test"
+      },
+      "1951": {
+        "fy": 1951,
+        "dod_total_musd": 23566.0,
+        "usaf_total_musd": 6350.0,
+        "usn_aviation_musd": 2550.0,
+        "aircraft_procurement_total_musd": 3950.0,
+        "aircraft_procurement_usaf_musd": 2800.0,
+        "aircraft_procurement_usn_musd": 1150.0,
+        "aviation_rd_musd": 680.0,
+        "deflator_1950": 1.079,
+        "era_note": "Korean War outbreak (Jun 1950) & NSC-68 emergency supplemental appropriations"
+      },
+      "1952": {
+        "fy": 1952,
+        "dod_total_musd": 46089.0,
+        "usaf_total_musd": 12100.0,
+        "usn_aviation_musd": 4200.0,
+        "aircraft_procurement_total_musd": 7450.0,
+        "aircraft_procurement_usaf_musd": 5400.0,
+        "aircraft_procurement_usn_musd": 2050.0,
+        "aviation_rd_musd": 1050.0,
+        "deflator_1950": 1.103,
+        "era_note": "Korean War rearmament surge; 143-Wing USAF buildup; MiG Alley lessons"
+      },
+      "1953": {
+        "fy": 1953,
+        "dod_total_musd": 52802.0,
+        "usaf_total_musd": 15100.0,
+        "usn_aviation_musd": 4500.0,
+        "aircraft_procurement_total_musd": 9200.0,
+        "aircraft_procurement_usaf_musd": 6850.0,
+        "aircraft_procurement_usn_musd": 2350.0,
+        "aviation_rd_musd": 1280.0,
+        "deflator_1950": 1.111,
+        "era_note": "Korean War peak outlays; Century Series (F-100, F-101, F-102, F-104) initiated"
+      },
+      "1954": {
+        "fy": 1954,
+        "dod_total_musd": 49266.0,
+        "usaf_total_musd": 15600.0,
+        "usn_aviation_musd": 4200.0,
+        "aircraft_procurement_total_musd": 8850.0,
+        "aircraft_procurement_usaf_musd": 6650.0,
+        "aircraft_procurement_usn_musd": 2200.0,
+        "aviation_rd_musd": 1320.0,
+        "deflator_1950": 1.117,
+        "era_note": "Korean Armistice (Jul 1953); Eisenhower 'New Look' (NSC 162/2) prioritizes airpower"
+      },
+      "1955": {
+        "fy": 1955,
+        "dod_total_musd": 42729.0,
+        "usaf_total_musd": 16400.0,
+        "usn_aviation_musd": 3700.0,
+        "aircraft_procurement_total_musd": 8400.0,
+        "aircraft_procurement_usaf_musd": 6400.0,
+        "aircraft_procurement_usn_musd": 2000.0,
+        "aviation_rd_musd": 1410.0,
+        "deflator_1950": 1.113,
+        "era_note": "Massive Retaliation doctrine; F8U Crusader & F-104A/F-105 development"
+      },
+      "1956": {
+        "fy": 1956,
+        "dod_total_musd": 42523.0,
+        "usaf_total_musd": 16750.0,
+        "usn_aviation_musd": 3900.0,
+        "aircraft_procurement_total_musd": 8250.0,
+        "aircraft_procurement_usaf_musd": 6250.0,
+        "aircraft_procurement_usn_musd": 2000.0,
+        "aviation_rd_musd": 1620.0,
+        "deflator_1950": 1.130,
+        "era_note": "Tushino 'Bomber Gap' scare boosts interceptor and radar/missile procurement"
+      },
+      "1957": {
+        "fy": 1957,
+        "dod_total_musd": 45433.0,
+        "usaf_total_musd": 18350.0,
+        "usn_aviation_musd": 4050.0,
+        "aircraft_procurement_total_musd": 8600.0,
+        "aircraft_procurement_usaf_musd": 6550.0,
+        "aircraft_procurement_usn_musd": 2050.0,
+        "aviation_rd_musd": 1880.0,
+        "deflator_1950": 1.168,
+        "era_note": "Suez & Hungarian crises; Mach 2 all-weather interceptors (F-106, F4H-1 Phantom II)"
+      },
+      "1958": {
+        "fy": 1958,
+        "dod_total_musd": 46815.0,
+        "usaf_total_musd": 18450.0,
+        "usn_aviation_musd": 4350.0,
+        "aircraft_procurement_total_musd": 8450.0,
+        "aircraft_procurement_usaf_musd": 6300.0,
+        "aircraft_procurement_usn_musd": 2150.0,
+        "aviation_rd_musd": 2050.0,
+        "deflator_1950": 1.200,
+        "era_note": "Sputnik 1 shock (Oct 1957); Gaither Report; missile share rises rapidly"
+      },
+      "1959": {
+        "fy": 1959,
+        "dod_total_musd": 49015.0,
+        "usaf_total_musd": 19100.0,
+        "usn_aviation_musd": 4300.0,
+        "aircraft_procurement_total_musd": 7750.0,
+        "aircraft_procurement_usaf_musd": 5750.0,
+        "aircraft_procurement_usn_musd": 2000.0,
+        "aviation_rd_musd": 2250.0,
+        "deflator_1950": 1.210,
+        "era_note": "Second Taiwan Strait Crisis (AIM-9B Sidewinder combat debut); NACA becomes NASA"
+      },
+      "1960": {
+        "fy": 1960,
+        "dod_total_musd": 48130.0,
+        "usaf_total_musd": 19050.0,
+        "usn_aviation_musd": 4050.0,
+        "aircraft_procurement_total_musd": 6500.0,
+        "aircraft_procurement_usaf_musd": 4800.0,
+        "aircraft_procurement_usn_musd": 1700.0,
+        "aviation_rd_musd": 2350.0,
+        "deflator_1950": 1.229,
+        "era_note": "F-108 Rapier cancelled (Sep 1959); U-2 shootdown (May 1960); high-cost Mach 2+ era"
+      },
+      "1961": {
+        "fy": 1961,
+        "dod_total_musd": 49601.0,
+        "usaf_total_musd": 19800.0,
+        "usn_aviation_musd": 4100.0,
+        "aircraft_procurement_total_musd": 6800.0,
+        "aircraft_procurement_usaf_musd": 5000.0,
+        "aircraft_procurement_usn_musd": 1800.0,
+        "aviation_rd_musd": 2500.0,
+        "deflator_1950": 1.242,
+        "era_note": "Kennedy 'Missile Gap' campaign; shift toward multi-role tactical fighters (TFX/F-4)"
+      }
+    }
+  },
+  "initial_macro_state": {
+    "tension": 0.70,
+    "war_active": true,
+    "active_war_id": "ww2_pacific",
+    "procurement_budget_mult": 1.0,
+    "rd_budget_mult": 1.0,
+    "usaf_priority_interceptor": 0.40,
+    "usaf_priority_day_fighter": 0.60,
+    "usaf_priority_fighter_bomber": 0.50,
+    "usn_priority_carrier_fighter": 0.65,
+    "missile_enthusiasm": 0.05,
+    "nuclear_delivery_priority": 0.10,
+    "naca_data_sharing_bonus": 0.0
+  },
+  "historical_events": [
+    {
+      "id": "evt_1945_german_tech_exploitation",
+      "title_key": "event.1945_paperclip.title",
+      "desc_key": "event.1945_paperclip.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1945-05-15"
+      },
+      "options": [
+        {
+          "id": "study_swept_wing_data",
+          "label_key": "event.1945_paperclip.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "operation_lusty_completed", "value": true },
+            { "op": "add_macro", "key": "naca_data_sharing_bonus", "delta": 0.10 },
+            { "op": "tech_boost", "discipline": "aero", "points": 120.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1945_vj_day_demobilization",
+      "title_key": "event.1945_vj_day.title",
+      "desc_key": "event.1945_vj_day.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1945-08-15"
+      },
+      "options": [
+        {
+          "id": "brace_for_cancellations",
+          "label_key": "event.1945_vj_day.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "ww2_ended", "value": true },
+            { "op": "set_macro", "key": "war_active", "value": false },
+            { "op": "set_macro", "key": "active_war_id", "value": "" },
+            { "op": "set_macro", "key": "tension", "value": 0.20 },
+            { "op": "set_macro", "key": "procurement_budget_mult", "value": 0.65 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1946_bikini_crossroads",
+      "title_key": "event.1946_crossroads.title",
+      "desc_key": "event.1946_crossroads.desc",
+      "scope": "global",
+      "major": false,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1946-07-01"
+      },
+      "options": [
+        {
+          "id": "acknowledge_atomic_age",
+          "label_key": "event.1946_crossroads.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "add_macro", "key": "nuclear_delivery_priority", "delta": 0.10 },
+            { "op": "set_macro", "key": "procurement_budget_mult", "value": 0.85 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1947_national_security_act",
+      "title_key": "event.1947_usaf_born.title",
+      "desc_key": "event.1947_usaf_born.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1947-09-18"
+      },
+      "options": [
+        {
+          "id": "independent_air_force",
+          "label_key": "event.1947_usaf_born.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "usaf_independent", "value": true },
+            { "op": "set_macro", "key": "procurement_budget_mult", "value": 1.0 },
+            { "op": "add_macro", "key": "tension", "delta": 0.10 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1947_xs1_mach_1",
+      "title_key": "event.1947_bell_x1.title",
+      "desc_key": "event.1947_bell_x1.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1947-10-14"
+      },
+      "options": [
+        {
+          "id": "sound_barrier_broken",
+          "label_key": "event.1947_bell_x1.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "sound_barrier_broken", "value": true },
+            { "op": "add_macro", "key": "naca_data_sharing_bonus", "delta": 0.10 },
+            { "op": "tech_boost", "discipline": "aero", "points": 150.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1948_berlin_blockade",
+      "title_key": "event.1948_berlin.title",
+      "desc_key": "event.1948_berlin.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1948-06-24"
+      },
+      "options": [
+        {
+          "id": "cold_war_escalates",
+          "label_key": "event.1948_berlin.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "berlin_blockade", "value": true },
+            { "op": "add_macro", "key": "tension", "delta": 0.20 },
+            { "op": "add_macro", "key": "procurement_budget_mult", "delta": 0.10 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1949_revolt_of_admirals",
+      "title_key": "event.1949_admirals.title",
+      "desc_key": "event.1949_admirals.desc",
+      "scope": "player",
+      "major": false,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1949-04-23"
+      },
+      "options": [
+        {
+          "id": "testify_for_usaf",
+          "label_key": "event.1949_admirals.opt_usaf",
+          "ai_weight": 0.4,
+          "effects": [
+            { "op": "add_reputation", "customer": "USAF", "delta": 0.05 },
+            { "op": "add_reputation", "customer": "USN", "delta": -0.05 },
+            { "op": "add_political_capital", "delta": 5.0 }
+          ]
+        },
+        {
+          "id": "testify_for_navy_carriers",
+          "label_key": "event.1949_admirals.opt_usn",
+          "ai_weight": 0.3,
+          "effects": [
+            { "op": "add_reputation", "customer": "USN", "delta": 0.06 },
+            { "op": "add_reputation", "customer": "USAF", "delta": -0.05 },
+            { "op": "add_political_capital", "delta": 5.0 }
+          ]
+        },
+        {
+          "id": "stay_neutral",
+          "label_key": "event.1949_admirals.opt_neutral",
+          "ai_weight": 0.3,
+          "effects": [
+            { "op": "add_political_capital", "delta": 2.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1949_soviet_joe1_atomic_test",
+      "title_key": "event.1949_joe1.title",
+      "desc_key": "event.1949_joe1.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1949-09-23"
+      },
+      "options": [
+        {
+          "id": "urgent_interceptor_demand",
+          "label_key": "event.1949_joe1.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "soviet_nuclear_armed", "value": true },
+            { "op": "add_macro", "key": "tension", "delta": 0.15 },
+            { "op": "set_macro", "key": "usaf_priority_interceptor", "value": 0.75 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1950_korean_war_outbreak",
+      "title_key": "event.1950_korea.title",
+      "desc_key": "event.1950_korea.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1950-06-25"
+      },
+      "options": [
+        {
+          "id": "mobilize_production_lines",
+          "label_key": "event.1950_korea.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "korean_war_active", "value": true },
+            { "op": "set_macro", "key": "war_active", "value": true },
+            { "op": "set_macro", "key": "active_war_id", "value": "korean_war" },
+            { "op": "set_macro", "key": "tension", "value": 0.85 },
+            { "op": "set_macro", "key": "procurement_budget_mult", "value": 1.35 },
+            { "op": "set_macro", "key": "rd_budget_mult", "value": 1.25 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1950_mig15_shock_over_yalu",
+      "title_key": "event.1950_mig15.title",
+      "desc_key": "event.1950_mig15.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1950-11-08"
+      },
+      "options": [
+        {
+          "id": "accelerate_swept_wing_fighters",
+          "label_key": "event.1950_mig15.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "mig15_encountered", "value": true },
+            { "op": "set_macro", "key": "usaf_priority_day_fighter", "value": 0.85 },
+            { "op": "tech_boost", "discipline": "aero", "points": 100.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1952_whitcomb_area_rule",
+      "title_key": "event.1952_area_rule.title",
+      "desc_key": "event.1952_area_rule.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1952-09-15"
+      },
+      "options": [
+        {
+          "id": "receive_classified_naca_rm",
+          "label_key": "event.1952_area_rule.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "whitcomb_area_rule_discovered", "value": true },
+            { "op": "add_macro", "key": "naca_data_sharing_bonus", "delta": 0.15 },
+            { "op": "tech_boost", "discipline": "aero", "points": 200.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1953_korean_armistice",
+      "title_key": "event.1953_armistice.title",
+      "desc_key": "event.1953_armistice.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1953-07-27"
+      },
+      "options": [
+        {
+          "id": "transition_to_new_look",
+          "label_key": "event.1953_armistice.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "korean_war_active", "value": false },
+            { "op": "set_flag", "flag": "korean_armistice_signed", "value": true },
+            { "op": "set_macro", "key": "war_active", "value": false },
+            { "op": "set_macro", "key": "active_war_id", "value": "" },
+            { "op": "set_macro", "key": "tension", "value": 0.60 },
+            { "op": "set_macro", "key": "procurement_budget_mult", "value": 1.05 },
+            { "op": "set_macro", "key": "nuclear_delivery_priority", "value": 0.70 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1955_tushino_bomber_gap",
+      "title_key": "event.1955_bomber_gap.title",
+      "desc_key": "event.1955_bomber_gap.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1955-07-10"
+      },
+      "options": [
+        {
+          "id": "expand_continental_air_defense",
+          "label_key": "event.1955_bomber_gap.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "bomber_gap_scare", "value": true },
+            { "op": "set_macro", "key": "usaf_priority_interceptor", "value": 0.90 },
+            { "op": "set_macro", "key": "missile_enthusiasm", "value": 0.55 },
+            { "op": "add_macro", "key": "procurement_budget_mult", "delta": 0.10 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1957_sputnik_shock",
+      "title_key": "event.1957_sputnik.title",
+      "desc_key": "event.1957_sputnik.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1957-10-04"
+      },
+      "options": [
+        {
+          "id": "missile_age_arrives",
+          "label_key": "event.1957_sputnik.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "sputnik_launched", "value": true },
+            { "op": "set_macro", "key": "tension", "value": 0.78 },
+            { "op": "set_macro", "key": "missile_enthusiasm", "value": 0.85 },
+            { "op": "set_macro", "key": "rd_budget_mult", "value": 1.35 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1958_taiwan_strait_sidewinder",
+      "title_key": "event.1958_quemoy.title",
+      "desc_key": "event.1958_quemoy.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1958-09-24"
+      },
+      "options": [
+        {
+          "id": "guided_missiles_validated",
+          "label_key": "event.1958_quemoy.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "sidewinder_combat_proven", "value": true },
+            { "op": "set_macro", "key": "missile_enthusiasm", "value": 0.92 },
+            { "op": "tech_boost", "discipline": "systems", "points": 150.0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_1960_u2_incident",
+      "title_key": "event.1960_u2.title",
+      "desc_key": "event.1960_u2.desc",
+      "scope": "global",
+      "major": true,
+      "fire_once": true,
+      "trigger": {
+        "type": "date",
+        "date": "1960-05-01"
+      },
+      "options": [
+        {
+          "id": "high_altitude_vulnerability_exposed",
+          "label_key": "event.1960_u2.opt_a",
+          "ai_weight": 1.0,
+          "effects": [
+            { "op": "set_flag", "flag": "u2_shot_down", "value": true },
+            { "op": "set_macro", "key": "tension", "value": 0.82 },
+            { "op": "set_macro", "key": "usaf_priority_fighter_bomber", "value": 0.80 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_mtth_industrial_labor_dispute",
+      "title_key": "event.mtth_strike.title",
+      "desc_key": "event.mtth_strike.desc",
+      "scope": "player",
+      "major": false,
+      "fire_once": true,
+      "trigger": {
+        "type": "mtth",
+        "mtth_days": 720.0,
+        "condition": {
+          "all": [
+            { "var": "date.year", "op": ">=", "value": 1946 },
+            { "var": "player.cash_usd", "op": ">=", "value": 2000000.0 }
+          ]
+        }
+      },
+      "options": [
+        {
+          "id": "settle_generously",
+          "label_key": "event.mtth_strike.opt_settle",
+          "ai_weight": 0.7,
+          "effects": [
+            { "op": "add_cash", "delta_usd": -350000.0 },
+            { "op": "add_political_capital", "delta": 3.0 }
+          ]
+        },
+        {
+          "id": "hold_firm",
+          "label_key": "event.mtth_strike.opt_firm",
+          "ai_weight": 0.3,
+          "effects": [
+            { "op": "add_cash", "delta_usd": -100000.0 },
+            { "op": "add_reputation", "customer": "USAF", "delta": -0.02 },
+            { "op": "add_reputation", "customer": "USN", "delta": -0.02 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt_mtth_naca_symposium_invite",
+      "title_key": "event.mtth_naca_symposium.title",
+      "desc_key": "event.mtth_naca_symposium.desc",
+      "scope": "player",
+      "major": false,
+      "fire_once": true,
+      "trigger": {
+        "type": "mtth",
+        "mtth_days": 540.0,
+        "condition": {
+          "all": [
+            { "var": "date.year", "op": ">=", "value": 1948 },
+            { "var": "flag.sound_barrier_broken", "op": "==", "value": true }
+          ]
+        }
+      },
+      "options": [
+        {
+          "id": "send_chief_aerodynamicist",
+          "label_key": "event.mtth_naca_symposium.opt_send",
+          "ai_weight": 0.85,
+          "effects": [
+            { "op": "add_cash", "delta_usd": -75000.0 },
+            { "op": "tech_boost", "discipline": "aero", "points": 90.0 },
+            { "op": "add_reputation", "customer": "USAF", "delta": 0.02 }
+          ]
+        },
+        {
+          "id": "decline_invitation",
+          "label_key": "event.mtth_naca_symposium.opt_decline",
+          "ai_weight": 0.15,
+          "effects": []
+        }
+      ]
+    }
+  ]
+}

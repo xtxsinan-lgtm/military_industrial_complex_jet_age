@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "era": "1945-1960",
+  "description": "Pre-1962 US Military Aircraft and Jet Engine Designation Rules (1924-1962 USAAF/USAF system and 1922-1962 US Navy BuAer letter system) + company popular nickname pools.",
+  "usaf_fighter_rules": {
+    "cutoff_date_p_to_f": "1948-06-11",
+    "type_prefix_before_cutoff": "P",
+    "type_prefix_from_cutoff": "F",
+    "status_prefixes": {
+      "experimental_prototype": "X",
+      "service_test": "Y",
+      "production": ""
+    },
+    "initial_next_sequence_number_1945": 83,
+    "format_template": "{status_prefix}{type_prefix}-{seq_num}{series_letter}",
+    "examples": [
+      "XP-86 (prototype ordered before 1948-06-11)",
+      "F-86A (production after 1948-06-11)",
+      "YF-100A (service test prototype ordered after 1948-06-11)",
+      "F-106A (first production block)"
+    ],
+    "note": "On June 11, 1948, the newly independent USAF replaced Pursuit (P-) with Fighter (F-); existing P-80, P-84, P-86 became F-80, F-84, F-86, and sequential numbering continued uninterrupted through the Century Series (F-100+)."
+  },
+  "usn_buaer_fighter_rules": {
+    "type_letter_fighter": "F",
+    "type_letter_attack_from_1946": "A",
+    "status_prefixes": {
+      "experimental_prototype": "X",
+      "development_test": "Y",
+      "production": ""
+    },
+    "manufacturer_letters": {
+      "boeing": "B",
+      "curtiss_wright": "C",
+      "douglas": "D",
+      "grumman": "F",
+      "mcdonnell": "H",
+      "north_american": "J",
+      "bell": "L",
+      "martin": "M",
+      "northrop": "N",
+      "republic": "P",
+      "vought": "U",
+      "lockheed": "V",
+      "convair": "Y",
+      "preset_skunk_works_spinoff": "X",
+      "preset_wartime_subcontractor": "W",
+      "preset_naca_alumni_syndicate": "A",
+      "preset_industrialist_venture": "K"
+    },
+    "initial_next_model_number_by_manufacturer_1945": {
+      "boeing": 9,
+      "curtiss_wright": 16,
+      "douglas": 3,
+      "grumman": 9,
+      "mcdonnell": 2,
+      "north_american": 2,
+      "bell": 3,
+      "martin": 1,
+      "northrop": 2,
+      "republic": 1,
+      "vought": 6,
+      "lockheed": 2,
+      "convair": 2,
+      "preset_skunk_works_spinoff": 1,
+      "preset_wartime_subcontractor": 1,
+      "preset_naca_alumni_syndicate": 1,
+      "preset_industrialist_venture": 1
+    },
+    "omit_model_number_when_one": true,
+    "format_template_model_1": "{status_prefix}{type_letter}{mfg_letter}-{variant_num}{sub_mod}",
+    "format_template_model_n": "{status_prefix}{type_letter}{model_num}{mfg_letter}-{variant_num}{sub_mod}",
+    "sub_modification_suffixes": {
+      "night_fighter": "N",
+      "photo_recon": "P",
+      "missile_armed": "M"
+    },
+    "examples": [
+      "XFH-1 / FH-1 Phantom (McDonnell's 1st Navy fighter; '1' omitted before H)",
+      "XF2H-1 / F2H-2N Banshee (McDonnell's 2nd Navy fighter, Variant 2 Night)",
+      "XF9F-2 / F9F-8 Cougar (Grumman's 9th Navy fighter, Variant 8)",
+      "XF8U-1 / F8U-2 Crusader (Chance Vought's 8th Navy fighter)",
+      "XF4H-1 / F4H-1 Phantom II (McDonnell's 4th Navy fighter)"
+    ]
+  },
+  "us_jet_engine_designation_rules": {
+    "type_prefix_turbojet": "J",
+    "type_prefix_turbofan_from_1959": "TF",
+    "status_prefix_experimental": "X",
+    "usn_even_numbers_next_1945": 36,
+    "usaf_odd_numbers_next_1945": 47,
+    "manufacturer_codes": {
+      "general_electric": "GE",
+      "pratt_whitney": "P",
+      "allison": "A",
+      "westinghouse": "WE",
+      "wright": "W"
+    },
+    "format_template": "{status_prefix}{type_prefix}{number}-{mfg_code}-{dash_num}",
+    "examples": [
+      "J33-A-35 (Allison USAF odd-numbered turbojet)",
+      "J34-WE-34 (Westinghouse USN even-numbered turbojet)",
+      "J47-GE-27 (General Electric USAF odd-numbered turbojet)",
+      "J57-P-21 (Pratt & Whitney USAF odd-numbered turbojet)"
+    ]
+  },
+  "company_nickname_pools": {
+    "north_american": ["Sabre", "Super Sabre", "Fury", "Rapier", "Apache", "Mustang II", "Cavalier"],
+    "lockheed": ["Shooting Star", "Starfire", "Starfighter", "Lancaster", "Constellation", "Lightning II", "Vega"],
+    "republic": ["Thunderjet", "Thunderstreak", "Thunderceptor", "Thunderchief", "Thunderbolt II", "Thunderflash", "Thunderwarrior"],
+    "convair": ["Delta Dagger", "Delta Dart", "Sea Dart", "Charger", "Hustler", "Pogo", "Convairliner"],
+    "mcdonnell": ["Phantom", "Banshee", "Demon", "Voodoo", "Phantom II", "Goblin", "Spectre"],
+    "grumman": ["Panther", "Cougar", "Jaguar", "Tiger", "Super Tiger", "Bearcat II", "Bobcat"],
+    "douglas": ["Skyknight", "Skyray", "Skylancer", "Skyhawk", "Skystreak", "Skyrocket", "Skywarrior"],
+    "vought": ["Pirate", "Cutlass", "Crusader", "Crusader III", "Corsair II", "Buccaneer", "Sea Wolf"],
+    "northrop": ["Scorpion", "Black Widow II", "Bantam", "Fang", "Freedom Fighter", "Talon", "Prowler"],
+    "bell": ["Airacomet", "Airacobra II", "Kingcobra II", "Starstreak", "Meteor", "X-calibur"],
+    "curtiss_wright": ["Blackhawk", "Warhawk II", "Mohawk", "Sea Hawk", "Nighthawk"],
+    "martin": ["Maryland II", "Marauder II", "Baltimore", "Oriole", "Condor"],
+    "boeing": ["Stratojet", "Stratofortress", "Stratohawk", "Monomail", "Peashooter II"],
+    "default": ["Falcon", "Eagle", "Viper", "Hornet", "Lightning", "Valkyrie", "Comet"]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "_doc": "US military aircraft procurement budget index (1.0 = normal Cold War baseline). Reflects post-WWII demobilization (1946-1948), Korean War surge (1951-1953), Eisenhower 'New Look' cuts (1954-1955), and late-1950s missile reallocation (1958-1960).",
+  "fiscal_year_budget_index": {
+    "1945": 1.1,
+    "1946": 0.55,
+    "1947": 0.6,
+    "1948": 0.72,
+    "1949": 0.85,
+    "1950": 0.9,
+    "1951": 1.4,
+    "1952": 1.5,
+    "1953": 1.38,
+    "1954": 0.95,
+    "1955": 0.92,
+    "1956": 1.0,
+    "1957": 1.02,
+    "1958": 0.88,
+    "1959": 0.82,
+    "1960": 0.85,
+    "1961": 0.95
+  }
+}

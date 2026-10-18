@@ -1,0 +1,46 @@
+{
+  "engine_id": "vk_1",
+  "name": "Klimov VK-1",
+  "manufacturer": "OKB-117 Klimov",
+  "country": "USSR",
+  "first_run_year": 1947,
+  "service_entry_year": 1949,
+  "applications": ["Mikoyan-Gurevich MiG-15bis", "Ilyushin Il-28"],
+  "cycle_input": {
+    "compressor_type": "centrifugal",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": false,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 48.20,
+    "opr": 4.42,
+    "tit_K": 1148.0,
+    "ab_temp_K": 0.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.795,
+    "eta_t_poly": 0.85,
+    "eta_burner": 0.955,
+    "pi_burner": 0.945,
+    "specific_weight_factor": 0.94,
+    "mtbf_factor": 0.65,
+    "length_factor": 0.97,
+    "diameter_factor": 0.98,
+    "cumulative_test_hours": 1000.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 26476.0,
+    "sls_ab_thrust_N": null,
+    "sls_dry_tsfc_kg_per_Ns": 3.03082e-5,
+    "sls_ab_tsfc_kg_per_Ns": null,
+    "mass_kg": 872.0,
+    "diameter_m": 1.2733,
+    "length_m": 2.6518,
+    "unit_cost_usd": 22500.0,
+    "tbo_hours_service": 200.0,
+    "sources": [
+      "LeteckeMotory.cz: VK-1 Official Technical Manual",
+      "Gunston, World Encyclopaedia of Aero Engines (1989)"
+    ]
+  }
+}

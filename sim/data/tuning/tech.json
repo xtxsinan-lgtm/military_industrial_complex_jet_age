@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "module": "03_tech_tree",
+  "description": "All balance and simulation tunables for Module 03 (Tech Tree, Research Progress, IRAD vs Government Contracts, NACA Diffusion, and Maturity).",
+  "tunables": {
+    "eng_efficiency_per_day": 1.0,
+    "max_effective_engineers_per_project": 40,
+    "diminishing_returns_threshold_eng": 15,
+    "diminishing_returns_exponent": 0.65,
+    "underfunded_min_speed_factor": 0.10,
+    "aot_free_lead_years": 0.5,
+    "aot_rate_per_year": 0.55,
+    "aot_exponent": 1.6,
+    "aot_min_speed_multiplier": 0.12,
+    "catchup_rate_per_year": 0.20,
+    "catchup_max_speed_multiplier": 1.75,
+    "irad_company_cost_share": 1.0,
+    "govt_contract_company_cost_share": 0.20,
+    "govt_contract_speed_multiplier": 1.15,
+    "gfe_auto_grant_lag_days": 180,
+    "gfe_initial_maturity": 0.45,
+    "naca_diffusion_lag_years": 2.0,
+    "naca_report_speed_multiplier": 1.35,
+    "naca_passive_drip_frac_per_day": 0.0012,
+    "naca_auto_unlock_lag_years": 4.0,
+    "default_unlock_maturity": 0.35,
+    "passive_maturity_rate_per_day": 0.00025,
+    "passive_maturity_cap": 0.65,
+    "maturity_gain_sim_run": 0.02,
+    "maturity_gain_tunnel_campaign": 0.08,
+    "maturity_gain_first_flight": 0.12,
+    "maturity_gain_flight_test_sortie": 0.015,
+    "maturity_gain_flaw_fixed": 0.10,
+    "maturity_gain_production_10_units": 0.04,
+    "max_maturity": 1.0,
+    "float_cap_epsilon": 1e-6
+  },
+  "tunables_meta": [
+    {
+      "name": "eng_efficiency_per_day",
+      "default": 1.0,
+      "range": [0.25, 4.0],
+      "effect": "Base engineer-days of progress generated per effective engineer per calendar day.",
+      "rationale": "1.0 means 10 engineers on a 1,800 eng-day node finish in ~180 days at 1.0x speed."
+    },
+    {
+      "name": "max_effective_engineers_per_project",
+      "default": 40,
+      "range": [10, 100],
+      "effect": "Hard cap on effective engineer-equivalents that can contribute to a single tech node.",
+      "rationale": "Brooks's Law: piling 200 engineers onto one research question cannot finish it in a week."
+    },
+    {
+      "name": "diminishing_returns_threshold_eng",
+      "default": 15,
+      "range": [5, 40],
+      "effect": "Number of assigned engineers before Brooks's Law diminishing returns kick in.",
+      "rationale": "Small Skunk-Works-sized research teams (10-15 engineers) work at 100% marginal efficiency."
+    },
+    {
+      "name": "diminishing_returns_exponent",
+      "default": 0.65,
+      "range": [0.4, 1.0],
+      "effect": "Power-law exponent applied to engineers assigned above diminishing_returns_threshold_eng.",
+      "rationale": "Encourages parallelizing across 2-3 tech branches rather than doom-stacking one node."
+    },
+    {
+      "name": "aot_free_lead_years",
+      "default": 0.5,
+      "range": [0.0, 2.0],
+      "effect": "Years ahead of historical_year with zero ahead-of-time research penalty.",
+      "rationale": "Allows slight historical divergence (6 months early) without punitive slowdowns."
+    },
+    {
+      "name": "aot_rate_per_year",
+      "default": 0.55,
+      "range": [0.1, 2.0],
+      "effect": "Denominator growth coefficient per year ahead of (historical_year - aot_free_lead_years).",
+      "rationale": "Prevents rushing 1956 Mach 2 techs in 1948 while allowing a focused company to lead by 1-2 years at steep cost."
+    },
+    {
+      "name": "aot_exponent",
+      "default": 1.6,
+      "range": [1.0, 3.0],
+      "effect": "Non-linear exponent on ahead-of-time years excess.",
+      "rationale": "1 yr early = 0.72x speed; 3 yrs early = 0.31x speed; 5 yrs early hits floor (0.12x)."
+    },
+    {
+      "name": "aot_min_speed_multiplier",
+      "default": 0.12,
+      "range": [0.05, 0.5],
+      "effect": "Floor on ahead-of-time speed multiplier.",
+      "rationale": "Avoids division-by-zero or complete stall while making 5+ year rushes impractical."
+    },
+    {
+      "name": "catchup_rate_per_year",
+      "default": 0.20,
+      "range": [0.0, 0.5],
+      "effect": "Linear research speed bonus per year after a node's historical_year.",
+      "rationale": "Published papers, trade journals, and engineer mobility make late research faster."
+    },
+    {
+      "name": "catchup_max_speed_multiplier",
+      "default": 1.75,
+      "range": [1.0, 3.0],
+      "effect": "Maximum speed multiplier from behind-time catchup.",
+      "rationale": "Caps catch-up at +75% speed (reached 3.75 years after historical date)."
+    },
+    {
+      "name": "irad_company_cost_share",
+      "default": 1.0,
+      "range": [0.5, 1.0],
+      "effect": "Fraction of direct research USD paid by company under internal R&D (IRAD).",
+      "rationale": "IRAD is 100% self-funded out of company cash reserves, though unlock is proprietary."
+    },
+    {
+      "name": "govt_contract_company_cost_share",
+      "default": 0.20,
+      "range": [0.0, 0.5],
+      "effect": "Fraction of direct research USD paid by company when backed by USAF/USN/NACA contract.",
+      "rationale": "Government R&D contracts reimburse 80% of direct lab costs and boost speed via NACA/Wright Field data."
+    },
+    {
+      "name": "govt_contract_speed_multiplier",
+      "default": 1.15,
+      "range": [1.0, 1.5],
+      "effect": "Research speed multiplier when funded by a government research contract.",
+      "rationale": "Access to Wright Field / BuAer test data and government laboratories."
+    },
+    {
+      "name": "naca_diffusion_lag_years",
+      "default": 2.0,
+      "range": [0.5, 5.0],
+      "effect": "Years after historical_year before NACA Technical Notes begin diffusing a tech to all US firms.",
+      "rationale": "Models wartime/classified NACA RM reports declassifying into industry-wide NACA TN reports after ~2 years."
+    },
+    {
+      "name": "naca_report_speed_multiplier",
+      "default": 1.35,
+      "range": [1.0, 2.0],
+      "effect": "Speed bonus when actively researching a naca_diffusion=true node after its NACA diffusion date.",
+      "rationale": "Having NACA wind-tunnel reports in hand makes internal adoption much faster."
+    },
+    {
+      "name": "naca_passive_drip_frac_per_day",
+      "default": 0.0012,
+      "range": [0.0, 0.005],
+      "effect": "Fraction of node total progress gained passively per day once NACA diffusion starts and prereqs are met.",
+      "rationale": "At 0.0012/day (~44%/yr), an unresearched NACA tech with met prereqs diffuses automatically in ~2.3 years."
+    },
+    {
+      "name": "default_unlock_maturity",
+      "default": 0.35,
+      "range": [0.1, 0.7],
+      "effect": "Initial maturity assigned to a newly unlocked tech if not overridden by node.initial_maturity.",
+      "rationale": "First unlock represents laboratory/conceptual proof; flight hardware still carries high uncertainty."
+    },
+    {
+      "name": "passive_maturity_rate_per_day",
+      "default": 0.00025,
+      "range": [0.0, 0.001],
+      "effect": "Daily passive maturity growth for unlocked techs up to passive_maturity_cap.",
+      "rationale": "~0.09/year passive refinement from ongoing bench work; reaching >0.65 requires building & flying aircraft."
+    },
+    {
+      "name": "passive_maturity_cap",
+      "default": 0.65,
+      "range": [0.4, 0.85],
+      "effect": "Maximum maturity reachable through passive time alone without flight test or production.",
+      "rationale": "You cannot mature an afterburner or swept wing to 0.95 on paper alone—you must test and build it."
+    },
+    {
+      "name": "maturity_gain_tunnel_campaign",
+      "default": 0.08,
+      "range": [0.02, 0.20],
+      "effect": "Base maturity gain (scaled by 1 - maturity) when a design using the tech completes a wind-tunnel campaign.",
+      "rationale": "Rewards wind-tunnel testing of novel aerodynamic/structural technologies."
+    },
+    {
+      "name": "maturity_gain_first_flight",
+      "default": 0.12,
+      "range": [0.05, 0.25],
+      "effect": "Base maturity gain (scaled by 1 - maturity) on first flight of a prototype using the tech.",
+      "rationale": "Building and flying a prototype is the biggest single learning milestone."
+    },
+    {
+      "name": "maturity_gain_flaw_fixed",
+      "default": 0.10,
+      "range": [0.03, 0.25],
+      "effect": "Base maturity gain (scaled by 1 - maturity) when a HiddenFlaw associated with the tech is diagnosed and fixed.",
+      "rationale": "Fixing transonic pitch-up or inlet buzz permanently teaches the engineering team how to avoid it."
+    },
+    {
+      "name": "maturity_gain_production_10_units",
+      "default": 0.04,
+      "range": [0.01, 0.10],
+      "effect": "Base maturity gain (scaled by 1 - maturity) per 10 production aircraft delivered using the tech.",
+      "rationale": "Series production and squadron service drive maturity toward 1.0."
+    }
+  ]
+}

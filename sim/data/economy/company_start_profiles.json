@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "description": "Starting 1945-01-01 company size archetypes for Module 04 initialization and Monte-Carlo campaign testing.",
+  "profiles": {
+    "small_innovator": {
+      "profile_id": "small_innovator",
+      "label": "Boutique Airframe Innovator (McDonnell / Northrop 1945 Scale)",
+      "cash_usd": 8500000.0,
+      "debt_usd": 0.0,
+      "credit_rating": "BBB",
+      "reputation": {"USAF": 48.0, "USN": 52.0, "export": 35.0},
+      "political_capital": 22.0,
+      "engineers": {
+        "aero": 65.0,
+        "structures": 80.0,
+        "propulsion": 25.0,
+        "systems": 40.0
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 32000.0,
+        "goco_floor_m2": 0.0,
+        "test_site": false,
+        "nc_machining_installed": false
+      },
+      "commercial_buffer_level": "subcontracting",
+      "active_delivered_fleet": 120
+    },
+    "medium_prime": {
+      "profile_id": "medium_prime",
+      "label": "Established Fighter Prime (Republic / Grumman / Vought 1945 Scale)",
+      "cash_usd": 16000000.0,
+      "debt_usd": 0.0,
+      "credit_rating": "A",
+      "reputation": {"USAF": 60.0, "USN": 60.0, "export": 45.0},
+      "political_capital": 35.0,
+      "engineers": {
+        "aero": 115.0,
+        "structures": 145.0,
+        "propulsion": 45.0,
+        "systems": 75.0
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 65000.0,
+        "goco_floor_m2": 0.0,
+        "test_site": true,
+        "nc_machining_installed": false
+      },
+      "commercial_buffer_level": "subcontracting",
+      "active_delivered_fleet": 450
+    },
+    "large_giant": {
+      "profile_id": "large_giant",
+      "label": "Wartime Aerospace Giant (North American / Lockheed / Douglas 1945 Scale)",
+      "cash_usd": 28000000.0,
+      "debt_usd": 0.0,
+      "credit_rating": "AA",
+      "reputation": {"USAF": 72.0, "USN": 65.0, "export": 60.0},
+      "political_capital": 50.0,
+      "engineers": {
+        "aero": 185.0,
+        "structures": 230.0,
+        "propulsion": 70.0,
+        "systems": 115.0
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 110000.0,
+        "goco_floor_m2": 25000.0,
+        "test_site": true,
+        "nc_machining_installed": false
+      },
+      "commercial_buffer_level": "civil_diversified",
+      "active_delivered_fleet": 1100
+    }
+  }
+}

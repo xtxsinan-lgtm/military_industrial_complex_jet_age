@@ -1,0 +1,115 @@
+{
+  "id": "f86a_sabre",
+  "name": "North American F-86A-5 Sabre",
+  "company_id": "north_american",
+  "created_date": "1949-03-01",
+  "crew_count": 1,
+  "role_tags": [
+    "day_fighter"
+  ],
+  "wing": {
+    "area_m2": 26.75,
+    "aspect_ratio": 4.79,
+    "sweep_qc_deg": 35.0,
+    "taper_ratio": 0.5,
+    "tc_root": 0.095,
+    "tc_tip": 0.085,
+    "airfoil_ref": "0009.5",
+    "planform_type": "conventional",
+    "position": "low",
+    "x_le_root_frac": 0.34,
+    "dihedral_deg": 3.0,
+    "incidence_deg": 1.0,
+    "twist_deg": -2.0,
+    "devices": [
+      "slotted_flaps",
+      "le_slats"
+    ]
+  },
+  "fuselage": {
+    "length_m": 11.43,
+    "max_diameter_m": 1.45,
+    "nose_fineness": 2.4,
+    "tail_fineness": 2.8,
+    "canopy_type": "bubble",
+    "area_ruled": false
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": false,
+    "all_moving_tail": false,
+    "ht_area_m2": 3.25,
+    "ht_aspect_ratio": 4.6,
+    "ht_sweep_qc_deg": 35.0,
+    "vt_area_m2": 3.05,
+    "vt_aspect_ratio": 1.7,
+    "vt_sweep_qc_deg": 35.0
+  },
+  "intake": {
+    "type": "nose",
+    "compression": "pitot",
+    "variable": false,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J47-GE-13",
+    "count": 1,
+    "afterburner": false,
+    "x_cg_frac": 0.58
+  },
+  "structure": {
+    "design_load_factor_g": 7.33,
+    "material_mix": {
+      "al": 0.88,
+      "steel": 0.12,
+      "ti": 0.0
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 1315.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 365.0,
+    "combat_uses_drop_tanks": true
+  },
+  "systems": {
+    "radar_id": "apg30",
+    "fire_control_id": null,
+    "avionics_level": 1,
+    "powered_controls": true,
+    "stability_augmentation": false,
+    "ejection_seat": true,
+    "inflight_refuel": false,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "m3_50",
+        "count": 6,
+        "rounds_per_gun": 300
+      }
+    ],
+    "hardpoints": 2,
+    "internal_bay": false,
+    "missile_ids": []
+  },
+  "published_performance": {
+    "empty_mass_kg": 4780.0,
+    "combat_mass_kg": 5850.0,
+    "mtow_kg": 7350.0,
+    "max_mach_sl": 0.89,
+    "max_mach_alt": 0.9,
+    "alt_of_max_mach_m": 6096.0,
+    "climb_rate_sl_mps": 38.0,
+    "service_ceiling_m": 14630.0,
+    "combat_radius_m": 660000.0,
+    "ferry_range_m": 1950000.0,
+    "stall_speed_mps": 53.5,
+    "takeoff_distance_m": 1120.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-86A-5 Sabre (1950)",
+      "Loftin, Quest for Performance, NASA SP-468, Ch. 11 (1985)"
+    ]
+  }
+}

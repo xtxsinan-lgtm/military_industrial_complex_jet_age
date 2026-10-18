@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "id": "usaf_ws202a_1955",
+  "name_key": "program.usaf_ws202a_1955.name",
+  "program_name": "GOR 114 / WS-202A Long-Range Mach 3 Interceptor (LRI-X)",
+  "customer": "USAF",
+  "role": "interceptor",
+  "mvp_core": true,
+  "issue_date": "1955-10-06",
+  "proposal_due": "1957-04-15",
+  "first_flight_due": "1961-03-01",
+  "ioc_due": "1963-06-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": true,
+    "min_crew": 2,
+    "min_engines": 2,
+    "internal_bay_required": true,
+    "min_guns_20mm": 0,
+    "missile_capability": [
+      "sarh"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 2.75,
+      "objective_value": 3.1,
+      "weight": 0.35,
+      "unit": "mach",
+      "description": "Mach 3.0 cruise and intercept at 70,000+ ft"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1574200.0,
+      "objective_value": 1889040.0,
+      "weight": 0.3,
+      "unit": "m",
+      "description": "Long-range Arctic intercept radius (850-1,010 nmi)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 21336.0,
+      "objective_value": 24384.0,
+      "weight": 0.2,
+      "unit": "m",
+      "description": "Combat ceiling (70,000-80,100 ft)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 177.8,
+      "objective_value": 228.6,
+      "weight": 0.15,
+      "unit": "mps",
+      "description": "Rate of climb (35,000-45,000 ft/min)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 180000000.0,
+    "unit_price_ceiling_usd": 5200000.0,
+    "quantity_planned": 480
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.75
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "north_american": 0.55,
+      "lockheed": 0.3,
+      "northrop": 0.2
+    },
+    "congressional_interest": 0.5,
+    "industrial_base_need": {
+      "north_american": 0.5,
+      "lockheed": 0.25
+    }
+  },
+  "historical": {
+    "winner_company_id": "north_american",
+    "winner_design_name": "NA-236 / NA-257 (XF-108 Rapier)",
+    "award_date": "1957-06-06",
+    "outcome": "cancelled_in_dev",
+    "production_delivered": 0,
+    "notes": "North American won WS-202A on June 6, 1957 over Lockheed CL-325 and Northrop N-167 due to Mach 3 stainless-steel honeycomb and GE J93 engine commonality with the XB-70 Valkyrie. Cancelled Sep 23, 1959 after $141.9M spent as Soviet threat shifted from bombers to ICBMs; its ASG-18 radar and GAR-9 missile lived on in the YF-12A and F-14 AWG-9/AIM-54 Phoenix.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/North_American_XF-108_Rapier",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195840/north-american-xf-108-rapier/"
+    ],
+    "competitors": [
+      {
+        "company_id": "north_american",
+        "design_name": "NA-257 (XF-108 Rapier)",
+        "is_historical_winner": true,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 4200000.0,
+        "dev_cost_bid_usd": 145000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 88.0,
+        "track_record_at_bid": 0.8,
+        "district_weight": 0.55,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 3.05,
+          "combat_radius_m": 1870520.0,
+          "service_ceiling_m": 24414.5,
+          "climb_rate_sl_mps": 228.6
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Mach 3+ (1,720 kn), 80,100 ft ceiling, 1,010 nmi combat radius, 45,000 ft/min climb, 2x GE YJ93 + 3x GAR-9 in rotary bay."
+      },
+      {
+        "company_id": "lockheed",
+        "design_name": "CL-325 Mach 3 LRI-X Proposal",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 4550000.0,
+        "dev_cost_bid_usd": 165000000.0,
+        "novelty": {
+          "unproven_tech_count": 3,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 84.0,
+        "track_record_at_bid": 0.76,
+        "district_weight": 0.52,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 3.0,
+          "combat_radius_m": 1740880.0,
+          "service_ceiling_m": 23774.4,
+          "climb_rate_sl_mps": 213.36
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "High-altitude Mach 3 interceptor proposal; lacked NAA's XB-70 J93/brazed-honeycomb cost-sharing synergy."
+      },
+      {
+        "company_id": "northrop",
+        "design_name": "N-167 Long-Range Interceptor",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 4400000.0,
+        "dev_cost_bid_usd": 160000000.0,
+        "novelty": {
+          "unproven_tech_count": 3,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 74.0,
+        "track_record_at_bid": 0.68,
+        "district_weight": 0.48,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.85,
+          "combat_radius_m": 1685320.0,
+          "service_ceiling_m": 22555.2,
+          "climb_rate_sl_mps": 198.12
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Northrop LRI-X proposal; lower cruise Mach and ceiling than NA-257."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usaf_ws201a_1950",
+    "follow_on_program_id": null,
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.85
+  }
+}

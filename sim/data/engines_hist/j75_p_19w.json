@@ -1,0 +1,47 @@
+{
+  "engine_id": "j75_p_19w",
+  "name": "Pratt & Whitney J75-P-19W",
+  "manufacturer": "Pratt & Whitney",
+  "country": "USA",
+  "first_run_year": 1955,
+  "service_entry_year": 1959,
+  "applications": ["Republic F-105D Thunderchief", "Convair F-106A/B Delta Dart"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 2,
+    "variable_stators": false,
+    "has_afterburner": true,
+    "nozzle_type": "convergent_divergent",
+    "mass_flow_kgps": 114.30,
+    "opr": 12.0,
+    "tit_K": 1145.0,
+    "ab_temp_K": 1950.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.865,
+    "eta_t_poly": 0.875,
+    "eta_burner": 0.97,
+    "pi_burner": 0.955,
+    "eta_ab": 0.83,
+    "specific_weight_factor": 0.74,
+    "mtbf_factor": 1.25,
+    "length_factor": 0.96,
+    "diameter_factor": 1.0,
+    "cumulative_test_hours": 2500.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 71616.4,
+    "sls_ab_thrust_N": 108981.4,
+    "sls_dry_tsfc_kg_per_Ns": 2.23771e-5,
+    "sls_ab_tsfc_kg_per_Ns": 5.94834e-5,
+    "mass_kg": 2698.9,
+    "diameter_m": 1.0922,
+    "length_m": 6.5786,
+    "unit_cost_usd": 320000.0,
+    "tbo_hours_service": 800.0,
+    "sources": [
+      "Jane's All the World's Aircraft 1962-63",
+      "Wilkinson, Aircraft Engines of the World 1966/67"
+    ]
+  }
+}

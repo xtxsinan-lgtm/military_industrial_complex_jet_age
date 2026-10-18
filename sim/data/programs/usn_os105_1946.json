@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "id": "usn_os105_1946",
+  "name_key": "program.usn_os105_1946.name",
+  "program_name": "OS-105 BuAer Carrier Swept-Wing Day Fighter",
+  "customer": "USN",
+  "role": "carrier_day_fighter",
+  "mvp_core": false,
+  "issue_date": "1946-01-15",
+  "proposal_due": "1946-05-15",
+  "first_flight_due": "1948-10-01",
+  "ioc_due": "1951-07-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": false,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 0.85,
+      "objective_value": 0.93,
+      "weight": 0.4,
+      "unit": "mach",
+      "description": "Top speed >= 600 mph (521 kt / M0.85+)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 40.64,
+      "objective_value": 63.5,
+      "weight": 0.3,
+      "unit": "mps",
+      "description": "High sea-level climb rate (8,000-12,500 ft/min)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 11887.2,
+      "objective_value": 13106.4,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Service ceiling >= 40,000 ft"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 555600.0,
+      "objective_value": 740800.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Combat radius (300-400 nmi)"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Carrier deck suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 11000000.0,
+    "unit_price_ceiling_usd": 800000.0,
+    "quantity_planned": 300
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 3,
+    "allow_dual_award": false,
+    "production_lots": 4,
+    "urgency": 0.55
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.5,
+      "cost": 0.15,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "vought": 0.45,
+      "north_american": 0.2,
+      "curtiss_wright": 0.15
+    },
+    "congressional_interest": 0.35,
+    "industrial_base_need": {
+      "vought": 0.45
+    }
+  },
+  "historical": {
+    "winner_company_id": "vought",
+    "winner_design_name": "V-346 (XF7U-1 Cutlass)",
+    "award_date": "1946-06-25",
+    "outcome": "produced",
+    "production_delivered": 320,
+    "notes": "Vought V-346 won OS-105 in June 1946 based on German Arado tailless swept-wing research promising >600 mph and 13,000 ft/min climb.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Vought_F7U_Cutlass",
+      "https://thanlont.blogspot.com/2011/04/bell-l-39-wing-sweep-evaluation.html"
+    ],
+    "competitors": [
+      {
+        "company_id": "vought",
+        "design_name": "V-346 (XF7U-1 Cutlass)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1948-09-29",
+        "unit_price_bid_usd": 650000.0,
+        "dev_cost_bid_usd": 9200000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 78.0,
+        "track_record_at_bid": 0.7,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 0.92,
+          "climb_rate_sl_mps": 66.04,
+          "service_ceiling_m": 12192.0,
+          "combat_radius_m": 648200.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 3,
+        "published_notes": "606 kt (M0.92), 13,000 ft/min climb, 40,000 ft ceiling, 350 nmi radius."
+      },
+      {
+        "company_id": "north_american",
+        "design_name": "NA-140 Naval Swept Study",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 690000.0,
+        "dev_cost_bid_usd": 9800000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 66.0,
+        "track_record_at_bid": 0.6,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 0.87,
+          "climb_rate_sl_mps": 44.7,
+          "service_ceiling_m": 12192.0,
+          "combat_radius_m": 611160.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Single-J35 swept-wing study; lower climb rate than twin-AB Vought V-346."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": "usn_os130_1952",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

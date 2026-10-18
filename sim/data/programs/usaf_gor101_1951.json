@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "id": "usaf_gor101_1951",
+  "name_key": "program.usaf_gor101_1951.name",
+  "program_name": "GOR 101 Long-Range Strategic Fighter Escort (WS-105A)",
+  "customer": "USAF",
+  "role": "escort_fighter",
+  "mvp_core": false,
+  "issue_date": "1951-02-06",
+  "proposal_due": "1951-05-15",
+  "first_flight_due": "1954-10-01",
+  "ioc_due": "1956-10-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": true,
+    "min_crew": 1,
+    "min_engines": 2,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1389000.0,
+      "objective_value": 1666800.0,
+      "weight": 0.35,
+      "unit": "m",
+      "description": "Long unrefueled strategic escort radius (750-900 nmi)"
+    },
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1.35,
+      "objective_value": 1.6,
+      "weight": 0.3,
+      "unit": "mach",
+      "description": "Supersonic speed (Mach 1.35-1.60)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 111.76,
+      "objective_value": 177.8,
+      "weight": 0.2,
+      "unit": "mps",
+      "description": "Rate of climb (22,000-35,000 ft/min)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 14630.4,
+      "objective_value": 16764.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Service ceiling (48,000-55,800 ft)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 42000000.0,
+    "unit_price_ceiling_usd": 2200000.0,
+    "quantity_planned": 500
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.75
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "mcdonnell": 0.55,
+      "lockheed": 0.25,
+      "north_american": 0.25,
+      "northrop": 0.2
+    },
+    "congressional_interest": 0.4,
+    "industrial_base_need": {
+      "mcdonnell": 0.45
+    }
+  },
+  "historical": {
+    "winner_company_id": "mcdonnell",
+    "winner_design_name": "Model 36W (F-101A/B Voodoo)",
+    "award_date": "1951-05-31",
+    "outcome": "produced",
+    "production_delivered": 705,
+    "notes": "Revival of the 1946 Penetration Fighter requirement under SAC GOR 101. McDonnell scaled the winning XF-88 around two P&W J57 engines, beating derivatives of the F-90, F-93, F-89, and F-84F.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/McDonnell_F-101_Voodoo",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195832/mcdonnell-f-101a-voodoo/"
+    ],
+    "competitors": [
+      {
+        "company_id": "mcdonnell",
+        "design_name": "Model 36W (F-101A Voodoo)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1954-09-29",
+        "unit_price_bid_usd": 1754000.0,
+        "dev_cost_bid_usd": 34000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 80.0,
+        "track_record_at_bid": 0.75,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "combat_radius_m": 1611240.0,
+          "max_mach_alt": 1.56,
+          "climb_rate_sl_mps": 185.42,
+          "service_ceiling_m": 17007.8
+        },
+        "flyoff_flaws_unfixed_severity": 2,
+        "published_notes": "M1.52-1.66 (1,009-1,093 mph), 870 nmi combat radius, 36,500 ft/min climb, 55,800 ft ceiling, 2x P&W J57."
+      },
+      {
+        "company_id": "lockheed",
+        "design_name": "Model 90D (J57 XF-90 Derivative)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1920000.0,
+        "dev_cost_bid_usd": 37000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 74.0,
+        "track_record_at_bid": 0.62,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "combat_radius_m": 1500120.0,
+          "max_mach_alt": 1.38,
+          "climb_rate_sl_mps": 121.92,
+          "service_ceiling_m": 15240.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Enlarged XF-90 derivative; penalized by XF-90A's structural weight history."
+      },
+      {
+        "company_id": "northrop",
+        "design_name": "N-68 Advanced Swept F-89E Escort",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1850000.0,
+        "dev_cost_bid_usd": 35000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 72.0,
+        "track_record_at_bid": 0.65,
+        "district_weight": 0.48,
+        "cross_service_derivative": false,
+        "promised_overrides": {
+          "max_mach_alt": 1.35
+        },
+        "anchor_performance": {
+          "combat_radius_m": 1444560.0,
+          "max_mach_alt": 1.25,
+          "climb_rate_sl_mps": 114.3,
+          "service_ceiling_m": 15544.8
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Swept-wing F-89 derivative; slower than McDonnell Model 36W."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usaf_pen_fighter_1946",
+    "follow_on_program_id": null,
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

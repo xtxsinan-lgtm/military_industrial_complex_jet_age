@@ -1,0 +1,99 @@
+{
+  "depth_presets": {
+    "light": {"sortie_mult": 0.50, "label": "Light / Cursory (0.5x sorties)"},
+    "standard": {"sortie_mult": 1.00, "label": "Standard Syllabus (1.0x sorties)"},
+    "thorough": {"sortie_mult": 1.60, "label": "Exhaustive Envelope Expansion (1.6x sorties)"}
+  },
+  "syllabus_items": [
+    {
+      "id": "low_speed",
+      "name": "Low-Speed, Stall, Take-off & Landing (incl. Carrier Suitability)",
+      "order": 1,
+      "standard_sorties": 22,
+      "days_per_sortie": 2.2,
+      "cost_per_sortie_1950_usd": 8500.0,
+      "base_crash_prob_per_sortie": 0.0008,
+      "bailout_survival_mult": 1.00,
+      "driver_precision": {
+        "clmax": 0.010,
+        "kind": 0.014,
+        "cd0": 0.018
+      }
+    },
+    {
+      "id": "speed_envelope",
+      "name": "High-Speed & Mach Dive Envelope Expansion",
+      "order": 2,
+      "standard_sorties": 30,
+      "days_per_sortie": 2.8,
+      "cost_per_sortie_1950_usd": 12000.0,
+      "base_crash_prob_per_sortie": 0.0022,
+      "bailout_survival_mult": 0.82,
+      "driver_precision": {
+        "cdw": 0.008,
+        "cd0": 0.009,
+        "thrust": 0.014
+      }
+    },
+    {
+      "id": "altitude_envelope",
+      "name": "High-Altitude Climb, Relight & Service Ceiling",
+      "order": 3,
+      "standard_sorties": 20,
+      "days_per_sortie": 2.5,
+      "cost_per_sortie_1950_usd": 10000.0,
+      "base_crash_prob_per_sortie": 0.0012,
+      "bailout_survival_mult": 0.95,
+      "driver_precision": {
+        "thrust": 0.009,
+        "tsfc": 0.009,
+        "cd0": 0.016
+      }
+    },
+    {
+      "id": "maneuver",
+      "name": "High-G Turn, Structural Load Factor & Energy Agility",
+      "order": 4,
+      "standard_sorties": 26,
+      "days_per_sortie": 2.6,
+      "cost_per_sortie_1950_usd": 11000.0,
+      "base_crash_prob_per_sortie": 0.0018,
+      "bailout_survival_mult": 0.88,
+      "driver_precision": {
+        "kind": 0.009,
+        "clmax": 0.011,
+        "mass": 0.008
+      }
+    },
+    {
+      "id": "high_aoa_spin",
+      "name": "High-Alpha Stall Departure & Intentional Spin Recovery",
+      "order": 5,
+      "standard_sorties": 18,
+      "days_per_sortie": 3.0,
+      "cost_per_sortie_1950_usd": 11500.0,
+      "base_crash_prob_per_sortie": 0.0032,
+      "bailout_survival_mult": 0.72,
+      "driver_precision": {
+        "clmax": 0.008,
+        "kind": 0.015
+      }
+    },
+    {
+      "id": "weapons_stores",
+      "name": "Armament Firing, Stores Jettison & Avionics/FCS Shakedown",
+      "order": 6,
+      "standard_sorties": 24,
+      "days_per_sortie": 2.5,
+      "cost_per_sortie_1950_usd": 13000.0,
+      "base_crash_prob_per_sortie": 0.0010,
+      "bailout_survival_mult": 0.96,
+      "driver_precision": {
+        "maint": 0.022,
+        "cost_unit": 0.020,
+        "cd0": 0.016,
+        "tsfc": 0.014
+      }
+    }
+  ]
+}

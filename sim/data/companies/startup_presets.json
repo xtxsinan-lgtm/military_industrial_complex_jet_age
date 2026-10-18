@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "era": "1945-1960",
+  "description": "Custom player-founded aircraft company startup presets for 1945-01-01 campaign start.",
+  "presets": [
+    {
+      "id": "preset_skunk_works_spinoff",
+      "name_key": "preset.skunk_works_spinoff.name",
+      "desc_key": "preset.skunk_works_spinoff.desc",
+      "default_hq_location": "Burbank / Mojave, California",
+      "company_code_usn": "X",
+      "cash_usd": 12000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.65,
+        "USN": 0.55,
+        "export": 0.45
+      },
+      "political_capital": 0.55,
+      "engineers": {
+        "aero": 38,
+        "structures": 32,
+        "propulsion": 14,
+        "systems": 26
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 65000.0,
+        "test_site": true
+      },
+      "starting_tech_overrides": {
+        "aero_1945_compressible_subsonic": 0.94,
+        "prop_1945_early_axial_compressor": 0.65
+      },
+      "chief_designer_id": "designer_custom_aero_visionary"
+    },
+    {
+      "id": "preset_wartime_subcontractor",
+      "name_key": "preset.wartime_subcontractor.name",
+      "desc_key": "preset.wartime_subcontractor.desc",
+      "default_hq_location": "Wichita, Kansas",
+      "company_code_usn": "W",
+      "cash_usd": 22000000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.60,
+        "USN": 0.60,
+        "export": 0.50
+      },
+      "political_capital": 0.68,
+      "engineers": {
+        "aero": 26,
+        "structures": 44,
+        "propulsion": 10,
+        "systems": 22
+      },
+      "facilities": {
+        "wind_tunnel_level": 0,
+        "factory_floor_m2": 160000.0,
+        "test_site": false
+      },
+      "starting_tech_overrides": {
+        "mfg_1945_ww2_mass_production_line": 0.95,
+        "struct_1945_stressed_skin_7075": 0.92
+      },
+      "chief_designer_id": "designer_custom_production_master"
+    },
+    {
+      "id": "preset_naca_alumni_syndicate",
+      "name_key": "preset.naca_alumni_syndicate.name",
+      "desc_key": "preset.naca_alumni_syndicate.desc",
+      "default_hq_location": "Hampton, Virginia",
+      "company_code_usn": "A",
+      "cash_usd": 9500000.0,
+      "debt_usd": 0.0,
+      "reputation": {
+        "USAF": 0.55,
+        "USN": 0.55,
+        "export": 0.35
+      },
+      "political_capital": 0.45,
+      "engineers": {
+        "aero": 45,
+        "structures": 28,
+        "propulsion": 16,
+        "systems": 24
+      },
+      "facilities": {
+        "wind_tunnel_level": 2,
+        "factory_floor_m2": 48000.0,
+        "test_site": false
+      },
+      "starting_tech_overrides": {
+        "aero_1945_compressible_subsonic": 0.96,
+        "test_1945_sub_and_supersonic_blowdown_tunnels": 0.95
+      },
+      "chief_designer_id": "designer_custom_transonic_theorist"
+    },
+    {
+      "id": "preset_industrialist_venture",
+      "name_key": "preset.industrialist_venture.name",
+      "desc_key": "preset.industrialist_venture.desc",
+      "default_hq_location": "Culver City, California",
+      "company_code_usn": "K",
+      "cash_usd": 30000000.0,
+      "debt_usd": 4000000.0,
+      "reputation": {
+        "USAF": 0.48,
+        "USN": 0.48,
+        "export": 0.60
+      },
+      "political_capital": 0.72,
+      "engineers": {
+        "aero": 32,
+        "structures": 32,
+        "propulsion": 14,
+        "systems": 36
+      },
+      "facilities": {
+        "wind_tunnel_level": 1,
+        "factory_floor_m2": 120000.0,
+        "test_site": true
+      },
+      "starting_tech_overrides": {
+        "av_1945_vhf_gyro_sight_scr720": 0.92
+      },
+      "chief_designer_id": "designer_custom_systems_integrator"
+    }
+  ]
+}

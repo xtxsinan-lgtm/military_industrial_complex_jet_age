@@ -1,0 +1,120 @@
+{
+  "id": "f8u1_crusader",
+  "name": "Vought F8U-1 (F-8A) Crusader",
+  "company_id": "vought",
+  "created_date": "1955-03-25",
+  "crew_count": 1,
+  "role_tags": [
+    "day_fighter",
+    "carrier"
+  ],
+  "wing": {
+    "area_m2": 34.84,
+    "aspect_ratio": 3.4,
+    "sweep_qc_deg": 42.0,
+    "taper_ratio": 0.25,
+    "tc_root": 0.06,
+    "tc_tip": 0.05,
+    "airfoil_ref": "65A006",
+    "planform_type": "conventional",
+    "position": "high",
+    "x_le_root_frac": 0.34,
+    "dihedral_deg": -5.0,
+    "incidence_deg": 1.0,
+    "twist_deg": -1.5,
+    "devices": [
+      "fowler_flaps",
+      "le_flaps"
+    ]
+  },
+  "fuselage": {
+    "length_m": 16.53,
+    "max_diameter_m": 1.54,
+    "nose_fineness": 2.9,
+    "tail_fineness": 3.4,
+    "canopy_type": "faired",
+    "area_ruled": true,
+    "area_rule_waist_frac": 0.55
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": false,
+    "all_moving_tail": true,
+    "ht_area_m2": 8.68,
+    "ht_aspect_ratio": 3.5,
+    "ht_sweep_qc_deg": 45.0,
+    "vt_area_m2": 10.1,
+    "vt_aspect_ratio": 1.5,
+    "vt_sweep_qc_deg": 45.0
+  },
+  "intake": {
+    "type": "chin",
+    "compression": "pitot",
+    "variable": false,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J57-P-16",
+    "count": 1,
+    "afterburner": true,
+    "x_cg_frac": 0.62
+  },
+  "structure": {
+    "design_load_factor_g": 7.33,
+    "material_mix": {
+      "al": 0.78,
+      "steel": 0.12,
+      "ti": 0.1
+    },
+    "carrier_capable": true
+  },
+  "fuel": {
+    "internal_kg": 4130.0,
+    "drop_tanks_count": 0,
+    "drop_tank_fuel_kg_each": 0.0,
+    "combat_uses_drop_tanks": false
+  },
+  "systems": {
+    "radar_id": "apg30",
+    "fire_control_id": null,
+    "avionics_level": 2,
+    "powered_controls": true,
+    "stability_augmentation": true,
+    "ejection_seat": true,
+    "inflight_refuel": true,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "mk12_20mm",
+        "count": 4,
+        "rounds_per_gun": 144
+      }
+    ],
+    "hardpoints": 2,
+    "internal_bay": false,
+    "missile_ids": [
+      "aim9b_sidewinder",
+      "aim9b_sidewinder"
+    ]
+  },
+  "published_performance": {
+    "empty_mass_kg": 7956.0,
+    "combat_mass_kg": 10450.0,
+    "mtow_kg": 12700.0,
+    "max_mach_sl": 1.02,
+    "max_mach_alt": 1.66,
+    "alt_of_max_mach_m": 10668.0,
+    "climb_rate_sl_mps": 115.0,
+    "service_ceiling_m": 17370.0,
+    "combat_radius_m": 780000.0,
+    "ferry_range_m": 2250000.0,
+    "stall_speed_mps": 55.0,
+    "takeoff_distance_m": 1050.0,
+    "sources": [
+      "US Navy Standard Aircraft Characteristics: F8U-1 Crusader, NAVAER 1335A (1958)",
+      "Loftin, Quest for Performance, NASA SP-468, Table V (1985)"
+    ]
+  }
+}

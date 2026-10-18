@@ -1,0 +1,47 @@
+{
+  "engine_id": "j57_p_21",
+  "name": "Pratt & Whitney J57-P-21",
+  "manufacturer": "Pratt & Whitney",
+  "country": "USA",
+  "first_run_year": 1950,
+  "service_entry_year": 1955,
+  "applications": ["North American F-100C/D Super Sabre"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 2,
+    "variable_stators": false,
+    "has_afterburner": true,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 75.75,
+    "opr": 11.5,
+    "tit_K": 1144.0,
+    "ab_temp_K": 1980.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.875,
+    "eta_t_poly": 0.885,
+    "eta_burner": 0.975,
+    "pi_burner": 0.96,
+    "eta_ab": 0.86,
+    "specific_weight_factor": 0.95,
+    "mtbf_factor": 1.15,
+    "length_factor": 0.99,
+    "diameter_factor": 1.01,
+    "cumulative_test_hours": 2500.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 45371.9,
+    "sls_ab_thrust_N": 71171.5,
+    "sls_dry_tsfc_kg_per_Ns": 2.22355e-5,
+    "sls_ab_tsfc_kg_per_Ns": 5.80672e-5,
+    "mass_kg": 2347.3,
+    "diameter_m": 1.0160,
+    "length_m": 6.1976,
+    "unit_cost_usd": 245000.0,
+    "tbo_hours_service": 800.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-100D",
+      "NMUSAF Fact Sheet: Pratt & Whitney J57"
+    ]
+  }
+}

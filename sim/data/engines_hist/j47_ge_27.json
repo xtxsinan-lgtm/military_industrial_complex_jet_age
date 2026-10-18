@@ -1,0 +1,47 @@
+{
+  "engine_id": "j47_ge_27",
+  "name": "General Electric J47-GE-27",
+  "manufacturer": "General Electric",
+  "country": "USA",
+  "first_run_year": 1947,
+  "service_entry_year": 1952,
+  "applications": ["North American F-86F Sabre", "North American FJ-2 Fury"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": false,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 42.2,
+    "opr": 5.35,
+    "tit_K": 1130.0,
+    "ab_temp_K": 0.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.84,
+    "eta_t_poly": 0.86,
+    "eta_burner": 0.955,
+    "pi_burner": 0.95,
+    "specific_weight_factor": 1.30,
+    "mtbf_factor": 1.25,
+    "length_factor": 1.02,
+    "diameter_factor": 1.03,
+    "cumulative_test_hours": 3000.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 26555.9,
+    "sls_ab_thrust_N": null,
+    "sls_dry_tsfc_kg_per_Ns": 2.87219e-5,
+    "sls_ab_tsfc_kg_per_Ns": null,
+    "mass_kg": 1158.5,
+    "diameter_m": 0.9335,
+    "length_m": 3.6830,
+    "unit_cost_usd": 47000.0,
+    "tbo_hours_service": 625.0,
+    "sources": [
+      "Jane's All the World's Aircraft 1955-56",
+      "Flight, 11 May 1956, p. 590",
+      "NMUSAF Fact Sheet: General Electric J47"
+    ]
+  }
+}

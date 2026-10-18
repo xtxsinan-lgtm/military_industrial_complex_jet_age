@@ -1,0 +1,13 @@
+{
+  "tunnel_complete": "Campaign [{campaign_name}] at {provider_name} completed ({hours:.0f} tunnel hrs, cost ${cost_usd:,.0f}). Updated {drivers_updated}.",
+  "tunnel_choked": "WARNING: [{campaign_name}] experienced transonic choking between M 0.85 and M 1.20. Wave drag and transonic control characteristics could not be resolved without a slotted-throat tunnel or free-flight rocket model.",
+  "tunnel_flaw_detected": "WIND TUNNEL / RIG DISCOVERY: [{campaign_name}] revealed [{flaw_label}] (Severity {severity}). Engineering team recommends design-phase remediation [{recommended_fix}] before cutting prototype metal.",
+  "prototype_rollout": "Prototype rollout complete ({n_prototypes} airframes built in {build_days} days, cost ${cost_usd:,.0f}). Scale weighing confirms empty mass {empty_mass_kg:,.0f} kg.",
+  "sortie_nominal": "Sortie #{flight_num} (Day {day}) — {pilot_name} completed [{item_name}] sortie ({progress_pct:.0f}% item completion). Telemetry nominal.",
+  "sortie_flaw_near_miss": "Sortie #{flight_num} (Day {day}) — INCIDENT: During [{item_name}], {pilot_name} encountered [{flaw_label}] (Severity {severity}) and recovered safely. Engineering action required.",
+  "sortie_crash_survived": "Sortie #{flight_num} (Day {day}) — LOSS OF PROTOTYPE: During [{item_name}], Prototype #{proto_idx} was lost due to [{cause_label}]. {pilot_name} {survival_outcome}. Flight programme paused {investigation_days} days for accident board.",
+  "sortie_crash_fatal": "Sortie #{flight_num} (Day {day}) — FATAL ACCIDENT: During [{item_name}], Prototype #{proto_idx} was lost due to [{cause_label}]. {pilot_name} did not survive the accident. Flight programme paused {investigation_days} days for accident board.",
+  "fix_applied": "ENGINEERING MODIFICATION: Applied [{fix_name}] to resolve [{flaw_label}] (Cost: ${cost_usd:,.0f}, Downtime: {fix_days} days, Residual risk: {residual_pct:.0f}%).",
+  "placard_applied": "FLIGHT MANUAL PLACARD: Issued [{placard_name}] for [{flaw_label}] (7 days manual revision). Envelope restricted; residual operational risk {residual_pct:.0f}%.",
+  "service_manifest": "SQUADRON SERVICE DEFECT (Month {month}): [{flaw_label}] (Severity {severity}) manifested in operational service after {fleet_fh:,.0f} fleet hours. {grounding_clause}Mandatory fleet retrofit cost: ${retrofit_cost_usd:,.0f} (Reputation delta: {rep_delta:+.1f})."
+}

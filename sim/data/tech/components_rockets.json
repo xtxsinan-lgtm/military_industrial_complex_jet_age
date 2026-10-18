@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "component_type": "rocket",
+  "description": "Unguided rocket armament catalog (1945-1960). SI units. Unlock key is unlock.rocket.<id>.",
+  "components": [
+    {
+      "id": "hvar_5in",
+      "unlock_key": "unlock.rocket.hvar_5in",
+      "name_key": "comp.rocket.hvar_5in",
+      "historical_designation": "5-inch HVAR (Holy Moses)",
+      "diameter_m": 0.127,
+      "length_m": 1.83,
+      "single_round_mass_kg": 61.0,
+      "salvo_pack_count": 2,
+      "pack_installed_mass_kg": 134.0,
+      "drag_area_m2": 0.038,
+      "burnout_velocity_mps": 420.0,
+      "effective_range_m": 1500.0,
+      "role": "ground_attack",
+      "cas_score": 2.2,
+      "interceptor_salvo_score": 0.4,
+      "unit_cost_usd": 420.0,
+      "historical_year": 1944,
+      "granted_at_start": true,
+      "notes": "WWII/Korea standard air-to-ground high-velocity aircraft rocket carried on underwing rails."
+    },
+    {
+      "id": "ffar_2_75in",
+      "unlock_key": "unlock.rocket.ffar_2_75in",
+      "name_key": "comp.rocket.ffar_2_75in",
+      "historical_designation": "2.75-inch Mk 4 Mighty Mouse FFAR",
+      "diameter_m": 0.070,
+      "length_m": 1.20,
+      "single_round_mass_kg": 8.4,
+      "salvo_pack_count": 24,
+      "pack_installed_mass_kg": 245.0,
+      "drag_area_m2": 0.022,
+      "burnout_velocity_mps": 660.0,
+      "effective_range_m": 2800.0,
+      "role": "interceptor_and_cas",
+      "cas_score": 2.6,
+      "interceptor_salvo_score": 3.8,
+      "unit_cost_usd": 1800.0,
+      "historical_year": 1949,
+      "granted_at_start": false,
+      "notes": "Folding-fin aerial rocket for lead-collision bomber interception (F-86D, F-89D, F-94C, F7U-3, F-102A) or podded CAS."
+    }
+  ]
+}

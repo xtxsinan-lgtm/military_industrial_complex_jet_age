@@ -1,0 +1,206 @@
+{
+  "drivers": {
+    "cd0": {
+      "name": "Zero-Lift Parasite Drag Coefficient (CD0)",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.055,
+      "bias0": 0.025,
+      "regime_sensitivity": 0.55,
+      "discipline": "aero"
+    },
+    "cdw": {
+      "name": "Transonic/Supersonic Wave Drag (CDw)",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.095,
+      "bias0": 0.055,
+      "regime_sensitivity": 1.00,
+      "discipline": "aero"
+    },
+    "kind": {
+      "name": "Lift-Induced Drag Factor (K)",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.050,
+      "bias0": 0.020,
+      "regime_sensitivity": 0.45,
+      "discipline": "aero"
+    },
+    "clmax": {
+      "name": "Maximum Usable Lift Coefficient (CLmax)",
+      "unfavorable_sign": -1.0,
+      "sigma0": 0.055,
+      "bias0": 0.022,
+      "regime_sensitivity": 0.35,
+      "discipline": "aero"
+    },
+    "mass": {
+      "name": "Structural Empty Mass",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.040,
+      "bias0": 0.030,
+      "regime_sensitivity": 0.20,
+      "discipline": "structures"
+    },
+    "thrust": {
+      "name": "Installed Net Thrust",
+      "unfavorable_sign": -1.0,
+      "sigma0": 0.040,
+      "bias0": 0.020,
+      "regime_sensitivity": 0.60,
+      "discipline": "propulsion"
+    },
+    "tsfc": {
+      "name": "Installed Thrust Specific Fuel Consumption",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.035,
+      "bias0": 0.018,
+      "regime_sensitivity": 0.35,
+      "discipline": "propulsion"
+    },
+    "cost_unit": {
+      "name": "Flyaway Unit Manufacturing Cost",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.090,
+      "bias0": 0.045,
+      "regime_sensitivity": 0.25,
+      "discipline": "structures"
+    },
+    "cost_dev": {
+      "name": "R&D and Prototype Engineering Cost",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.120,
+      "bias0": 0.065,
+      "regime_sensitivity": 0.40,
+      "discipline": "systems"
+    },
+    "maint": {
+      "name": "Maintenance Man-Hours per Flight Hour",
+      "unfavorable_sign": 1.0,
+      "sigma0": 0.110,
+      "bias0": 0.050,
+      "regime_sensitivity": 0.30,
+      "discipline": "systems"
+    }
+  },
+  "metrics": {
+    "max_mach_sl": {
+      "unit": "mach",
+      "elasticities_subsonic": {"cd0": -0.22, "cdw": -0.28, "thrust": 0.26, "mass": -0.03},
+      "elasticities_supersonic": {"cd0": -0.18, "cdw": -0.38, "thrust": 0.36, "mass": -0.04}
+    },
+    "max_mach_alt": {
+      "unit": "mach",
+      "elasticities_subsonic": {"cd0": -0.20, "cdw": -0.30, "kind": -0.05, "thrust": 0.28, "mass": -0.05},
+      "elasticities_supersonic": {"cd0": -0.16, "cdw": -0.46, "kind": -0.06, "thrust": 0.44, "mass": -0.06}
+    },
+    "alt_of_max_mach_m": {
+      "unit": "m",
+      "elasticities_subsonic": {"thrust": 0.08, "mass": -0.08},
+      "elasticities_supersonic": {"thrust": 0.10, "mass": -0.10}
+    },
+    "service_ceiling_m": {
+      "unit": "m",
+      "elasticities_subsonic": {"cd0": -0.12, "kind": -0.18, "thrust": 0.38, "mass": -0.42},
+      "elasticities_supersonic": {"cd0": -0.10, "cdw": -0.08, "kind": -0.18, "thrust": 0.42, "mass": -0.44}
+    },
+    "climb_rate_sl_mps": {
+      "unit": "m/s",
+      "elasticities_subsonic": {"cd0": -0.32, "kind": -0.18, "thrust": 1.35, "mass": -1.10},
+      "elasticities_supersonic": {"cd0": -0.28, "kind": -0.16, "thrust": 1.30, "mass": -1.08}
+    },
+    "time_to_alt_10668m_s": {
+      "unit": "s",
+      "elasticities_subsonic": {"cd0": 0.34, "cdw": 0.10, "kind": 0.22, "thrust": -1.35, "mass": 1.15},
+      "elasticities_supersonic": {"cd0": 0.28, "cdw": 0.18, "kind": 0.20, "thrust": -1.30, "mass": 1.12}
+    },
+    "sustained_turn_dps_m08_4572m": {
+      "unit": "deg/s",
+      "elasticities_subsonic": {"cd0": -0.16, "cdw": -0.12, "kind": -0.48, "thrust": 0.55, "mass": -0.68},
+      "elasticities_supersonic": {"cd0": -0.15, "cdw": -0.16, "kind": -0.50, "thrust": 0.58, "mass": -0.70}
+    },
+    "instantaneous_turn_dps_m08_4572m": {
+      "unit": "deg/s",
+      "elasticities_subsonic": {"clmax": 0.65, "mass": -0.55},
+      "elasticities_supersonic": {"clmax": 0.65, "mass": -0.55}
+    },
+    "ps_mps_m09_4572m_1g": {
+      "unit": "m/s",
+      "elasticities_subsonic": {"cd0": -0.42, "cdw": -0.48, "kind": -0.14, "thrust": 1.45, "mass": -1.05},
+      "elasticities_supersonic": {"cd0": -0.35, "cdw": -0.58, "kind": -0.14, "thrust": 1.40, "mass": -1.02}
+    },
+    "combat_radius_m": {
+      "unit": "m",
+      "elasticities_subsonic": {"cd0": -0.48, "kind": -0.32, "tsfc": -0.92, "mass": -0.55},
+      "elasticities_supersonic": {"cd0": -0.45, "cdw": -0.18, "kind": -0.30, "tsfc": -0.92, "mass": -0.58}
+    },
+    "ferry_range_m": {
+      "unit": "m",
+      "elasticities_subsonic": {"cd0": -0.52, "kind": -0.35, "tsfc": -0.95, "mass": -0.52},
+      "elasticities_supersonic": {"cd0": -0.50, "kind": -0.35, "tsfc": -0.95, "mass": -0.52}
+    },
+    "takeoff_distance_m": {
+      "unit": "m",
+      "elasticities_subsonic": {"clmax": -0.85, "thrust": -0.95, "mass": 1.75},
+      "elasticities_supersonic": {"clmax": -0.85, "thrust": -0.95, "mass": 1.75}
+    },
+    "landing_distance_m": {
+      "unit": "m",
+      "elasticities_subsonic": {"clmax": -0.90, "mass": 0.90},
+      "elasticities_supersonic": {"clmax": -0.90, "mass": 0.90}
+    },
+    "stall_speed_mps": {
+      "unit": "m/s",
+      "elasticities_subsonic": {"clmax": -0.50, "mass": 0.50},
+      "elasticities_supersonic": {"clmax": -0.50, "mass": 0.50}
+    },
+    "max_load_factor_g": {
+      "unit": "g",
+      "elasticities_subsonic": {"mass": -0.35},
+      "elasticities_supersonic": {"mass": -0.35}
+    },
+    "empty_mass_kg": {
+      "unit": "kg",
+      "elasticities_subsonic": {"mass": 1.00},
+      "elasticities_supersonic": {"mass": 1.00}
+    },
+    "mtow_kg": {
+      "unit": "kg",
+      "elasticities_subsonic": {"mass": 0.68},
+      "elasticities_supersonic": {"mass": 0.68}
+    },
+    "internal_fuel_kg": {
+      "unit": "kg",
+      "elasticities_subsonic": {},
+      "elasticities_supersonic": {}
+    },
+    "payload_kg": {
+      "unit": "kg",
+      "elasticities_subsonic": {},
+      "elasticities_supersonic": {}
+    },
+    "thrust_to_weight_combat": {
+      "unit": "ratio",
+      "elasticities_subsonic": {"thrust": 1.00, "mass": -0.78},
+      "elasticities_supersonic": {"thrust": 1.00, "mass": -0.78}
+    },
+    "wing_loading_combat_kgm2": {
+      "unit": "kg/m2",
+      "elasticities_subsonic": {"mass": 0.78},
+      "elasticities_supersonic": {"mass": 0.78}
+    },
+    "unit_flyaway_cost_usd": {
+      "unit": "usd",
+      "elasticities_subsonic": {"mass": 0.45, "cost_unit": 1.00},
+      "elasticities_supersonic": {"mass": 0.45, "cost_unit": 1.00}
+    },
+    "dev_cost_usd_estimate": {
+      "unit": "usd",
+      "elasticities_subsonic": {"mass": 0.35, "cost_dev": 1.00},
+      "elasticities_supersonic": {"mass": 0.35, "cost_dev": 1.00}
+    },
+    "maint_mh_per_fh": {
+      "unit": "mh/fh",
+      "elasticities_subsonic": {"mass": 0.25, "maint": 1.00},
+      "elasticities_supersonic": {"mass": 0.25, "maint": 1.00}
+    }
+  }
+}

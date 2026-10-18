@@ -1,0 +1,116 @@
+{
+  "id": "f102a_delta_dagger",
+  "name": "Convair F-102A Delta Dagger (Area-Ruled)",
+  "company_id": "convair",
+  "created_date": "1954-12-20",
+  "crew_count": 1,
+  "role_tags": [
+    "interceptor"
+  ],
+  "wing": {
+    "area_m2": 64.57,
+    "aspect_ratio": 2.09,
+    "sweep_qc_deg": 52.5,
+    "taper_ratio": 0.05,
+    "tc_root": 0.04,
+    "tc_tip": 0.04,
+    "airfoil_ref": "0004",
+    "planform_type": "delta",
+    "position": "mid",
+    "x_le_root_frac": 0.3,
+    "dihedral_deg": 0.0,
+    "incidence_deg": 0.0,
+    "twist_deg": 0.0,
+    "conical_camber": true,
+    "devices": [
+      "plain_flaps"
+    ]
+  },
+  "fuselage": {
+    "length_m": 20.83,
+    "max_diameter_m": 1.72,
+    "nose_fineness": 3.2,
+    "tail_fineness": 3.4,
+    "canopy_type": "faired",
+    "area_ruled": true,
+    "area_rule_waist_frac": 0.65
+  },
+  "empennage": {
+    "tailless": true,
+    "t_tail": false,
+    "all_moving_tail": false,
+    "ht_area_m2": 0.0,
+    "vt_area_m2": 8.8,
+    "vt_aspect_ratio": 1.35,
+    "vt_sweep_qc_deg": 52.5
+  },
+  "intake": {
+    "type": "cheek",
+    "compression": "pitot",
+    "variable": false,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J57-P-23",
+    "count": 1,
+    "afterburner": true,
+    "x_cg_frac": 0.64
+  },
+  "structure": {
+    "design_load_factor_g": 7.0,
+    "material_mix": {
+      "al": 0.82,
+      "steel": 0.12,
+      "ti": 0.06
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 3340.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 460.0,
+    "combat_uses_drop_tanks": true
+  },
+  "systems": {
+    "radar_id": "mg10",
+    "fire_control_id": null,
+    "avionics_level": 4,
+    "powered_controls": true,
+    "stability_augmentation": true,
+    "ejection_seat": true,
+    "inflight_refuel": false,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [],
+    "hardpoints": 0,
+    "internal_bay": true,
+    "missile_ids": [
+      "aim4a_falcon",
+      "aim4a_falcon",
+      "aim4a_falcon",
+      "aim4c_falcon",
+      "aim4c_falcon",
+      "aim4c_falcon"
+    ]
+  },
+  "published_performance": {
+    "empty_mass_kg": 8777.0,
+    "combat_mass_kg": 11100.0,
+    "mtow_kg": 14288.0,
+    "max_mach_sl": 0.98,
+    "max_mach_alt": 1.25,
+    "alt_of_max_mach_m": 10668.0,
+    "climb_rate_sl_mps": 88.9,
+    "service_ceiling_m": 16276.0,
+    "combat_radius_m": 820000.0,
+    "ferry_range_m": 2170000.0,
+    "stall_speed_mps": 55.0,
+    "takeoff_distance_m": 1180.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-102A Delta Dagger (1956)",
+      "Loftin, Quest for Performance, NASA SP-468, Table V (1985)",
+      "Knaack, Encyclopedia of US Air Force Aircraft and Missile Systems Vol. 1, pp. 163-170 (1978)"
+    ]
+  }
+}

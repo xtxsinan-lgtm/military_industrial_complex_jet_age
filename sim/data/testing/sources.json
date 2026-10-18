@@ -1,0 +1,240 @@
+{
+  "providers": {
+    "own": {
+      "name": "Company-Owned Facility",
+      "quality_mult": 1.05,
+      "queue_base_days": 0,
+      "queue_jitter_days": 0,
+      "hours_per_day": 16.0,
+      "hourly_cost_1950_usd": {
+        "low_speed_tunnel": 350.0,
+        "transonic_slotted": 750.0,
+        "supersonic_tunnel": 1200.0,
+        "spin_tunnel": 250.0,
+        "flutter_model": 500.0,
+        "engine_altitude_cell": 850.0,
+        "mockup_review": 200.0,
+        "static_structural": 400.0
+      }
+    },
+    "naca": {
+      "name": "NACA National Laboratories (Langley / Ames / Lewis / Wallops)",
+      "quality_mult": 1.00,
+      "queue_base_days": 75,
+      "queue_jitter_days": 30,
+      "military_priority_queue_mult": 0.50,
+      "hours_per_day": 8.0,
+      "hourly_cost_1950_usd": {
+        "low_speed_tunnel": 150.0,
+        "transonic_bump": 220.0,
+        "rocket_model": 450.0,
+        "transonic_slotted": 250.0,
+        "supersonic_tunnel": 320.0,
+        "spin_tunnel": 140.0,
+        "flutter_model": 240.0,
+        "engine_altitude_cell": 280.0
+      }
+    },
+    "aedc": {
+      "name": "USAF Arnold Engineering Development Center (Tullahoma)",
+      "available_from_date": "1956-01-01",
+      "quality_mult": 0.88,
+      "queue_base_days": 30,
+      "queue_jitter_days": 15,
+      "military_priority_queue_mult": 0.50,
+      "hours_per_day": 12.0,
+      "hourly_cost_1950_usd": {
+        "transonic_slotted": 1350.0,
+        "supersonic_tunnel": 1650.0,
+        "flutter_model": 1200.0,
+        "engine_altitude_cell": 1450.0
+      }
+    }
+  },
+  "depth_presets": {
+    "brief": {"hours_mult": 0.50, "label": "Brief Survey (0.5x hours)"},
+    "standard": {"hours_mult": 1.00, "label": "Standard Campaign (1.0x hours)"},
+    "comprehensive": {"hours_mult": 2.00, "label": "Comprehensive Campaign (2.0x hours)"}
+  },
+  "campaigns": {
+    "low_speed_tunnel": {
+      "id": "low_speed_tunnel",
+      "name": "Low-Speed Subsonic Wind Tunnel (M ≤ 0.4)",
+      "available_year": 1945,
+      "required_tech": null,
+      "min_own_tunnel_level": 1,
+      "allowed_providers": ["own", "naca"],
+      "model_cost_1950_usd": 35000.0,
+      "model_fab_days": 30,
+      "ref_hours": 80.0,
+      "mach_max_covered": 0.45,
+      "chokes_in_transonic": true,
+      "driver_precision": {
+        "clmax": {"sigma_ref": 0.024, "sigma_floor": 0.014},
+        "kind": {"sigma_ref": 0.026, "sigma_floor": 0.015},
+        "cd0": {"sigma_ref": 0.032, "sigma_floor": 0.018}
+      }
+    },
+    "transonic_bump": {
+      "id": "transonic_bump",
+      "name": "NACA Wing-Flow / Transonic Bump Technique",
+      "available_year": 1946,
+      "required_tech": null,
+      "min_own_tunnel_level": 99,
+      "allowed_providers": ["naca"],
+      "model_cost_1950_usd": 45000.0,
+      "model_fab_days": 35,
+      "ref_hours": 60.0,
+      "mach_max_covered": 1.12,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "cdw": {"sigma_ref": 0.065, "sigma_floor": 0.042},
+        "cd0": {"sigma_ref": 0.045, "sigma_floor": 0.028}
+      }
+    },
+    "rocket_model": {
+      "id": "rocket_model",
+      "name": "Rocket-Boosted Free-Flight Drop Models (NACA Wallops)",
+      "available_year": 1945,
+      "required_tech": "testing.rocket_model_testing",
+      "min_own_tunnel_level": 99,
+      "allowed_providers": ["naca"],
+      "model_cost_1950_usd": 75000.0,
+      "model_fab_days": 45,
+      "ref_hours": 40.0,
+      "mach_max_covered": 1.60,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "cdw": {"sigma_ref": 0.038, "sigma_floor": 0.022},
+        "cd0": {"sigma_ref": 0.035, "sigma_floor": 0.020}
+      }
+    },
+    "transonic_slotted": {
+      "id": "transonic_slotted",
+      "name": "Slotted-Throat Transonic Wind Tunnel (M 0.7–1.3)",
+      "available_year": 1950,
+      "required_tech": "testing.transonic_tunnel",
+      "min_own_tunnel_level": 2,
+      "allowed_providers": ["own", "naca", "aedc"],
+      "model_cost_1950_usd": 65000.0,
+      "model_fab_days": 45,
+      "ref_hours": 100.0,
+      "mach_max_covered": 1.30,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "cdw": {"sigma_ref": 0.025, "sigma_floor": 0.012},
+        "cd0": {"sigma_ref": 0.024, "sigma_floor": 0.012},
+        "kind": {"sigma_ref": 0.024, "sigma_floor": 0.013},
+        "clmax": {"sigma_ref": 0.028, "sigma_floor": 0.015}
+      }
+    },
+    "supersonic_tunnel": {
+      "id": "supersonic_tunnel",
+      "name": "Continuous Supersonic Wind Tunnel (M 1.2–2.5)",
+      "available_year": 1945,
+      "required_tech": "testing.supersonic_tunnel",
+      "min_own_tunnel_level": 3,
+      "allowed_providers": ["own", "naca", "aedc"],
+      "model_cost_1950_usd": 80000.0,
+      "model_fab_days": 50,
+      "ref_hours": 100.0,
+      "mach_max_covered": 2.50,
+      "chokes_in_transonic": true,
+      "driver_precision": {
+        "cdw": {"sigma_ref": 0.028, "sigma_floor": 0.014},
+        "cd0": {"sigma_ref": 0.028, "sigma_floor": 0.015},
+        "thrust": {"sigma_ref": 0.032, "sigma_floor": 0.018}
+      }
+    },
+    "spin_tunnel": {
+      "id": "spin_tunnel",
+      "name": "20-ft Vertical Free-Spin Wind Tunnel",
+      "available_year": 1945,
+      "required_tech": null,
+      "min_own_tunnel_level": 2,
+      "allowed_providers": ["own", "naca"],
+      "model_cost_1950_usd": 20000.0,
+      "model_fab_days": 25,
+      "ref_hours": 40.0,
+      "mach_max_covered": 0.30,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "clmax": {"sigma_ref": 0.040, "sigma_floor": 0.025}
+      }
+    },
+    "flutter_model": {
+      "id": "flutter_model",
+      "name": "Dynamic Aeroelastic Flutter Scale Model",
+      "available_year": 1947,
+      "required_tech": null,
+      "min_own_tunnel_level": 2,
+      "allowed_providers": ["own", "naca", "aedc"],
+      "model_cost_1950_usd": 55000.0,
+      "model_fab_days": 40,
+      "ref_hours": 60.0,
+      "mach_max_covered": 1.25,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "mass": {"sigma_ref": 0.035, "sigma_floor": 0.020}
+      }
+    },
+    "engine_altitude_cell": {
+      "id": "engine_altitude_cell",
+      "name": "Propulsion Altitude & Inlet Test Cell",
+      "available_year": 1945,
+      "required_tech": null,
+      "min_own_tunnel_level": 2,
+      "allowed_providers": ["own", "naca", "aedc"],
+      "model_cost_1950_usd": 30000.0,
+      "model_fab_days": 20,
+      "ref_hours": 80.0,
+      "mach_max_covered": 2.20,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "thrust": {"sigma_ref": 0.018, "sigma_floor": 0.009},
+        "tsfc": {"sigma_ref": 0.016, "sigma_floor": 0.008},
+        "maint": {"sigma_ref": 0.055, "sigma_floor": 0.030}
+      }
+    },
+    "mockup_review": {
+      "id": "mockup_review",
+      "name": "Full-Scale Wood & Metal Engineering Mock-up Board",
+      "available_year": 1945,
+      "required_tech": null,
+      "min_own_tunnel_level": 0,
+      "allowed_providers": ["own"],
+      "model_cost_1950_usd": 40000.0,
+      "model_fab_days": 30,
+      "ref_hours": 24.0,
+      "mach_max_covered": 0.0,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "mass": {"sigma_ref": 0.028, "sigma_floor": 0.016},
+        "maint": {"sigma_ref": 0.050, "sigma_floor": 0.028},
+        "cost_unit": {"sigma_ref": 0.055, "sigma_floor": 0.030}
+      }
+    },
+    "static_structural": {
+      "id": "static_structural",
+      "name": "Static Ultimate-Load Structural Torture Rig",
+      "available_year": 1945,
+      "required_tech": null,
+      "min_own_tunnel_level": 0,
+      "allowed_providers": ["own"],
+      "model_cost_1950_usd": 110000.0,
+      "model_fab_days": 60,
+      "ref_hours": 40.0,
+      "mach_max_covered": 0.0,
+      "chokes_in_transonic": false,
+      "driver_precision": {
+        "mass": {"sigma_ref": 0.015, "sigma_floor": 0.008},
+        "cost_unit": {"sigma_ref": 0.045, "sigma_floor": 0.025}
+      }
+    }
+  },
+  "prototype_rollout_precision": {
+    "mass": 0.005,
+    "cost_dev": 0.015,
+    "cost_unit": 0.030
+  }
+}

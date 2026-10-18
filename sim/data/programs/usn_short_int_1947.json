@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "id": "usn_short_int_1947",
+  "name_key": "program.usn_short_int_1947.name",
+  "program_name": "1947 BuAer Carrier Point-Defense Interceptor",
+  "customer": "USN",
+  "role": "carrier_interceptor",
+  "mvp_core": false,
+  "issue_date": "1947-06-01",
+  "proposal_due": "1948-06-01",
+  "first_flight_due": "1951-02-01",
+  "ioc_due": "1954-06-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": true,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 71.12,
+      "objective_value": 91.44,
+      "weight": 0.4,
+      "unit": "mps",
+      "description": "Emergency deck-launch climb rate (14,000-18,300 ft/min)"
+    },
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 0.92,
+      "objective_value": 1.02,
+      "weight": 0.3,
+      "unit": "mach",
+      "description": "Transonic/supersonic intercept speed"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 14630.4,
+      "objective_value": 16764.0,
+      "weight": 0.2,
+      "unit": "m",
+      "description": "Service ceiling (48,000-55,000 ft)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 444480.0,
+      "objective_value": 592640.0,
+      "weight": 0.1,
+      "unit": "m",
+      "description": "Point-defense intercept radius (240-320 nmi)"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Carrier deck suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 18000000.0,
+    "unit_price_ceiling_usd": 1200000.0,
+    "quantity_planned": 400
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 4,
+    "urgency": 0.65
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.5,
+      "cost": 0.15,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "douglas": 0.45,
+      "grumman": 0.25
+    },
+    "congressional_interest": 0.35,
+    "industrial_base_need": {
+      "douglas": 0.3
+    }
+  },
+  "historical": {
+    "winner_company_id": "douglas",
+    "winner_design_name": "D-571 (XF4D-1 Skyray)",
+    "award_date": "1948-12-16",
+    "outcome": "produced",
+    "production_delivered": 423,
+    "notes": "Ed Heinemann's batwing delta D-571 won prototype contract Dec 16, 1948; re-engined from Westinghouse J40 to P&W J57, setting world speed and time-to-climb records.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Douglas_F4D_Skyray"
+    ],
+    "competitors": [
+      {
+        "company_id": "douglas",
+        "design_name": "D-571 (XF4D-1 Skyray)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1951-01-23",
+        "unit_price_bid_usd": 980000.0,
+        "dev_cost_bid_usd": 15000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 82.0,
+        "track_record_at_bid": 0.75,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "climb_rate_sl_mps": 92.96,
+          "max_mach_alt": 0.98,
+          "service_ceiling_m": 16764.0,
+          "combat_radius_m": 518560.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "627 kt (M0.95 SL, M1.05 dive), 18,300 ft/min climb, 55,000 ft ceiling."
+      },
+      {
+        "company_id": "grumman",
+        "design_name": "G-85 Swept Point Interceptor Study",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1050000.0,
+        "dev_cost_bid_usd": 16500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 78.0,
+        "track_record_at_bid": 0.7,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "climb_rate_sl_mps": 73.66,
+          "max_mach_alt": 0.93,
+          "service_ceiling_m": 14935.2,
+          "combat_radius_m": 537080.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Higher wing loading than Douglas low-aspect-ratio delta batwing."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": null,
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

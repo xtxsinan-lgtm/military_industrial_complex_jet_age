@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "id": "usaf_ws306a_1952",
+  "name_key": "program.usaf_ws306a_1952.name",
+  "program_name": "WS-306A Supersonic Tactical Nuclear Strike Fighter",
+  "customer": "USAF",
+  "role": "fighter_bomber",
+  "mvp_core": false,
+  "issue_date": "1952-04-15",
+  "proposal_due": "1952-09-01",
+  "first_flight_due": "1955-10-15",
+  "ioc_due": "1958-05-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": true,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": true,
+    "min_guns_20mm": 1,
+    "missile_capability": [
+      "ir"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1.75,
+      "objective_value": 2.05,
+      "weight": 0.3,
+      "unit": "mach",
+      "description": "Mach 2.0 altitude speed & Mach 1.1+ sea-level nuclear dash"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 926000.0,
+      "objective_value": 1250100.0,
+      "weight": 0.3,
+      "unit": "m",
+      "description": "Hi-lo-hi nuclear strike radius (500-676 nmi)"
+    },
+    {
+      "key": "payload_kg",
+      "kind": "objective",
+      "op": ">=",
+      "value": 3628.7,
+      "objective_value": 6350.3,
+      "weight": 0.25,
+      "unit": "kg",
+      "description": "Internal nuclear bay + external ordnance payload (8,000-14,000 lb)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 127.0,
+      "objective_value": 195.58,
+      "weight": 0.15,
+      "unit": "mps",
+      "description": "Rate of climb (25,000-38,500 ft/min)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 52000000.0,
+    "unit_price_ceiling_usd": 2400000.0,
+    "quantity_planned": 600
+  },
+  "acquisition": {
+    "style": "sole_source",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.7
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "republic": 0.65,
+      "north_american": 0.25
+    },
+    "congressional_interest": 0.45,
+    "industrial_base_need": {
+      "republic": 0.45
+    }
+  },
+  "historical": {
+    "winner_company_id": "republic",
+    "winner_design_name": "AP-63-31 (YF-105A / F-105D Thunderchief)",
+    "award_date": "1952-09-15",
+    "outcome": "produced",
+    "production_delivered": 833,
+    "notes": "Republic's unsolicited AP-63 successor to the F-84F with an internal thermonuclear bomb bay, P&W J75 engine, and M61 Vulcan cannon.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Republic_F-105_Thunderchief",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195844/republic-f-105d-thunderchief/"
+    ],
+    "competitors": [
+      {
+        "company_id": "republic",
+        "design_name": "AP-63-31 (F-105 Thunderchief)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1955-10-22",
+        "unit_price_bid_usd": 2137000.0,
+        "dev_cost_bid_usd": 46000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": true,
+          "guns_20mm": 1,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 84.0,
+        "track_record_at_bid": 0.76,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.08,
+          "combat_radius_m": 1251952.0,
+          "payload_kg": 6350.3,
+          "climb_rate_sl_mps": 195.58
+        },
+        "flyoff_flaws_unfixed_severity": 1,
+        "published_notes": "M2.08 (1,372 mph) at 36k ft, M1.13 at SL, 676 nmi hi-lo-hi radius, 14,000 lb ordnance, P&W J75."
+      },
+      {
+        "company_id": "north_american",
+        "design_name": "NA-195 Fighter-Bomber Study",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 2050000.0,
+        "dev_cost_bid_usd": 44000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": true,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 82.0,
+        "track_record_at_bid": 0.75,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.75,
+          "combat_radius_m": 981560.0,
+          "payload_kg": 4082.3,
+          "climb_rate_sl_mps": 147.32
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Enlarged F-100 strike concept; smaller internal bay and lower SL dash speed than Republic AP-63."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": null,
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

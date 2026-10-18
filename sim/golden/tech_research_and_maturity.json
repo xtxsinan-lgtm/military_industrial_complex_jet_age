@@ -1,0 +1,83 @@
+{
+  "tolerance_rel": 1e-06,
+  "aot_vectors": [
+    {
+      "date_str": "1945-01-01",
+      "date_day": 0,
+      "historical_year": 1950.0,
+      "expected_multiplier": 0.14079690861728097
+    },
+    {
+      "date_str": "1948-01-01",
+      "date_day": 1095,
+      "historical_year": 1950.0,
+      "expected_multiplier": 0.48672912883973873
+    },
+    {
+      "date_str": "1949-09-01",
+      "date_day": 1704,
+      "historical_year": 1950.0,
+      "expected_multiplier": 1.0
+    },
+    {
+      "date_str": "1950-01-01",
+      "date_day": 1826,
+      "historical_year": 1950.0,
+      "expected_multiplier": 1.0
+    },
+    {
+      "date_str": "1952-01-01",
+      "date_day": 2556,
+      "historical_year": 1950.0,
+      "expected_multiplier": 1.3995893223819167
+    },
+    {
+      "date_str": "1955-01-01",
+      "date_day": 3652,
+      "historical_year": 1950.0,
+      "expected_multiplier": 1.75
+    }
+  ],
+  "brooks_vectors": [
+    {
+      "assigned_engineers": 0,
+      "expected_effective": 0.0
+    },
+    {
+      "assigned_engineers": 5,
+      "expected_effective": 5.0
+    },
+    {
+      "assigned_engineers": 15,
+      "expected_effective": 15.0
+    },
+    {
+      "assigned_engineers": 20,
+      "expected_effective": 17.846626597125766
+    },
+    {
+      "assigned_engineers": 30,
+      "expected_effective": 20.813789703166073
+    },
+    {
+      "assigned_engineers": 50,
+      "expected_effective": 25.084264513267584
+    },
+    {
+      "assigned_engineers": 100,
+      "expected_effective": 32.95239113127825
+    }
+  ],
+  "swept_wing_project_trajectory": {
+    "tech_id": "aero_1945_swept_wing_theory",
+    "start_date": "1945-07-01",
+    "assigned_engineers": 20,
+    "funding_mode": "govt_contract",
+    "days_to_unlock": 86,
+    "total_company_usd": 28000.0,
+    "total_govt_usd": 112000.0,
+    "maturity_on_unlock": 0.35,
+    "maturity_after_tunnel": 0.40199999999999997,
+    "maturity_after_first_flight": 0.47375999999999996
+  }
+}

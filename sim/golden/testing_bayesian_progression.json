@@ -1,0 +1,69 @@
+{
+  "campaign_seed": 19531024,
+  "tolerance_rel": 1e-06,
+  "stages": {
+    "0_sim": {
+      "cdw_sigma": 0.6858668308874923,
+      "mass_sigma": 0.17665947723578287,
+      "max_mach_alt": {
+        "value": 1.24,
+        "sigma": 0.4000708967555073,
+        "source": "sim",
+        "unit": "mach"
+      },
+      "empty_mass_kg": {
+        "value": 8750.0,
+        "sigma": 1545.7704258131002,
+        "source": "sim",
+        "unit": "kg"
+      }
+    },
+    "1_low_speed_tunnel_choked": {
+      "choked": true,
+      "cdw_sigma": 0.6858668308874923,
+      "clmax_sigma": 0.027567274674550692,
+      "max_mach_alt": {
+        "value": 1.249349130342773,
+        "sigma": 0.40130497728440756,
+        "source": "tunnel",
+        "unit": "mach"
+      }
+    },
+    "2_transonic_slotted": {
+      "cdw_sigma": 0.02770821073743469,
+      "max_mach_alt": {
+        "value": 0.920694802711939,
+        "sigma": 0.05658082714006051,
+        "source": "tunnel",
+        "unit": "mach"
+      }
+    },
+    "3_prototype_rollout": {
+      "mass_sigma": 0.004997998547403095,
+      "empty_mass_kg": {
+        "value": 9838.86959144438,
+        "sigma": 49.17465592612749,
+        "source": "flight",
+        "unit": "kg"
+      }
+    },
+    "4_flight_speed_envelope": {
+      "cdw_sigma": 0.006016466013952012,
+      "max_mach_alt": {
+        "value": 0.8752915774517586,
+        "sigma": 0.005004799721001969,
+        "source": "flight",
+        "unit": "mach"
+      }
+    },
+    "5_service_1yr": {
+      "cdw_sigma": 0.0037278344326512488,
+      "max_mach_alt": {
+        "value": 0.870280308922567,
+        "sigma": 0.0023180291142427074,
+        "source": "service",
+        "unit": "mach"
+      }
+    }
+  }
+}

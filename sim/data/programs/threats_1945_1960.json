@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "_doc": "Soviet aviation & strategic threat milestones (1945-1960) driving procedural RFP demand and doctrinal obsolescence.",
+  "milestones": [
+    {
+      "id": "tu4_bull_reveal_1947",
+      "date": "1947-08-03",
+      "name": "Tupolev Tu-4 'Bull' Revealed at Tushino Air Parade",
+      "category": "bomber",
+      "affected_customers": [
+        "USAF",
+        "USN"
+      ],
+      "affected_roles": [
+        "interceptor",
+        "carrier_interceptor"
+      ],
+      "threat_mach": 0.56,
+      "threat_ceiling_m": 11200.0,
+      "demand_shock": 0.25,
+      "obsolescence_shock_roles": {},
+      "description": "Reverse-engineered B-29 gives the USSR intercontinental-range strategic bombing capability."
+    },
+    {
+      "id": "soviet_rds1_abomb_1949",
+      "date": "1949-09-23",
+      "name": "President Truman Announces Soviet Atomic Bomb Test (RDS-1 'Joe-1')",
+      "category": "nuclear",
+      "affected_customers": [
+        "USAF",
+        "USN"
+      ],
+      "affected_roles": [
+        "interceptor",
+        "carrier_interceptor",
+        "escort_fighter"
+      ],
+      "threat_mach": 0.75,
+      "threat_ceiling_m": 13500.0,
+      "demand_shock": 0.45,
+      "obsolescence_shock_roles": {},
+      "description": "Ends US nuclear monopoly; triggers urgent continental air defense requirement WS-201A (1954 Interceptor)."
+    },
+    {
+      "id": "mig15_korea_shock_1950",
+      "date": "1950-11-01",
+      "name": "Mikoyan-Gurevich MiG-15 Appears Over Yalu River in Korea",
+      "category": "fighter",
+      "affected_customers": [
+        "USAF",
+        "USN"
+      ],
+      "affected_roles": [
+        "day_fighter",
+        "carrier_day_fighter"
+      ],
+      "threat_mach": 0.92,
+      "threat_ceiling_m": 15500.0,
+      "demand_shock": 0.5,
+      "obsolescence_shock_roles": {},
+      "description": "Swept-wing MiG-15 outclasses straight-wing F-80, F-84, and F9F Panther; accelerates F-100, F-104, and OS-130 F8U."
+    },
+    {
+      "id": "soviet_hbomb_rds6_1953",
+      "date": "1953-08-12",
+      "name": "Soviet Thermonuclear Test (RDS-6s) & Il-28/Tu-16 Jet Bombers",
+      "category": "nuclear",
+      "affected_customers": [
+        "USAF",
+        "USN"
+      ],
+      "affected_roles": [
+        "interceptor",
+        "carrier_interceptor",
+        "fighter_bomber"
+      ],
+      "threat_mach": 0.88,
+      "threat_ceiling_m": 14000.0,
+      "demand_shock": 0.35,
+      "obsolescence_shock_roles": {},
+      "description": "Thermonuclear weapons and Tu-16 Badger jet bombers with anti-ship missiles drive USN Fleet Air Defense (F4H/F8U-3)."
+    },
+    {
+      "id": "m4_bison_bomber_gap_1955",
+      "date": "1955-07-03",
+      "name": "Myasishchev M-4 'Bison' & Tu-95 'Bear' Tushino Flyby ('Bomber Gap')",
+      "category": "bomber",
+      "affected_customers": [
+        "USAF"
+      ],
+      "affected_roles": [
+        "interceptor"
+      ],
+      "threat_mach": 0.9,
+      "threat_ceiling_m": 15000.0,
+      "demand_shock": 0.45,
+      "obsolescence_shock_roles": {},
+      "description": "Staged multiple flybys of M-4 Bison bombers trigger the 'Bomber Gap' panic and GOR 114 / WS-202A (F-108 Rapier)."
+    },
+    {
+      "id": "mig19_supersonic_1956",
+      "date": "1956-06-24",
+      "name": "Supersonic MiG-19 'Farmer' & Ye-4 (MiG-21 Prototype) Shown at Tushino",
+      "category": "fighter",
+      "affected_customers": [
+        "USAF",
+        "USN"
+      ],
+      "affected_roles": [
+        "day_fighter",
+        "carrier_day_fighter",
+        "carrier_interceptor"
+      ],
+      "threat_mach": 1.45,
+      "threat_ceiling_m": 17500.0,
+      "demand_shock": 0.35,
+      "obsolescence_shock_roles": {},
+      "description": "Confirms Soviet operational supersonic fighters and Mach 2 prototypes."
+    },
+    {
+      "id": "sputnik_icbm_shift_1957",
+      "date": "1957-10-04",
+      "name": "Sputnik-1 Launch & R-7 ICBM Strategic Shift ('Missile Gap')",
+      "category": "missile",
+      "affected_customers": [
+        "USAF"
+      ],
+      "affected_roles": [
+        "interceptor",
+        "escort_fighter"
+      ],
+      "threat_mach": 2.0,
+      "threat_ceiling_m": 20000.0,
+      "demand_shock": 0.1,
+      "obsolescence_shock_roles": {
+        "interceptor": 1.35,
+        "escort_fighter": 1.2
+      },
+      "description": "Soviet ICBMs and SAM networks shift strategic threat away from manned bombers, causing high cancellation pressure on pure Mach 3 interceptors (XF-103, F-108) and SAC escort fighters."
+    }
+  ]
+}

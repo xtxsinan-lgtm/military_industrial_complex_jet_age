@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "id": "usn_fad_1955",
+  "name_key": "program.usn_fad_1955.name",
+  "program_name": "1955 BuAer Fleet Air Defense Mach 2 Interceptor & 1958 Fly-Off",
+  "customer": "USN",
+  "role": "carrier_interceptor",
+  "mvp_core": true,
+  "issue_date": "1955-05-26",
+  "proposal_due": "1955-10-15",
+  "first_flight_due": "1958-06-15",
+  "ioc_due": "1960-12-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": true,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 0,
+    "missile_capability": [
+      "sarh",
+      "ir"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 2.0,
+      "objective_value": 2.3,
+      "weight": 0.25,
+      "unit": "mach",
+      "description": "Mach 2.0+ fleet air defense intercept speed (M2.00 threshold, M2.30 objective)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 142.24,
+      "objective_value": 208.28,
+      "weight": 0.25,
+      "unit": "mps",
+      "description": "Initial rate of climb (28,000-41,300 ft/min)"
+    },
+    {
+      "key": "payload_kg",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1134.0,
+      "objective_value": 3401.9,
+      "weight": 0.25,
+      "unit": "kg",
+      "description": "All-weather missile & multi-mission ordnance load (4x Sparrow III + 4x Sidewinder & growth)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 648200.0,
+      "objective_value": 926000.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "CAP / Fleet defense combat radius (350-500 nmi)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 16764.0,
+      "objective_value": 18897.6,
+      "weight": 0.1,
+      "unit": "m",
+      "description": "Service ceiling (55,000-62,000 ft)"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Forrestal/Midway/Essex carrier suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 65000000.0,
+    "unit_price_ceiling_usd": 2400000.0,
+    "quantity_planned": 650
+  },
+  "acquisition": {
+    "style": "flyoff",
+    "downselect_count": 2,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.85
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "mcdonnell": 0.45,
+      "vought": 0.35,
+      "grumman": 0.25
+    },
+    "congressional_interest": 0.45,
+    "industrial_base_need": {
+      "mcdonnell": 0.4,
+      "vought": 0.2
+    }
+  },
+  "historical": {
+    "winner_company_id": "mcdonnell",
+    "winner_design_name": "Model 98B (XF4H-1 / F-4B Phantom II)",
+    "award_date": "1958-12-17",
+    "outcome": "produced",
+    "production_delivered": 5195,
+    "notes": "Legendary 1958 fly-off at Edwards AFB and NAS Patuxent River between McDonnell XF4H-1 Phantom II and Vought XF8U-3 Crusader III. While the single-seat XF8U-3 achieved Mach 2.39, the Navy selected the twin-J79, two-seat (Pilot + RIO), 4-Sparrow XF4H-1 on Dec 17, 1958 for its superior climb, radar workload management, twin-engine safety, and multi-mission payload.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II",
+      "https://en.wikipedia.org/wiki/Vought_XF8U-3_Crusader_III",
+      "https://thanlont.blogspot.com/2018/11/birth-of-legend-mcdonnell-f4h-1-phantom.html",
+      "https://thanlont.blogspot.com/2019/09/f8u-3-vs-f4h-1-dogfights-at-patuxent.html"
+    ],
+    "competitors": [
+      {
+        "company_id": "mcdonnell",
+        "design_name": "Model 98B (XF4H-1 Phantom II)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1958-05-27",
+        "unit_price_bid_usd": 1900000.0,
+        "dev_cost_bid_usd": 52000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 2,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh",
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 84.0,
+        "track_record_at_bid": 0.78,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.23,
+          "climb_rate_sl_mps": 209.8,
+          "payload_kg": 3810.2,
+          "combat_radius_m": 796360.0,
+          "service_ceiling_m": 18288.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "1,280 kt (M2.23), 41,300 ft/min climb, 60,000 ft ceiling, 2-man crew (Pilot+RIO), 4x Sparrow III semi-recessed + 4x Sidewinder (up to 16,000+ lb ordnance), 2x GE J79."
+      },
+      {
+        "company_id": "vought",
+        "design_name": "V-401 (XF8U-3 Crusader III)",
+        "is_historical_winner": false,
+        "built_prototype": true,
+        "first_flight_date": "1958-06-02",
+        "unit_price_bid_usd": 2250000.0,
+        "dev_cost_bid_usd": 56000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": false,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh",
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 82.0,
+        "track_record_at_bid": 0.76,
+        "district_weight": 0.48,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.39,
+          "climb_rate_sl_mps": 165.1,
+          "payload_kg": 1451.5,
+          "combat_radius_m": 926000.0,
+          "service_ceiling_m": 19812.0,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 2,
+        "published_notes": "M2.39 at 50,000 ft, 32,500 ft/min climb, 3x Sparrow III; single pilot overloaded by manual APQ-50/Sparrow III radar intercept workload, folding ventral fins."
+      },
+      {
+        "company_id": "grumman",
+        "design_name": "Design 98J / G-118 Super Tiger FAD Proposal",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": "1956-05-25",
+        "unit_price_bid_usd": 1750000.0,
+        "dev_cost_bid_usd": 42000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "sarh",
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 76.0,
+        "track_record_at_bid": 0.68,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.04,
+          "climb_rate_sl_mps": 111.76,
+          "payload_kg": 1179.3,
+          "combat_radius_m": 574120.0,
+          "service_ceiling_m": 17983.2,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "J79-powered F11F-1F Super Tiger (M2.04); airframe too small for large 32-in dish radar, 4x Sparrow III load, and 350 nmi radius."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usn_os130_1952",
+    "follow_on_program_id": null,
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "id": "usn_os130_1952",
+  "name_key": "program.usn_os130_1952.name",
+  "program_name": "OS-130 BuAer Carrier Supersonic Day Fighter",
+  "customer": "USN",
+  "role": "carrier_day_fighter",
+  "mvp_core": true,
+  "issue_date": "1952-09-15",
+  "proposal_due": "1953-01-15",
+  "first_flight_due": "1955-04-01",
+  "ioc_due": "1957-03-01",
+  "equipment": {
+    "carrier_capable": true,
+    "radar_required": false,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 4,
+    "missile_capability": [
+      "ir"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1.2,
+      "objective_value": 1.55,
+      "weight": 0.3,
+      "unit": "mach",
+      "description": "Level flight supersonic speed at 30,000-35,000 ft (Mach 1.20 threshold, 1.55 objective)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 101.6,
+      "objective_value": 134.62,
+      "weight": 0.25,
+      "unit": "mps",
+      "description": "Sea-level initial rate of climb (20,000-26,500 ft/min)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 15240.0,
+      "objective_value": 16764.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Service ceiling (50,000-55,000 ft)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 555600.0,
+      "objective_value": 740800.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Combat radius on internal fuel (300-400 nmi)"
+    },
+    {
+      "key": "stall_speed_mps",
+      "kind": "objective",
+      "op": "<=",
+      "value": 54.02,
+      "objective_value": 48.87,
+      "weight": 0.15,
+      "unit": "mps",
+      "description": "Carrier approach/stall speed (<= 100-105 kt)"
+    },
+    {
+      "key": "carrier_suitability",
+      "kind": "threshold",
+      "op": ">=",
+      "value": 1.0,
+      "weight": 0.0,
+      "unit": "bool",
+      "description": "Essex deck spot factor (25 aircraft in aft 200 ft) & carrier suitability"
+    }
+  ],
+  "budget": {
+    "dev_usd": 32000000.0,
+    "unit_price_ceiling_usd": 1150000.0,
+    "quantity_planned": 550
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.7
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "grumman": 0.35,
+      "douglas": 0.3,
+      "mcdonnell": 0.25,
+      "vought": 0.25,
+      "north_american": 0.15,
+      "lockheed": 0.05
+    },
+    "congressional_interest": 0.4,
+    "industrial_base_need": {
+      "vought": 0.65,
+      "grumman": 0.2,
+      "douglas": -0.25
+    }
+  },
+  "historical": {
+    "winner_company_id": "vought",
+    "winner_design_name": "V-383 (XF8U-1 Crusader)",
+    "award_date": "1953-05-29",
+    "outcome": "produced",
+    "production_delivered": 1261,
+    "notes": "Eight companies competed. Vought V-383 won in May 1953 on its brilliant two-position variable-incidence wing (solving carrier approach visibility and sub-100 kt landing speed), Essex deck spot factor compliance, and Mach 1.55+ J57 performance.",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Vought_F-8_Crusader",
+      "https://thanlont.blogspot.com/2017/10/the-first-supersonic-us-navy-fighter.html",
+      "https://thanlont.blogspot.com/2010/07/fitting-in-ii.html"
+    ],
+    "competitors": [
+      {
+        "company_id": "vought",
+        "design_name": "V-383 (XF8U-1 Crusader)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1955-03-25",
+        "unit_price_bid_usd": 780000.0,
+        "dev_cost_bid_usd": 26000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 72.0,
+        "track_record_at_bid": 0.58,
+        "district_weight": 0.48,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.55,
+          "climb_rate_sl_mps": 127.0,
+          "service_ceiling_m": 16306.8,
+          "combat_radius_m": 722280.0,
+          "stall_speed_mps": 49.9,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "M1.35-1.70 (F8U-1/2), 25,000+ ft/min climb, 51,500-58,000 ft ceiling, 390 nmi radius, variable-incidence wing."
+      },
+      {
+        "company_id": "douglas",
+        "design_name": "Model 656 (F5D-1 Skylancer Precursor)",
+        "is_historical_winner": false,
+        "built_prototype": true,
+        "first_flight_date": "1956-04-21",
+        "unit_price_bid_usd": 1120000.0,
+        "dev_cost_bid_usd": 29000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 84.0,
+        "track_record_at_bid": 0.78,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.35,
+          "climb_rate_sl_mps": 105.31,
+          "service_ceiling_m": 17526.0,
+          "combat_radius_m": 648200.0,
+          "stall_speed_mps": 52.99,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Thin-wing F4D evolution (F5D Skylancer); slower than V-383, higher AoA over-nose visibility limitation, and Douglas already held AD/A3D/A4D/F4D contracts."
+      },
+      {
+        "company_id": "grumman",
+        "design_name": "Design 98 (F9F-9 / F11F-1 Tiger)",
+        "is_historical_winner": false,
+        "built_prototype": true,
+        "first_flight_date": "1954-07-30",
+        "unit_price_bid_usd": 980000.0,
+        "dev_cost_bid_usd": 22000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 80.0,
+        "track_record_at_bid": 0.72,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "promised_overrides": {
+          "max_mach_alt": 1.22,
+          "combat_radius_m": 555600.0
+        },
+        "anchor_performance": {
+          "max_mach_alt": 1.1,
+          "climb_rate_sl_mps": 82.8,
+          "service_ceiling_m": 14935.2,
+          "combat_radius_m": 463000.0,
+          "stall_speed_mps": 50.42,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 2,
+        "published_notes": "Wright J65 engine lacked thrust; tight area-ruled fuselage left only 250 nmi combat radius and Mach 1.10 speed."
+      },
+      {
+        "company_id": "north_american",
+        "design_name": "NA-208 (Super Fury Naval F-100)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1020000.0,
+        "dev_cost_bid_usd": 27000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 4,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 72.0,
+        "track_record_at_bid": 0.68,
+        "district_weight": 0.5,
+        "cross_service_derivative": true,
+        "anchor_performance": {
+          "max_mach_alt": 1.32,
+          "climb_rate_sl_mps": 111.76,
+          "service_ceiling_m": 15240.0,
+          "combat_radius_m": 648200.0,
+          "stall_speed_mps": 53.5,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Navalized F-100 Super Sabre; penalized by high approach speed and cross-service origin."
+      },
+      {
+        "company_id": "lockheed",
+        "design_name": "Model L-242 (Naval Starfighter)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1050000.0,
+        "dev_cost_bid_usd": 28000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": true,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 1,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 62.0,
+        "track_record_at_bid": 0.6,
+        "district_weight": 0.5,
+        "cross_service_derivative": true,
+        "anchor_performance": {
+          "max_mach_alt": 1.85,
+          "climb_rate_sl_mps": 152.4,
+          "service_ceiling_m": 16764.0,
+          "combat_radius_m": 555600.0,
+          "stall_speed_mps": 59.16,
+          "carrier_suitability": 1.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Carrier L-246 derivative; failed 4x20mm gun gate and sub-105 kt carrier stall speed."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usn_os105_1946",
+    "follow_on_program_id": "usn_fad_1955",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

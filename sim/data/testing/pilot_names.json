@@ -1,0 +1,76 @@
+{
+  "ranks": ["Capt.", "Maj.", "Lt. Col.", "Lt. Cmdr.", "Cmdr.", "Mr."],
+  "first_names": [
+    "Richard 'Dick'", "Robert 'Bob'", "William 'Bill'", "Charles 'Chuck'", "George 'Wheaties'",
+    "Frank 'Pete'", "Howard 'Tick'", "almers 'Slick'", "Joseph 'Joe'", "Albert 'Al'",
+    "Marion 'Carl'", "Russell 'Russ'", "Teston 'Tex'", "Donald 'Don'", "Jack", "Glenn"
+  ],
+  "last_names": [
+    "Thorne", "Caldwell", "Vance", "Mercer", "Halloway", "Bridger", "Keller", "Rawlings",
+    "Stoddard", "armstrong", "Halvorsen", "McAllister", "Lindstrom", "Gallagher", "carver", "Bannister"
+  ],
+  "traits": {
+    "engineer_pilot": {
+      "name": "Aeronautical Engineer-Pilot",
+      "description": "Holds an aeronautical engineering degree; +22% flaw detection, 15% tighter telemetry scatter.",
+      "crash_mult": 1.00,
+      "detect_mult": 1.22,
+      "data_sigma_mult": 0.85,
+      "salary_mult": 1.20
+    },
+    "cautious": {
+      "name": "Methodical & Cautious",
+      "description": "Approaches envelope boundaries incrementally; -20% crash hazard.",
+      "crash_mult": 0.80,
+      "detect_mult": 0.96,
+      "data_sigma_mult": 1.00,
+      "salary_mult": 1.00
+    },
+    "daring": {
+      "name": "Envelope Pusher",
+      "description": "Pushes deep into buffet and dive limits; +10% flaw detection, +20% crash risk.",
+      "crash_mult": 1.20,
+      "detect_mult": 1.10,
+      "data_sigma_mult": 1.02,
+      "salary_mult": 1.05
+    },
+    "carrier_qualified": {
+      "name": "Naval Carrier Test Pilot",
+      "description": "Patuxent River carrier suitability specialist; +25% detection on low-speed/carrier flaws.",
+      "crash_mult": 0.92,
+      "detect_mult": 1.08,
+      "data_sigma_mult": 0.95,
+      "salary_mult": 1.10
+    }
+  },
+  "starter_roster_1945": [
+    {
+      "id": "pilot_starter_1",
+      "name": "Maj. Richard 'Dick' Thorne",
+      "age": 30,
+      "hired_year": 1945,
+      "skill": 80.0,
+      "experience": 65.0,
+      "traits": ["engineer_pilot", "cautious"],
+      "salary_annual_usd": 14500.0,
+      "status": "active",
+      "injured_until_day": 0,
+      "assigned_prototype_idx": 0,
+      "flights_flown": 0
+    },
+    {
+      "id": "pilot_starter_2",
+      "name": "Capt. Robert 'Bob' Vance",
+      "age": 27,
+      "hired_year": 1945,
+      "skill": 72.0,
+      "experience": 50.0,
+      "traits": ["daring"],
+      "salary_annual_usd": 11500.0,
+      "status": "active",
+      "injured_until_day": 0,
+      "assigned_prototype_idx": 1,
+      "flights_flown": 0
+    }
+  ]
+}

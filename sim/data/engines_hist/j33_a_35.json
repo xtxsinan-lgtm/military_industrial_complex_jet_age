@@ -1,0 +1,47 @@
+{
+  "engine_id": "j33_a_35",
+  "name": "Allison J33-A-35",
+  "manufacturer": "Allison (GM)",
+  "country": "USA",
+  "first_run_year": 1944,
+  "service_entry_year": 1948,
+  "applications": ["Lockheed F-80C Shooting Star", "Lockheed T-33A"],
+  "cycle_input": {
+    "compressor_type": "centrifugal",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": false,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 40.82,
+    "opr": 4.4,
+    "tit_K": 1090.0,
+    "ab_temp_K": 0.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.785,
+    "eta_t_poly": 0.835,
+    "eta_burner": 0.94,
+    "pi_burner": 0.935,
+    "specific_weight_factor": 1.03,
+    "mtbf_factor": 1.15,
+    "length_factor": 1.0,
+    "diameter_factor": 1.0,
+    "cumulative_test_hours": 2500.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 20461.8,
+    "sls_ab_thrust_N": null,
+    "sls_dry_tsfc_kg_per_Ns": 3.17245e-5,
+    "sls_ab_tsfc_kg_per_Ns": null,
+    "mass_kg": 825.5,
+    "diameter_m": 1.2827,
+    "length_m": 2.7178,
+    "unit_cost_usd": 18000.0,
+    "tbo_hours_service": 500.0,
+    "sources": [
+      "Jane's All the World's Aircraft 1955-56",
+      "Wilkinson, Aircraft Engines of the World 1957, pp. 68-69",
+      "NMUSAF Fact Sheet: Allison J33"
+    ]
+  }
+}

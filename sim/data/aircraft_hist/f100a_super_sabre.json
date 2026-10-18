@@ -1,0 +1,115 @@
+{
+  "id": "f100a_super_sabre",
+  "name": "North American F-100A Super Sabre",
+  "company_id": "north_american",
+  "created_date": "1953-05-25",
+  "crew_count": 1,
+  "role_tags": [
+    "day_fighter"
+  ],
+  "wing": {
+    "area_m2": 35.79,
+    "aspect_ratio": 3.86,
+    "sweep_qc_deg": 45.0,
+    "taper_ratio": 0.27,
+    "tc_root": 0.07,
+    "tc_tip": 0.07,
+    "airfoil_ref": "64A007",
+    "planform_type": "conventional",
+    "position": "low",
+    "x_le_root_frac": 0.34,
+    "dihedral_deg": 0.0,
+    "incidence_deg": 0.5,
+    "twist_deg": -1.5,
+    "devices": [
+      "plain_flaps",
+      "le_slats"
+    ]
+  },
+  "fuselage": {
+    "length_m": 14.33,
+    "max_diameter_m": 1.62,
+    "nose_fineness": 2.6,
+    "tail_fineness": 3.1,
+    "canopy_type": "faired",
+    "area_ruled": false
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": false,
+    "all_moving_tail": true,
+    "ht_area_m2": 8.95,
+    "ht_aspect_ratio": 3.5,
+    "ht_sweep_qc_deg": 45.0,
+    "vt_area_m2": 4.1,
+    "vt_aspect_ratio": 1.45,
+    "vt_sweep_qc_deg": 45.0
+  },
+  "intake": {
+    "type": "nose",
+    "compression": "pitot",
+    "variable": false,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J57-P-7",
+    "count": 1,
+    "afterburner": true,
+    "x_cg_frac": 0.6
+  },
+  "structure": {
+    "design_load_factor_g": 7.33,
+    "material_mix": {
+      "al": 0.8,
+      "steel": 0.14,
+      "ti": 0.06
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 2310.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 775.0,
+    "combat_uses_drop_tanks": true
+  },
+  "systems": {
+    "radar_id": "apg30",
+    "fire_control_id": null,
+    "avionics_level": 2,
+    "powered_controls": true,
+    "stability_augmentation": false,
+    "ejection_seat": true,
+    "inflight_refuel": false,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "m39_20mm",
+        "count": 4,
+        "rounds_per_gun": 200
+      }
+    ],
+    "hardpoints": 4,
+    "internal_bay": false,
+    "missile_ids": []
+  },
+  "published_performance": {
+    "empty_mass_kg": 8695.0,
+    "combat_mass_kg": 10450.0,
+    "mtow_kg": 13500.0,
+    "max_mach_sl": 0.99,
+    "max_mach_alt": 1.29,
+    "alt_of_max_mach_m": 10668.0,
+    "climb_rate_sl_mps": 98.0,
+    "service_ceiling_m": 15240.0,
+    "combat_radius_m": 880000.0,
+    "ferry_range_m": 2400000.0,
+    "stall_speed_mps": 63.0,
+    "takeoff_distance_m": 1380.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-100A Super Sabre (1954)",
+      "Knaack, Encyclopedia of US Air Force Aircraft and Missile Systems Vol. 1, pp. 114-120 (1978)"
+    ]
+  }
+}

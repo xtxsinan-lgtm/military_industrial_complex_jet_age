@@ -1,0 +1,47 @@
+{
+  "engine_id": "j73_ge_3",
+  "name": "General Electric J73-GE-3",
+  "manufacturer": "General Electric",
+  "country": "USA",
+  "first_run_year": 1951,
+  "service_entry_year": 1954,
+  "applications": ["North American F-86H Sabre"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": false,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 70.31,
+    "opr": 7.5,
+    "tit_K": 1117.0,
+    "ab_temp_K": 0.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.855,
+    "eta_t_poly": 0.87,
+    "eta_burner": 0.965,
+    "pi_burner": 0.955,
+    "specific_weight_factor": 1.11,
+    "mtbf_factor": 1.0,
+    "length_factor": 1.22,
+    "diameter_factor": 1.01,
+    "cumulative_test_hours": 1000.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 40034.0,
+    "sls_ab_thrust_N": null,
+    "sls_dry_tsfc_kg_per_Ns": 2.54929e-5,
+    "sls_ab_tsfc_kg_per_Ns": null,
+    "mass_kg": 1655.6,
+    "diameter_m": 1.0033,
+    "length_m": 5.0800,
+    "unit_cost_usd": 100000.0,
+    "tbo_hours_service": 350.0,
+    "sources": [
+      "Flight, 9 April 1954, p. 457",
+      "Wilkinson, Aircraft Engines of the World 1953, pp. 82-83",
+      "NMUSAF Fact Sheet: General Electric J73"
+    ]
+  }
+}

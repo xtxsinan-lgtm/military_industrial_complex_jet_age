@@ -1,0 +1,639 @@
+{
+  "tolerance_rel": 1e-06,
+  "deck_queries": [
+    {
+      "engine_id": "j33_a_35",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": false,
+      "thrust_N": 19672.628744,
+      "tsfc": 3.347314e-05,
+      "fuel_flow_kgps": 0.65850466
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 19672.628744,
+      "tsfc": 3.347314e-05,
+      "fuel_flow_kgps": 0.65850466
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 0.55,
+      "alt_m": 3000.0,
+      "throttle": 0.8,
+      "ab": false,
+      "thrust_N": 11117.12162,
+      "tsfc": 4.2846147e-05,
+      "fuel_flow_kgps": 0.47632582
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.75,
+      "ab": false,
+      "thrust_N": 6351.630562,
+      "tsfc": 4.0641331e-05,
+      "fuel_flow_kgps": 0.25813872
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.05,
+      "ab": false,
+      "thrust_N": 423.442037,
+      "tsfc": 0.000176471994,
+      "fuel_flow_kgps": 0.07472566
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 1.25,
+      "alt_m": 10668.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 9767.025249,
+      "tsfc": 4.0909672e-05,
+      "fuel_flow_kgps": 0.3995658
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 1.85,
+      "alt_m": 12192.0,
+      "throttle": 0.6,
+      "ab": true,
+      "thrust_N": 6111.744394,
+      "tsfc": 5.0911491e-05,
+      "fuel_flow_kgps": 0.31115802
+    },
+    {
+      "engine_id": "j33_a_35",
+      "mach": 2.15,
+      "alt_m": 15240.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 6776.828267,
+      "tsfc": 5.3877039e-05,
+      "fuel_flow_kgps": 0.36511544
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": false,
+      "thrust_N": 24725.546009,
+      "tsfc": 2.8230032e-05,
+      "fuel_flow_kgps": 0.69800295
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 24725.546009,
+      "tsfc": 2.8230032e-05,
+      "fuel_flow_kgps": 0.69800295
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 0.55,
+      "alt_m": 3000.0,
+      "throttle": 0.8,
+      "ab": false,
+      "thrust_N": 14028.350269,
+      "tsfc": 3.4956493e-05,
+      "fuel_flow_kgps": 0.49038193
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.75,
+      "ab": false,
+      "thrust_N": 7622.651455,
+      "tsfc": 3.4655574e-05,
+      "fuel_flow_kgps": 0.26416736
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.05,
+      "ab": false,
+      "thrust_N": 508.176764,
+      "tsfc": 0.000126074039,
+      "fuel_flow_kgps": 0.0640679
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 1.25,
+      "alt_m": 10668.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 11350.682343,
+      "tsfc": 3.7319175e-05,
+      "fuel_flow_kgps": 0.4235981
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 1.85,
+      "alt_m": 12192.0,
+      "throttle": 0.6,
+      "ab": true,
+      "thrust_N": 6779.193645,
+      "tsfc": 4.5928929e-05,
+      "fuel_flow_kgps": 0.3113611
+    },
+    {
+      "engine_id": "j47_ge_27",
+      "mach": 2.15,
+      "alt_m": 15240.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 7431.299677,
+      "tsfc": 5.0314513e-05,
+      "fuel_flow_kgps": 0.37390222
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": false,
+      "thrust_N": 46714.796457,
+      "tsfc": 2.1357934e-05,
+      "fuel_flow_kgps": 0.99773152
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 73586.077887,
+      "tsfc": 5.5530658e-05,
+      "fuel_flow_kgps": 4.08628331
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 0.55,
+      "alt_m": 3000.0,
+      "throttle": 0.8,
+      "ab": false,
+      "thrust_N": 25979.660278,
+      "tsfc": 2.6714207e-05,
+      "fuel_flow_kgps": 0.69402601
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.75,
+      "ab": false,
+      "thrust_N": 13511.785807,
+      "tsfc": 2.7462631e-05,
+      "fuel_flow_kgps": 0.37106919
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.05,
+      "ab": false,
+      "thrust_N": 900.78572,
+      "tsfc": 9.3950841e-05,
+      "fuel_flow_kgps": 0.08462958
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 1.25,
+      "alt_m": 10668.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 41060.64194,
+      "tsfc": 6.0432189e-05,
+      "fuel_flow_kgps": 2.48138447
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 1.85,
+      "alt_m": 12192.0,
+      "throttle": 0.6,
+      "ab": true,
+      "thrust_N": 32881.95244,
+      "tsfc": 5.7542268e-05,
+      "fuel_flow_kgps": 1.89210212
+    },
+    {
+      "engine_id": "j57_p_21",
+      "mach": 2.15,
+      "alt_m": 15240.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 31836.311515,
+      "tsfc": 7.0215492e-05,
+      "fuel_flow_kgps": 2.23540227
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": false,
+      "thrust_N": 42359.259336,
+      "tsfc": 2.2526702e-05,
+      "fuel_flow_kgps": 0.95421443
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 67436.125119,
+      "tsfc": 5.782937e-05,
+      "fuel_flow_kgps": 3.89978865
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 0.55,
+      "alt_m": 3000.0,
+      "throttle": 0.8,
+      "ab": false,
+      "thrust_N": 23713.662072,
+      "tsfc": 2.8577154e-05,
+      "fuel_flow_kgps": 0.67766897
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.75,
+      "ab": false,
+      "thrust_N": 12813.258987,
+      "tsfc": 2.8476422e-05,
+      "fuel_flow_kgps": 0.36487577
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.05,
+      "ab": false,
+      "thrust_N": 854.217266,
+      "tsfc": 0.000109245097,
+      "fuel_flow_kgps": 0.09331905
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 1.25,
+      "alt_m": 10668.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 41745.378546,
+      "tsfc": 5.6744824e-05,
+      "fuel_flow_kgps": 2.36883415
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 1.85,
+      "alt_m": 12192.0,
+      "throttle": 0.6,
+      "ab": true,
+      "thrust_N": 36170.040574,
+      "tsfc": 4.9394939e-05,
+      "fuel_flow_kgps": 1.78661695
+    },
+    {
+      "engine_id": "j79_ge_11a",
+      "mach": 2.15,
+      "alt_m": 15240.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 36270.359978,
+      "tsfc": 5.8212308e-05,
+      "fuel_flow_kgps": 2.11138137
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": false,
+      "thrust_N": 25639.436078,
+      "tsfc": 3.2926001e-05,
+      "fuel_flow_kgps": 0.84420409
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 31625.920757,
+      "tsfc": 6.8290303e-05,
+      "fuel_flow_kgps": 2.15974372
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 0.55,
+      "alt_m": 3000.0,
+      "throttle": 0.8,
+      "ab": false,
+      "thrust_N": 14669.615108,
+      "tsfc": 4.1156458e-05,
+      "fuel_flow_kgps": 0.6037494
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.75,
+      "ab": false,
+      "thrust_N": 8274.828058,
+      "tsfc": 3.9451032e-05,
+      "fuel_flow_kgps": 0.3264505
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.05,
+      "ab": false,
+      "thrust_N": 551.655204,
+      "tsfc": 0.00016012456,
+      "fuel_flow_kgps": 0.08833355
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 1.25,
+      "alt_m": 10668.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 19533.322762,
+      "tsfc": 6.7116539e-05,
+      "fuel_flow_kgps": 1.31100901
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 1.85,
+      "alt_m": 12192.0,
+      "throttle": 0.6,
+      "ab": true,
+      "thrust_N": 19897.443758,
+      "tsfc": 6.3518032e-05,
+      "fuel_flow_kgps": 1.26384647
+    },
+    {
+      "engine_id": "vk_1f",
+      "mach": 2.15,
+      "alt_m": 15240.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 18531.961075,
+      "tsfc": 7.5944746e-05,
+      "fuel_flow_kgps": 1.40740508
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": false,
+      "thrust_N": 25129.936123,
+      "tsfc": 2.515516e-05,
+      "fuel_flow_kgps": 0.63214756
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 0.0,
+      "alt_m": 0.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 31955.431091,
+      "tsfc": 4.6744355e-05,
+      "fuel_flow_kgps": 1.49373601
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 0.55,
+      "alt_m": 3000.0,
+      "throttle": 0.8,
+      "ab": false,
+      "thrust_N": 14074.749512,
+      "tsfc": 3.1614658e-05,
+      "fuel_flow_kgps": 0.4449684
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.75,
+      "ab": false,
+      "thrust_N": 7512.101053,
+      "tsfc": 3.1782717e-05,
+      "fuel_flow_kgps": 0.23875498
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 0.85,
+      "alt_m": 9144.0,
+      "throttle": 0.05,
+      "ab": false,
+      "thrust_N": 500.806737,
+      "tsfc": 0.000116415673,
+      "fuel_flow_kgps": 0.05830175
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 1.25,
+      "alt_m": 10668.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 17166.510021,
+      "tsfc": 5.2820003e-05,
+      "fuel_flow_kgps": 0.90673512
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 1.85,
+      "alt_m": 12192.0,
+      "throttle": 0.6,
+      "ab": true,
+      "thrust_N": 15274.671182,
+      "tsfc": 5.3383714e-05,
+      "fuel_flow_kgps": 0.81541868
+    },
+    {
+      "engine_id": "rd_9b",
+      "mach": 2.15,
+      "alt_m": 15240.0,
+      "throttle": 1.0,
+      "ab": true,
+      "thrust_N": 13445.457329,
+      "tsfc": 6.3876955e-05,
+      "fuel_flow_kgps": 0.85885488
+    }
+  ],
+  "inlet_recovery_queries": [
+    {
+      "mach": 0.0,
+      "inlet_type": "pitot",
+      "pi_d": 0.975
+    },
+    {
+      "mach": 0.0,
+      "inlet_type": "spike",
+      "pi_d": 0.975
+    },
+    {
+      "mach": 0.0,
+      "inlet_type": "variable",
+      "pi_d": 0.975
+    },
+    {
+      "mach": 0.0,
+      "inlet_type": "mil_spec",
+      "pi_d": 0.985
+    },
+    {
+      "mach": 0.8,
+      "inlet_type": "pitot",
+      "pi_d": 0.975
+    },
+    {
+      "mach": 0.8,
+      "inlet_type": "spike",
+      "pi_d": 0.975
+    },
+    {
+      "mach": 0.8,
+      "inlet_type": "variable",
+      "pi_d": 0.975
+    },
+    {
+      "mach": 0.8,
+      "inlet_type": "mil_spec",
+      "pi_d": 0.985
+    },
+    {
+      "mach": 1.2,
+      "inlet_type": "pitot",
+      "pi_d": 0.96797844
+    },
+    {
+      "mach": 1.2,
+      "inlet_type": "spike",
+      "pi_d": 0.96409446
+    },
+    {
+      "mach": 1.2,
+      "inlet_type": "variable",
+      "pi_d": 0.96667362
+    },
+    {
+      "mach": 1.2,
+      "inlet_type": "mil_spec",
+      "pi_d": 0.97658822
+    },
+    {
+      "mach": 1.6,
+      "inlet_type": "pitot",
+      "pi_d": 0.87282025
+    },
+    {
+      "mach": 1.6,
+      "inlet_type": "spike",
+      "pi_d": 0.94327908
+    },
+    {
+      "mach": 1.6,
+      "inlet_type": "variable",
+      "pi_d": 0.93830811
+    },
+    {
+      "mach": 1.6,
+      "inlet_type": "mil_spec",
+      "pi_d": 0.94793178
+    },
+    {
+      "mach": 2.0,
+      "inlet_type": "pitot",
+      "pi_d": 0.70285201
+    },
+    {
+      "mach": 2.0,
+      "inlet_type": "spike",
+      "pi_d": 0.89123884
+    },
+    {
+      "mach": 2.0,
+      "inlet_type": "variable",
+      "pi_d": 0.901875
+    },
+    {
+      "mach": 2.0,
+      "inlet_type": "mil_spec",
+      "pi_d": 0.911125
+    },
+    {
+      "mach": 2.4,
+      "inlet_type": "pitot",
+      "pi_d": 0.5266403
+    },
+    {
+      "mach": 2.4,
+      "inlet_type": "spike",
+      "pi_d": 0.81464474
+    },
+    {
+      "mach": 2.4,
+      "inlet_type": "variable",
+      "pi_d": 0.85983017
+    },
+    {
+      "mach": 2.4,
+      "inlet_type": "mil_spec",
+      "pi_d": 0.86864894
+    }
+  ],
+  "duane_queries": [
+    {
+      "mtbf_init": 100.0,
+      "hours": 0.0,
+      "alpha": 0.42,
+      "mtbf_h": 100.0
+    },
+    {
+      "mtbf_init": 100.0,
+      "hours": 250.0,
+      "alpha": 0.42,
+      "mtbf_h": 109.825251
+    },
+    {
+      "mtbf_init": 100.0,
+      "hours": 1000.0,
+      "alpha": 0.42,
+      "mtbf_h": 133.792755
+    },
+    {
+      "mtbf_init": 100.0,
+      "hours": 5000.0,
+      "alpha": 0.42,
+      "mtbf_h": 212.238186
+    },
+    {
+      "mtbf_init": 100.0,
+      "hours": 25000.0,
+      "alpha": 0.42,
+      "mtbf_h": 392.906131
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "engine_id": "rd_9b",
+  "name": "Tumansky RD-9B",
+  "manufacturer": "OKB-300 Mikulin / Tumansky",
+  "country": "USSR",
+  "first_run_year": 1953,
+  "service_entry_year": 1955,
+  "applications": ["Mikoyan-Gurevich MiG-19S / PF / PM"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": true,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 43.50,
+    "opr": 7.14,
+    "tit_K": 1120.0,
+    "ab_temp_K": 1415.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": true,
+    "eta_c_poly": 0.85,
+    "eta_t_poly": 0.865,
+    "eta_burner": 0.96,
+    "pi_burner": 0.955,
+    "eta_ab": 0.83,
+    "pi_ab_dry": 0.985,
+    "pi_ab_wet": 0.945,
+    "specific_weight_factor": 0.57,
+    "mtbf_factor": 0.55,
+    "length_factor": 1.0,
+    "diameter_factor": 0.88,
+    "cumulative_test_hours": 800.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 25510.0,
+    "sls_ab_thrust_N": 31900.0,
+    "sls_dry_tsfc_kg_per_Ns": 2.63889e-5,
+    "sls_ab_tsfc_kg_per_Ns": 4.52778e-5,
+    "mass_kg": 695.0,
+    "diameter_m": 0.8010,
+    "length_m": 5.5550,
+    "unit_cost_usd": 22000.0,
+    "tbo_hours_service": 150.0,
+    "sources": [
+      "LeteckeMotory.cz: RD-9B (M-07) Official Technical Manual",
+      "Gunston, World Encyclopaedia of Aero Engines (1989)"
+    ]
+  }
+}

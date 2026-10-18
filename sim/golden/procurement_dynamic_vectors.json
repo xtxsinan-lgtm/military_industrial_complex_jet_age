@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "module": "05_procurement",
+  "tolerance_rel": 1e-06,
+  "vectors": {
+    "adapted_os130_criteria": [
+      {
+        "key": "max_mach_alt",
+        "kind": "objective",
+        "op": ">=",
+        "value": 1.44,
+        "weight": 0.3,
+        "objective_value": 1.86,
+        "unit": "mach",
+        "description": "Level flight supersonic speed at 30,000-35,000 ft (Mach 1.20 threshold, 1.55 objective)"
+      },
+      {
+        "key": "climb_rate_sl_mps",
+        "kind": "objective",
+        "op": ">=",
+        "value": 121.5,
+        "weight": 0.25,
+        "objective_value": 160.9875,
+        "unit": "mps",
+        "description": "Sea-level initial rate of climb (20,000-26,500 ft/min)"
+      },
+      {
+        "key": "service_ceiling_m",
+        "kind": "objective",
+        "op": ">=",
+        "value": 15240.0,
+        "weight": 0.15,
+        "objective_value": 16764.0,
+        "unit": "m",
+        "description": "Service ceiling (50,000-55,000 ft)"
+      },
+      {
+        "key": "combat_radius_m",
+        "kind": "objective",
+        "op": ">=",
+        "value": 555600.0,
+        "weight": 0.15,
+        "objective_value": 740800.0,
+        "unit": "m",
+        "description": "Combat radius on internal fuel (300-400 nmi)"
+      },
+      {
+        "key": "stall_speed_mps",
+        "kind": "objective",
+        "op": "<=",
+        "value": 54.02,
+        "weight": 0.15,
+        "objective_value": 48.87,
+        "unit": "mps",
+        "description": "Carrier approach/stall speed (<= 100-105 kt)"
+      },
+      {
+        "key": "carrier_suitability",
+        "kind": "threshold",
+        "op": ">=",
+        "value": 1.0,
+        "weight": 0.0,
+        "objective_value": null,
+        "unit": "bool",
+        "description": "Essex deck spot factor (25 aircraft in aft 200 ft) & carrier suitability"
+      }
+    ],
+    "f11f_stopgap_suppressed": true,
+    "redirected_gor101_incumbent_bias": {
+      "mcdonnell": 0.15,
+      "lockheed": 0.55,
+      "north_american": 0.25,
+      "northrop": 0.2
+    },
+    "monthly_trigger": {
+      "should_issue": true,
+      "d_total": 0.9534291581108831,
+      "d_parts": {
+        "d_age": 0.0,
+        "d_threat": 0.8835728952772077,
+        "d_gap": 1.0,
+        "d_total": 0.9534291581108831
+      }
+    },
+    "procedural_requirement": {
+      "schema_version": 1,
+      "id": "proc_usaf_day_fighter_1950_1",
+      "name_key": "program.proc_usaf_day_fighter_1950_1.name",
+      "program_name": "1950 USAF Day Fighter Requirement",
+      "customer": "USAF",
+      "role": "day_fighter",
+      "mvp_core": false,
+      "issue_date": "1950-12-01",
+      "proposal_due": "1951-03-01",
+      "first_flight_due": "1952-10-06",
+      "ioc_due": "1954-08-12",
+      "equipment": {
+        "carrier_capable": false,
+        "radar_required": false,
+        "min_crew": 1,
+        "min_engines": 1,
+        "internal_bay_required": false,
+        "min_guns_20mm": 2,
+        "missile_capability": []
+      },
+      "criteria": [
+        {
+          "key": "max_mach_alt",
+          "kind": "objective",
+          "op": ">=",
+          "value": 1.33,
+          "weight": 0.3,
+          "objective_value": 1.59,
+          "unit": "mach",
+          "description": "Maximum level Mach at altitude"
+        },
+        {
+          "key": "climb_rate_sl_mps",
+          "kind": "objective",
+          "op": ">=",
+          "value": 89.1,
+          "weight": 0.25,
+          "objective_value": 106.9,
+          "unit": "mps",
+          "description": "Sea-level rate of climb"
+        },
+        {
+          "key": "service_ceiling_m",
+          "kind": "objective",
+          "op": ">=",
+          "value": 15196.0,
+          "weight": 0.2,
+          "objective_value": 17019.0,
+          "unit": "m",
+          "description": "Service ceiling"
+        },
+        {
+          "key": "combat_radius_m",
+          "kind": "objective",
+          "op": ">=",
+          "value": 575801.0,
+          "weight": 0.2,
+          "objective_value": 711283.0,
+          "unit": "m",
+          "description": "Combat radius"
+        }
+      ],
+      "budget": {
+        "dev_usd": 14880000.0,
+        "unit_price_ceiling_usd": 372000.0,
+        "quantity_planned": 840
+      },
+      "acquisition": {
+        "style": "paper_award",
+        "downselect_count": 1,
+        "prototype_quantity_per_winner": 2,
+        "allow_dual_award": false,
+        "production_lots": 4,
+        "urgency": 0.95
+      },
+      "eval_weights": {
+        "proposal": {
+          "perf": 0.45,
+          "cost": 0.2,
+          "sched": 0.15,
+          "risk": 0.2
+        },
+        "flyoff": {
+          "perf": 0.6,
+          "cost": 0.15,
+          "sched": 0.1,
+          "risk": 0.15
+        }
+      },
+      "politics": {
+        "incumbent_bias": {},
+        "congressional_interest": 0.35,
+        "industrial_base_need": {}
+      },
+      "historical": {
+        "winner_company_id": "",
+        "winner_design_name": "",
+        "award_date": "1951-03-01",
+        "outcome": "produced",
+        "production_delivered": 0,
+        "notes": "Procedurally generated requirement.",
+        "citations": [],
+        "competitors": []
+      },
+      "alt_history": {
+        "predecessor_program_id": null,
+        "follow_on_program_id": null,
+        "suppress_if_role_satisfied": false,
+        "historical_cancellation_shock": 0.0
+      }
+    },
+    "unsolicited_pitch_result": {
+      "company_id": "lockheed",
+      "design_name": "Model CL-246",
+      "customer": "USAF",
+      "role": "day_fighter",
+      "pitch_day": 2861,
+      "decision_day": 2951,
+      "pitch_cost_usd": 113974.02650671695,
+      "evaluated_score": 108.95554932443225,
+      "p_accept": 0.95,
+      "accepted": true,
+      "p_sole_source": 0.8031999999999999,
+      "outcome": "sole_source_award",
+      "generated_program": {
+        "id": "unsol_sole_usaf_day_fighter_2861",
+        "program_name": "1952 USAF Day Fighter Requirement",
+        "customer": "USAF",
+        "role": "day_fighter",
+        "issue_date": "1952-11-01",
+        "proposal_due": "1953-03-01",
+        "first_flight_due": "1955-04-20",
+        "ioc_due": "1957-10-06",
+        "criteria": [
+          {
+            "key": "max_mach_alt",
+            "kind": "objective",
+            "op": ">=",
+            "value": 1.66,
+            "weight": 0.3,
+            "objective_value": 1.99,
+            "unit": "mach",
+            "description": "Maximum level Mach at altitude"
+          },
+          {
+            "key": "climb_rate_sl_mps",
+            "kind": "objective",
+            "op": ">=",
+            "value": 129.7,
+            "weight": 0.25,
+            "objective_value": 155.7,
+            "unit": "mps",
+            "description": "Sea-level rate of climb"
+          },
+          {
+            "key": "service_ceiling_m",
+            "kind": "objective",
+            "op": ">=",
+            "value": 16276.0,
+            "weight": 0.2,
+            "objective_value": 18229.0,
+            "unit": "m",
+            "description": "Service ceiling"
+          },
+          {
+            "key": "combat_radius_m",
+            "kind": "objective",
+            "op": ">=",
+            "value": 624741.0,
+            "weight": 0.2,
+            "objective_value": 771739.0,
+            "unit": "m",
+            "description": "Combat radius"
+          }
+        ],
+        "budget": {
+          "dev_usd": 22280000.0,
+          "unit_price_ceiling_usd": 557000.0,
+          "quantity_planned": 300
+        },
+        "politics": {
+          "incumbent_bias": {},
+          "congressional_interest": 0.35,
+          "industrial_base_need": {}
+        },
+        "historical": {
+          "winner_company_id": "",
+          "winner_design_name": "",
+          "award_date": "1953-03-01",
+          "outcome": "produced",
+          "production_delivered": 0,
+          "notes": "Procedurally generated requirement.",
+          "citations": [],
+          "competitors": []
+        },
+        "name_key": "program.proc_usaf_day_fighter_1952_99.name",
+        "mvp_core": false,
+        "equipment": {
+          "carrier_capable": false,
+          "radar_required": false,
+          "min_crew": 1,
+          "min_engines": 1,
+          "internal_bay_required": false,
+          "min_guns_20mm": 2,
+          "missile_capability": []
+        },
+        "acquisition": {
+          "style": "sole_source",
+          "downselect_count": 2,
+          "prototype_quantity_per_winner": 2,
+          "allow_dual_award": false,
+          "production_lots": 4,
+          "urgency": 0.75
+        },
+        "eval_weights": {
+          "proposal": {
+            "perf": 0.45,
+            "cost": 0.2,
+            "sched": 0.15,
+            "risk": 0.2
+          },
+          "flyoff": {
+            "perf": 0.6,
+            "cost": 0.15,
+            "sched": 0.1,
+            "risk": 0.15
+          }
+        },
+        "alt_history": {
+          "predecessor_program_id": null,
+          "follow_on_program_id": null,
+          "suppress_if_role_satisfied": false,
+          "historical_cancellation_shock": 0.0
+        },
+        "schema_version": 1
+      },
+      "awarded_contract": {
+        "contract_id": "contract__unsol_sole_usaf_day_fighter_2861__lockheed__production_fpif",
+        "program_id": "unsol_sole_usaf_day_fighter_2861",
+        "customer": "USAF",
+        "role": "day_fighter",
+        "company_id": "lockheed",
+        "design_name": "Model CL-246",
+        "contract_kind": "production_fpif",
+        "award_day": 2951,
+        "dev_target_cost_usd": 18938000.0,
+        "dev_fixed_fee_usd": 1325660.0000000002,
+        "dev_cost_incurred_usd": 0.0,
+        "promised_performance": {
+          "max_mach_alt": 2.1492,
+          "climb_rate_sl_mps": 168.156,
+          "service_ceiling_m": 19687.32,
+          "combat_radius_m": 833478.1200000001
+        },
+        "promised_first_flight_day": 3361,
+        "promised_ioc_day": 4061,
+        "lots": [
+          {
+            "lot_number": 1,
+            "fiscal_year": 1953,
+            "quantity_planned": 75,
+            "quantity_awarded": 75,
+            "unit_target_price_usd": 456740.0,
+            "unit_ceiling_price_usd": 548088.0,
+            "gov_share": 0.7,
+            "liquidated_damage_frac": 0.0,
+            "status": "active"
+          },
+          {
+            "lot_number": 2,
+            "fiscal_year": 1954,
+            "quantity_planned": 75,
+            "quantity_awarded": 0,
+            "unit_target_price_usd": 456740.0,
+            "unit_ceiling_price_usd": 548088.0,
+            "gov_share": 0.7,
+            "liquidated_damage_frac": 0.0,
+            "status": "planned"
+          },
+          {
+            "lot_number": 3,
+            "fiscal_year": 1955,
+            "quantity_planned": 75,
+            "quantity_awarded": 0,
+            "unit_target_price_usd": 456740.0,
+            "unit_ceiling_price_usd": 548088.0,
+            "gov_share": 0.7,
+            "liquidated_damage_frac": 0.0,
+            "status": "planned"
+          },
+          {
+            "lot_number": 4,
+            "fiscal_year": 1956,
+            "quantity_planned": 75,
+            "quantity_awarded": 0,
+            "unit_target_price_usd": 456740.0,
+            "unit_ceiling_price_usd": 548088.0,
+            "gov_share": 0.7,
+            "liquidated_damage_frac": 0.0,
+            "status": "planned"
+          }
+        ],
+        "status": "active",
+        "cancellation_reason": null
+      },
+      "cooldown_until_day": 3316
+    },
+    "capability_gap_record": {
+      "customer": "USN",
+      "role": "carrier_day_fighter",
+      "origin_program_id": "usn_os130_1952",
+      "created_day": 3073,
+      "reissue_due_day": 3621,
+      "urgency": 0.7,
+      "reissued": false
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "full_mvp_1945_1960_seed_1945": {
+    "days_simulated": 5844,
+    "end_day": 5843,
+    "events_fired_count": 18,
+    "outcome": "completed_1960",
+    "player_score": {
+      "aircraft_delivered": 1242,
+      "company_id": "north_american",
+      "contract_points": 1250.0,
+      "contracts_won": 5,
+      "delivery_points": 1490.4,
+      "difficulty_multiplier": 1.0,
+      "final_score": 7195.57,
+      "grade_tier": "S",
+      "grade_title_key": "score.tier.skunk_works_legend",
+      "industry_rank": 1,
+      "is_player": true,
+      "net_worth_1950_usd": 196858285.02,
+      "net_worth_nominal_usd": 244497990.0,
+      "net_worth_points": 3937.17,
+      "raw_score": 7195.57,
+      "reputation_avg": 0.63,
+      "reputation_points": 378.0,
+      "tech_points": 140.0,
+      "techs_unlocked": 4
+    },
+    "seed": 1945,
+    "start_day": 0,
+    "state_hash": "69066eb731b63ad97cad4fe29d4df08d4a0b242c62c21e1ff4bb4912c7aa897a"
+  },
+  "macro_budget_sample": {
+    "1945": {
+      "aircraft_procurement_total_usd": 13800000000.0,
+      "aircraft_procurement_usaf_usd": 10600000000.0,
+      "aircraft_procurement_usn_usd": 3200000000.0,
+      "aviation_rd_usd": 520000000.0,
+      "deflator_1950": 0.746,
+      "dod_total_usd": 82965000000.0
+    },
+    "1947": {
+      "aircraft_procurement_total_usd": 590000000.0,
+      "aircraft_procurement_usaf_usd": 410000000.0,
+      "aircraft_procurement_usn_usd": 180000000.0,
+      "aviation_rd_usd": 250000000.0,
+      "deflator_1950": 0.926,
+      "dod_total_usd": 12808000000.0
+    },
+    "1950": {
+      "aircraft_procurement_total_usd": 1920000000.0,
+      "aircraft_procurement_usaf_usd": 1380000000.0,
+      "aircraft_procurement_usn_usd": 540000000.0,
+      "aviation_rd_usd": 410000000.0,
+      "deflator_1950": 1.0,
+      "dod_total_usd": 13724000000.0
+    },
+    "1953": {
+      "aircraft_procurement_total_usd": 9200000000.0,
+      "aircraft_procurement_usaf_usd": 6850000000.0,
+      "aircraft_procurement_usn_usd": 2350000000.0,
+      "aviation_rd_usd": 1280000000.0,
+      "deflator_1950": 1.111,
+      "dod_total_usd": 52802000000.0
+    },
+    "1958": {
+      "aircraft_procurement_total_usd": 8450000000.0,
+      "aircraft_procurement_usaf_usd": 6300000000.0,
+      "aircraft_procurement_usn_usd": 2150000000.0,
+      "aviation_rd_usd": 2050000000.0,
+      "deflator_1950": 1.2,
+      "dod_total_usd": 46815000000.0
+    },
+    "1960": {
+      "aircraft_procurement_total_usd": 6500000000.0,
+      "aircraft_procurement_usaf_usd": 4800000000.0,
+      "aircraft_procurement_usn_usd": 1700000000.0,
+      "aviation_rd_usd": 2350000000.0,
+      "deflator_1950": 1.229,
+      "dod_total_usd": 48130000000.0
+    },
+    "1961": {
+      "aircraft_procurement_total_usd": 6800000000.0,
+      "aircraft_procurement_usaf_usd": 5000000000.0,
+      "aircraft_procurement_usn_usd": 1800000000.0,
+      "aviation_rd_usd": 2500000000.0,
+      "deflator_1950": 1.242,
+      "dod_total_usd": 49601000000.0
+    }
+  },
+  "module": "09_core_loop",
+  "note": "Stub-era campaign smoke test vectors; regenerate when domain modules 01..07 replace stubs.",
+  "save_load_split_1945_seed_777": {
+    "final_state_hash": "5245bad1ab16438d7df4b2ec9a93fcaa5074a1f31a037315349c959b5bc61055",
+    "mid_day": 181
+  },
+  "smoke_2y_seed_42": {
+    "days_simulated": 730,
+    "end_day": 729,
+    "events_fired_count": 3,
+    "outcome": "completed_1960",
+    "player_score": {
+      "aircraft_delivered": 0,
+      "company_id": "mcdonnell",
+      "contract_points": 0.0,
+      "contracts_won": 0,
+      "delivery_points": 0.0,
+      "difficulty_multiplier": 1.0,
+      "final_score": 549.61,
+      "grade_tier": "D",
+      "grade_title_key": "score.tier.subcontractor",
+      "industry_rank": 8,
+      "is_player": true,
+      "net_worth_1950_usd": 10780323.97,
+      "net_worth_nominal_usd": 9982580.0,
+      "net_worth_points": 215.61,
+      "raw_score": 549.61,
+      "reputation_avg": 0.44,
+      "reputation_points": 264.0,
+      "tech_points": 70.0,
+      "techs_unlocked": 2
+    },
+    "seed": 42,
+    "start_day": 0,
+    "state_hash": "d1806dac905a9faf264d12a194d68cc45ee3fe116caa2c844cbf7016ca88c2db"
+  },
+  "suite": "core_campaign_smoke"
+}

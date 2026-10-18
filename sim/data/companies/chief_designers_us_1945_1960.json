@@ -1,0 +1,531 @@
+{
+  "schema_version": "1.0",
+  "era": "1945-1960",
+  "description": "Historical and custom chief designers (1945-1960) with modest, data-driven engineering trait modifiers (bounded within +/-15%).",
+  "designers": [
+    {
+      "id": "designer_edgar_schmued",
+      "name_key": "designer.edgar_schmued.name",
+      "title_key": "designer.edgar_schmued.title",
+      "company_id": "north_american",
+      "active_years": [1945, 1957],
+      "specialty": "swept_wing_and_drag_refinement",
+      "research_branch_bonuses": {
+        "aero": 0.12,
+        "manufacturing": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.94,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Chief Designer of P-51 Mustang, F-86 Sabre, and F-100 Super Sabre (later VP of Engineering at Northrop for T-38/F-5)."
+    },
+    {
+      "id": "designer_harrison_storms",
+      "name_key": "designer.harrison_storms.name",
+      "title_key": "designer.harrison_storms.title",
+      "company_id": "north_american",
+      "active_years": [1948, 1960],
+      "specialty": "high_mach_and_flight_test",
+      "research_branch_bonuses": {
+        "aero": 0.10,
+        "structures": 0.10,
+        "testing": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.98,
+        "prototype_build_time_factor": 0.92,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "Dynamic NAA chief engineer driving the F-100, F-107A, X-15, and XB-70 Valkyrie."
+    },
+    {
+      "id": "designer_kelly_johnson",
+      "name_key": "designer.kelly_johnson.name",
+      "title_key": "designer.kelly_johnson.title",
+      "company_id": "lockheed",
+      "active_years": [1945, 1960],
+      "specialty": "rapid_prototyping_and_supersonics",
+      "research_branch_bonuses": {
+        "aero": 0.15,
+        "testing": 0.12
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.96,
+        "prototype_build_time_factor": 0.85,
+        "structural_mass_factor": 0.97
+      },
+      "historical_note": "Legendary head of Lockheed Advanced Development Projects (P-80 in 143 days, F-104 Starfighter, U-2, A-12)."
+    },
+    {
+      "id": "designer_willis_hawkins",
+      "name_key": "designer.willis_hawkins.name",
+      "title_key": "designer.willis_hawkins.title",
+      "company_id": "lockheed",
+      "active_years": [1945, 1960],
+      "specialty": "preliminary_design_and_structures",
+      "research_branch_bonuses": {
+        "structures": 0.10,
+        "avionics": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.99,
+        "prototype_build_time_factor": 0.95,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "Head of Lockheed preliminary design; key architect on F-80, F-94, and XF-90."
+    },
+    {
+      "id": "designer_alexander_kartveli",
+      "name_key": "designer.alexander_kartveli.name",
+      "title_key": "designer.alexander_kartveli.title",
+      "company_id": "republic",
+      "active_years": [1945, 1960],
+      "specialty": "heavy_strike_and_area_ruled_structures",
+      "research_branch_bonuses": {
+        "structures": 0.14,
+        "propulsion": 0.08,
+        "armament": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.98,
+        "prototype_build_time_factor": 0.98,
+        "structural_mass_factor": 0.96
+      },
+      "historical_note": "Georgian-born Chief Engineer of Republic Aviation (P-47, F-84, F-84F, XF-91, F-105 Thunderchief, XF-103)."
+    },
+    {
+      "id": "designer_frank_davis",
+      "name_key": "designer.frank_davis.name",
+      "title_key": "designer.frank_davis.title",
+      "company_id": "convair",
+      "active_years": [1948, 1960],
+      "specialty": "delta_wing_and_weapon_system_integration",
+      "research_branch_bonuses": {
+        "aero": 0.12,
+        "avionics": 0.12
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.96,
+        "structural_mass_factor": 0.99
+      },
+      "historical_note": "Former test pilot and Convair Chief Engineer on XF-92A, F-102A Delta Dagger, F-106A Delta Dart, and B-58."
+    },
+    {
+      "id": "designer_ralph_shick",
+      "name_key": "designer.ralph_shick.name",
+      "title_key": "designer.ralph_shick.title",
+      "company_id": "convair",
+      "active_years": [1945, 1956],
+      "specialty": "delta_aerodynamics",
+      "research_branch_bonuses": {
+        "aero": 0.12,
+        "testing": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.98,
+        "prototype_build_time_factor": 1.00,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Convair aerodynamicist who collaborated with Lippisch and NACA on the 60-degree tailless delta layout."
+    },
+    {
+      "id": "designer_kendall_perkins",
+      "name_key": "designer.kendall_perkins.name",
+      "title_key": "designer.kendall_perkins.title",
+      "company_id": "mcdonnell",
+      "active_years": [1945, 1960],
+      "specialty": "twin_engine_carrier_and_long_range_fighters",
+      "research_branch_bonuses": {
+        "aero": 0.08,
+        "structures": 0.10,
+        "avionics": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.98,
+        "prototype_build_time_factor": 0.95,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "McDonnell VP of Engineering overseeing the FH-1, F2H Banshee, F-101 Voodoo, and F4H-1 Phantom II."
+    },
+    {
+      "id": "designer_herman_barkey",
+      "name_key": "designer.herman_barkey.name",
+      "title_key": "designer.herman_barkey.title",
+      "company_id": "mcdonnell",
+      "active_years": [1945, 1960],
+      "specialty": "carrier_fighter_detail_design",
+      "research_branch_bonuses": {
+        "structures": 0.10,
+        "manufacturing": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.99,
+        "prototype_build_time_factor": 0.95,
+        "structural_mass_factor": 0.97
+      },
+      "historical_note": "Project engineer on F2H Banshee and Chief Project Engineer on the F4H-1 (F-4) Phantom II."
+    },
+    {
+      "id": "designer_william_schwendler",
+      "name_key": "designer.william_schwendler.name",
+      "title_key": "designer.william_schwendler.title",
+      "company_id": "grumman",
+      "active_years": [1945, 1960],
+      "specialty": "rugged_carrier_structures",
+      "research_branch_bonuses": {
+        "structures": 0.14,
+        "manufacturing": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.99,
+        "prototype_build_time_factor": 0.94,
+        "structural_mass_factor": 0.97
+      },
+      "historical_note": "Grumman Chief Engineer & co-founder ('Iron Works'); designed F9F Panther/Cougar and oversaw F11F Tiger."
+    },
+    {
+      "id": "designer_richard_hutton",
+      "name_key": "designer.richard_hutton.name",
+      "title_key": "designer.richard_hutton.title",
+      "company_id": "grumman",
+      "active_years": [1950, 1960],
+      "specialty": "area_ruled_naval_supersonics",
+      "research_branch_bonuses": {
+        "aero": 0.12,
+        "structures": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.95,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "Grumman Chief Development Engineer who immediately applied Whitcomb's area rule to create the F11F-1 Tiger."
+    },
+    {
+      "id": "designer_ed_heinemann",
+      "name_key": "designer.ed_heinemann.name",
+      "title_key": "designer.ed_heinemann.title",
+      "company_id": "douglas",
+      "active_years": [1945, 1960],
+      "specialty": "lightweight_structural_simplicity",
+      "research_branch_bonuses": {
+        "structures": 0.15,
+        "aero": 0.10,
+        "manufacturing": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.88,
+        "structural_mass_factor": 0.92
+      },
+      "historical_note": "Chief Engineer of Douglas El Segundo (D-558, F3D, F4D Skyray, A4D Skyhawk); famous for delivering the A4D at half the Navy's weight specification."
+    },
+    {
+      "id": "designer_john_russell_clark",
+      "name_key": "designer.john_russell_clark.name",
+      "title_key": "designer.john_russell_clark.title",
+      "company_id": "vought",
+      "active_years": [1948, 1960],
+      "specialty": "supersonic_carrier_fighters_and_titanium",
+      "research_branch_bonuses": {
+        "aero": 0.12,
+        "structures": 0.12
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.92,
+        "structural_mass_factor": 0.97
+      },
+      "historical_note": "Leader of Vought's F8U-1 Crusader (variable-incidence wing, titanium aft fuselage) and XF8U-3 Crusader III."
+    },
+    {
+      "id": "designer_rex_beisel",
+      "name_key": "designer.rex_beisel.name",
+      "title_key": "designer.rex_beisel.title",
+      "company_id": "vought",
+      "active_years": [1945, 1949],
+      "specialty": "experimental_tailless_naval_fighters",
+      "research_branch_bonuses": {
+        "aero": 0.10,
+        "testing": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.98,
+        "prototype_build_time_factor": 1.02,
+        "structural_mass_factor": 1.02
+      },
+      "historical_note": "Designer of the F4U Corsair and the radical tailless swept-wing F7U Cutlass."
+    },
+    {
+      "id": "designer_jack_northrop",
+      "name_key": "designer.jack_northrop.name",
+      "title_key": "designer.jack_northrop.title",
+      "company_id": "northrop",
+      "active_years": [1945, 1952],
+      "specialty": "all_wing_and_all_weather_interceptors",
+      "research_branch_bonuses": {
+        "aero": 0.14,
+        "avionics": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.96,
+        "prototype_build_time_factor": 1.00,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "Visionary founder of Northrop Aircraft (YB-49 Flying Wing, X-4 Bantam, F-89 Scorpion)."
+    },
+    {
+      "id": "designer_welko_gasich",
+      "name_key": "designer.welko_gasich.name",
+      "title_key": "designer.welko_gasich.title",
+      "company_id": "northrop",
+      "active_years": [1953, 1960],
+      "specialty": "lightweight_supersonic_area_rule",
+      "research_branch_bonuses": {
+        "aero": 0.10,
+        "manufacturing": 0.12
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.93,
+        "structural_mass_factor": 0.94
+      },
+      "historical_note": "Chief of Preliminary Design (with Edgar Schmued) on the N-156 / T-38 Talon and F-5 Freedom Fighter."
+    },
+    {
+      "id": "designer_robert_woods",
+      "name_key": "designer.robert_woods.name",
+      "title_key": "designer.robert_woods.title",
+      "company_id": "bell",
+      "active_years": [1945, 1956],
+      "specialty": "x_plane_transonic_and_variable_sweep",
+      "research_branch_bonuses": {
+        "aero": 0.14,
+        "testing": 0.15
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.92,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Bell co-founder and Chief Design Engineer who championed the X-1, X-2, and variable-sweep X-5 with NACA."
+    },
+    {
+      "id": "designer_donovan_berlin",
+      "name_key": "designer.donovan_berlin.name",
+      "title_key": "designer.donovan_berlin.title",
+      "company_id": "curtiss_wright",
+      "active_years": [1945, 1952],
+      "specialty": "conventional_mass_production",
+      "research_branch_bonuses": {
+        "manufacturing": 0.08,
+        "structures": 0.06
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.01,
+        "prototype_build_time_factor": 0.98,
+        "structural_mass_factor": 1.01
+      },
+      "historical_note": "Designer of P-36/P-40 who returned to Curtiss-Wright for the heavy four-jet XP-87 Blackhawk."
+    },
+    {
+      "id": "designer_george_trimble",
+      "name_key": "designer.george_trimble.name",
+      "title_key": "designer.george_trimble.title",
+      "company_id": "martin",
+      "active_years": [1945, 1960],
+      "specialty": "high_speed_tactical_strike",
+      "research_branch_bonuses": {
+        "aero": 0.08,
+        "armament": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.98,
+        "prototype_build_time_factor": 0.96,
+        "structural_mass_factor": 0.99
+      },
+      "historical_note": "Head of Martin aerodynamics and advanced design (three-jet swept-wing XB-51 and B-57)."
+    },
+    {
+      "id": "designer_george_schairer",
+      "name_key": "designer.george_schairer.name",
+      "title_key": "designer.george_schairer.title",
+      "company_id": "boeing",
+      "active_years": [1945, 1960],
+      "specialty": "swept_wing_wind_tunnel_mastery",
+      "research_branch_bonuses": {
+        "aero": 0.14,
+        "testing": 0.12,
+        "structures": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.96,
+        "prototype_build_time_factor": 0.96,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "Boeing Chief Aerodynamicist whose May 1945 letter from Germany triggered the swept-wing XB-47 and B-52."
+    },
+    {
+      "id": "designer_gerhard_neumann",
+      "name_key": "designer.gerhard_neumann.name",
+      "title_key": "designer.gerhard_neumann.title",
+      "company_id": "general_electric",
+      "active_years": [1948, 1960],
+      "specialty": "variable_stator_high_mach_turbojets",
+      "research_branch_bonuses": {
+        "propulsion": 0.15
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.00,
+        "prototype_build_time_factor": 0.92,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Leader of GE's variable-stator J79 development team (Collier Trophy 1958)."
+    },
+    {
+      "id": "designer_luke_hobbs",
+      "name_key": "designer.luke_hobbs.name",
+      "title_key": "designer.luke_hobbs.title",
+      "company_id": "pratt_whitney",
+      "active_years": [1945, 1958],
+      "specialty": "twin_spool_high_pressure_compressors",
+      "research_branch_bonuses": {
+        "propulsion": 0.15
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.00,
+        "prototype_build_time_factor": 0.94,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Pratt & Whitney VP of Engineering who conceived the twin-spool J57 (JT3) and won the 1952 Collier Trophy."
+    },
+    {
+      "id": "designer_ronald_hazen",
+      "name_key": "designer.ronald_hazen.name",
+      "title_key": "designer.ronald_hazen.title",
+      "company_id": "allison",
+      "active_years": [1945, 1960],
+      "specialty": "production_turbojet_reliability",
+      "research_branch_bonuses": {
+        "propulsion": 0.10,
+        "manufacturing": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.00,
+        "prototype_build_time_factor": 0.95,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Director of Engineering at Allison Division of GM overseeing J33, J35, J71, and T56."
+    },
+    {
+      "id": "designer_reinout_kroon",
+      "name_key": "designer.reinout_kroon.name",
+      "title_key": "designer.reinout_kroon.title",
+      "company_id": "westinghouse",
+      "active_years": [1945, 1955],
+      "specialty": "compact_axial_compressors",
+      "research_branch_bonuses": {
+        "propulsion": 0.08
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.00,
+        "prototype_build_time_factor": 1.00,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "Chief Engineer of Westinghouse Aviation Gas Turbine Division (19XB/J30 and 24C/J34)."
+    },
+    {
+      "id": "designer_william_lundquist",
+      "name_key": "designer.william_lundquist.name",
+      "title_key": "designer.william_lundquist.title",
+      "company_id": "wright",
+      "active_years": [1945, 1960],
+      "specialty": "licensed_turbojet_production",
+      "research_branch_bonuses": {
+        "propulsion": 0.08,
+        "manufacturing": 0.06
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.00,
+        "prototype_build_time_factor": 0.96,
+        "structural_mass_factor": 1.00
+      },
+      "historical_note": "VP of Engineering at Wright Aeronautical overseeing J65 Sapphire industrialization."
+    },
+    {
+      "id": "designer_custom_aero_visionary",
+      "name_key": "designer.custom_aero_visionary.name",
+      "title_key": "designer.custom_aero_visionary.title",
+      "company_id": "preset_skunk_works_spinoff",
+      "active_years": [1945, 1960],
+      "specialty": "rapid_prototyping_and_supersonics",
+      "research_branch_bonuses": {
+        "aero": 0.12,
+        "testing": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.97,
+        "prototype_build_time_factor": 0.90,
+        "structural_mass_factor": 0.98
+      },
+      "historical_note": "Custom startup chief designer archetype focused on small-team rapid prototyping and clean aerodynamics."
+    },
+    {
+      "id": "designer_custom_production_master",
+      "name_key": "designer.custom_production_master.name",
+      "title_key": "designer.custom_production_master.title",
+      "company_id": "preset_wartime_subcontractor",
+      "active_years": [1945, 1960],
+      "specialty": "tooling_and_mass_production",
+      "research_branch_bonuses": {
+        "manufacturing": 0.14,
+        "structures": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 1.00,
+        "prototype_build_time_factor": 0.95,
+        "structural_mass_factor": 0.97
+      },
+      "historical_note": "Custom startup chief designer archetype focused on tooling efficiency and structural manufacturability."
+    },
+    {
+      "id": "designer_custom_transonic_theorist",
+      "name_key": "designer.custom_transonic_theorist.name",
+      "title_key": "designer.custom_transonic_theorist.title",
+      "company_id": "preset_naca_alumni_syndicate",
+      "active_years": [1945, 1960],
+      "specialty": "wind_tunnel_and_transonic_theory",
+      "research_branch_bonuses": {
+        "aero": 0.14,
+        "testing": 0.14
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.96,
+        "prototype_build_time_factor": 0.98,
+        "structural_mass_factor": 0.99
+      },
+      "historical_note": "Custom startup chief designer archetype with deep NACA wind-tunnel and compressibility background."
+    },
+    {
+      "id": "designer_custom_systems_integrator",
+      "name_key": "designer.custom_systems_integrator.name",
+      "title_key": "designer.custom_systems_integrator.title",
+      "company_id": "preset_industrialist_venture",
+      "active_years": [1945, 1960],
+      "specialty": "all_weather_weapon_systems",
+      "research_branch_bonuses": {
+        "avionics": 0.14,
+        "armament": 0.10
+      },
+      "design_modifiers": {
+        "cd0_refinement_factor": 0.99,
+        "prototype_build_time_factor": 0.94,
+        "structural_mass_factor": 0.99
+      },
+      "historical_note": "Custom startup chief designer archetype focused on radar, fire control, and guided missile integration."
+    }
+  ]
+}

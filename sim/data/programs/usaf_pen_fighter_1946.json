@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "id": "usaf_pen_fighter_1946",
+  "name_key": "program.usaf_pen_fighter_1946.name",
+  "program_name": "1946 USAAF Long-Range Penetration Fighter & 1950 Fly-Off",
+  "customer": "USAF",
+  "role": "escort_fighter",
+  "mvp_core": true,
+  "issue_date": "1946-02-15",
+  "proposal_due": "1946-06-15",
+  "first_flight_due": "1949-06-01",
+  "ioc_due": "1951-06-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": false,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 6,
+    "missile_capability": []
+  },
+  "criteria": [
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1203800.0,
+      "objective_value": 1481600.0,
+      "weight": 0.35,
+      "unit": "m",
+      "description": "Long-range bomber escort radius (650-800 nmi)"
+    },
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 0.88,
+      "objective_value": 0.98,
+      "weight": 0.3,
+      "unit": "mach",
+      "description": "High-subsonic / transonic level speed (600-706 mph)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 27.94,
+      "objective_value": 45.72,
+      "weight": 0.2,
+      "unit": "mps",
+      "description": "Initial rate of climb (5,500-9,000 ft/min)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 11734.8,
+      "objective_value": 13716.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Service ceiling (38,500-45,000 ft)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 12000000.0,
+    "unit_price_ceiling_usd": 850000.0,
+    "quantity_planned": 150
+  },
+  "acquisition": {
+    "style": "flyoff",
+    "downselect_count": 3,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 3,
+    "urgency": 0.45
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "mcdonnell": 0.35,
+      "north_american": 0.3,
+      "lockheed": 0.25
+    },
+    "congressional_interest": 0.35,
+    "industrial_base_need": {
+      "mcdonnell": 0.5,
+      "lockheed": 0.2,
+      "north_american": 0.1
+    }
+  },
+  "historical": {
+    "winner_company_id": "mcdonnell",
+    "winner_design_name": "Model 36 (XF-88A Voodoo)",
+    "award_date": "1950-08-25",
+    "outcome": "cancelled_after_flyoff",
+    "production_delivered": 2,
+    "notes": "McDonnell XF-88A won the August 1950 Edwards AFB fly-off over Lockheed XF-90A (overweight/underpowered) and North American YF-93A (NACA flush inlet stall & shorter range). Program was cancelled immediately due to Korean War budget reallocation and SAC B-47 doctrine, then revived in Jan 1951 as GOR 101 (F-101 Voodoo).",
+    "citations": [
+      "https://en.wikipedia.org/wiki/McDonnell_XF-88_Voodoo",
+      "https://en.wikipedia.org/wiki/Lockheed_XF-90",
+      "https://en.wikipedia.org/wiki/North_American_YF-93"
+    ],
+    "competitors": [
+      {
+        "company_id": "mcdonnell",
+        "design_name": "Model 36 (XF-88A Voodoo)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1948-10-20",
+        "unit_price_bid_usd": 640000.0,
+        "dev_cost_bid_usd": 6600000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 6,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 70.0,
+        "track_record_at_bid": 0.65,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "combat_radius_m": 1398260.0,
+          "max_mach_alt": 0.96,
+          "climb_rate_sl_mps": 40.64,
+          "service_ceiling_m": 12009.1
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "706 mph (613 kn), 8,000 ft/min climb, 1,509 nmi range (755 nmi radius), 12,140 lb empty, $6.6M R&D."
+      },
+      {
+        "company_id": "lockheed",
+        "design_name": "Model 90 (XF-90A)",
+        "is_historical_winner": false,
+        "built_prototype": true,
+        "first_flight_date": "1949-06-03",
+        "unit_price_bid_usd": 740000.0,
+        "dev_cost_bid_usd": 5100000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 2,
+          "internal_bay": false,
+          "guns_20mm": 6,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 75.0,
+        "track_record_at_bid": 0.6,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "promised_overrides": {
+          "max_mach_alt": 0.95,
+          "climb_rate_sl_mps": 39.62,
+          "service_ceiling_m": 12496.8
+        },
+        "anchor_performance": {
+          "combat_radius_m": 1518640.0,
+          "max_mach_alt": 0.89,
+          "climb_rate_sl_mps": 28.22,
+          "service_ceiling_m": 11887.2
+        },
+        "flyoff_flaws_unfixed_severity": 3,
+        "published_notes": "Severely overweight (18,050 lb empty, 31,060 lb MTOW) due to 75ST structure; needed RATO to take off with full fuel; 5,555 ft/min climb."
+      },
+      {
+        "company_id": "north_american",
+        "design_name": "NA-157 (YF-93A)",
+        "is_historical_winner": false,
+        "built_prototype": true,
+        "first_flight_date": "1950-01-25",
+        "unit_price_bid_usd": 790000.0,
+        "dev_cost_bid_usd": 11500000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": false,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 6,
+          "missile_capability": []
+        },
+        "reputation_at_bid": 76.0,
+        "track_record_at_bid": 0.65,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "promised_overrides": {
+          "combat_radius_m": 1407520.0
+        },
+        "anchor_performance": {
+          "combat_radius_m": 1250100.0,
+          "max_mach_alt": 0.94,
+          "climb_rate_sl_mps": 60.76,
+          "service_ceiling_m": 14264.6
+        },
+        "flyoff_flaws_unfixed_severity": 3,
+        "published_notes": "Flush NACA side intakes suffered severe airflow separation at high AoA; shorter combat radius; $11.5M R&D cost."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": null,
+    "follow_on_program_id": "usaf_gor101_1951",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.9
+  }
+}

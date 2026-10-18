@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "id": "usaf_ws303a_1952",
+  "name_key": "program.usaf_ws303a_1952.name",
+  "program_name": "WS-303A Lightweight Air-Superiority Day Fighter (GOR Dec 1952)",
+  "customer": "USAF",
+  "role": "day_fighter",
+  "mvp_core": true,
+  "issue_date": "1952-12-12",
+  "proposal_due": "1953-01-31",
+  "first_flight_due": "1954-06-01",
+  "ioc_due": "1957-06-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": false,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": false,
+    "min_guns_20mm": 1,
+    "missile_capability": [
+      "ir"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1.8,
+      "objective_value": 2.2,
+      "weight": 0.35,
+      "unit": "mach",
+      "description": "Mach 2.0+ speed at 40,000 ft (Mach 1.80 threshold, 2.20 objective)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 177.8,
+      "objective_value": 243.84,
+      "weight": 0.3,
+      "unit": "mps",
+      "description": "Extraordinary climb rate (35,000-48,000 ft/min)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 16459.2,
+      "objective_value": 17678.4,
+      "weight": 0.2,
+      "unit": "m",
+      "description": "Service ceiling (54,000-58,000 ft, >80,000 ft zoom)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 611160.0,
+      "objective_value": 777840.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "Day air-superiority combat radius (330-420 nmi)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 35000000.0,
+    "unit_price_ceiling_usd": 1400000.0,
+    "quantity_planned": 300
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 4,
+    "urgency": 0.8
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.5,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.15
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "lockheed": 0.45,
+      "north_american": 0.25,
+      "republic": 0.2,
+      "northrop": 0.2
+    },
+    "congressional_interest": 0.4,
+    "industrial_base_need": {
+      "lockheed": 0.55,
+      "northrop": 0.3,
+      "north_american": -0.25,
+      "republic": -0.25
+    }
+  },
+  "historical": {
+    "winner_company_id": "lockheed",
+    "winner_design_name": "Model L-246 (XF-104 Starfighter)",
+    "award_date": "1953-03-11",
+    "outcome": "produced",
+    "production_delivered": 296,
+    "notes": "Originated from Kelly Johnson's Nov 1952 unsolicited L-246 proposal after interviewing Korean War pilots. Lockheed won over Northrop N-102 Fang, Republic AP-55, and NAA NA-212 on unmatched Mach 2.2 / 48,000 ft/min performance and USAF's desire to prevent NAA and Republic from monopolizing fighter production (Knaack, p. 175).",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Lockheed_F-104_Starfighter",
+      "https://en.wikipedia.org/wiki/Northrop_N-102_Fang",
+      "https://www.nationalmuseum.af.mil/Visit/Museum-Exhibits/Fact-Sheets/Display/Article/195837/lockheed-f-104a-starfighter/"
+    ],
+    "competitors": [
+      {
+        "company_id": "lockheed",
+        "design_name": "Model L-246 (XF-104 Starfighter)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1954-03-04",
+        "unit_price_bid_usd": 1006000.0,
+        "dev_cost_bid_usd": 27000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 1,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 84.0,
+        "track_record_at_bid": 0.78,
+        "district_weight": 0.55,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.2,
+          "climb_rate_sl_mps": 243.84,
+          "service_ceiling_m": 17678.4,
+          "combat_radius_m": 675980.0
+        },
+        "flyoff_flaws_unfixed_severity": 1,
+        "published_notes": "1,450 mph (M2.2), 48,000 ft/min climb, 58,000 ft ceiling, GE J79 + M61 Vulcan, flew March 1954 on interim J65."
+      },
+      {
+        "company_id": "northrop",
+        "design_name": "N-102 Fang",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1080000.0,
+        "dev_cost_bid_usd": 29000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 2,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 70.0,
+        "track_record_at_bid": 0.62,
+        "district_weight": 0.48,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.0,
+          "climb_rate_sl_mps": 203.2,
+          "service_ceiling_m": 16764.0,
+          "combat_radius_m": 703760.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Shoulder-mounted delta wing with ventral chin intake and J79; lower top speed and climb than L-246."
+      },
+      {
+        "company_id": "republic",
+        "design_name": "AP-55 Lightweight Day Fighter",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1180000.0,
+        "dev_cost_bid_usd": 31000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 2,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 75.0,
+        "track_record_at_bid": 0.65,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.95,
+          "climb_rate_sl_mps": 193.04,
+          "service_ceiling_m": 16764.0,
+          "combat_radius_m": 666720.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Republic already held F-84F, XF-103, and F-105 contracts."
+      },
+      {
+        "company_id": "north_american",
+        "design_name": "NA-212 Advanced Day Fighter",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1150000.0,
+        "dev_cost_bid_usd": 30000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": false,
+          "guns_20mm": 2,
+          "missile_capability": [
+            "ir"
+          ]
+        },
+        "reputation_at_bid": 82.0,
+        "track_record_at_bid": 0.75,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.9,
+          "climb_rate_sl_mps": 190.5,
+          "service_ceiling_m": 16611.6,
+          "combat_radius_m": 694500.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "NAA already held F-86 and F-100 production."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usaf_sabre45_1951",
+    "follow_on_program_id": "usaf_gor127_n156_1956",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}

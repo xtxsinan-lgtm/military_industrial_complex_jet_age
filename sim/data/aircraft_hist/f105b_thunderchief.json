@@ -1,0 +1,117 @@
+{
+  "id": "f105b_thunderchief",
+  "name": "Republic F-105B Thunderchief",
+  "company_id": "republic",
+  "created_date": "1956-05-26",
+  "crew_count": 1,
+  "role_tags": [
+    "fighter_bomber"
+  ],
+  "wing": {
+    "area_m2": 35.76,
+    "aspect_ratio": 3.16,
+    "sweep_qc_deg": 45.0,
+    "taper_ratio": 0.47,
+    "tc_root": 0.055,
+    "tc_tip": 0.04,
+    "airfoil_ref": "65A005.5",
+    "planform_type": "conventional",
+    "position": "mid",
+    "x_le_root_frac": 0.38,
+    "dihedral_deg": -3.5,
+    "incidence_deg": 0.5,
+    "twist_deg": -1.0,
+    "conical_camber": true,
+    "devices": [
+      "slotted_flaps",
+      "le_flaps"
+    ]
+  },
+  "fuselage": {
+    "length_m": 19.2,
+    "max_diameter_m": 1.82,
+    "nose_fineness": 3.1,
+    "tail_fineness": 3.4,
+    "canopy_type": "faired",
+    "area_ruled": true,
+    "area_rule_waist_frac": 0.65
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": false,
+    "all_moving_tail": true,
+    "ht_area_m2": 5.5,
+    "ht_aspect_ratio": 3.4,
+    "ht_sweep_qc_deg": 45.0,
+    "vt_area_m2": 5.6,
+    "vt_aspect_ratio": 1.4,
+    "vt_sweep_qc_deg": 46.0
+  },
+  "intake": {
+    "type": "wing_root",
+    "compression": "variable_ramp",
+    "variable": true,
+    "spike": false
+  },
+  "propulsion": {
+    "engine_id": "J75-P-5",
+    "count": 1,
+    "afterburner": true,
+    "x_cg_frac": 0.62
+  },
+  "structure": {
+    "design_load_factor_g": 8.0,
+    "material_mix": {
+      "al": 0.78,
+      "steel": 0.14,
+      "ti": 0.08
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 3550.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 1150.0,
+    "combat_uses_drop_tanks": true
+  },
+  "systems": {
+    "radar_id": "ma1",
+    "fire_control_id": null,
+    "avionics_level": 4,
+    "powered_controls": true,
+    "stability_augmentation": true,
+    "ejection_seat": true,
+    "inflight_refuel": true,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "m61_20mm",
+        "count": 1,
+        "rounds_per_gun": 1028
+      }
+    ],
+    "hardpoints": 5,
+    "internal_bay": true,
+    "missile_ids": []
+  },
+  "published_performance": {
+    "empty_mass_kg": 11790.0,
+    "combat_mass_kg": 14600.0,
+    "mtow_kg": 21000.0,
+    "max_mach_sl": 1.11,
+    "max_mach_alt": 2.02,
+    "alt_of_max_mach_m": 10668.0,
+    "climb_rate_sl_mps": 160.0,
+    "service_ceiling_m": 15850.0,
+    "combat_radius_m": 1150000.0,
+    "ferry_range_m": 3200000.0,
+    "stall_speed_mps": 72.0,
+    "takeoff_distance_m": 1420.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-105B Thunderchief (1958)",
+      "Knaack, Encyclopedia of US Air Force Aircraft and Missile Systems Vol. 1, pp. 191-198 (1978)"
+    ]
+  }
+}

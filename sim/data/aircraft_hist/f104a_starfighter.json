@@ -1,0 +1,122 @@
+{
+  "id": "f104a_starfighter",
+  "name": "Lockheed F-104A Starfighter",
+  "company_id": "lockheed",
+  "created_date": "1956-02-17",
+  "crew_count": 1,
+  "role_tags": [
+    "interceptor",
+    "day_fighter"
+  ],
+  "wing": {
+    "area_m2": 18.22,
+    "aspect_ratio": 2.45,
+    "sweep_qc_deg": 18.1,
+    "taper_ratio": 0.38,
+    "tc_root": 0.0336,
+    "tc_tip": 0.0336,
+    "airfoil_ref": "biconvex:0.0336",
+    "planform_type": "conventional",
+    "position": "mid",
+    "x_le_root_frac": 0.44,
+    "dihedral_deg": -10.0,
+    "incidence_deg": 0.0,
+    "twist_deg": 0.0,
+    "devices": [
+      "plain_flaps",
+      "blown_flaps",
+      "le_flaps"
+    ]
+  },
+  "fuselage": {
+    "length_m": 16.66,
+    "max_diameter_m": 1.38,
+    "nose_fineness": 3.6,
+    "tail_fineness": 3.5,
+    "canopy_type": "faired",
+    "area_ruled": true,
+    "area_rule_waist_frac": 0.5
+  },
+  "empennage": {
+    "tailless": false,
+    "t_tail": true,
+    "all_moving_tail": true,
+    "ht_area_m2": 4.48,
+    "ht_aspect_ratio": 2.9,
+    "ht_sweep_qc_deg": 18.0,
+    "vt_area_m2": 4.05,
+    "vt_aspect_ratio": 1.2,
+    "vt_sweep_qc_deg": 35.0
+  },
+  "intake": {
+    "type": "cheek",
+    "compression": "fixed_spike",
+    "variable": false,
+    "spike": true
+  },
+  "propulsion": {
+    "engine_id": "J79-GE-3A",
+    "count": 1,
+    "afterburner": true,
+    "x_cg_frac": 0.62
+  },
+  "structure": {
+    "design_load_factor_g": 7.33,
+    "material_mix": {
+      "al": 0.76,
+      "steel": 0.14,
+      "ti": 0.1
+    },
+    "carrier_capable": false
+  },
+  "fuel": {
+    "internal_kg": 2690.0,
+    "drop_tanks_count": 2,
+    "drop_tank_fuel_kg_each": 510.0,
+    "combat_uses_drop_tanks": false
+  },
+  "systems": {
+    "radar_id": "apg30",
+    "fire_control_id": null,
+    "avionics_level": 3,
+    "powered_controls": true,
+    "stability_augmentation": true,
+    "ejection_seat": true,
+    "inflight_refuel": false,
+    "pressurized_cockpit": true
+  },
+  "armament": {
+    "guns": [
+      {
+        "gun_id": "m61_20mm",
+        "count": 1,
+        "rounds_per_gun": 725
+      }
+    ],
+    "hardpoints": 2,
+    "internal_bay": false,
+    "missile_ids": [
+      "aim9b_sidewinder",
+      "aim9b_sidewinder"
+    ]
+  },
+  "published_performance": {
+    "empty_mass_kg": 6070.0,
+    "combat_mass_kg": 7850.0,
+    "mtow_kg": 10450.0,
+    "max_mach_sl": 1.12,
+    "max_mach_alt": 2.0,
+    "alt_of_max_mach_m": 10668.0,
+    "climb_rate_sl_mps": 165.0,
+    "service_ceiling_m": 18200.0,
+    "combat_radius_m": 620000.0,
+    "ferry_range_m": 2250000.0,
+    "stall_speed_mps": 66.0,
+    "takeoff_distance_m": 1150.0,
+    "sources": [
+      "USAF Standard Aircraft Characteristics: F-104A Starfighter (1958)",
+      "Loftin, Quest for Performance, NASA SP-468, Table V & Ch. 11 (1985)",
+      "Knaack, Encyclopedia of US Air Force Aircraft and Missile Systems Vol. 1, pp. 176-183 (1978)"
+    ]
+  }
+}

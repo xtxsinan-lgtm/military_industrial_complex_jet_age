@@ -1,0 +1,2105 @@
+{
+  "flaws": [
+    {
+      "id": "swept_wing_pitch_up",
+      "name": "Swept-Wing Sabre Dance / Pitch-Up",
+      "family": "pitch_up",
+      "category": "aerodynamics",
+      "base_severity": 4,
+      "known_from_year": 1949,
+      "unknown_symptom_label": "Unexplained violent high-alpha nose-up departure",
+      "historical_examples": ["F-86A/E Sabre", "F-100A Super Sabre", "F-101A Voodoo"],
+      "max_prob": 0.85,
+      "novelty_features": ["swept_wing", "high_sweep", "t_tail"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "sweep_deg", "min": 22.0, "full": 32.0}],
+        "ramps": [{"feature": "shortal_maggin_excess", "x0": -0.5, "x1": 1.5, "weight": 0.42}],
+        "flags": [{"feature": "is_t_tail", "add": 0.22}],
+        "multipliers": [
+          {"feature": "has_le_slats", "mul": 0.45},
+          {"feature": "has_wing_fences", "mul": 0.55},
+          {"feature": "has_sawtooth_le", "mul": 0.50}
+        ]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.08,
+        "low_speed_tunnel": 0.35,
+        "transonic_slotted": 0.50,
+        "spin_tunnel": 0.40,
+        "flight:low_speed": 0.45,
+        "flight:maneuver": 0.82,
+        "flight:high_aoa_spin": 0.88
+      },
+      "flight_incident": {"encounter_weight": 0.35, "crash_prob_given_encounter": 0.18},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {
+          "instantaneous_turn_dps_m08_4572m": 0.86,
+          "sustained_turn_dps_m08_4572m": 0.92
+        }
+      },
+      "placard": {
+        "name": "AoA / G-Limiter Placard",
+        "metric_multipliers": {
+          "instantaneous_turn_dps_m08_4572m": 0.80,
+          "sustained_turn_dps_m08_4572m": 0.88,
+          "max_load_factor_g": 0.85
+        },
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.55,
+        "accident_rate_per_1000fh": 0.18,
+        "grounding_days": 45,
+        "rep_penalty": 8.0
+      },
+      "fixes": [
+        {
+          "id": "wing_fences",
+          "name": "Install Boundary-Layer Wing Fences",
+          "available_year": 1948,
+          "required_tech": null,
+          "base_cost_1950_usd": 45000.0,
+          "retrofit_kit_1950_usd": 1800.0,
+          "fix_days": 21,
+          "residual_factor": 0.20,
+          "driver_log_deltas": {"cd0": 0.015, "mass": 0.004},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "sawtooth_le_dogtooth",
+          "name": "Sawtooth / Dogtooth Leading-Edge Extension",
+          "available_year": 1952,
+          "required_tech": null,
+          "base_cost_1950_usd": 95000.0,
+          "retrofit_kit_1950_usd": 4200.0,
+          "fix_days": 38,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"cd0": 0.008, "mass": 0.006},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "auto_le_slats",
+          "name": "Retrofit Automatic Leading-Edge Slats",
+          "available_year": 1947,
+          "required_tech": "aero.le_slats",
+          "base_cost_1950_usd": 140000.0,
+          "retrofit_kit_1950_usd": 6500.0,
+          "fix_days": 50,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"cd0": 0.012, "clmax": 0.08, "mass": 0.018},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "deep_stall_t_tail",
+      "name": "T-Tail Locked-In Deep Stall",
+      "family": "pitch_up",
+      "category": "aerodynamics",
+      "base_severity": 5,
+      "known_from_year": 1954,
+      "unknown_symptom_label": "Irrecoverable high-alpha tail blanketing stall",
+      "historical_examples": ["F-101A Voodoo", "XF-104 Starfighter"],
+      "max_prob": 0.80,
+      "novelty_features": ["t_tail", "high_sweep"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [
+          {"feature": "is_t_tail", "min": 0.5, "full": 1.0},
+          {"feature": "sweep_deg", "min": 24.0, "full": 36.0}
+        ],
+        "ramps": [
+          {"feature": "shortal_maggin_excess", "x0": -0.8, "x1": 1.2, "weight": 0.35},
+          {"feature": "wing_loading_kgm2", "x0": 260.0, "x1": 480.0, "weight": 0.18}
+        ],
+        "flags": [],
+        "multipliers": [{"feature": "has_le_flaps", "mul": 0.70}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.04,
+        "low_speed_tunnel": 0.25,
+        "spin_tunnel": 0.55,
+        "flight:low_speed": 0.35,
+        "flight:maneuver": 0.65,
+        "flight:high_aoa_spin": 0.85
+      },
+      "flight_incident": {"encounter_weight": 0.30, "crash_prob_given_encounter": 0.32},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.84}
+      },
+      "placard": {
+        "name": "Hard Pitch / AoA Horn Restriction",
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.76, "max_load_factor_g": 0.82},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.24,
+        "grounding_days": 60,
+        "rep_penalty": 11.0
+      },
+      "fixes": [
+        {
+          "id": "active_stick_pusher",
+          "name": "Install Automatic Pneumatic Stick Pusher & AoA Vane",
+          "available_year": 1954,
+          "required_tech": null,
+          "base_cost_1950_usd": 75000.0,
+          "retrofit_kit_1950_usd": 3200.0,
+          "fix_days": 30,
+          "residual_factor": 0.15,
+          "driver_log_deltas": {"mass": 0.005, "maint": 0.03},
+          "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.94}
+        },
+        {
+          "id": "lower_stabilizer_relocation",
+          "name": "Relocate Horizontal Tail to Low Fuselage Position",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 240000.0,
+          "retrofit_kit_1950_usd": 14000.0,
+          "fix_days": 75,
+          "residual_factor": 0.04,
+          "driver_log_deltas": {"mass": 0.022, "cd0": 0.010},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "inertia_roll_coupling",
+      "name": "Supersonic Roll-Inertia Pitch/Yaw Coupling",
+      "family": "inertia_coupling",
+      "category": "stability_control",
+      "base_severity": 5,
+      "known_from_year": 1954,
+      "unknown_symptom_label": "Catastrophic unexplained yaw-pitch structural divergence in rapid roll",
+      "historical_examples": ["F-100A Super Sabre (George Welch crash)", "Douglas X-3 Stiletto", "F-104A"],
+      "max_prob": 0.85,
+      "novelty_features": ["supersonic_level", "thin_wing", "high_sweep"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "max_mach_nom", "min": 0.94, "full": 1.25}],
+        "ramps": [
+          {"feature": "inertia_coupling_index", "x0": 2.2, "x1": 6.5, "weight": 0.52},
+          {"feature": "fuselage_to_span_ratio", "x0": 1.15, "x1": 2.10, "weight": 0.25}
+        ],
+        "flags": [],
+        "multipliers": [{"feature": "has_sas", "mul": 0.45}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.03,
+        "supersonic_tunnel": 0.28,
+        "flight:speed_envelope": 0.72,
+        "flight:maneuver": 0.78
+      },
+      "flight_incident": {"encounter_weight": 0.38, "crash_prob_given_encounter": 0.35},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"sustained_turn_dps_m08_4572m": 0.90}
+      },
+      "placard": {
+        "name": "Half-Deflection Aileron & Supersonic Roll Placard",
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.82, "sustained_turn_dps_m08_4572m": 0.86},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.65,
+        "accident_rate_per_1000fh": 0.28,
+        "grounding_days": 75,
+        "rep_penalty": 12.0
+      },
+      "fixes": [
+        {
+          "id": "enlarged_vertical_fin",
+          "name": "27% Enlarged Tall Vertical Fin & Wingtip Extensions (F-100A Fix)",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 165000.0,
+          "retrofit_kit_1950_usd": 7800.0,
+          "fix_days": 52,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"cd0": 0.016, "cdw": 0.015, "mass": 0.018},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "three_axis_sas_damper",
+          "name": "Install 3-Axis Stability Augmentation Yaw/Pitch Damper",
+          "available_year": 1951,
+          "required_tech": "systems.stability_augmentation",
+          "base_cost_1950_usd": 120000.0,
+          "retrofit_kit_1950_usd": 5500.0,
+          "fix_days": 40,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"mass": 0.008, "maint": 0.05},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "supersonic_directional_instability",
+      "name": "Supersonic Cn_beta Weathercock Instability",
+      "family": "inertia_coupling",
+      "category": "stability_control",
+      "base_severity": 4,
+      "known_from_year": 1953,
+      "unknown_symptom_label": "High-Mach directional divergence and vertical fin unloading",
+      "historical_examples": ["F-100C", "F-102A", "F8U-1 Crusader", "F-104A"],
+      "max_prob": 0.80,
+      "novelty_features": ["supersonic_level", "mach2_regime"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "max_mach_nom", "min": 1.20, "full": 1.65}],
+        "ramps": [
+          {"feature": "vv_deficit", "x0": -0.01, "x1": 0.04, "weight": 0.45},
+          {"feature": "max_mach_nom", "x0": 1.30, "x1": 2.10, "weight": 0.25}
+        ],
+        "flags": [],
+        "multipliers": [{"feature": "has_sas", "mul": 0.55}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.05,
+        "supersonic_tunnel": 0.58,
+        "flight:speed_envelope": 0.82
+      },
+      "flight_incident": {"encounter_weight": 0.30, "crash_prob_given_encounter": 0.24},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"max_mach_alt": 0.93}
+      },
+      "placard": {
+        "name": "Supersonic Mach Limit Placard",
+        "metric_multipliers": {"max_mach_alt": 0.88},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.50,
+        "accident_rate_per_1000fh": 0.20,
+        "grounding_days": 45,
+        "rep_penalty": 7.5
+      },
+      "fixes": [
+        {
+          "id": "ventral_dorsal_fins",
+          "name": "Install Ventral Strake & Extended Dorsal Fin",
+          "available_year": 1952,
+          "required_tech": null,
+          "base_cost_1950_usd": 85000.0,
+          "retrofit_kit_1950_usd": 3800.0,
+          "fix_days": 32,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"cd0": 0.012, "mass": 0.009},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "transonic_mach_tuck",
+      "name": "Transonic Nose-Down Mach Tuck & Elevator Lock",
+      "family": "transonic_control_loss",
+      "category": "stability_control",
+      "base_severity": 3,
+      "known_from_year": 1945,
+      "unknown_symptom_label": "Severe transonic dive recovery loss",
+      "historical_examples": ["P-80A Shooting Star", "F-86A Sabre", "F9F Panther"],
+      "max_prob": 0.85,
+      "novelty_features": ["transonic_target", "swept_wing"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [{"feature": "max_mach_nom", "min": 0.80, "full": 0.94}],
+        "ramps": [
+          {"feature": "ac_shift_mac", "x0": 0.02, "x1": 0.12, "weight": 0.45},
+          {"feature": "mach_dd_excess", "x0": -0.04, "x1": 0.12, "weight": 0.30}
+        ],
+        "flags": [],
+        "multipliers": [{"feature": "has_all_moving_tail", "mul": 0.20}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.12,
+        "transonic_bump": 0.48,
+        "rocket_model": 0.52,
+        "transonic_slotted": 0.68,
+        "flight:speed_envelope": 0.88
+      },
+      "flight_incident": {"encounter_weight": 0.32, "crash_prob_given_encounter": 0.16},
+      "truth_effects": {
+        "driver_log_deltas": {"cdw": 0.04},
+        "metric_multipliers": {"max_mach_sl": 0.95, "max_mach_alt": 0.95}
+      },
+      "placard": {
+        "name": "Redline Dive Mach Placard (M 0.90)",
+        "metric_multipliers": {"max_mach_sl": 0.91, "max_mach_alt": 0.91},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.50,
+        "accident_rate_per_1000fh": 0.15,
+        "grounding_days": 30,
+        "rep_penalty": 6.0
+      },
+      "fixes": [
+        {
+          "id": "all_flying_tail_conversion",
+          "name": "Convert to All-Moving Power Stabilator (F-86E Type)",
+          "available_year": 1948,
+          "required_tech": "aero.all_moving_tail",
+          "base_cost_1950_usd": 150000.0,
+          "retrofit_kit_1950_usd": 7200.0,
+          "fix_days": 48,
+          "residual_factor": 0.06,
+          "driver_log_deltas": {"mass": 0.012, "cdw": -0.02},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "mach_trim_compensator",
+          "name": "Install Electric Mach Trim Pitch Compensator",
+          "available_year": 1946,
+          "required_tech": null,
+          "base_cost_1950_usd": 55000.0,
+          "retrofit_kit_1950_usd": 2200.0,
+          "fix_days": 24,
+          "residual_factor": 0.22,
+          "driver_log_deltas": {"mass": 0.003, "maint": 0.02},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "transonic_control_heaviness",
+      "name": "Transonic Hinge-Moment Control Freezing",
+      "family": "transonic_control_loss",
+      "category": "stability_control",
+      "base_severity": 3,
+      "known_from_year": 1946,
+      "unknown_symptom_label": "Extreme stick force lockup at high dynamic pressure",
+      "historical_examples": ["F-84B Thunderjet", "F2H Banshee"],
+      "max_prob": 0.85,
+      "novelty_features": ["transonic_target"],
+      "trigger": {
+        "base": 0.06,
+        "gates": [{"feature": "max_mach_nom", "min": 0.82, "full": 0.94}],
+        "ramps": [{"feature": "q_dive_kpa", "x0": 45.0, "x1": 90.0, "weight": 0.55}],
+        "flags": [],
+        "multipliers": [{"feature": "has_powered_controls", "mul": 0.12}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.15,
+        "transonic_slotted": 0.45,
+        "flight:speed_envelope": 0.86,
+        "flight:maneuver": 0.75
+      },
+      "flight_incident": {"encounter_weight": 0.25, "crash_prob_given_encounter": 0.12},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.85, "sustained_turn_dps_m08_4572m": 0.90}
+      },
+      "placard": {
+        "name": "High-Speed IAS Maneuver Restriction",
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.80, "max_mach_sl": 0.93},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.12,
+        "grounding_days": 20,
+        "rep_penalty": 5.0
+      },
+      "fixes": [
+        {
+          "id": "hydraulic_irreversible_boost",
+          "name": "Install Irreversible Hydraulic Flight Control Actuators",
+          "available_year": 1947,
+          "required_tech": "systems.powered_controls",
+          "base_cost_1950_usd": 135000.0,
+          "retrofit_kit_1950_usd": 6200.0,
+          "fix_days": 45,
+          "residual_factor": 0.05,
+          "driver_log_deltas": {"mass": 0.015, "maint": 0.04},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "spring_servo_tabs",
+          "name": "Geared Aerodynamic Balance & Spring Servo Tabs",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 48000.0,
+          "retrofit_kit_1950_usd": 1900.0,
+          "fix_days": 20,
+          "residual_factor": 0.25,
+          "driver_log_deltas": {"cd0": 0.008},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "transonic_buffet_boundary",
+      "name": "Severe Transonic Shock-Induced Wing Buffet",
+      "family": "transonic_control_loss",
+      "category": "aerodynamics",
+      "base_severity": 3,
+      "known_from_year": 1947,
+      "unknown_symptom_label": "Violent airframe buffeting limiting usable g at Mach 0.8+",
+      "historical_examples": ["F-86A", "F9F-2", "F3D Skyknight"],
+      "max_prob": 0.80,
+      "novelty_features": ["transonic_target", "swept_wing"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "max_mach_nom", "min": 0.76, "full": 0.88}],
+        "ramps": [
+          {"feature": "tc_ratio", "x0": 0.075, "x1": 0.125, "weight": 0.42},
+          {"feature": "mach_dd_excess", "x0": -0.03, "x1": 0.10, "weight": 0.30}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.10,
+        "transonic_bump": 0.45,
+        "transonic_slotted": 0.62,
+        "flight:speed_envelope": 0.72,
+        "flight:maneuver": 0.84
+      },
+      "flight_incident": {"encounter_weight": 0.20, "crash_prob_given_encounter": 0.06},
+      "truth_effects": {
+        "driver_log_deltas": {"kind": 0.06},
+        "metric_multipliers": {"sustained_turn_dps_m08_4572m": 0.89, "instantaneous_turn_dps_m08_4572m": 0.88}
+      },
+      "placard": {
+        "name": "Transonic Buffet G-Limit Table",
+        "metric_multipliers": {"sustained_turn_dps_m08_4572m": 0.85, "instantaneous_turn_dps_m08_4572m": 0.84},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.40,
+        "accident_rate_per_1000fh": 0.06,
+        "grounding_days": 0,
+        "rep_penalty": 4.5
+      },
+      "fixes": [
+        {
+          "id": "vortex_generators",
+          "name": "Install Upper-Surface Wing Vortex Generators",
+          "available_year": 1949,
+          "required_tech": null,
+          "base_cost_1950_usd": 38000.0,
+          "retrofit_kit_1950_usd": 1400.0,
+          "fix_days": 16,
+          "residual_factor": 0.18,
+          "driver_log_deltas": {"cd0": 0.010},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "control_surface_buzz",
+      "name": "Transonic Shock-Oscillation Aileron Buzz",
+      "family": "transonic_control_loss",
+      "category": "aeroelasticity",
+      "base_severity": 2,
+      "known_from_year": 1946,
+      "unknown_symptom_label": "High-frequency control surface oscillation near M 0.82",
+      "historical_examples": ["P-80A Shooting Star", "F-84C"],
+      "max_prob": 0.75,
+      "novelty_features": ["transonic_target"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "max_mach_nom", "min": 0.78, "full": 0.88}],
+        "ramps": [{"feature": "tc_ratio", "x0": 0.08, "x1": 0.13, "weight": 0.48}],
+        "flags": [],
+        "multipliers": [{"feature": "has_powered_controls", "mul": 0.35}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.06,
+        "transonic_bump": 0.45,
+        "transonic_slotted": 0.58,
+        "flutter_model": 0.55,
+        "flight:speed_envelope": 0.80
+      },
+      "flight_incident": {"encounter_weight": 0.22, "crash_prob_given_encounter": 0.08},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"max_mach_sl": 0.96}
+      },
+      "placard": {
+        "name": "Mach 0.82 Buzz Placard",
+        "metric_multipliers": {"max_mach_sl": 0.92, "max_mach_alt": 0.93},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.38,
+        "accident_rate_per_1000fh": 0.08,
+        "grounding_days": 0,
+        "rep_penalty": 3.5
+      },
+      "fixes": [
+        {
+          "id": "viscous_hinge_dampers",
+          "name": "Install Hydraulic Viscous Control Hinge Dampers",
+          "available_year": 1946,
+          "required_tech": null,
+          "base_cost_1950_usd": 42000.0,
+          "retrofit_kit_1950_usd": 1600.0,
+          "fix_days": 18,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"mass": 0.004, "maint": 0.015},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "aileron_reversal",
+      "name": "High-Q Aeroelastic Aileron Reversal",
+      "family": "aileron_reversal",
+      "category": "aeroelasticity",
+      "base_severity": 4,
+      "known_from_year": 1947,
+      "unknown_symptom_label": "Control reversal in high-speed dive due to wing twist",
+      "historical_examples": ["F-86A", "F-84F", "B-47 Stratojet"],
+      "max_prob": 0.82,
+      "novelty_features": ["swept_wing", "high_sweep", "thin_wing"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "q_dive_kpa", "min": 45.0, "full": 85.0}],
+        "ramps": [
+          {"feature": "torsion_flex_index", "x0": 3.5, "x1": 12.0, "weight": 0.52},
+          {"feature": "sweep_deg", "x0": 25.0, "x1": 45.0, "weight": 0.20}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.08,
+        "flutter_model": 0.62,
+        "transonic_slotted": 0.40,
+        "flight:speed_envelope": 0.84,
+        "flight:maneuver": 0.68
+      },
+      "flight_incident": {"encounter_weight": 0.30, "crash_prob_given_encounter": 0.18},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"max_mach_sl": 0.94}
+      },
+      "placard": {
+        "name": "Low-Altitude Vne IAS Limit Placard",
+        "metric_multipliers": {"max_mach_sl": 0.89},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.48,
+        "accident_rate_per_1000fh": 0.16,
+        "grounding_days": 35,
+        "rep_penalty": 7.0
+      },
+      "fixes": [
+        {
+          "id": "wing_torsion_box_stiffening",
+          "name": "Heavy-Gauge Wing Torsion Box & Inboard Aileron Lockout",
+          "available_year": 1947,
+          "required_tech": null,
+          "base_cost_1950_usd": 130000.0,
+          "retrofit_kit_1950_usd": 5800.0,
+          "fix_days": 42,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"mass": 0.024, "cost_unit": 0.018},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "spoiler_roll_control",
+          "name": "Mid-Chord Roll Spoilers & Differential Tail",
+          "available_year": 1952,
+          "required_tech": "systems.powered_controls",
+          "base_cost_1950_usd": 160000.0,
+          "retrofit_kit_1950_usd": 7200.0,
+          "fix_days": 48,
+          "residual_factor": 0.06,
+          "driver_log_deltas": {"mass": 0.012, "maint": 0.03},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "wing_bending_torsion_flutter",
+      "name": "Explosive Wing Bending-Torsion Flutter",
+      "family": "flutter",
+      "category": "aeroelasticity",
+      "base_severity": 5,
+      "known_from_year": 1945,
+      "unknown_symptom_label": "Catastrophic in-flight wing disintegration at high IAS",
+      "historical_examples": ["F-84B", "XF-104", "F-100C with external stores"],
+      "max_prob": 0.80,
+      "novelty_features": ["thin_wing", "swept_wing", "transonic_target"],
+      "trigger": {
+        "base": 0.03,
+        "gates": [{"feature": "q_dive_kpa", "min": 50.0, "full": 95.0}],
+        "ramps": [
+          {"feature": "torsion_flex_index", "x0": 4.0, "x1": 13.0, "weight": 0.45},
+          {"feature": "hardpoints", "x0": 2.0, "x1": 6.0, "weight": 0.18}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.06,
+        "flutter_model": 0.70,
+        "flight:speed_envelope": 0.82,
+        "flight:weapons_stores": 0.60
+      },
+      "flight_incident": {"encounter_weight": 0.35, "crash_prob_given_encounter": 0.38},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"max_mach_sl": 0.92}
+      },
+      "placard": {
+        "name": "Strict Vne Dive Speed Restriction",
+        "metric_multipliers": {"max_mach_sl": 0.86, "max_mach_alt": 0.92},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.52,
+        "accident_rate_per_1000fh": 0.26,
+        "grounding_days": 60,
+        "rep_penalty": 11.5
+      },
+      "fixes": [
+        {
+          "id": "wing_skin_spar_beefup",
+          "name": "Thickened Milled Wing Skins & Leading-Edge Mass Balance",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 175000.0,
+          "retrofit_kit_1950_usd": 8200.0,
+          "fix_days": 55,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.028, "cost_unit": 0.022},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "empennage_t_tail_flutter",
+      "name": "Empennage & T-Tail Aeroelastic Flutter",
+      "family": "flutter",
+      "category": "aeroelasticity",
+      "base_severity": 4,
+      "known_from_year": 1947,
+      "unknown_symptom_label": "Violent tail section oscillation and fin failure",
+      "historical_examples": ["F-89 Scorpion", "F-104A Starfighter", "F-101 Voodoo"],
+      "max_prob": 0.78,
+      "novelty_features": ["t_tail", "thin_wing", "supersonic_level"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "q_dive_kpa", "min": 48.0, "full": 90.0}],
+        "ramps": [{"feature": "max_mach_nom", "x0": 0.88, "x1": 1.60, "weight": 0.35}],
+        "flags": [{"feature": "is_t_tail", "add": 0.28}],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.05,
+        "flutter_model": 0.68,
+        "flight:speed_envelope": 0.80
+      },
+      "flight_incident": {"encounter_weight": 0.30, "crash_prob_given_encounter": 0.30},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"max_mach_sl": 0.94}
+      },
+      "placard": {
+        "name": "Empennage Dynamic Pressure Limit",
+        "metric_multipliers": {"max_mach_sl": 0.89, "max_mach_alt": 0.93},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.22,
+        "grounding_days": 50,
+        "rep_penalty": 9.0
+      },
+      "fixes": [
+        {
+          "id": "tail_spar_mass_balance",
+          "name": "Fin Spar Stiffening & Irreversible Stabilator Mass Balance",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 115000.0,
+          "retrofit_kit_1950_usd": 5200.0,
+          "fix_days": 38,
+          "residual_factor": 0.09,
+          "driver_log_deltas": {"mass": 0.016, "cost_unit": 0.012},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "panel_transonic_flutter",
+      "name": "Supersonic Aerodynamic Skin Panel Flutter",
+      "family": "flutter",
+      "category": "aeroelasticity",
+      "base_severity": 3,
+      "known_from_year": 1953,
+      "unknown_symptom_label": "High-Mach skin panel acoustic fatigue and buckling",
+      "historical_examples": ["F-100D", "F-105B", "B-58 Hustler"],
+      "max_prob": 0.75,
+      "novelty_features": ["supersonic_level", "mach2_regime"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "max_mach_nom", "min": 1.15, "full": 1.75}],
+        "ramps": [{"feature": "q_dive_kpa", "x0": 60.0, "x1": 110.0, "weight": 0.45}],
+        "flags": [],
+        "multipliers": [{"feature": "has_honeycomb", "mul": 0.35}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.04,
+        "supersonic_tunnel": 0.40,
+        "flutter_model": 0.50,
+        "flight:speed_envelope": 0.76
+      },
+      "flight_incident": {"encounter_weight": 0.20, "crash_prob_given_encounter": 0.10},
+      "truth_effects": {
+        "driver_log_deltas": {"maint": 0.12},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Supersonic Low-Level Dash Time Limit",
+        "metric_multipliers": {"max_mach_sl": 0.93},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.42,
+        "accident_rate_per_1000fh": 0.09,
+        "grounding_days": 20,
+        "rep_penalty": 5.0
+      },
+      "fixes": [
+        {
+          "id": "skin_doublers_honeycomb",
+          "name": "Internal Frame Doublers & Bonded Skin Stiffeners",
+          "available_year": 1950,
+          "required_tech": null,
+          "base_cost_1950_usd": 85000.0,
+          "retrofit_kit_1950_usd": 3600.0,
+          "fix_days": 30,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"mass": 0.012, "maint": -0.08},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "unrecoverable_flat_spin",
+      "name": "Irrecoverable Flat Spin Mode",
+      "family": "spin",
+      "category": "stability_control",
+      "base_severity": 5,
+      "known_from_year": 1945,
+      "unknown_symptom_label": "Locked flat spin with zero rudder recovery authority",
+      "historical_examples": ["F7U Cutlass", "XF-92A", "F-100A", "F-104A"],
+      "max_prob": 0.80,
+      "novelty_features": ["delta_wing", "high_sweep", "t_tail"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "sweep_deg", "min": 20.0, "full": 38.0}],
+        "ramps": [
+          {"feature": "fuselage_to_span_ratio", "x0": 1.10, "x1": 2.00, "weight": 0.35},
+          {"feature": "vv_deficit", "x0": -0.01, "x1": 0.04, "weight": 0.30}
+        ],
+        "flags": [{"feature": "is_t_tail", "add": 0.14}],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.05,
+        "spin_tunnel": 0.72,
+        "flight:high_aoa_spin": 0.86,
+        "flight:maneuver": 0.40
+      },
+      "flight_incident": {"encounter_weight": 0.36, "crash_prob_given_encounter": 0.36},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.90}
+      },
+      "placard": {
+        "name": "Intentional Spin Prohibited / AoA Placard",
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.84, "sustained_turn_dps_m08_4572m": 0.90},
+        "residual_hazard_factor": 0.28
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.48,
+        "accident_rate_per_1000fh": 0.25,
+        "grounding_days": 45,
+        "rep_penalty": 9.5
+      },
+      "fixes": [
+        {
+          "id": "ventral_strakes_unshielded_rudder",
+          "name": "Aft Fuselage Anti-Spin Strakes & Extended Rudder Chord",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 92000.0,
+          "retrofit_kit_1950_usd": 4100.0,
+          "fix_days": 34,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"cd0": 0.011, "mass": 0.009},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "swept_wing_dutch_roll",
+      "name": "Lightly Damped High-Altitude Dutch Roll",
+      "family": "spin",
+      "category": "stability_control",
+      "base_severity": 2,
+      "known_from_year": 1948,
+      "unknown_symptom_label": "Nuisance coupled yaw-roll oscillation ruining gun/rocket tracking",
+      "historical_examples": ["F-86A", "B-47", "F-89"],
+      "max_prob": 0.85,
+      "novelty_features": ["swept_wing", "high_sweep"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [{"feature": "sweep_deg", "min": 22.0, "full": 35.0}],
+        "ramps": [
+          {"feature": "vv_deficit", "x0": -0.02, "x1": 0.03, "weight": 0.38},
+          {"feature": "service_ceiling_nom_m", "x0": 12000.0, "x1": 16000.0, "weight": 0.25}
+        ],
+        "flags": [],
+        "multipliers": [{"feature": "has_sas", "mul": 0.22}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.12,
+        "low_speed_tunnel": 0.38,
+        "flight:altitude_envelope": 0.78,
+        "flight:weapons_stores": 0.70
+      },
+      "flight_incident": {"encounter_weight": 0.15, "crash_prob_given_encounter": 0.03},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"sustained_turn_dps_m08_4572m": 0.94}
+      },
+      "placard": {
+        "name": "High-Altitude Autopilot / Rudder Coordination Restriction",
+        "metric_multipliers": {"service_ceiling_m": 0.94},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.04,
+        "grounding_days": 0,
+        "rep_penalty": 3.5
+      },
+      "fixes": [
+        {
+          "id": "single_axis_yaw_damper",
+          "name": "Install Rate-Gyro Automatic Rudder Yaw Damper",
+          "available_year": 1949,
+          "required_tech": "systems.stability_augmentation",
+          "base_cost_1950_usd": 52000.0,
+          "retrofit_kit_1950_usd": 2100.0,
+          "fix_days": 22,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.004, "maint": 0.02},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "high_aoa_adverse_yaw",
+      "name": "High-Alpha Aileron Adverse Yaw Departure",
+      "family": "spin",
+      "category": "stability_control",
+      "base_severity": 3,
+      "known_from_year": 1948,
+      "unknown_symptom_label": "Violent nose-slice opposite to roll input at high angle of attack",
+      "historical_examples": ["F-100A/C", "F-102A", "F4H-1"],
+      "max_prob": 0.80,
+      "novelty_features": ["high_sweep", "delta_wing"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "sweep_deg", "min": 28.0, "full": 42.0}],
+        "ramps": [{"feature": "shortal_maggin_excess", "x0": -0.5, "x1": 1.2, "weight": 0.42}],
+        "flags": [{"feature": "is_delta", "add": 0.16}],
+        "multipliers": [{"feature": "has_sas", "mul": 0.50}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.06,
+        "low_speed_tunnel": 0.35,
+        "spin_tunnel": 0.45,
+        "flight:maneuver": 0.72,
+        "flight:high_aoa_spin": 0.80
+      },
+      "flight_incident": {"encounter_weight": 0.26, "crash_prob_given_encounter": 0.15},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.88}
+      },
+      "placard": {
+        "name": "Rudder-Roll Only Above 12° AoA Placard",
+        "metric_multipliers": {"instantaneous_turn_dps_m08_4572m": 0.82},
+        "residual_hazard_factor": 0.24
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.42,
+        "accident_rate_per_1000fh": 0.14,
+        "grounding_days": 25,
+        "rep_penalty": 5.5
+      },
+      "fixes": [
+        {
+          "id": "aileron_rudder_interconnect",
+          "name": "Install Mechanical/Hydraulic Aileron-Rudder Interconnect (ARI)",
+          "available_year": 1950,
+          "required_tech": null,
+          "base_cost_1950_usd": 65000.0,
+          "retrofit_kit_1950_usd": 2600.0,
+          "fix_days": 26,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"mass": 0.005, "maint": 0.02},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "tip_stall_wing_drop",
+      "name": "Asymmetric Low-Speed Tip Stall & Wing Drop",
+      "family": "spin",
+      "category": "aerodynamics",
+      "base_severity": 3,
+      "known_from_year": 1946,
+      "unknown_symptom_label": "Sudden uncommanded 60° bank roll-off on landing approach",
+      "historical_examples": ["FJ-2 Fury", "F-86F '6-3' hard wing", "F9F-6 Cougar"],
+      "max_prob": 0.82,
+      "novelty_features": ["swept_wing", "thin_wing"],
+      "trigger": {
+        "base": 0.06,
+        "gates": [{"feature": "sweep_deg", "min": 18.0, "full": 34.0}],
+        "ramps": [
+          {"feature": "taper_deficit", "x0": 0.0, "x1": 0.30, "weight": 0.35},
+          {"feature": "shortal_maggin_excess", "x0": -0.6, "x1": 1.0, "weight": 0.28}
+        ],
+        "flags": [],
+        "multipliers": [
+          {"feature": "has_le_slats", "mul": 0.35},
+          {"feature": "has_wing_fences", "mul": 0.55},
+          {"feature": "has_le_flaps", "mul": 0.50}
+        ]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.10,
+        "low_speed_tunnel": 0.60,
+        "flight:low_speed": 0.85,
+        "flight:high_aoa_spin": 0.72
+      },
+      "flight_incident": {"encounter_weight": 0.25, "crash_prob_given_encounter": 0.12},
+      "truth_effects": {
+        "driver_log_deltas": {"clmax": -0.08},
+        "metric_multipliers": {"landing_distance_m": 1.12}
+      },
+      "placard": {
+        "name": "+15 Knot Approach Speed Margin Placard",
+        "metric_multipliers": {"landing_distance_m": 1.22, "stall_speed_mps": 1.08},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.50,
+        "accident_rate_per_1000fh": 0.12,
+        "grounding_days": 0,
+        "rep_penalty": 5.0
+      },
+      "fixes": [
+        {
+          "id": "wing_fences",
+          "name": "Install Boundary-Layer Wing Fences",
+          "available_year": 1948,
+          "required_tech": null,
+          "base_cost_1950_usd": 45000.0,
+          "retrofit_kit_1950_usd": 1800.0,
+          "fix_days": 21,
+          "residual_factor": 0.18,
+          "driver_log_deltas": {"cd0": 0.015, "mass": 0.004},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "auto_le_slats",
+          "name": "Retrofit Automatic Leading-Edge Slats",
+          "available_year": 1947,
+          "required_tech": "aero.le_slats",
+          "base_cost_1950_usd": 140000.0,
+          "retrofit_kit_1950_usd": 6500.0,
+          "fix_days": 50,
+          "residual_factor": 0.06,
+          "driver_log_deltas": {"cd0": 0.012, "clmax": 0.08, "mass": 0.018},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "delta_high_sink_approach",
+      "name": "Backside-of-Power-Curve High-Sink Approach Instability",
+      "family": "spin",
+      "category": "aerodynamics",
+      "base_severity": 3,
+      "known_from_year": 1951,
+      "unknown_symptom_label": "Dangerous induced-drag sink rate on final approach",
+      "historical_examples": ["F4D-1 Skyray", "F7U Cutlass", "F-102A", "F-104A"],
+      "max_prob": 0.80,
+      "novelty_features": ["delta_wing", "thin_wing"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "wing_loading_kgm2", "min": 210.0, "full": 380.0}],
+        "ramps": [
+          {"feature": "low_ar_excess", "x0": 0.0, "x1": 1.8, "weight": 0.45},
+          {"feature": "wing_loading_kgm2", "x0": 260.0, "x1": 480.0, "weight": 0.25}
+        ],
+        "flags": [{"feature": "is_delta", "add": 0.18}],
+        "multipliers": [{"feature": "has_blown_flaps", "mul": 0.40}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.12,
+        "low_speed_tunnel": 0.52,
+        "flight:low_speed": 0.88
+      },
+      "flight_incident": {"encounter_weight": 0.26, "crash_prob_given_encounter": 0.14},
+      "truth_effects": {
+        "driver_log_deltas": {"kind": 0.06},
+        "metric_multipliers": {"landing_distance_m": 1.18, "takeoff_distance_m": 1.10}
+      },
+      "placard": {
+        "name": "High-Power Flat Approach & Minimum Runway Length Placard",
+        "metric_multipliers": {"landing_distance_m": 1.28},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.48,
+        "accident_rate_per_1000fh": 0.14,
+        "grounding_days": 0,
+        "rep_penalty": 5.5
+      },
+      "fixes": [
+        {
+          "id": "braking_parachute_le_droop",
+          "name": "Install Ribbon Drag Chute & Leading-Edge Droop Camber",
+          "available_year": 1950,
+          "required_tech": null,
+          "base_cost_1950_usd": 68000.0,
+          "retrofit_kit_1950_usd": 2900.0,
+          "fix_days": 28,
+          "residual_factor": 0.14,
+          "driver_log_deltas": {"mass": 0.008, "clmax": 0.05},
+          "metric_multipliers": {"landing_distance_m": 0.88}
+        },
+        {
+          "id": "blc_blown_flap_system",
+          "name": "Install Compressor-Bleed Boundary-Layer Control (BLC) Flaps",
+          "available_year": 1955,
+          "required_tech": "aero.blown_flaps",
+          "base_cost_1950_usd": 155000.0,
+          "retrofit_kit_1950_usd": 7000.0,
+          "fix_days": 46,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"clmax": 0.14, "mass": 0.014, "maint": 0.04},
+          "metric_multipliers": {"landing_distance_m": 0.84}
+        }
+      ]
+    },
+    {
+      "id": "area_rule_drag_pinch",
+      "name": "Transonic Area-Rule Wave-Drag Wall (YF-102 Syndrome)",
+      "family": "inlet",
+      "category": "aerodynamics",
+      "base_severity": 4,
+      "known_from_year": 1952,
+      "unknown_symptom_label": "Severe unexpected transonic drag rise preventing supersonic flight",
+      "historical_examples": ["Convair YF-102 (stuck at M0.98)", "Grumman F11F-1", "Chance Vought F8U"],
+      "max_prob": 0.88,
+      "novelty_features": ["supersonic_level", "delta_wing", "transonic_target"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [{"feature": "max_mach_nom", "min": 0.96, "full": 1.22}],
+        "ramps": [
+          {"feature": "wave_drag_ratio", "x0": 1.55, "x1": 2.45, "weight": 0.55},
+          {"feature": "mach_dd_excess", "x0": 0.02, "x1": 0.25, "weight": 0.22}
+        ],
+        "flags": [],
+        "multipliers": [{"feature": "is_area_ruled", "mul": 0.18}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.04,
+        "transonic_bump": 0.35,
+        "rocket_model": 0.72,
+        "transonic_slotted": 0.85,
+        "supersonic_tunnel": 0.45,
+        "flight:speed_envelope": 0.95
+      },
+      "flight_incident": {"encounter_weight": 0.15, "crash_prob_given_encounter": 0.02},
+      "truth_effects": {
+        "driver_log_deltas": {"cdw": 0.22},
+        "metric_multipliers": {"max_mach_alt": 0.88, "ps_mps_m09_4572m_1g": 0.82}
+      },
+      "placard": {
+        "name": "Subsonic Operational Envelope Acceptance",
+        "metric_multipliers": {"max_mach_alt": 0.86},
+        "residual_hazard_factor": 0.30
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.85,
+        "accident_rate_per_1000fh": 0.02,
+        "grounding_days": 30,
+        "rep_penalty": 10.0
+      },
+      "fixes": [
+        {
+          "id": "wasp_waist_area_rule_redesign",
+          "name": "Whitcomb 'Coke-Bottle' Wasp-Waist Fuselage Redesign & Tail Fairings",
+          "available_year": 1953,
+          "required_tech": "aero.area_rule",
+          "base_cost_1950_usd": 280000.0,
+          "retrofit_kit_1950_usd": 18000.0,
+          "fix_days": 85,
+          "residual_factor": 0.05,
+          "driver_log_deltas": {"cdw": -0.18, "mass": 0.015},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "local_fairing_area_cleanup",
+          "name": "Wing-Root Glove & Aft Kuchemann Anti-Shock Carrots",
+          "available_year": 1951,
+          "required_tech": null,
+          "base_cost_1950_usd": 110000.0,
+          "retrofit_kit_1950_usd": 5200.0,
+          "fix_days": 40,
+          "residual_factor": 0.30,
+          "driver_log_deltas": {"cdw": -0.06, "mass": 0.008},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "supersonic_intake_buzz",
+      "name": "Supersonic Shock-Disgorging Inlet Buzz (Ferri Instability)",
+      "family": "inlet",
+      "category": "propulsion",
+      "base_severity": 3,
+      "known_from_year": 1953,
+      "unknown_symptom_label": "Violent supersonic inlet shock oscillation and thrust loss",
+      "historical_examples": ["F-100A/C", "F-104A", "F-105B"],
+      "max_prob": 0.82,
+      "novelty_features": ["supersonic_level", "mach2_regime", "variable_intake"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "max_mach_nom", "min": 1.30, "full": 1.85}],
+        "ramps": [{"feature": "max_mach_nom", "x0": 1.35, "x1": 2.15, "weight": 0.55}],
+        "flags": [],
+        "multipliers": [{"feature": "is_variable_intake", "mul": 0.38}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.06,
+        "supersonic_tunnel": 0.74,
+        "engine_altitude_cell": 0.55,
+        "flight:speed_envelope": 0.86
+      },
+      "flight_incident": {"encounter_weight": 0.25, "crash_prob_given_encounter": 0.10},
+      "truth_effects": {
+        "driver_log_deltas": {"thrust": -0.07, "cdw": 0.05},
+        "metric_multipliers": {"max_mach_alt": 0.94}
+      },
+      "placard": {
+        "name": "Supersonic Inlet Mach Cap (M 1.45)",
+        "metric_multipliers": {"max_mach_alt": 0.90},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.09,
+        "grounding_days": 20,
+        "rep_penalty": 5.5
+      },
+      "fixes": [
+        {
+          "id": "inlet_bypass_bleed_doors",
+          "name": "Install Automatic Subsonic-Duct Spill & Boundary-Layer Bleed Doors",
+          "available_year": 1953,
+          "required_tech": null,
+          "base_cost_1950_usd": 95000.0,
+          "retrofit_kit_1950_usd": 4400.0,
+          "fix_days": 35,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"mass": 0.009, "maint": 0.03},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "translating_shock_cone",
+          "name": "Convert to Variable Translating Shock Cone / Ramp Inlet",
+          "available_year": 1955,
+          "required_tech": "aero.inlet_variable",
+          "base_cost_1950_usd": 195000.0,
+          "retrofit_kit_1950_usd": 9500.0,
+          "fix_days": 60,
+          "residual_factor": 0.05,
+          "driver_log_deltas": {"thrust": 0.04, "mass": 0.018, "maint": 0.05},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "inlet_distortion_recoverable",
+      "name": "High-Alpha Cheek/Root Inlet Boundary-Layer Ingestion",
+      "family": "inlet",
+      "category": "propulsion",
+      "base_severity": 3,
+      "known_from_year": 1950,
+      "unknown_symptom_label": "Asymmetric duct flow separation and thrust rumble in turns",
+      "historical_examples": ["F-101A Voodoo", "F11F Tiger", "F-102A"],
+      "max_prob": 0.78,
+      "novelty_features": ["swept_wing", "supersonic_level"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "non_nose_intake", "min": 0.5, "full": 1.0}],
+        "ramps": [
+          {"feature": "max_mach_nom", "x0": 0.85, "x1": 1.60, "weight": 0.35},
+          {"feature": "fuselage_fineness", "x0": 7.0, "x1": 12.0, "weight": 0.25}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.08,
+        "low_speed_tunnel": 0.40,
+        "transonic_slotted": 0.55,
+        "engine_altitude_cell": 0.48,
+        "flight:maneuver": 0.80
+      },
+      "flight_incident": {"encounter_weight": 0.22, "crash_prob_given_encounter": 0.08},
+      "truth_effects": {
+        "driver_log_deltas": {"thrust": -0.05, "tsfc": 0.03},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "High-AoA Throttle Movement Restriction",
+        "metric_multipliers": {"sustained_turn_dps_m08_4572m": 0.92},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.42,
+        "accident_rate_per_1000fh": 0.08,
+        "grounding_days": 0,
+        "rep_penalty": 4.5
+      },
+      "fixes": [
+        {
+          "id": "splitter_plate_diverter",
+          "name": "Enlarged Boundary-Layer Splitter Plate & Lip Camber",
+          "available_year": 1948,
+          "required_tech": null,
+          "base_cost_1950_usd": 62000.0,
+          "retrofit_kit_1950_usd": 2400.0,
+          "fix_days": 25,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"cd0": 0.006, "mass": 0.005},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "compressor_surge_stall",
+      "name": "High-OPR Axial Compressor Surge & Rotating Stall",
+      "family": "engine_stall",
+      "category": "propulsion",
+      "base_severity": 4,
+      "known_from_year": 1947,
+      "unknown_symptom_label": "Explosive compressor backfire and turbine over-temperature on throttle slam",
+      "historical_examples": ["Allison J35", "Wright J65 (F-84F)", "Allison J71 (F3H-2)"],
+      "max_prob": 0.82,
+      "novelty_features": ["transonic_target", "supersonic_level"],
+      "trigger": {
+        "base": 0.06,
+        "gates": [],
+        "ramps": [
+          {"feature": "stall_margin_deficit", "x0": 0.0, "x1": 0.14, "weight": 0.55},
+          {"feature": "engine_immaturity", "x0": 0.1, "x1": 0.8, "weight": 0.25}
+        ],
+        "flags": [{"feature": "non_nose_intake", "add": 0.10}],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.08,
+        "engine_altitude_cell": 0.72,
+        "flight:altitude_envelope": 0.82,
+        "flight:maneuver": 0.70
+      },
+      "flight_incident": {"encounter_weight": 0.30, "crash_prob_given_encounter": 0.18},
+      "truth_effects": {
+        "driver_log_deltas": {"thrust": -0.05, "maint": 0.12},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Slow Throttle Advancement & Altitude RPM Restriction",
+        "metric_multipliers": {"service_ceiling_m": 0.94, "sustained_turn_dps_m08_4572m": 0.93},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.55,
+        "accident_rate_per_1000fh": 0.16,
+        "grounding_days": 40,
+        "rep_penalty": 8.0
+      },
+      "fixes": [
+        {
+          "id": "interstage_bleed_fuel_schedule",
+          "name": "Automatic Interstage Compressor Bleed Valves & Hydromechanical Fuel Limiter",
+          "available_year": 1948,
+          "required_tech": null,
+          "base_cost_1950_usd": 110000.0,
+          "retrofit_kit_1950_usd": 4800.0,
+          "fix_days": 38,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"tsfc": 0.015, "mass": 0.006},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "gun_gas_ingestion_surge",
+      "name": "Cannon Muzzle-Gas Ingestion Compressor Stall (GunVal)",
+      "family": "engine_stall",
+      "category": "propulsion",
+      "base_severity": 4,
+      "known_from_year": 1952,
+      "unknown_symptom_label": "Immediate engine flameout upon firing nose armament at altitude",
+      "historical_examples": ["F-86F-2 GunVal (T-160 20mm)", "F-101A", "F11F Tiger", "F-86H"],
+      "max_prob": 0.85,
+      "novelty_features": ["transonic_target", "supersonic_level"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "has_guns", "min": 0.5, "full": 1.0}],
+        "ramps": [
+          {"feature": "gun_caliber_mm", "x0": 12.7, "x1": 25.0, "weight": 0.35},
+          {"feature": "stall_margin_deficit", "x0": 0.0, "x1": 0.12, "weight": 0.25}
+        ],
+        "flags": [{"feature": "guns_near_intake", "add": 0.32}],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.04,
+        "engine_altitude_cell": 0.25,
+        "flight:weapons_stores": 0.90
+      },
+      "flight_incident": {"encounter_weight": 0.28, "crash_prob_given_encounter": 0.14},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Prohibit Gun Firing Above 30,000 ft / Salvo Limit",
+        "metric_multipliers": {"service_ceiling_m": 0.92},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.50,
+        "accident_rate_per_1000fh": 0.14,
+        "grounding_days": 30,
+        "rep_penalty": 7.0
+      },
+      "fixes": [
+        {
+          "id": "gun_purge_blast_deflectors",
+          "name": "Install Muzzle Gas Deflector Louvers, Gun Bay Purge & Continuous Igniter",
+          "available_year": 1951,
+          "required_tech": null,
+          "base_cost_1950_usd": 68000.0,
+          "retrofit_kit_1950_usd": 2800.0,
+          "fix_days": 26,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"cd0": 0.008, "mass": 0.006},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "high_altitude_flameout",
+      "name": "Stratospheric Combustor Blowout & Relight Failure",
+      "family": "engine_stall",
+      "category": "propulsion",
+      "base_severity": 3,
+      "known_from_year": 1948,
+      "unknown_symptom_label": "Combustor flameout above 42,000 ft with dead-stick descent",
+      "historical_examples": ["GE J47", "Wright J65", "Early P&W J57"],
+      "max_prob": 0.80,
+      "novelty_features": ["transonic_target", "supersonic_level"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [{"feature": "service_ceiling_nom_m", "min": 12000.0, "full": 15000.0}],
+        "ramps": [
+          {"feature": "flameout_ceiling_deficit_m", "x0": -500.0, "x1": 2500.0, "weight": 0.50},
+          {"feature": "engine_immaturity", "x0": 0.1, "x1": 0.8, "weight": 0.22}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.10,
+        "engine_altitude_cell": 0.82,
+        "flight:altitude_envelope": 0.86
+      },
+      "flight_incident": {"encounter_weight": 0.25, "crash_prob_given_encounter": 0.12},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"service_ceiling_m": 0.91}
+      },
+      "placard": {
+        "name": "40,000 ft Operational Altitude Ceiling Placard",
+        "metric_multipliers": {"service_ceiling_m": 0.86},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.12,
+        "grounding_days": 20,
+        "rep_penalty": 5.5
+      },
+      "fixes": [
+        {
+          "id": "high_energy_capacitor_igniter",
+          "name": "High-Energy Capacitor Discharge Igniter & Annular Crossover Tubes",
+          "available_year": 1949,
+          "required_tech": null,
+          "base_cost_1950_usd": 72000.0,
+          "retrofit_kit_1950_usd": 3100.0,
+          "fix_days": 28,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"mass": 0.004, "maint": 0.02},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "afterburner_lightoff_instability",
+      "name": "Afterburner Light-Off Failure & Screech Liner Burnthrough",
+      "family": "engine_stall",
+      "category": "propulsion",
+      "base_severity": 3,
+      "known_from_year": 1949,
+      "unknown_symptom_label": "Hard afterburner light-off explosion and eyelid nozzle jamming",
+      "historical_examples": ["F-94B Starfire", "F7U Cutlass (J46)", "F-100A (J57-P-7)"],
+      "max_prob": 0.82,
+      "novelty_features": ["afterburner", "supersonic_level"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [{"feature": "has_afterburner", "min": 0.5, "full": 1.0}],
+        "ramps": [{"feature": "ab_immaturity", "x0": 0.05, "x1": 0.75, "weight": 0.58}],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.10,
+        "engine_altitude_cell": 0.78,
+        "flight:altitude_envelope": 0.80,
+        "flight:speed_envelope": 0.70
+      },
+      "flight_incident": {"encounter_weight": 0.25, "crash_prob_given_encounter": 0.10},
+      "truth_effects": {
+        "driver_log_deltas": {"thrust": -0.05, "tsfc": 0.05, "maint": 0.15},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Restrict Afterburner Light-Off Below 35,000 ft",
+        "metric_multipliers": {"max_mach_alt": 0.92, "climb_rate_sl_mps": 0.90},
+        "residual_hazard_factor": 0.22
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.48,
+        "accident_rate_per_1000fh": 0.10,
+        "grounding_days": 20,
+        "rep_penalty": 5.0
+      },
+      "fixes": [
+        {
+          "id": "hot_streak_ab_igniter",
+          "name": "Install 'Hot-Streak' Turbine-Torch Igniter & Corrugated Screech Liner",
+          "available_year": 1951,
+          "required_tech": null,
+          "base_cost_1950_usd": 82000.0,
+          "retrofit_kit_1950_usd": 3600.0,
+          "fix_days": 30,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"mass": 0.006, "maint": -0.08},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "prototype_engine_teething",
+      "name": "Immature Powerplant Turbine Creep & Bearing Distress (J40 Syndrome)",
+      "family": "engine_stall",
+      "category": "propulsion",
+      "base_severity": 4,
+      "known_from_year": 1945,
+      "unknown_symptom_label": "Severe premature turbine blade cracking and oil-seal failure",
+      "historical_examples": ["Westinghouse J40 (F3H-1 Demon)", "Wright J65 early blocks", "J71"],
+      "max_prob": 0.85,
+      "novelty_features": ["afterburner", "supersonic_level"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "engine_immaturity", "min": 0.25, "full": 0.65}],
+        "ramps": [{"feature": "engine_immaturity", "x0": 0.25, "x1": 0.85, "weight": 0.65}],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.12,
+        "engine_altitude_cell": 0.75,
+        "flight:altitude_envelope": 0.78,
+        "flight:weapons_stores": 0.68
+      },
+      "flight_incident": {"encounter_weight": 0.32, "crash_prob_given_encounter": 0.20},
+      "truth_effects": {
+        "driver_log_deltas": {"thrust": -0.06, "maint": 0.25},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "92% Military Thrust Derating & 50-Hour Engine Teardown",
+        "metric_multipliers": {"max_mach_sl": 0.94, "climb_rate_sl_mps": 0.88, "maint_mh_per_fh": 1.30},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.65,
+        "accident_rate_per_1000fh": 0.20,
+        "grounding_days": 55,
+        "rep_penalty": 10.5
+      },
+      "fixes": [
+        {
+          "id": "engine_cip_durability_rework",
+          "name": "150-Hour Model Qualification & Turbine Hot-Section Redesign (CIP)",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 195000.0,
+          "retrofit_kit_1950_usd": 9200.0,
+          "fix_days": 60,
+          "residual_factor": 0.10,
+          "driver_log_deltas": {"mass": 0.012, "maint": -0.15},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "wing_root_fatigue_cracking",
+      "name": "Main Wing Carry-Through Spar Fatigue & Under-Strength",
+      "family": "structural_fatigue",
+      "category": "structures",
+      "base_severity": 4,
+      "known_from_year": 1948,
+      "unknown_symptom_label": "Premature wing root spar cap cracking under high-g maneuvering",
+      "historical_examples": ["F-84B/C Thunderjet", "F-86A", "F3H Demon"],
+      "max_prob": 0.78,
+      "novelty_features": ["thin_wing", "swept_wing", "high_sweep"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "design_load_factor_g", "min": 6.5, "full": 8.0}],
+        "ramps": [
+          {"feature": "torsion_flex_index", "x0": 3.0, "x1": 11.0, "weight": 0.42},
+          {"feature": "wing_loading_kgm2", "x0": 240.0, "x1": 460.0, "weight": 0.22}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.06,
+        "static_structural": 0.82,
+        "flight:maneuver": 0.70
+      },
+      "flight_incident": {"encounter_weight": 0.25, "crash_prob_given_encounter": 0.28},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"max_load_factor_g": 0.84}
+      },
+      "placard": {
+        "name": "5.0g Flight Manual G-Limit Placard",
+        "metric_multipliers": {"max_load_factor_g": 0.75, "instantaneous_turn_dps_m08_4572m": 0.82},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.48,
+        "accident_rate_per_1000fh": 0.22,
+        "grounding_days": 55,
+        "rep_penalty": 9.5
+      },
+      "fixes": [
+        {
+          "id": "forged_spar_cap_straps",
+          "name": "Install Milled 7075/Steel Spar Cap Doublers & Carry-Through Forging",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 145000.0,
+          "retrofit_kit_1950_usd": 6800.0,
+          "fix_days": 45,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.026, "cost_unit": 0.015},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "landing_gear_shimmy_collapse",
+      "name": "Main/Nose Landing Gear Shimmy & Thin-Wing Retraction Binding",
+      "family": "structural_fatigue",
+      "category": "structures",
+      "base_severity": 3,
+      "known_from_year": 1945,
+      "unknown_symptom_label": "High-speed touchdown strut shimmy and gear door failure",
+      "historical_examples": ["F7U Cutlass nose strut", "F-104A", "F-100C"],
+      "max_prob": 0.78,
+      "novelty_features": ["thin_wing"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [],
+        "ramps": [
+          {"feature": "thin_wing_excess", "x0": 0.0, "x1": 0.05, "weight": 0.38},
+          {"feature": "wing_loading_kgm2", "x0": 250.0, "x1": 480.0, "weight": 0.25}
+        ],
+        "flags": [{"feature": "carrier_capable", "add": 0.18}],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.08,
+        "static_structural": 0.65,
+        "mockup_review": 0.40,
+        "flight:low_speed": 0.80
+      },
+      "flight_incident": {"encounter_weight": 0.24, "crash_prob_given_encounter": 0.10},
+      "truth_effects": {
+        "driver_log_deltas": {"maint": 0.08},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Reduced Gross Landing Weight & Crosswind Limit",
+        "metric_multipliers": {"landing_distance_m": 1.12},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.45,
+        "accident_rate_per_1000fh": 0.10,
+        "grounding_days": 15,
+        "rep_penalty": 4.5
+      },
+      "fixes": [
+        {
+          "id": "heavy_duty_oleo_shimmy_damper",
+          "name": "Forged Steel Oleo Strut, Hydraulic Shimmy Damper & Fuselage Stowage",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 65000.0,
+          "retrofit_kit_1950_usd": 2800.0,
+          "fix_days": 25,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.014, "cost_unit": 0.010},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "aft_fuselage_ab_overheating",
+      "name": "Afterburner Tailpipe Structure Overheating & Bay Fire Hazard",
+      "family": "structural_fatigue",
+      "category": "structures",
+      "base_severity": 3,
+      "known_from_year": 1951,
+      "unknown_symptom_label": "Aft fuselage aluminum frame annealing and fire warning above M 1.1",
+      "historical_examples": ["F-100A/C", "F-101A", "F-102A"],
+      "max_prob": 0.80,
+      "novelty_features": ["afterburner", "titanium_structure"],
+      "trigger": {
+        "base": 0.06,
+        "gates": [{"feature": "has_afterburner", "min": 0.5, "full": 1.0}],
+        "ramps": [{"feature": "ti_deficit", "x0": 0.0, "x1": 0.12, "weight": 0.48}],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.08,
+        "engine_altitude_cell": 0.50,
+        "flight:speed_envelope": 0.76,
+        "flight:altitude_envelope": 0.65
+      },
+      "flight_incident": {"encounter_weight": 0.22, "crash_prob_given_encounter": 0.14},
+      "truth_effects": {
+        "driver_log_deltas": {"maint": 0.10},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "5-Minute Maximum Continuous Afterburner Time Limit",
+        "metric_multipliers": {"max_mach_alt": 0.95, "combat_radius_m": 0.94},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.42,
+        "accident_rate_per_1000fh": 0.12,
+        "grounding_days": 25,
+        "rep_penalty": 5.5
+      },
+      "fixes": [
+        {
+          "id": "titanium_aft_heat_shield",
+          "name": "Install Titanium Aft Fuselage Shroud & Ram Cooling Ejector",
+          "available_year": 1951,
+          "required_tech": "struct.material.titanium_available",
+          "base_cost_1950_usd": 88000.0,
+          "retrofit_kit_1950_usd": 4200.0,
+          "fix_days": 30,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.006, "cost_unit": 0.018},
+          "metric_multipliers": {}
+        },
+        {
+          "id": "stainless_steel_blast_blanket",
+          "name": "Stainless-Steel Thermal Blanket & Bay Cooling Scoop",
+          "available_year": 1945,
+          "required_tech": null,
+          "base_cost_1950_usd": 55000.0,
+          "retrofit_kit_1950_usd": 2400.0,
+          "fix_days": 22,
+          "residual_factor": 0.16,
+          "driver_log_deltas": {"mass": 0.015, "cd0": 0.006},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "stores_separation_strike",
+      "name": "Transonic External Stores Pitch-Up & Tailplane Strike on Jettison",
+      "family": "structural_fatigue",
+      "category": "aerodynamics",
+      "base_severity": 2,
+      "known_from_year": 1948,
+      "unknown_symptom_label": "Jettisoned drop tanks/bombs tumbling into wing and horizontal tail",
+      "historical_examples": ["F-84E", "F-100C", "F-104C"],
+      "max_prob": 0.78,
+      "novelty_features": ["transonic_target", "swept_wing"],
+      "trigger": {
+        "base": 0.04,
+        "gates": [{"feature": "hardpoints", "min": 2.0, "full": 4.0}],
+        "ramps": [
+          {"feature": "max_mach_nom", "x0": 0.82, "x1": 1.35, "weight": 0.35},
+          {"feature": "hardpoints", "x0": 2.0, "x1": 6.0, "weight": 0.25}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.06,
+        "low_speed_tunnel": 0.35,
+        "transonic_slotted": 0.55,
+        "flight:weapons_stores": 0.88
+      },
+      "flight_incident": {"encounter_weight": 0.20, "crash_prob_given_encounter": 0.10},
+      "truth_effects": {
+        "driver_log_deltas": {"cd0": 0.03},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Subsonic Level-Flight Stores Release Limit (300 kt)",
+        "metric_multipliers": {"combat_radius_m": 0.93},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.38,
+        "accident_rate_per_1000fh": 0.08,
+        "grounding_days": 0,
+        "rep_penalty": 3.5
+      },
+      "fixes": [
+        {
+          "id": "cartridge_pneumatic_ejector_racks",
+          "name": "Install Pyrotechnic Cartridge Forced-Ejection Pylon Racks & Tank Fins",
+          "available_year": 1948,
+          "required_tech": null,
+          "base_cost_1950_usd": 48000.0,
+          "retrofit_kit_1950_usd": 1900.0,
+          "fix_days": 20,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.005, "cd0": 0.004},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "hydraulic_single_point_failure",
+      "name": "Irreversible Flight Control Total Hydraulic Loss",
+      "family": "systems",
+      "category": "systems",
+      "base_severity": 4,
+      "known_from_year": 1948,
+      "unknown_symptom_label": "Complete loss of flight control authority following single hydraulic leak",
+      "historical_examples": ["F-86E", "F-100A", "F8U-1"],
+      "max_prob": 0.78,
+      "novelty_features": ["transonic_target", "supersonic_level"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [{"feature": "has_powered_controls", "min": 0.5, "full": 1.0}],
+        "ramps": [{"feature": "max_mach_nom", "x0": 0.85, "x1": 1.50, "weight": 0.42}],
+        "flags": [],
+        "multipliers": [{"feature": "has_dual_hydraulics", "mul": 0.20}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.14,
+        "mockup_review": 0.55,
+        "flight:maneuver": 0.72,
+        "flight:speed_envelope": 0.65
+      },
+      "flight_incident": {"encounter_weight": 0.24, "crash_prob_given_encounter": 0.26},
+      "truth_effects": {
+        "driver_log_deltas": {"maint": 0.08},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Mandatory Pre-Flight Hydraulic Pressure Check & Chase Escort",
+        "metric_multipliers": {"maint_mh_per_fh": 1.15},
+        "residual_hazard_factor": 0.40
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.48,
+        "accident_rate_per_1000fh": 0.20,
+        "grounding_days": 40,
+        "rep_penalty": 8.5
+      },
+      "fixes": [
+        {
+          "id": "dual_tandem_hydraulics_rat",
+          "name": "Dual Independent Hydraulic Loops & Drop-Out Ram Air Turbine (RAT)",
+          "available_year": 1948,
+          "required_tech": null,
+          "base_cost_1950_usd": 98000.0,
+          "retrofit_kit_1950_usd": 4500.0,
+          "fix_days": 34,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.012, "cost_unit": 0.012},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "fuel_cg_shift_venting",
+      "name": "Multi-Tank Fuel Sequencing CG Shift & Negative-G Venting",
+      "family": "systems",
+      "category": "systems",
+      "base_severity": 2,
+      "known_from_year": 1947,
+      "unknown_symptom_label": "Aft CG migration during fuel burn and overboard fuel siphon in climbs",
+      "historical_examples": ["F-84E", "F-100C", "F-101A"],
+      "max_prob": 0.75,
+      "novelty_features": ["swept_wing", "thin_wing"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [],
+        "ramps": [
+          {"feature": "fuel_fraction", "x0": 0.24, "x1": 0.42, "weight": 0.42},
+          {"feature": "thin_wing_excess", "x0": 0.0, "x1": 0.05, "weight": 0.22}
+        ],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.10,
+        "mockup_review": 0.38,
+        "flight:altitude_envelope": 0.68,
+        "flight:maneuver": 0.70
+      },
+      "flight_incident": {"encounter_weight": 0.18, "crash_prob_given_encounter": 0.06},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"combat_radius_m": 0.91, "ferry_range_m": 0.91}
+      },
+      "placard": {
+        "name": "Manual Tank Selector Schedule & Unusable Reserve Increase",
+        "metric_multipliers": {"combat_radius_m": 0.88, "ferry_range_m": 0.88},
+        "residual_hazard_factor": 0.20
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.40,
+        "accident_rate_per_1000fh": 0.06,
+        "grounding_days": 0,
+        "rep_penalty": 3.5
+      },
+      "fixes": [
+        {
+          "id": "auto_fuel_cg_proportioner",
+          "name": "Automatic Float-Valve CG Fuel Proportioner & Pressurized Vent Traps",
+          "available_year": 1947,
+          "required_tech": null,
+          "base_cost_1950_usd": 52000.0,
+          "retrofit_kit_1950_usd": 2100.0,
+          "fix_days": 22,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.005, "maint": 0.015},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "radar_fcs_immaturity",
+      "name": "Vacuum-Tube Radar Fire-Control Microphonics & Lock Failure",
+      "family": "systems",
+      "category": "systems",
+      "base_severity": 3,
+      "known_from_year": 1949,
+      "unknown_symptom_label": "Chronic radar scope clutter, tube failure, and erratic lead computing",
+      "historical_examples": ["F-86D (E-4 FCS)", "F-89D Scorpion", "F-102A (MG-10)"],
+      "max_prob": 0.85,
+      "novelty_features": ["radar_fcs"],
+      "trigger": {
+        "base": 0.06,
+        "gates": [{"feature": "has_radar", "min": 0.5, "full": 1.0}],
+        "ramps": [{"feature": "avionics_level", "x0": 1.5, "x1": 4.5, "weight": 0.55}],
+        "flags": [],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.12,
+        "mockup_review": 0.30,
+        "flight:weapons_stores": 0.84,
+        "flight:altitude_envelope": 0.45
+      },
+      "flight_incident": {"encounter_weight": 0.12, "crash_prob_given_encounter": 0.01},
+      "truth_effects": {
+        "driver_log_deltas": {"maint": 0.24, "cost_unit": 0.08},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Optical Backup Sight Mode / Degraded Radar Readiness",
+        "metric_multipliers": {"maint_mh_per_fh": 1.20},
+        "residual_hazard_factor": 0.30
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.60,
+        "accident_rate_per_1000fh": 0.02,
+        "grounding_days": 15,
+        "rep_penalty": 6.5
+      },
+      "fixes": [
+        {
+          "id": "fcs_environmental_isolation_rack",
+          "name": "Vibration-Isolated Pressurized Avionics Bay & Ruggedized Tubes",
+          "available_year": 1950,
+          "required_tech": null,
+          "base_cost_1950_usd": 115000.0,
+          "retrofit_kit_1950_usd": 5400.0,
+          "fix_days": 38,
+          "residual_factor": 0.12,
+          "driver_log_deltas": {"mass": 0.008, "maint": -0.16},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "ejection_envelope_deficiency",
+      "name": "High-Speed / Low-Altitude Bailout & Fin-Clearance Hazard",
+      "family": "systems",
+      "category": "ergonomics",
+      "base_severity": 3,
+      "known_from_year": 1946,
+      "unknown_symptom_label": "Lethal tail-strike or windblast hazard during emergency bailout",
+      "historical_examples": ["P-80A (no seat)", "F-104A (downward C-2 seat)", "F7U Cutlass"],
+      "max_prob": 0.82,
+      "novelty_features": ["t_tail", "mach2_regime"],
+      "trigger": {
+        "base": 0.08,
+        "gates": [{"feature": "max_mach_nom", "min": 0.75, "full": 0.95}],
+        "ramps": [{"feature": "max_mach_nom", "x0": 0.85, "x1": 1.80, "weight": 0.38}],
+        "flags": [{"feature": "is_t_tail", "add": 0.20}],
+        "multipliers": [{"feature": "has_ejection_seat", "mul": 0.35}]
+      },
+      "detect_prob_by_source": {
+        "sim": 0.20,
+        "mockup_review": 0.78,
+        "flight:low_speed": 0.45
+      },
+      "flight_incident": {"encounter_weight": 0.10, "crash_prob_given_encounter": 0.01},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {}
+      },
+      "placard": {
+        "name": "Minimum 1,500 ft AGL Bailout Altitude Advisory",
+        "metric_multipliers": {},
+        "residual_hazard_factor": 0.45
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.35,
+        "accident_rate_per_1000fh": 0.05,
+        "grounding_days": 15,
+        "rep_penalty": 6.0
+      },
+      "fixes": [
+        {
+          "id": "upward_ballistic_rocket_seat",
+          "name": "Install Upward High-Impulse Catapult / Rocket Ejection Seat",
+          "available_year": 1947,
+          "required_tech": "systems.ejection_seat",
+          "base_cost_1950_usd": 58000.0,
+          "retrofit_kit_1950_usd": 2600.0,
+          "fix_days": 24,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"mass": 0.006},
+          "metric_multipliers": {}
+        }
+      ]
+    },
+    {
+      "id": "carrier_hook_visibility_deficiency",
+      "name": "Over-Nose Approach Blindness & Arrestor Hook Bounce",
+      "family": "manufacturing",
+      "category": "ergonomics",
+      "base_severity": 3,
+      "known_from_year": 1946,
+      "unknown_symptom_label": "Pilot loses sight of runway/LSO on high-alpha approach; hook skip",
+      "historical_examples": ["F7U-1 Cutlass", "F4D-1 Skyray", "FJ-2 Fury"],
+      "max_prob": 0.82,
+      "novelty_features": ["delta_wing", "high_sweep"],
+      "trigger": {
+        "base": 0.05,
+        "gates": [],
+        "ramps": [
+          {"feature": "low_ar_excess", "x0": 0.0, "x1": 1.6, "weight": 0.32},
+          {"feature": "fuselage_fineness", "x0": 7.5, "x1": 11.5, "weight": 0.22}
+        ],
+        "flags": [{"feature": "carrier_capable", "add": 0.25}],
+        "multipliers": []
+      },
+      "detect_prob_by_source": {
+        "sim": 0.14,
+        "mockup_review": 0.80,
+        "flight:low_speed": 0.88
+      },
+      "flight_incident": {"encounter_weight": 0.24, "crash_prob_given_encounter": 0.12},
+      "truth_effects": {
+        "driver_log_deltas": {},
+        "metric_multipliers": {"landing_distance_m": 1.10},
+        "carrier_unsuitable_reason": "Excessive over-nose blind angle and arrestor hook skip on deck recovery"
+      },
+      "placard": {
+        "name": "Day-VFR / Shore-Based Field Operation Restriction",
+        "metric_multipliers": {"landing_distance_m": 1.15},
+        "residual_hazard_factor": 0.25
+      },
+      "service_hazard": {
+        "manifest_rate_per_1000fh": 0.50,
+        "accident_rate_per_1000fh": 0.14,
+        "grounding_days": 25,
+        "rep_penalty": 7.0
+      },
+      "fixes": [
+        {
+          "id": "raised_seat_hook_damper",
+          "name": "Raise Cockpit Sill/Canopy Line & Install Long-Stroke Hydraulic Hook Damper",
+          "available_year": 1946,
+          "required_tech": null,
+          "base_cost_1950_usd": 72000.0,
+          "retrofit_kit_1950_usd": 3200.0,
+          "fix_days": 28,
+          "residual_factor": 0.08,
+          "driver_log_deltas": {"cd0": 0.008, "mass": 0.007},
+          "metric_multipliers": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "engine_id": "j35_a_29",
+  "name": "Allison J35-A-29",
+  "manufacturer": "Allison (GM)",
+  "country": "USA",
+  "first_run_year": 1944,
+  "service_entry_year": 1951,
+  "applications": ["Republic F-84G Thunderjet"],
+  "cycle_input": {
+    "compressor_type": "axial",
+    "spools": 1,
+    "variable_stators": false,
+    "has_afterburner": false,
+    "nozzle_type": "convergent",
+    "mass_flow_kgps": 40.5,
+    "opr": 5.1,
+    "tit_K": 1125.0,
+    "ab_temp_K": 0.0,
+    "bypass_ratio": 0.0,
+    "cooled_turbine": false,
+    "eta_c_poly": 0.815,
+    "eta_t_poly": 0.84,
+    "eta_burner": 0.94,
+    "pi_burner": 0.94,
+    "specific_weight_factor": 1.22,
+    "mtbf_factor": 0.95,
+    "length_factor": 1.04,
+    "diameter_factor": 1.04,
+    "cumulative_test_hours": 1500.0
+  },
+  "historical_reference": {
+    "sls_dry_thrust_N": 24732.1,
+    "sls_ab_thrust_N": null,
+    "sls_dry_tsfc_kg_per_Ns": 3.05915e-5,
+    "sls_ab_tsfc_kg_per_Ns": null,
+    "mass_kg": 1045.5,
+    "diameter_m": 0.9398,
+    "length_m": 3.7084,
+    "unit_cost_usd": 46000.0,
+    "tbo_hours_service": 300.0,
+    "sources": [
+      "Wilkinson, Aircraft Engines of the World 1953, pp. 60-62",
+      "NACA RM E53G24 (NTRS 19930086171)"
+    ]
+  }
+}

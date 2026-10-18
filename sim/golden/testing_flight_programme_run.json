@@ -1,0 +1,58 @@
+{
+  "campaign_seed": 19500625,
+  "tolerance_rel": 1e-06,
+  "tunnel_result": {
+    "campaign_id": "transonic_slotted",
+    "provider_id": "naca",
+    "depth": "standard",
+    "hours": 100.0,
+    "queue_days": 47,
+    "total_days": 60,
+    "total_cost_usd": 89608.82292690373,
+    "choked": false,
+    "drivers_updated": [
+      "cdw",
+      "cd0",
+      "kind",
+      "clmax"
+    ],
+    "detected_flaws": [],
+    "fixes_applied": []
+  },
+  "prototype_rollout": {
+    "n_prototypes": 2,
+    "build_days": 300,
+    "proto_cost_usd": 1256362.111766146,
+    "true_empty_mass_kg": 4921.424366998534
+  },
+  "flight_result": {
+    "items_completed": [
+      "low_speed",
+      "speed_envelope",
+      "altitude_envelope",
+      "maneuver",
+      "high_aoa_spin",
+      "weapons_stores"
+    ],
+    "total_sorties_flown": 140,
+    "flight_test_days": 185,
+    "flight_test_cost_usd": 1712282.640181784,
+    "crashes": 0,
+    "pilots_lost": 0,
+    "pilots_injured": 0,
+    "near_misses": 1,
+    "flaws_detected_in_flight": [
+      "tip_stall_wing_drop"
+    ]
+  },
+  "service_result": {
+    "months_simulated": 36,
+    "manifested_flaws": [],
+    "total_grounding_days": 0,
+    "total_squadron_accidents": 1,
+    "total_retrofit_cost_usd": 0.0,
+    "total_reputation_delta": 0.0
+  },
+  "final_total_testing_cost_usd": 3058253.5748748337,
+  "final_total_testing_days": 545
+}

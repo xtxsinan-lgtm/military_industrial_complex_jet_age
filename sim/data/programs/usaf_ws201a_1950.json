@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "id": "usaf_ws201a_1950",
+  "name_key": "program.usaf_ws201a_1950.name",
+  "program_name": "WS-201A '1954 Ultimate Interceptor' (Project MX-1554)",
+  "customer": "USAF",
+  "role": "interceptor",
+  "mvp_core": true,
+  "issue_date": "1950-06-18",
+  "proposal_due": "1951-01-31",
+  "first_flight_due": "1953-11-01",
+  "ioc_due": "1955-12-01",
+  "equipment": {
+    "carrier_capable": false,
+    "radar_required": true,
+    "min_crew": 1,
+    "min_engines": 1,
+    "internal_bay_required": true,
+    "min_guns_20mm": 0,
+    "missile_capability": [
+      "sarh"
+    ]
+  },
+  "criteria": [
+    {
+      "key": "max_mach_alt",
+      "kind": "objective",
+      "op": ">=",
+      "value": 1.2,
+      "objective_value": 1.5,
+      "weight": 0.35,
+      "unit": "mach",
+      "description": "Supersonic level intercept speed (Mach 1.20 threshold, 1.50 objective)"
+    },
+    {
+      "key": "service_ceiling_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 15240.0,
+      "objective_value": 17068.8,
+      "weight": 0.25,
+      "unit": "m",
+      "description": "Combat ceiling >= 50,000 ft (56,000 ft objective)"
+    },
+    {
+      "key": "climb_rate_sl_mps",
+      "kind": "objective",
+      "op": ">=",
+      "value": 60.96,
+      "objective_value": 86.36,
+      "weight": 0.25,
+      "unit": "mps",
+      "description": "Initial rate of climb (12,000-17,400 ft/min)"
+    },
+    {
+      "key": "combat_radius_m",
+      "kind": "objective",
+      "op": ">=",
+      "value": 592640.0,
+      "objective_value": 777840.0,
+      "weight": 0.15,
+      "unit": "m",
+      "description": "GCI/SAGE intercept radius (320-420 nmi)"
+    }
+  ],
+  "budget": {
+    "dev_usd": 45000000.0,
+    "unit_price_ceiling_usd": 1400000.0,
+    "quantity_planned": 750
+  },
+  "acquisition": {
+    "style": "paper_award",
+    "downselect_count": 1,
+    "prototype_quantity_per_winner": 2,
+    "allow_dual_award": false,
+    "production_lots": 5,
+    "urgency": 0.85
+  },
+  "eval_weights": {
+    "proposal": {
+      "perf": 0.45,
+      "cost": 0.2,
+      "sched": 0.15,
+      "risk": 0.2
+    },
+    "flyoff": {
+      "perf": 0.6,
+      "cost": 0.15,
+      "sched": 0.1,
+      "risk": 0.15
+    }
+  },
+  "politics": {
+    "incumbent_bias": {
+      "convair": 0.45,
+      "lockheed": 0.3,
+      "republic": 0.25,
+      "north_american": 0.2
+    },
+    "congressional_interest": 0.5,
+    "industrial_base_need": {
+      "convair": 0.5,
+      "lockheed": 0.2,
+      "republic": 0.2
+    }
+  },
+  "historical": {
+    "winner_company_id": "convair",
+    "winner_design_name": "Model 8-80 (YF-102 / F-102A Delta Dagger)",
+    "award_date": "1951-09-11",
+    "outcome": "produced",
+    "production_delivered": 1000,
+    "notes": "Six contractors submitted 9 proposals. Convair won WS-201A on its XF-92A delta-wing experience. Early YF-102 prototypes failed to break Mach 1 due to transonic wave drag until redesigned with Whitcomb's Area Rule into the YF-102A (M1.25) and later J75-powered F-106A (M2.3).",
+    "citations": [
+      "https://en.wikipedia.org/wiki/Convair_F-102_Delta_Dagger",
+      "https://en.wikipedia.org/wiki/Convair_F-106_Delta_Dart",
+      "https://en.wikipedia.org/wiki/Republic_XF-103"
+    ],
+    "competitors": [
+      {
+        "company_id": "convair",
+        "design_name": "Model 8-80 (YF-102 / F-102A Delta Dagger)",
+        "is_historical_winner": true,
+        "built_prototype": true,
+        "first_flight_date": "1953-10-23",
+        "unit_price_bid_usd": 1184000.0,
+        "dev_cost_bid_usd": 38000000.0,
+        "novelty": {
+          "unproven_tech_count": 1,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 78.0,
+        "track_record_at_bid": 0.7,
+        "district_weight": 0.55,
+        "cross_service_derivative": false,
+        "promised_overrides": {
+          "max_mach_alt": 1.38,
+          "service_ceiling_m": 16764.0,
+          "climb_rate_sl_mps": 83.82
+        },
+        "anchor_performance": {
+          "max_mach_alt": 1.25,
+          "service_ceiling_m": 16276.3,
+          "climb_rate_sl_mps": 78.23,
+          "combat_radius_m": 616716.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "F-102A achieved M1.25 (825 mph) at 40k ft, 53,400 ft ceiling, 13,000-17,400 ft/min climb, 6x AIM-4 Falcon in internal bay, $1.184M unit cost."
+      },
+      {
+        "company_id": "republic",
+        "design_name": "AP-57 (XF-103 Titanium Ramjet/Turbojet)",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1680000.0,
+        "dev_cost_bid_usd": 58000000.0,
+        "novelty": {
+          "unproven_tech_count": 4,
+          "unflown_engine": true,
+          "unconventional_config": true
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 72.0,
+        "track_record_at_bid": 0.6,
+        "district_weight": 0.45,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 2.2,
+          "service_ceiling_m": 19812.0,
+          "climb_rate_sl_mps": 71.12,
+          "combat_radius_m": 703760.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Extreme technical/schedule/cost risk (titanium + dual-cycle XJ67/XRJ55); funded only as experimental hedge WS-204A, cancelled at mockup stage after $104M."
+      },
+      {
+        "company_id": "lockheed",
+        "design_name": "Model L-205 Interceptor Proposal",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1320000.0,
+        "dev_cost_bid_usd": 42000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": true,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 74.0,
+        "track_record_at_bid": 0.65,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.28,
+          "service_ceiling_m": 15849.6,
+          "climb_rate_sl_mps": 72.14,
+          "combat_radius_m": 629680.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Selected for Phase I mockup alongside Convair and Republic in July 1951, dropped Sep 1951 in favor of Convair's XF-92A delta experience."
+      },
+      {
+        "company_id": "north_american",
+        "design_name": "NA-177 Interceptor Proposal",
+        "is_historical_winner": false,
+        "built_prototype": false,
+        "first_flight_date": null,
+        "unit_price_bid_usd": 1290000.0,
+        "dev_cost_bid_usd": 41000000.0,
+        "novelty": {
+          "unproven_tech_count": 2,
+          "unflown_engine": false,
+          "unconventional_config": false
+        },
+        "equipment": {
+          "carrier_capable": false,
+          "radar_installed": true,
+          "crew": 1,
+          "engines": 1,
+          "internal_bay": true,
+          "guns_20mm": 0,
+          "missile_capability": [
+            "sarh"
+          ]
+        },
+        "reputation_at_bid": 75.0,
+        "track_record_at_bid": 0.68,
+        "district_weight": 0.5,
+        "cross_service_derivative": false,
+        "anchor_performance": {
+          "max_mach_alt": 1.22,
+          "service_ceiling_m": 15392.4,
+          "climb_rate_sl_mps": 68.58,
+          "combat_radius_m": 611160.0
+        },
+        "flyoff_flaws_unfixed_severity": 0,
+        "published_notes": "Swept-wing interceptor derivative; lower high-altitude ceiling and internal bay volume than Convair delta."
+      }
+    ]
+  },
+  "alt_history": {
+    "predecessor_program_id": "usaf_aw_int_1945",
+    "follow_on_program_id": "usaf_ws202a_1955",
+    "suppress_if_role_satisfied": false,
+    "historical_cancellation_shock": 0.0
+  }
+}
