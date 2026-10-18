@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>军工复合体：喷气时代 (1945–1960) — 交互验证原型 | Military-Industrial Complex: Jet Age</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Persistent Global Top Bar HUD (TopBarHUD.tscn) -->
+  <header class="topbar-hud">
+    <div class="brand-block">
+      <div>
+        <div class="brand-title">MILITARY-INDUSTRIAL COMPLEX: JET AGE // 军工复合体：喷气时代</div>
+        <div class="brand-sub">INTERACTIVE WEB PLAYABILITY PROTOTYPE (1945–1960 US JET AGE ORACLE)</div>
+      </div>
+    </div>
+    <div class="vitals-strip">
+      <div class="vital-pill"><span class="lbl">日期 DATE:</span><span class="val cyan" id="hud-date">1952-09-15</span></div>
+      <div class="vital-pill"><span class="lbl">公司现金 CASH:</span><span class="val green" id="hud-cash">$24.50M</span></div>
+      <div class="vital-pill"><span class="lbl">空军声望 USAF:</span><span class="val brass" id="hud-rep-usaf">74/100</span></div>
+      <div class="vital-pill"><span class="lbl">海军声望 USN:</span><span class="val brass" id="hud-rep-usn">68/100</span></div>
+      <div class="vital-pill"><span class="lbl">政治资本 POL:</span><span class="val cyan" id="hud-pol">52/100</span></div>
+      <div class="vital-pill"><span class="lbl">已赢标书 WON:</span><span class="val green" id="hud-won">1 项</span></div>
+    </div>
+  </header>
+
+  <!-- 1-Click Historical Showdown Scenario Selector Bar -->
+  <section class="scenario-bar">
+    <div style="font-family:var(--font-mono);font-size:12px;color:var(--accent-brass);font-weight:700;">
+      ★ 一键切换经典历史竞标剧本 (HISTORICAL SHOWDOWN SCENARIOS)：
+    </div>
+    <div class="scenario-buttons">
+      <button class="btn btn-brass" onclick="window.MIC_APP_ACTIONS.loadScenario('1952_interceptor')">1952 空军 WS-201A 超音速截击机 (YF-102 音障危机 vs F-102A 面积律)</button>
+      <button class="btn" onclick="window.MIC_APP_ACTIONS.loadScenario('1946_day_fighter')">1946 陆航昼间喷气战斗机 (P-80 平直翼 vs XP-86 35°后掠翼)</button>
+      <button class="btn" onclick="window.MIC_APP_ACTIONS.loadScenario('1953_usn_carrier')">1953 海军超音速舰载机 (F8U-1 十字军战士 vs F4D-1 天光)</button>
+      <button class="btn" onclick="window.MIC_APP_ACTIONS.loadScenario('1955_mach2_showdown')">1955 双倍音速制空决战 (F-104A 星式战斗机 vs F-105B 雷公)</button>
+    </div>
+  </section>
+
+  <!-- Main Shell (Left Navigation Dock + Center Active Workspace + Right Event/Alert Feed) -->
+  <main class="main-shell">
+    <aside class="left-nav">
+      <div class="nav-section-title">核心工作台 (WORKSPACES)</div>
+      <button class="nav-btn active" data-ws="design" onclick="window.MIC_UI.goWorkspace('design')">
+        <span>1. 飞机总体设计局</span><span style="font-size:11px;opacity:0.75;">F2</span>
+      </button>
+      <button class="nav-btn" data-ws="testing" onclick="window.MIC_UI.goWorkspace('testing')">
+        <span>2. 风洞与试飞排雷</span><span style="font-size:11px;opacity:0.75;">F4</span>
+      </button>
+      <button class="nav-btn" data-ws="procurement" onclick="window.MIC_UI.goWorkspace('procurement')">
+        <span>3. 情报与真机竞飞</span><span style="font-size:11px;opacity:0.75;">F5</span>
+      </button>
+      <button class="nav-btn" data-ws="propulsion" onclick="window.MIC_UI.goWorkspace('propulsion')">
+        <span>4. 航发五巨头定制</span><span style="font-size:11px;opacity:0.75;">F3</span>
+      </button>
+      <button class="nav-btn" data-ws="tech" onclick="window.MIC_UI.goWorkspace('tech')">
+        <span>5. 科技树与沙盒设置</span><span style="font-size:11px;opacity:0.75;">F6</span>
+      </button>
+
+      <div class="nav-section-title" style="margin-top:14px;">快速试玩指南 (GUIDE)</div>
+      <div style="font-size:11.8px;color:#98b0d4;padding:6px;background:#091529;border:1px solid #244778;border-radius:4px;line-height:1.5;">
+        <b>推荐体验流程：</b><br>
+        ① 在【1. 飞机总体设计局】观察 <b>YF-102</b> 未开面积律时的红色波阻尖峰（极速卡在 M 1.03）；<br>
+        ② 进入【2. 风洞与试飞排雷】运行 <b>L2 开槽跨音速风洞</b>，揭开“未知高速领域风险 (D7)”；<br>
+        ③ 点击<b>【立即立项修形】</b>自动开启惠特科姆面积律蜂腰机身，极速跃升至 <b>M 1.35</b>；<br>
+        ④ 进入【3. 情报与真机竞飞】打探对手传闻 (D10) 并启动<b>爱德华兹真机同台竞飞 (D6)</b>！
+      </div>
+    </aside>
+
+    <section id="workspace-host" class="workspace-panel"></section>
+
+    <aside class="right-feed" id="right-event-list"></aside>
+  </main>
+
+  <script src="data_bundle.js"></script>
+  <script src="sim_kernel.js"></script>
+  <script src="canvas_plots.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
