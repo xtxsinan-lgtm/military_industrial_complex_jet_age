@@ -198,6 +198,8 @@
       text: textZh,
     });
     if (STATE.eventLog.length > 30) STATE.eventLog.pop();
+    STATE.unreadEvents = (STATE.unreadEvents || 0) + 1;
+    if (typeof showToast === "function" && STATE.booted) showToast(category, textZh);
   }
 
   function loadTemplate(stem, keepScenario) {
@@ -451,56 +453,120 @@
   };
 })();
 
+// ---------------------------------------------------------------------------
+// Shared UI helpers
+// ---------------------------------------------------------------------------
+const SCEN_SHORT = {
+  "1946_day_fighter": { t1: "昼间喷气战斗机", t2: "P-80 平直翼 vs XP-86 后掠翼" },
+  "1952_interceptor": { t1: "WS-201A 超音速截击机", t2: "YF-102 音障危机 · 面积律" },
+  "1953_usn_carrier": { t1: "海军超音速舰载机", t2: "F8U-1 vs F4D-1" },
+  "1955_mach2_showdown": { t1: "双倍音速制空决战", t2: "F-104A vs F-105B" },
+};
+
+const EVENT_TONE = {
+  AWARD: "good", FIX: "good", FLIGHT: "warn", FLAW: "bad", DEBRIEF: "bad",
+  RFP: "warn", TUNNEL: "", INTEL: "", ENGINE: "", VENDOR: "", AIRFOIL: "", FUSELAGE: "good", DESIGN: "", SANDBOX: "good",
+};
+
+function eventBadgeClass(cat) {
+  const tone = EVENT_TONE[cat] || "";
+  return tone === "good" ? "badge-ok" : tone === "bad" ? "badge-bad" : tone === "warn" ? "badge-sim" : "badge-tunnel";
+}
+
+function sourceBadgeClass(STATE) {
+  return STATE.flightPhaseRun > 0 ? "badge-flight" : STATE.tunnelLevelRun > 0 ? "badge-tunnel" : "badge-sim";
+}
+
+function showToast(cat, text) {
+  const host = document.getElementById("toast-host");
+  if (!host || !host.appendChild) return;
+  const tone = EVENT_TONE[cat] || "";
+  const el = document.createElement("div");
+  el.className = "toast" + (tone ? " t-" + tone : "");
+  el.innerHTML = `<span class="badge ${eventBadgeClass(cat)}">${cat}</span><div>${text}</div>`;
+  host.appendChild(el);
+  while (host.children.length > 3) host.removeChild(host.firstChild);
+  setTimeout(function () { el.classList.add("out"); }, 3800);
+  setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 4200);
+}
+
+// Keep range-input fill (--pct) in sync with its value
+function syncRangeFills(root) {
+  if (!root || !root.querySelectorAll) return;
+  root.querySelectorAll('input[type="range"]').forEach(function (el) {
+    const min = Number(el.min || 0), max = Number(el.max || 100), v = Number(el.value);
+    const pct = ((v - min) / Math.max(1e-9, max - min)) * 100;
+    el.style.setProperty("--pct", Math.max(0, Math.min(100, pct)).toFixed(1) + "%");
+  });
+}
+
 function renderTopBarAndRightFeed() {
   const A1 = window.MIC_APP_PART1;
   const STATE = A1.STATE;
   const scen = A1.SHOWDOWN_SCENARIOS[STATE.scenarioId];
 
-  const elDate = document.getElementById("hud-date");
-  if (elDate) elDate.textContent = scen.date_str + " (" + scen.customer + ")";
-  const elCash = document.getElementById("hud-cash");
-  if (elCash) elCash.textContent = "$" + (STATE.companyCashUsd / 1e6).toFixed(2) + "M";
-  const elRepAF = document.getElementById("hud-rep-usaf");
-  if (elRepAF) elRepAF.textContent = STATE.repUSAF + "/100";
-  const elRepNavy = document.getElementById("hud-rep-usn");
-  if (elRepNavy) elRepNavy.textContent = STATE.repUSN + "/100";
-  const elPol = document.getElementById("hud-pol");
-  if (elPol) elPol.textContent = STATE.polCapital + "/100";
-  const elWon = document.getElementById("hud-won");
-  if (elWon) elWon.textContent = STATE.contractsWon + " 项";
+  const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+  setTxt("hud-date", scen.date_str + " · " + scen.customer);
+  setTxt("hud-cash", "$" + (STATE.companyCashUsd / 1e6).toFixed(2) + "M");
+  setTxt("hud-rep-usaf", STATE.repUSAF + "/100");
+  setTxt("hud-rep-usn", STATE.repUSN + "/100");
+  setTxt("hud-pol", STATE.polCapital + "/100");
+  setTxt("hud-won", STATE.contractsWon + " 项");
+  setTxt("hud-feed-count", String(STATE.unreadEvents || 0));
+  const cnt = document.getElementById("hud-feed-count");
+  if (cnt && cnt.style) cnt.style.display = STATE.unreadEvents ? "" : "none";
 
-  // Update Left Nav Active Button
+  if (document.body && document.body.classList) {
+    document.body.classList.toggle("ws-design", STATE.activeWorkspace === "design");
+    if (STATE.activeWorkspace !== "design") document.body.classList.remove("feed-open");
+  }
+
+  // Scenario cards (active state follows STATE.scenarioId)
+  const scenHost = document.getElementById("scenario-buttons");
+  if (scenHost) {
+    scenHost.innerHTML = Object.keys(A1.SHOWDOWN_SCENARIOS)
+      .map((id) => A1.SHOWDOWN_SCENARIOS[id])
+      .sort((a, b) => a.year - b.year)
+      .map(function (s) {
+        const sh = SCEN_SHORT[s.id] || { t1: s.title_zh, t2: "" };
+        return `<button class="scen-card ${s.id === STATE.scenarioId ? "active" : ""}" onclick="window.MIC_APP_ACTIONS.loadScenario('${s.id}')" title="${s.title_zh}">
+          <span class="yr">${s.year}</span>
+          <span><span class="t1">${s.customer} · ${sh.t1}</span><br><span class="t2">${sh.t2}</span></span>
+        </button>`;
+      }).join("");
+  }
+
   document.querySelectorAll(".nav-btn").forEach(function (btn) {
     btn.classList.toggle("active", btn.getAttribute("data-ws") === STATE.activeWorkspace);
   });
 
-  // Update Right Event Feed & Status
   const feedEl = document.getElementById("right-event-list");
   if (feedEl) {
     const unfixed = STATE.flaws.filter((f) => !f.fixed);
     const uncharted = unfixed.filter((f) => f.uncharted_before_discovery && !f.discovered);
     const knownUnfixed = unfixed.filter((f) => f.discovered || !f.uncharted_before_discovery);
 
-    let alertHtml = `<div class="card" style="margin-bottom:10px;border-color:#e09f3e;">
-      <div class="card-title">当前竞标与原型机状态</div>
-      <div style="font-size:12px;margin-bottom:6px;"><b>当前剧本：</b>${scen.title_zh}</div>
-      <div style="font-size:11.5px;color:#98b0d4;margin-bottom:8px;">${scen.desc_zh}</div>
-      <div style="font-family:var(--font-mono);font-size:11.5px;">
-        <div>数据来源：<span class="badge ${STATE.flightPhaseRun > 0 ? "badge-flight" : STATE.tunnelLevelRun > 0 ? "badge-tunnel" : "badge-sim"}">${STATE.sourceBadge}</span></div>
-        <div style="margin-top:4px;">未知高速领域风险 (D7)：<span class="badge badge-uncharted">${uncharted.length} 项潜伏</span></div>
-        <div style="margin-top:4px;">已暴露待修缺陷：<b style="color:${knownUnfixed.length > 0 ? "#d94a38" : "#3bceac"}">${knownUnfixed.length} 项</b></div>
-      </div>
+    const statusHtml = `<div class="card accent-brass">
+      <div class="card-title"><span class="dot"></span>当前竞标<button class="btn sm ghost feed-close" style="margin-left:auto" onclick="window.MIC_UI.toggleFeed(false)">✕</button></div>
+      <div style="font-size:13px;font-weight:600;line-height:1.4;margin-bottom:6px;">${scen.title_zh}</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;line-height:1.55;">${scen.desc_zh}</div>
+      <div class="status-kv"><span>数据来源</span><span class="badge ${sourceBadgeClass(STATE)}">${STATE.sourceBadge}</span></div>
+      <div class="status-kv"><span>未知高速风险 (D7)</span><span class="badge ${uncharted.length ? "badge-uncharted" : "badge-muted"}">${uncharted.length} 项潜伏</span></div>
+      <div class="status-kv"><span>已暴露待修缺陷</span><span class="badge ${knownUnfixed.length ? "badge-bad" : "badge-ok"}">${knownUnfixed.length} 项</span></div>
+      <div class="status-kv"><span>累计工期</span><span class="mono" style="color:${STATE.schedDays > scen.flyoff_days_budget ? "var(--accent-red)" : "var(--text-primary)"}">${STATE.schedDays} / ${scen.flyoff_days_budget} 天</span></div>
     </div>`;
 
-    const logsHtml = STATE.eventLog.map(function (ev) {
-      return `<div style="border-bottom:1px solid #1a3358;padding:6px 2px;font-size:11.8px;">
-        <span style="font-family:var(--font-mono);color:#00f0ff;">[${ev.date}]</span>
-        <span class="badge badge-sim" style="margin:0 4px;">${ev.cat}</span>
-        <span>${ev.text}</span>
-      </div>`;
-    }).join("");
+    const logsHtml = STATE.eventLog.length
+      ? STATE.eventLog.map(function (ev) {
+          return `<div class="feed-item">
+            <span class="badge ${eventBadgeClass(ev.cat)}">${ev.cat}</span>
+            <span class="when">${ev.date}</span>
+            <div class="what">${ev.text}</div>
+          </div>`;
+        }).join("")
+      : `<div class="empty">暂无电报</div>`;
 
-    feedEl.innerHTML = alertHtml + `<div class="card"><div class="card-title">电传警报与试飞日志 (TELETYPE FEED)</div>${logsHtml}</div>`;
+    feedEl.innerHTML = statusHtml + `<div class="card"><div class="card-title">电传日志<span class="eyebrow">Teletype</span></div>${logsHtml}</div>`;
   }
 }
 
@@ -517,41 +583,56 @@ function renderTopBarAndRightFeed() {
     const ad = STATE.perf.areaDist;
 
     const rows = [
-      { lbl: "高空最大马赫数 (Max Mach)", key: "max_mach_alt", scale: 1.0, unit: "M", fmt: 2 },
-      { lbl: "实用升限 (Service Ceiling)", key: "service_ceiling_m", scale: K.M_TO_FT, unit: "ft", fmt: 0 },
-      { lbl: "海平面爬升率 (Climb Rate)", key: "climb_rate_sl_mps", scale: K.M_TO_FT * 60, unit: "fpm", fmt: 0 },
-      { lbl: "作战半径 (Combat Radius)", key: "combat_radius_m", scale: K.M_TO_NMI, unit: "nmi", fmt: 0 },
-      { lbl: "M0.8 持续盘旋率 (Turn Rate)", key: "sustained_turn_dps_m08_4572m", scale: 1.0, unit: "°/s", fmt: 1 },
+      { lbl: "高空最大马赫数", key: "max_mach_alt", scale: 1.0, unit: "M", fmt: 2, pre: true },
+      { lbl: "实用升限", key: "service_ceiling_m", scale: K.M_TO_FT, unit: "ft", fmt: 0 },
+      { lbl: "海平面爬升率", key: "climb_rate_sl_mps", scale: K.M_TO_FT * 60, unit: "fpm", fmt: 0 },
+      { lbl: "作战半径", key: "combat_radius_m", scale: K.M_TO_NMI, unit: "nmi", fmt: 0 },
+      { lbl: "M0.8 持续盘旋率", key: "sustained_turn_dps_m08_4572m", scale: 1.0, unit: "°/s", fmt: 1 },
     ];
 
+    // Each metric: value ± σ on a bar scaled to [0.6·threshold, 1.15·objective], with threshold/objective ticks
     const perfRowsHtml = rows.map(function (r) {
       const e = est[r.key];
-      const v = (e.value * r.scale).toFixed(r.fmt);
-      const s = (e.sigma * r.scale).toFixed(r.fmt);
-      const t = (scen.thresholds[r.key] * r.scale).toFixed(r.fmt);
-      const o = (scen.objectives[r.key] * r.scale).toFixed(r.fmt);
-      const pass = e.value >= scen.thresholds[r.key];
-      return `<tr>
-        <td>${r.lbl}</td>
-        <td><b style="color:${pass ? "#3bceac" : "#d94a38"}">${v}</b> <span style="color:#98b0d4">±${s} ${r.unit}</span></td>
-        <td>${t} / ${o} ${r.unit}</td>
-        <td><span class="badge" style="background:${pass ? "#0e3d33" : "#451a16"};color:${pass ? "#54f5cf" : "#ff9c8f"}">${pass ? "达标 OK" : "未达标 LOW"}</span></td>
-      </tr>`;
+      const th = scen.thresholds[r.key];
+      const ob = scen.objectives[r.key];
+      const lo = th * 0.6;
+      const hi = ob + (ob - th) * 0.6;
+      const pos = (x) => Math.max(0, Math.min(100, ((x - lo) / Math.max(1e-9, hi - lo)) * 100));
+      const pass = e.value >= th;
+      const great = e.value >= ob;
+      const fmtV = (x) => (x * r.scale).toFixed(r.fmt);
+      const withUnit = (x) => (r.pre ? `${r.unit} ${fmtV(x)}` : `${fmtV(x)} ${r.unit}`);
+      return `<div class="metric">
+        <div class="metric-top">
+          <span class="metric-name">${r.lbl}</span>
+          <span class="metric-val ${pass ? "pass" : "fail"}">${withUnit(e.value)}<span class="sig">±${fmtV(e.sigma)}</span></span>
+        </div>
+        <div class="mbar">
+          <div class="zone-ok" style="left:${pos(th)}%;right:0"></div>
+          <div class="fill ${pass ? "pass" : "fail"}" style="width:${pos(e.value)}%"></div>
+          <div class="sigma" style="left:${pos(e.value - e.sigma)}%;width:${Math.max(0.8, pos(e.value + e.sigma) - pos(e.value - e.sigma))}%"></div>
+          <div class="tick th" style="left:${pos(th)}%" title="门槛 Threshold"></div>
+          <div class="tick ob" style="left:${pos(ob)}%" title="目标 Objective"></div>
+        </div>
+        <div class="metric-foot"><span class="th">门槛 ${withUnit(th)}</span><span>${great ? "★ 超过目标" : pass ? "达标" : "未达门槛"}</span><span class="ob">目标 ${withUnit(ob)}</span></div>
+      </div>`;
     }).join("");
 
     const vitalsHtml = `
-      <div class="vital-pill"><span class="lbl">空重 Empty:</span><span class="val">${STATE.perf.empty_mass_kg.toFixed(0)} kg</span></div>
-      <div class="vital-pill"><span class="lbl">最大起飞 MTOW:</span><span class="val">${STATE.perf.mtow_kg.toFixed(0)} kg</span></div>
-      <div class="vital-pill"><span class="lbl">起飞滑跑距离:</span><span class="val">${(STATE.perf.takeoff_distance_m * 3.28084).toFixed(0)} ft</span></div>
-      <div class="vital-pill"><span class="lbl">单机出厂成本:</span><span class="val brass">$${(STATE.perf.unit_flyaway_cost_usd / 1e3).toFixed(0)}k</span></div>
+      <div class="kpi"><div class="k-lbl">空重 Empty</div><div class="k-val">${STATE.perf.empty_mass_kg.toFixed(0)}<small>kg</small></div></div>
+      <div class="kpi"><div class="k-lbl">最大起飞 MTOW</div><div class="k-val">${STATE.perf.mtow_kg.toFixed(0)}<small>kg</small></div></div>
+      <div class="kpi"><div class="k-lbl">起飞滑跑</div><div class="k-val">${(STATE.perf.takeoff_distance_m * 3.28084).toFixed(0)}<small>ft</small></div></div>
+      <div class="kpi brass"><div class="k-lbl">单机出厂成本</div><div class="k-val">$${(STATE.perf.unit_flyaway_cost_usd / 1e3).toFixed(0)}<small>k</small></div></div>
     `;
 
     const isSmooth = ad.r_area <= 1.18;
+    const sm = STATE.perf.static_margin;
     const diagHtml = `
-      <div style="color:#e09f3e;font-weight:700;margin-bottom:4px;">总师实时手绘气动诊断 (LIVE AIRFOIL & FUSELAGE DIAGNOSTICS)：</div>
-      <div>• <b>手绘翼型：</b>(t/c)_max = ${(afEval.tc_max * 100).toFixed(2)}% (@ ${(afEval.x_tc_max * 100).toFixed(0)}%c) | 弯度 = ${(afEval.camber_max * 100).toFixed(2)}% | 2D M_dd = ${afEval.m_dd_2d.toFixed(2)} | CL_max = ${afEval.cl_max_2d.toFixed(2)}</div>
-      <div>• <b>手绘机身与面积律：</b>波阻系数 R_area = <b style="color:${isSmooth ? "#3bceac" : "#ff5a47"}">${ad.r_area.toFixed(2)}</b> (蜂腰修形吻合度 ${(ad.waist_quality * 100).toFixed(0)}% | 机身容积 ${ad.fus_vol_m3.toFixed(1)} m³)</div>
-      <div>• <b>纵向静稳定裕度：</b>${(STATE.perf.static_margin * 100).toFixed(1)}% MAC | <b>预估研发总费：</b>$${(STATE.perf.dev_cost_usd_estimate / 1e6).toFixed(2)}M</div>
+      <ul class="diag-list">
+        <li class="${isSmooth ? "ok" : "warn"}"><div><b>面积律</b> R<sub>area</sub> = <span class="mono" style="color:${isSmooth ? "var(--accent-green)" : "var(--accent-red)"}">${ad.r_area.toFixed(2)}</span> · 蜂腰吻合 ${(ad.waist_quality * 100).toFixed(0)}%<br><span class="muted">${isSmooth ? "截面积分布平滑，跨音速波阻已压低。" : "机翼处截面积突变 → 去「手绘机身」把 S4–S7 往下拉。"}</span></div></li>
+        <li class="${afEval.tc_max <= 0.06 ? "ok" : "info"}"><div><b>翼型</b> t/c <span class="mono">${(afEval.tc_max * 100).toFixed(1)}%</span> @${(afEval.x_tc_max * 100).toFixed(0)}%c · 弯度 <span class="mono">${(afEval.camber_max * 100).toFixed(1)}%</span><br><span class="muted">M<sub>dd</sub>(2D) ${afEval.m_dd_2d.toFixed(2)} · C<sub>L,max</sub> ${afEval.cl_max_2d.toFixed(2)}</span></div></li>
+        <li class="${sm >= 0.02 ? "ok" : "warn"}"><div><b>静稳定裕度</b> <span class="mono">${(sm * 100).toFixed(1)}%</span> MAC<br><span class="muted">机身容积 ${ad.fus_vol_m3.toFixed(1)} m³ · 研发费 $${(STATE.perf.dev_cost_usd_estimate / 1e6).toFixed(1)}M</span></div></li>
+      </ul>
     `;
 
     return { perfRowsHtml, vitalsHtml, diagHtml };
@@ -599,6 +680,7 @@ function renderTopBarAndRightFeed() {
     if (vitals) vitals.innerHTML = vitalsHtml;
     const diag = document.getElementById("design-diag-box");
     if (diag) diag.innerHTML = diagHtml;
+    syncRangeFills(document);
 
     drawActiveDesignCanvas();
     renderTopBarAndRightFeed();
@@ -606,7 +688,6 @@ function renderTopBarAndRightFeed() {
 
   function renderDesignWorkspace(host) {
     const A1 = window.MIC_APP_PART1;
-    const K = window.MIC_KERNEL;
     const STATE = A1.STATE;
     const d = STATE.design;
     const wing = d.wing || {};
@@ -618,141 +699,138 @@ function renderTopBarAndRightFeed() {
     const templateOpts = histKeys.map(function (k) {
       const item = A1.DATA.aircraft_hist[k];
       const sel = k === STATE.templateStem ? "selected" : "";
-      return `<option value="${k}" ${sel}>${item.design.name || k} (${item.id})</option>`;
+      return `<option value="${k}" ${sel}>${item.design.name || k}</option>`;
     }).join("");
 
     const engKeys = Object.keys(A1.DATA.engines_hist || {});
     const engOpts = engKeys.map(function (ek) {
       const e = A1.DATA.engines_hist[ek];
-      const sel = (prop.engine_id === ek || ek.indexOf(prop.engine_id) !== -1) ? "selected" : "";
-      return `<option value="${ek}" ${sel}>${e.name || ek} (${((e.thrust_ab_sl_N || e.thrust_dry_sl_N || 35000)/1000).toFixed(1)} kN)</option>`;
+      const sel = prop.engine_id === ek ? "selected" : "";
+      return `<option value="${ek}" ${sel}>${e.name || ek} · ${((e.thrust_ab_sl_N || e.thrust_dry_sl_N || 35000) / 1000).toFixed(1)} kN</option>`;
     }).join("");
 
     const { perfRowsHtml, vitalsHtml, diagHtml } = buildPerfAndDiagHtml();
+    const tab = STATE.activeCanvasTab;
+    const tabBtn = (id, icon, label, tag) =>
+      `<button class="${tab === id ? "on" : ""}" onclick="window.MIC_UI.setCanvasTab('${id}')">${icon} ${label}<span class="tag">${tag}</span></button>`;
 
-    // Context-sensitive sculpting toolbar above the interactive canvas
-    let sculptToolbarHtml = "";
-    if (STATE.activeCanvasTab === "airfoil") {
-      sculptToolbarHtml = `
-        <div style="background:#0d213f;border:1px solid #00f0ff;border-radius:4px;padding:7px 10px;display:flex;flex-direction:column;gap:6px;">
-          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
-            <span style="font-size:11.5px;color:#00f0ff;font-weight:700;">✏️ 翼型画笔模式：</span>
-            <button class="btn ${STATE.airfoilBrushMode === "nodes" ? "btn-brass" : ""}" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.setAirfoilBrush('nodes')">🎯 拖拽控制点 (U1-U5 / L1-L5)</button>
-            <button class="btn ${STATE.airfoilBrushMode === "free_upper" ? "btn-brass" : ""}" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.setAirfoilBrush('free_upper')">🖌️ 自由涂抹手绘：上翼面</button>
-            <button class="btn ${STATE.airfoilBrushMode === "free_lower" ? "btn-brass" : ""}" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.setAirfoilBrush('free_lower')">🖌️ 自由涂抹手绘：下翼面</button>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;">
-            <span style="font-size:11px;color:#98b0d4;">经典翼型一键载入：</span>
-            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('naca_64a210')">NACA 64A-210 (F-86 亚音速高升力)</button>
-            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('naca_65a006')">NACA 65A-006 (F-102 跨音速薄翼)</button>
-            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('biconvex_34')">3.4% 双弧刀锋超音速翼 (F-104)</button>
-            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('supercritical_early')">平顶超临界减波阻翼 (Supercritical)</button>
-            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('high_camber_navy')">高弯度舰载机翼 (低失速)</button>
-          </div>
-        </div>
-      `;
-    } else if (STATE.activeCanvasTab === "area_rule" || STATE.activeCanvasTab === "3view") {
-      sculptToolbarHtml = `
-        <div style="background:#0d213f;border:1px solid #3bceac;border-radius:4px;padding:7px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
-          <span style="font-size:11.5px;color:#3bceac;font-weight:700;">✏️ 机身与机翼手绘塑形工具：</span>
-          <span style="font-size:11px;color:#98b0d4;">直接在画布上按住鼠标拖拽 S0–S10 站位捏出蜂腰（或在三视图拖拽翼尖改后掠角/展长）！</span>
-          <button class="btn" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('tube')">还原直筒机身 (无蜂腰)</button>
-          <button class="btn btn-green" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('waist')">✨ 一键惠特科姆蜂腰修形 (Coke-Bottle)</button>
-          <button class="btn" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('fatten')">机身扩容加粗 +6%</button>
-          <button class="btn" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('slim')">机身减阻收窄 -6%</button>
-        </div>
-      `;
+    let toolbarHtml = "";
+    if (tab === "airfoil") {
+      const bm = STATE.airfoilBrushMode;
+      const curPreset = (d.custom_airfoil && d.custom_airfoil.preset_name) || "";
+      const preset = (id, label, sub) =>
+        `<button class="chip ${curPreset && curPreset.indexOf(label.split(" ")[0]) === 0 ? "on" : ""}" onclick="window.MIC_UI.applyAirfoilPreset('${id}')">${label} <small>${sub}</small></button>`;
+      toolbarHtml = `<div class="toolbar">
+        <span class="tb-label">画笔</span>
+        <button class="chip ${bm === "nodes" ? "on" : ""}" onclick="window.MIC_UI.setAirfoilBrush('nodes')">🎯 控制点</button>
+        <button class="chip ${bm === "free_upper" ? "on" : ""}" onclick="window.MIC_UI.setAirfoilBrush('free_upper')">🖌️ 涂抹上翼面</button>
+        <button class="chip ${bm === "free_lower" ? "on" : ""}" onclick="window.MIC_UI.setAirfoilBrush('free_lower')">🖌️ 涂抹下翼面</button>
+        <span class="tb-sep"></span>
+        <span class="tb-label">预设</span>
+        ${preset("naca_64a210", "NACA 64A-210", "F-86")}
+        ${preset("naca_65a006", "NACA 65A-006", "F-102")}
+        ${preset("biconvex_34", "3.4% 双弧", "F-104")}
+        ${preset("supercritical_early", "Whitcomb 平顶超临界", "")}
+        ${preset("high_camber_navy", "高弯度舰载", "F8U")}
+      </div>`;
+    } else if (tab === "area_rule" || tab === "3view") {
+      toolbarHtml = `<div class="toolbar">
+        <span class="tb-label">机身</span>
+        <button class="chip go" onclick="window.MIC_UI.sculptFuselagePreset('waist')">✨ 一键蜂腰修形</button>
+        <button class="chip" onclick="window.MIC_UI.sculptFuselagePreset('tube')">还原直筒</button>
+        <button class="chip" onclick="window.MIC_UI.sculptFuselagePreset('fatten')">加粗 +6%</button>
+        <button class="chip" onclick="window.MIC_UI.sculptFuselagePreset('slim')">收窄 −6%</button>
+        <span class="hint">${tab === "3view" ? "拖拽翼尖改后掠 / 展长 / 梢弦，拖拽机身节点捏腰" : "拖拽 S0–S10 节点，或按住在轮廓上涂抹；红色虚线为发动机净空"}</span>
+      </div>`;
+    } else {
+      toolbarHtml = `<div class="toolbar"><span class="hint" style="margin-left:0">${tab === "ps_contour" ? "1g 单位剩余功率 Ps(M, h)：青色越亮爬升潜力越大，红色区域无法维持平飞。" : "实线为当前设计的 CD0(M)，琥珀虚线为切换面积律后的反事实对比。"}</span></div>`;
     }
 
     host.innerHTML = `
       <div class="panel-header">
         <div>
-          <div class="panel-title">2. 飞机总体气动设计局与手绘塑形工作台 (AIRFRAME & FREEHAND SCULPTING BUREAU // SCREEN 2)</div>
-          <div style="font-size:12px;color:#98b0d4;">支持在中央画布<b>直接用鼠标手绘/拖拽翼型上下表面 (U1–U5 / L1–L5)、捏合机身 11 个轴向站位 (S0–S10 蜂腰修形)、拖拽三视图翼尖</b>，实时解算激波分布与性能误差棒！</div>
+          <div class="panel-title"><span class="step">1</span>飞机设计局 <span class="eyebrow" style="margin-left:4px">Airframe Bureau</span></div>
+          <div class="panel-sub">直接在蓝图上手绘翼型、捏合机身蜂腰、拖拽翼尖；右侧性能条实时显示估值、±1σ 误差带与招标门槛/目标。</div>
         </div>
-        <div style="display:flex;gap:8px;">
-          <button class="btn btn-brass" onclick="window.MIC_UI.goWorkspace('testing')">前往风洞与试飞中心 (收窄 ±1σ & 排雷) &rarr;</button>
-          <button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">直接提交爱德华兹真机竞飞 &rarr;</button>
+        <div class="panel-actions">
+          <button class="btn" onclick="window.MIC_UI.goWorkspace('testing')">风洞与试飞 →</button>
+          <button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">提交真机竞飞 →</button>
         </div>
       </div>
 
       <div class="design-grid">
-        <!-- Left Column: Parametric Sliders -->
+        <!-- Left: grouped parametric inputs -->
         <div class="card">
-          <div class="card-title">总体气动与推进参数 (PARAMETRIC INPUTS)</div>
-          <div class="slider-row">
-            <div class="slider-header"><span>史实基准模板 (Baseline Template)</span></div>
+          <div class="slider-row" style="margin-bottom:6px;">
+            <div class="slider-header"><span>史实基准模板</span></div>
             <select id="inp-template">${templateOpts}</select>
           </div>
+
+          <div class="section-label">✈ 机翼 Wing</div>
           <div class="slider-row">
-            <div class="slider-header"><span>机翼参考面积 S (Wing Area)</span><span class="s-val" id="lbl-area">${Number(wing.area_m2).toFixed(1)} m² (${(wing.area_m2 * 10.764).toFixed(0)} sq.ft)</span></div>
+            <div class="slider-header"><span>参考面积 S</span><span class="s-val" id="lbl-area">${Number(wing.area_m2).toFixed(1)} m²</span></div>
             <input type="range" id="inp-area" min="14" max="68" step="0.5" value="${wing.area_m2}">
           </div>
           <div class="slider-row">
-            <div class="slider-header"><span>1/4弦线后掠角 Λ (Quarter-Chord Sweep)</span><span class="s-val" id="lbl-sweep">${Number(wing.sweep_quarter_chord_deg).toFixed(1)}°</span></div>
+            <div class="slider-header"><span>1/4 弦线后掠角 Λ</span><span class="s-val" id="lbl-sweep">${Number(wing.sweep_quarter_chord_deg).toFixed(1)}°</span></div>
             <input type="range" id="inp-sweep" min="0" max="60" step="1" value="${wing.sweep_quarter_chord_deg}">
           </div>
           <div class="slider-row">
-            <div class="slider-header"><span>展弦比 AR (Aspect Ratio)</span><span class="s-val" id="lbl-ar">${Number(wing.aspect_ratio).toFixed(2)}</span></div>
+            <div class="slider-header"><span>展弦比 AR</span><span class="s-val" id="lbl-ar">${Number(wing.aspect_ratio).toFixed(2)}</span></div>
             <input type="range" id="inp-ar" min="1.8" max="6.5" step="0.05" value="${wing.aspect_ratio}">
           </div>
           <div class="slider-row">
-            <div class="slider-header"><span>翼根相对厚度 t/c (缩放手绘翼型厚度)</span><span class="s-val" id="lbl-tc">${(Number(wing.t_c_root) * 100).toFixed(1)}%</span></div>
+            <div class="slider-header"><span>翼根厚度比 t/c</span><span class="s-val" id="lbl-tc">${(Number(wing.t_c_root) * 100).toFixed(1)}%</span></div>
             <input type="range" id="inp-tc" min="0.034" max="0.13" step="0.002" value="${wing.t_c_root}">
           </div>
-          <div class="slider-row" style="background:#17345c;padding:8px;border-radius:4px;border:1px solid #00f0ff;">
-            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;color:#00f0ff;">
-              <input type="checkbox" id="inp-arearule" ${fus.area_ruled ? "checked" : ""}>
-              <span>启用惠特科姆跨音速面积律修形 (Wasp-Waist Area Rule)</span>
-            </label>
-            <div style="font-size:11px;color:#98b0d4;margin-top:3px;">勾选自动生成蜂腰，或在【Tab C】亲手拖拽 S0–S10 捏合机身！</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-header"><span>发动机型号 (Engine Model)</span></div>
+
+          <div class="section-label">◎ 机身 Fuselage</div>
+          <label class="switch-row feature">
+            <span class="txt"><b>惠特科姆面积律蜂腰</b><small>自动生成蜂腰；也可在「手绘机身」亲手捏</small></span>
+            <input type="checkbox" id="inp-arearule" ${fus.area_ruled ? "checked" : ""}>
+          </label>
+
+          <div class="section-label">🔥 推进 Propulsion</div>
+          <div class="slider-row" style="margin-bottom:4px;">
             <select id="inp-engine">${engOpts}</select>
           </div>
-          <div class="slider-row" style="display:flex;gap:12px;align-items:center;">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
-              <input type="checkbox" id="inp-ab" ${prop.afterburner ? "checked" : ""}> <span>加力燃烧室 (Afterburner)</span>
-            </label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
-              <input type="checkbox" id="inp-twin" ${Number(prop.count) === 2 ? "checked" : ""}> <span>双发构型 (2x Engines)</span>
-            </label>
-          </div>
-          <div class="slider-row">
-            <div class="slider-header"><span>内部燃油重量 (Internal Fuel)</span><span class="s-val" id="lbl-fuel">${Number(fuel.internal_kg).toFixed(0)} kg (${(fuel.internal_kg * 2.2046).toFixed(0)} lb)</span></div>
-            <input type="range" id="inp-fuel" min="800" max="6500" step="50" value="${fuel.internal_kg}">
+          <label class="switch-row"><span class="txt">加力燃烧室 Afterburner</span><input type="checkbox" id="inp-ab" ${prop.afterburner ? "checked" : ""}></label>
+          <label class="switch-row"><span class="txt">双发构型 Twin engines</span><input type="checkbox" id="inp-twin" ${Number(prop.count) === 2 ? "checked" : ""}></label>
+
+          <div class="section-label">⛽ 燃油 Fuel</div>
+          <div class="slider-row" style="margin-bottom:0;">
+            <div class="slider-header"><span>机内燃油</span><span class="s-val" id="lbl-fuel">${Number(fuel.internal_kg).toFixed(0)} kg</span></div>
+            <input type="range" id="inp-fuel" class="brass" min="800" max="6500" step="50" value="${fuel.internal_kg}">
           </div>
         </div>
 
-        <!-- Center Column: 5 Interactive Blueprint & Freehand Sculpting Canvases -->
-        <div class="card" style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <button class="btn ${STATE.activeCanvasTab === "airfoil" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('airfoil')">✏️ Tab E: 手绘翼型与激波台 (Airfoil Studio)</button>
-            <button class="btn ${STATE.activeCanvasTab === "area_rule" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('area_rule')">✏️ Tab C: 手绘机身蜂腰与面积律 A(x)</button>
-            <button class="btn ${STATE.activeCanvasTab === "3view" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('3view')">✏️ Tab A: 正交三视图与机翼手绘蓝图</button>
-            <button class="btn ${STATE.activeCanvasTab === "ps_contour" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('ps_contour')">Tab D: Boyd 能量包线 Ps</button>
-            <button class="btn ${STATE.activeCanvasTab === "drag_polar" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('drag_polar')">Tab B: 跨音速波阻 CD0(M)</button>
+        <!-- Center: canvas stage -->
+        <div class="card stage">
+          <div class="stage-head">
+            <div class="seg">
+              ${tabBtn("airfoil", "✏️", "手绘翼型", "Airfoil")}
+              ${tabBtn("area_rule", "✏️", "手绘机身", "Area rule")}
+              ${tabBtn("3view", "✏️", "三视图", "Planform")}
+              <span class="sep"></span>
+              ${tabBtn("ps_contour", "📈", "能量包线", "Ps")}
+              ${tabBtn("drag_polar", "📉", "波阻曲线", "CD0")}
+            </div>
+            <span class="badge ${sourceBadgeClass(STATE)}">${STATE.sourceBadge}</span>
           </div>
-          ${sculptToolbarHtml}
+          ${toolbarHtml}
           <canvas id="design-main-canvas" class="blueprint-canvas" style="cursor:crosshair;"></canvas>
-          <div id="design-vital-pills" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-family:var(--font-mono);font-size:11.5px;">
-            ${vitalsHtml}
-          </div>
+          <div id="design-vital-pills" class="grid-4">${vitalsHtml}</div>
         </div>
 
-        <!-- Right Column: PerformanceReport with EstimateBadge Error Bars -->
-        <div class="card">
-          <div class="card-title">性能报告与误差棒 (PERFORMANCE REPORT & ±1σ)</div>
-          <div style="margin-bottom:8px;font-size:11.8px;">
-            当前置信度来源：<span class="badge ${STATE.flightPhaseRun > 0 ? "badge-flight" : STATE.tunnelLevelRun > 0 ? "badge-tunnel" : "badge-sim"}">${STATE.sourceBadge}</span>
+        <!-- Right: report -->
+        <div class="report-col">
+          <div class="card">
+            <div class="card-title">性能报告<span class="eyebrow">vs RFP · ±1σ</span></div>
+            <div id="design-perf-tbody">${perfRowsHtml}</div>
           </div>
-          <table class="bp-table">
-            <thead><tr><th>指标</th><th>当前估值 (±1σ)</th><th>招标门槛/目标</th><th>状态</th></tr></thead>
-            <tbody id="design-perf-tbody">${perfRowsHtml}</tbody>
-          </table>
-          <div id="design-diag-box" style="margin-top:12px;padding:9px;background:#091529;border:1px solid #244778;border-radius:4px;font-size:11.8px;line-height:1.5;">
-            ${diagHtml}
+          <div class="card">
+            <div class="card-title">总师诊断<span class="eyebrow">Diagnostics</span></div>
+            <div id="design-diag-box">${diagHtml}</div>
           </div>
         </div>
       </div>
@@ -763,82 +841,107 @@ function renderTestingWorkspace(host) {
   const A1 = window.MIC_APP_PART1;
   const STATE = A1.STATE;
 
+  const tunnels = [
+    { lv: 1, t: "L1 低速亚音速风洞", d: "起降与低速稳定性", cost: "$180k", days: "+8 天" },
+    { lv: 2, t: "L2 NACA 开槽喉道跨音速风洞", d: "★ 揪出跨音速激波阻力墙", cost: "$450k", days: "+14 天", star: true },
+    { lv: 3, t: "L3 超音速吹气风洞 + 颤振台", d: "高速副翼反效与颤振", cost: "$780k", days: "+19 天" },
+  ];
+  const tunnelHtml = tunnels.map((t) => {
+    const done = STATE.tunnelLevelRun >= t.lv;
+    return `<button class="action-tile ${done ? "done" : t.star ? "star" : ""}" onclick="window.MIC_APP_ACTIONS.runWindTunnel(${t.lv})">
+      <span class="ic">${done ? "✓" : "L" + t.lv}</span>
+      <span class="body"><span class="t">${t.t}</span><span class="d" style="display:block">${t.d}</span></span>
+      <span class="meta"><span class="c-brass">${t.cost}</span><span>${t.days}</span></span>
+    </button>`;
+  }).join("");
+
+  const phases = [
+    { p: 1, t: "滑跑与首飞", d: "First flight" },
+    { p: 2, t: "亚音速包线", d: "Subsonic envelope" },
+    { p: 3, t: "跨/超音速俯冲", d: "Mach dive", star: true },
+    { p: 4, t: "高过载与打靶", d: "High-g & weapons" },
+  ];
+  const stepperHtml = phases.map((ph) => {
+    const done = STATE.flightPhaseRun >= ph.p;
+    return `<button class="step-node ${done ? "done" : ""} ${ph.star ? "star" : ""}" onclick="window.MIC_APP_ACTIONS.runFlightTestPhase(${ph.p})">
+      <span class="bar"></span>
+      <div class="p">${done ? "✓ " : ""}P${ph.p}${ph.star ? " ★" : ""}</div>
+      <div class="t">${ph.t}</div>
+      <div class="d">${ph.d}</div>
+    </button>`;
+  }).join("");
+
   const pilotCards = A1.PILOTS.map(function (p, idx) {
     const sel = idx === STATE.selectedPilotIdx;
-    return `<div class="card" style="border-color:${sel ? "#00f0ff" : "#244778"};cursor:pointer;" onclick="window.MIC_UI.selectPilot(${idx})">
-      <div style="font-weight:700;color:${sel ? "#00f0ff" : "#eaf2ff"}">${sel ? "✓ " : ""}${p.name}</div>
-      <div style="font-size:11.5px;color:#98b0d4;margin-top:4px;">${p.desc_zh}</div>
-      <div style="font-family:var(--font-mono);font-size:11px;color:#e09f3e;margin-top:6px;">津贴：$${(p.cost_usd / 1e3).toFixed(0)}k / 阶段 | 技术：${(p.skill * 100).toFixed(0)}</div>
+    const nick = (p.name.match(/'([^']+)'/) || [])[1] || p.name;
+    const initials = nick.split(/[\s-]+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+    const fullName = p.name.split("(")[0].trim();
+    const role = (p.name.match(/\(([^)]+)\)/) || [])[1] || "";
+    const stat = (lbl, v, color) => `<div class="statbar"><span>${lbl}</span><span class="b"><i style="width:${Math.round(v * 100)}%;background:${color}"></i></span><span class="v">${Math.round(v * 100)}</span></div>`;
+    return `<div class="card pilot-card ${sel ? "sel" : ""}" onclick="window.MIC_UI.selectPilot(${idx})">
+      ${sel ? `<span class="sel-check">✓</span>` : ""}
+      <div class="pilot-head"><span class="avatar">${initials}</span><div><div class="pilot-name">${fullName}</div><div class="pilot-role">${role}</div></div></div>
+      <div class="pilot-desc">${p.desc_zh}</div>
+      ${stat("技术", p.skill, "var(--accent-cyan)")}
+      ${stat("谨慎", p.caution, "var(--accent-green)")}
+      ${stat("排雷", Math.min(1, p.flaw_bonus / 0.4), "var(--accent-brass)")}
+      <div style="margin-top:10px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">津贴 <span class="c-brass">$${(p.cost_usd / 1e3).toFixed(0)}k</span> / 阶段</div>
     </div>`;
   }).join("");
 
   const flawCards = STATE.flaws.map(function (fl) {
     if (!fl.discovered && fl.uncharted_before_discovery) {
-      return `<div class="card" style="border-color:#ff4785;background:#241122;">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span class="badge badge-uncharted">D7 迷雾：未知高速领域风险 (Uncharted High-Speed Regime Risk)</span>
-          <span style="font-family:var(--font-mono);font-size:11px;color:#ff9ec4;">史实认知年份：${fl.known_from_year} 年</span>
-        </div>
-        <div style="margin-top:6px;font-size:12px;color:#ffd6e6;">您的新颖高速气动构型正踏入人类尚未掌握的跨/超音速未知禁区！必须通过【L2 开槽跨音速风洞】或【阶段 3 超音速俯冲试飞】才能揭开该隐患的真实面目！</div>
+      return `<div class="card accent-pink flaw-card">
+        <div class="flaw-head"><span class="flaw-title" style="color:#ffc0dc">❓ 未知高速领域风险</span><span class="badge badge-uncharted">D7 · ${fl.known_from_year} 年才被认知</span></div>
+        <div class="flaw-desc">你的构型正踏入人类尚未掌握的跨/超音速禁区。只有 <b>L2 跨音速风洞</b> 或 <b>P3 俯冲试飞</b> 才能揭开它的真面目。</div>
       </div>`;
     }
-    const statusBadge = fl.fixed
-      ? `<span class="badge badge-flight">✓ 已整改修复 (FIXED)</span>`
-      : fl.discovered
-      ? `<span class="badge" style="background:#451a16;color:#ff9c8f;border:1px solid #d94a38;">⚠️ 已暴露缺陷 (严重度 S${fl.severity})</span>`
-      : `<span class="badge badge-sim">潜伏未检出 (请安排风洞或试飞)</span>`;
-
-    return `<div class="card" style="border-color:${fl.fixed ? "#3bceac" : fl.discovered ? "#d94a38" : "#244778"};">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-        <b style="color:${fl.fixed ? "#3bceac" : "#00f0ff"}">${fl.true_title_zh}</b>
-        ${statusBadge}
+    const sevHtml = `<span class="sev" title="严重度 S${fl.severity}">${[1, 2, 3, 4, 5].map((i) => `<i class="${i <= fl.severity ? "on" : ""}"></i>`).join("")}</span>`;
+    const status = fl.fixed
+      ? `<span class="badge badge-ok">✓ 已修复</span>`
+      : fl.discovered ? `<span class="badge badge-bad">已暴露</span>` : `<span class="badge badge-muted">潜伏未检出</span>`;
+    return `<div class="card flaw-card ${fl.fixed ? "accent-green" : fl.discovered ? "accent-red" : ""}">
+      <div class="flaw-head"><span class="flaw-title">${fl.true_title_zh}</span><span style="display:flex;gap:6px;align-items:center">${sevHtml}${status}</span></div>
+      <div class="flaw-desc">${fl.true_desc_zh}</div>
+      <div class="fix">
+        <span>🔧 ${fl.fix_action_zh}<br><span class="mono muted">$${(fl.fix_cost_usd / 1e3).toFixed(0)}k · +${Math.round(fl.fix_days * 0.65)} 天</span></span>
+        ${!fl.fixed ? `<button class="btn btn-green sm" onclick="window.MIC_APP_ACTIONS.fixFlaw('${fl.id}')">立项整改</button>` : ""}
       </div>
-      <div style="font-size:12px;color:#98b0d4;margin-bottom:8px;">${fl.true_desc_zh}</div>
-      <div style="font-family:var(--font-mono);font-size:11.5px;color:#e09f3e;margin-bottom:8px;">
-        整改方案：${fl.fix_action_zh}（费用 $${(fl.fix_cost_usd / 1e3).toFixed(0)}k，工期 +${Math.round(fl.fix_days * 0.65)} 天）
-      </div>
-      ${!fl.fixed ? `<button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.fixFlaw('${fl.id}')">立即立项修形整改 ($${(fl.fix_cost_usd / 1e3).toFixed(0)}k) &rarr;</button>` : ""}
     </div>`;
   }).join("");
 
   host.innerHTML = `
     <div class="panel-header">
       <div>
-        <div class="panel-title">4. 风洞试验、试飞中心与未知风险排雷 (WIND TUNNEL & FLIGHT TEST // SCREEN 4)</div>
-        <div style="font-size:12px;color:#98b0d4;">通过 NACA 风洞与爱德华兹 4 阶段试飞收窄 ±1σ 误差棒，揭开【未知高速领域风险 (D7)】并在真机竞飞前完成修形！</div>
+        <div class="panel-title"><span class="step">2</span>风洞与试飞 <span class="eyebrow" style="margin-left:4px">Test & Flaws</span></div>
+        <div class="panel-sub">风洞与四阶段试飞会收窄 ±1σ 误差带，并揭开隐藏缺陷与 D7「未知高速领域风险」。竞飞前修掉它们。</div>
       </div>
-      <button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">完成试飞，进入爱德华兹真机竞飞 &rarr;</button>
+      <div class="panel-actions">
+        <span class="badge ${sourceBadgeClass(STATE)}" style="align-self:center">${STATE.sourceBadge} · σ×${STATE.sigmaMult.toFixed(2)}</span>
+        <button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">进入真机竞飞 →</button>
+      </div>
     </div>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">步骤 A：预约 NACA 地面风洞试验 (WIND TUNNEL CAMPAIGNS)</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <button class="btn" onclick="window.MIC_APP_ACTIONS.runWindTunnel(1)">1. 运行 L1 低速亚音速风洞 ($180k, +8天) — 检验起降与低速稳定度</button>
-          <button class="btn btn-brass" onclick="window.MIC_APP_ACTIONS.runWindTunnel(2)">2. 运行 L2 NACA 开槽喉道跨音速风洞 ($450k, +14天) — ★ 揪出跨音速激波阻力墙！</button>
-          <button class="btn" onclick="window.MIC_APP_ACTIONS.runWindTunnel(3)">3. 运行 L3 超音速吹气式风洞与颤振台 ($780k, +19天) — 全面排查高速副翼反效</button>
-        </div>
+        <div class="card-title">A · NACA 风洞试验<span class="eyebrow">Wind tunnel</span></div>
+        <div class="stack">${tunnelHtml}</div>
       </div>
-
       <div class="card">
-        <div class="card-title">步骤 B：爱德华兹空军基地 4 阶段实机试飞 (EDWARDS AFB FLIGHT TEST)</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <button class="btn" onclick="window.MIC_APP_ACTIONS.runFlightTestPhase(1)">P1: 滑跑与首飞验证 (First Flight)</button>
-          <button class="btn" onclick="window.MIC_APP_ACTIONS.runFlightTestPhase(2)">P2: 亚音速包线扩展 (Subsonic)</button>
-          <button class="btn btn-brass" onclick="window.MIC_APP_ACTIONS.runFlightTestPhase(3)">P3: 跨/超音速俯冲穿音障 (Mach Dive)</button>
-          <button class="btn" onclick="window.MIC_APP_ACTIONS.runFlightTestPhase(4)">P4: 高过载与武器打靶 (High-G)</button>
-        </div>
+        <div class="card-title">B · 爱德华兹四阶段试飞<span class="eyebrow">Edwards AFB</span></div>
+        <div class="stepper">${stepperHtml}</div>
+        <div style="margin-top:10px;font-size:11.5px;color:var(--text-muted)">每阶段 $320k + 试飞员津贴；P3/P4 各 +22 天，其余 +14 天。</div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-title">试飞员选派名册 (FICTIONAL 1950s TEST PILOT ROSTER — DECISION D9)</div>
+    <div>
+      <div class="card-title" style="padding:0 2px">试飞员名册<span class="eyebrow">Pilot roster · D9</span></div>
       <div class="grid-3">${pilotCards}</div>
     </div>
 
-    <div class="card">
-      <div class="card-title">气动与工程隐患排雷看板 (HIDDEN FLAWS & UNCHARTED REGIME RISKS — DECISION D7)</div>
-      <div class="grid-2">${flawCards || "<div>当前设计无潜伏高危缺陷！</div>"}</div>
+    <div>
+      <div class="card-title" style="padding:0 2px">隐患排雷看板<span class="eyebrow">Hidden flaws · D7</span></div>
+      <div class="grid-2">${flawCards || `<div class="empty">当前设计没有潜伏的高危缺陷。</div>`}</div>
     </div>
   `;
 }
@@ -850,88 +953,93 @@ function renderProcurementWorkspace(host) {
 
   const sigMach = STATE.inquiryLevel === 0 ? 0.14 : STATE.inquiryLevel === 1 ? 0.07 : 0.03;
   const sigPrice = STATE.inquiryLevel === 0 ? 180 : STATE.inquiryLevel === 1 ? 90 : 35;
+  const sigR = STATE.inquiryLevel === 0 ? 55 : STATE.inquiryLevel === 1 ? 22 : 9;
 
   const rumorRows = scen.rivals.map(function (rv) {
     const h = A1.DATA.aircraft_hist && A1.DATA.aircraft_hist[rv.stem];
     const m = h ? h.oracle_perf.max_mach_alt : 1.35;
     const r = h ? (h.oracle_perf.combat_radius_m / 1852).toFixed(0) : 380;
     return `<tr>
-      <td><b>${rv.company}</b> (${rv.designation})</td>
-      <td>${rv.config_zh}</td>
-      <td><span style="color:#00f0ff">M ${m.toFixed(2)} ± ${sigMach.toFixed(2)}</span></td>
-      <td>${r} ± ${STATE.inquiryLevel === 0 ? 55 : 22} nmi</td>
-      <td><span style="color:#e09f3e">$${(rv.price_usd / 1e3).toFixed(0)}k ± $${sigPrice}k</span></td>
+      <td><b>${rv.company}</b><div class="muted" style="font-size:11.5px">${rv.designation}</div></td>
+      <td class="sec">${rv.config_zh}</td>
+      <td class="num c-cyan">M ${m.toFixed(2)} <span class="muted">±${sigMach.toFixed(2)}</span></td>
+      <td class="num">${r} <span class="muted">±${sigR} nmi</span></td>
+      <td class="num c-brass">$${(rv.price_usd / 1e3).toFixed(0)}k <span class="muted">±${sigPrice}k</span></td>
     </tr>`;
   }).join("");
 
-  let debriefHtml = `<div class="card" style="text-align:center;padding:22px;">
-    <div style="font-size:14px;color:#98b0d4;margin-bottom:10px;">尚未执行二阶段真机同台竞飞 (Two-Stage Hardware Fly-Off)。设定下方报价后点击按钮立即开赛！</div>
-    <button class="btn btn-green" style="font-size:14px;padding:10px 22px;" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">★ 启动爱德华兹真机同台竞飞 (RUN HARDWARE FLY-OFF) ★</button>
+  let debriefHtml = `<div class="card sunken" style="text-align:center;padding:26px;">
+    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">尚未进行两阶段真机同台竞飞。设定报价后开赛。</div>
+    <button class="btn btn-green lg" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">★ 启动爱德华兹真机竞飞</button>
   </div>`;
 
   if (STATE.flyoffResults) {
-    const resRows = STATE.flyoffResults.map(function (r, idx) {
+    const res = STATE.flyoffResults;
+    const me = res.find((r) => r.isPlayer);
+    const myRank = res.indexOf(me) + 1;
+    const win = myRank === 1;
+    const sb = (v) => `<div class="score-bar"><span class="b"><i style="width:${Math.max(0, Math.min(100, v))}%"></i></span><span class="v">${v}</span></div>`;
+    const resRows = res.map(function (r, idx) {
       const sc = r.scores;
-      return `<tr style="background:${r.isPlayer ? "rgba(0, 240, 255, 0.12)" : "transparent"}">
-        <td><b>#${idx + 1}</b> ${idx === 0 ? "🏆" : ""}</td>
-        <td><b style="color:${r.isPlayer ? "#00f0ff" : "#eaf2ff"}">${r.company} — ${r.designation}</b></td>
-        <td>M ${r.perf.max_mach_alt.toFixed(2)} / ${(r.perf.combat_radius_m / 1852).toFixed(0)} nmi</td>
-        <td>$${(r.price_usd / 1e3).toFixed(0)}k</td>
-        <td>${sc.S_perf}</td>
-        <td>${sc.S_cost}</td>
-        <td>${sc.S_sched}</td>
-        <td>${sc.S_risk}</td>
-        <td>${sc.S_pol}</td>
-        <td><b style="color:#3bceac;font-size:13px;">${sc.S_total}</b></td>
+      return `<tr class="${r.isPlayer ? "me" : ""}">
+        <td class="num"><b>#${idx + 1}</b> ${idx === 0 ? "🏆" : ""}</td>
+        <td><b style="color:${r.isPlayer ? "var(--accent-cyan)" : "var(--text-primary)"}">${r.company}</b><div class="muted" style="font-size:11.5px">${r.designation}</div></td>
+        <td class="num">M ${r.perf.max_mach_alt.toFixed(2)}<div class="muted">${(r.perf.combat_radius_m / 1852).toFixed(0)} nmi</div></td>
+        <td class="num c-brass">$${(r.price_usd / 1e3).toFixed(0)}k</td>
+        <td style="min-width:90px">${sb(sc.S_perf)}</td>
+        <td style="min-width:90px">${sb(sc.S_cost)}</td>
+        <td style="min-width:90px">${sb(sc.S_sched)}</td>
+        <td style="min-width:90px">${sb(sc.S_risk)}</td>
+        <td class="num">${sc.S_pol}</td>
+        <td class="num"><b style="font-size:14px;color:${idx === 0 ? "var(--accent-green)" : "var(--text-primary)"}">${sc.S_total}</b></td>
       </tr>`;
     }).join("");
-
-    debriefHtml = `<div class="card" style="border-color:#3bceac;">
-      <div class="card-title">五角大楼定标复盘报告 (SOURCE SELECTION DEBRIEF // DECISIONS D6 & D10)</div>
-      <table class="bp-table">
-        <thead><tr><th>名次</th><th>竞标厂商与原型机</th><th>实测极速/半径</th><th>单机报价</th><th>S_perf(性能)</th><th>S_cost(成本)</th><th>S_sched(进度)</th><th>S_risk(可靠性)</th><th>S_pol(声望)</th><th>总分 S_TOTAL</th></tr></thead>
-        <tbody>${resRows}</tbody>
-      </table>
-    </div>`;
+    debriefHtml = `
+      <div class="result-banner ${win ? "win" : "lose"}">
+        <span class="big">${win ? "🏆" : "📉"}</span>
+        <div><div class="h">${win ? `中标！${scen.quantity_planned} 架量产合同` : `落败 · 第 ${myRank} 名`}</div>
+        <div class="s">${win ? "我方原型机在爱德华兹同台竞飞中综合得分第一。" : `冠军：${res[0].company} (${res[0].designation})${me.scores.misses.length ? " · 我方未达门槛：" + me.scores.misses.join(", ") : ""}`}</div></div>
+        <div class="score"><span class="muted" style="font-size:11px">我方总分</span><b class="${win ? "c-green" : "c-red"}">${me.scores.S_total}</b></div>
+      </div>
+      <div class="card">
+        <div class="card-title">定标复盘<span class="eyebrow">Source selection debrief · D6 / D10</span></div>
+        <div style="overflow-x:auto"><table class="bp-table">
+          <thead><tr><th>名次</th><th>厂商 / 原型机</th><th>实测</th><th>报价</th><th>性能</th><th>成本</th><th>进度</th><th>风险</th><th>声望</th><th>总分</th></tr></thead>
+          <tbody>${resRows}</tbody>
+        </table></div>
+      </div>`;
   }
+
+  const intelBtn = (lv, label) => `<button class="${STATE.inquiryLevel === lv ? "on" : ""}" onclick="window.MIC_UI.setInquiry(${lv})">${label}</button>`;
+  const priceRatio = STATE.bidPriceUsd / scen.unit_price_ceiling_usd;
 
   host.innerHTML = `
     <div class="panel-header">
       <div>
-        <div class="panel-title">5. 五角大楼招标、截标前情报传闻与真机竞飞复盘 (PROCUREMENT & FLY-OFF // SCREEN 5)</div>
-        <div style="font-size:12px;color:#98b0d4;">截标前可查阅《航空周刊》传闻或动用华盛顿联络官打探对手区间（D10）；定标采用两阶段真机同台竞飞（D6）！</div>
+        <div class="panel-title"><span class="step">3</span>情报与真机竞飞 <span class="eyebrow" style="margin-left:4px">Procurement</span></div>
+        <div class="panel-sub">截标前可用媒体传闻或华盛顿联络官收窄对手区间（D10）；定标采用两阶段真机同台竞飞（D6）。</div>
       </div>
     </div>
 
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <div class="card-title" style="margin:0;">截标前竞争对手媒体传闻与情报 (PRE-BID COMPETITOR RUMORS — DECISION D10)</div>
-        <div style="display:flex;gap:6px;">
-          <button class="btn ${STATE.inquiryLevel === 0 ? "btn-brass" : ""}" onclick="window.MIC_UI.setInquiry(0)">L0: 免费《航空周刊》传闻</button>
-          <button class="btn ${STATE.inquiryLevel === 1 ? "btn-brass" : ""}" onclick="window.MIC_UI.setInquiry(1)">L1: 华盛顿联络官打探 (-4 政治资本)</button>
-          <button class="btn ${STATE.inquiryLevel === 2 ? "btn-brass" : ""}" onclick="window.MIC_UI.setInquiry(2)">L2: 深度技术侦察 (-$150k)</button>
-        </div>
+      <div class="card-title" style="flex-wrap:wrap">截标前对手情报<span class="eyebrow" style="margin-left:6px;margin-right:auto">Rumors · D10</span>
+        <div class="seg">${intelBtn(0, "L0《航空周刊》传闻")}${intelBtn(1, "L1 华盛顿联络官 −4 政治")}${intelBtn(2, "L2 深度技术侦察 −$150k")}</div>
       </div>
-      <table class="bp-table">
-        <thead><tr><th>竞争对手与代号</th><th>传闻气动构型</th><th>传闻最大马赫数 (±1σ)</th><th>传闻作战半径 (±1σ)</th><th>传闻单机报价区间 (±1σ)</th></tr></thead>
+      <div style="overflow-x:auto"><table class="bp-table">
+        <thead><tr><th>竞争对手</th><th>传闻构型</th><th>最大马赫 ±1σ</th><th>作战半径 ±1σ</th><th>单机报价 ±1σ</th></tr></thead>
         <tbody>${rumorRows}</tbody>
-      </table>
+      </table></div>
     </div>
 
     <div class="card">
-      <div class="card-title">我方商务报价与合同类型设定 (BID PRICING & CONTRACT TERMS)</div>
-      <div class="grid-3">
+      <div class="card-title">我方报价与合同<span class="eyebrow">Bid</span></div>
+      <div class="grid-3" style="align-items:center">
         <div>
-          <div class="slider-header"><span>我方单机出厂报价 (Unit Bid Price)</span><span class="s-val">$${(STATE.bidPriceUsd / 1e3).toFixed(0)}k (上限 $${(scen.unit_price_ceiling_usd / 1e3).toFixed(0)}k)</span></div>
-          <input type="range" id="inp-bid-price" min="${Math.round(scen.unit_price_ceiling_usd * 0.55)}" max="${Math.round(scen.unit_price_ceiling_usd * 1.15)}" step="10000" value="${STATE.bidPriceUsd}">
+          <div class="slider-header"><span>单机出厂报价</span><span class="s-val" style="color:${priceRatio > 1 ? "var(--accent-red)" : "var(--accent-brass)"}">$${(STATE.bidPriceUsd / 1e3).toFixed(0)}k <span class="muted">/ 上限 $${(scen.unit_price_ceiling_usd / 1e3).toFixed(0)}k</span></span></div>
+          <input type="range" id="inp-bid-price" class="brass" min="${Math.round(scen.unit_price_ceiling_usd * 0.55)}" max="${Math.round(scen.unit_price_ceiling_usd * 1.15)}" step="10000" value="${STATE.bidPriceUsd}">
         </div>
-        <div>
-          <div class="slider-header"><span>当前累计交付周期</span><span class="s-val">${STATE.schedDays} 天 (招标要求 ${scen.flyoff_days_budget} 天)</span></div>
-          <div style="font-size:11.5px;color:#98b0d4;">风洞与缺陷整改会增加天数，但能大幅提高 S_perf 与 S_risk！</div>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:flex-end;">
-          <button class="btn btn-green" style="width:100%;padding:10px;" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">★ 提交原型机并开始真机竞飞 ★</button>
-        </div>
+        <div class="kpi"><div class="k-lbl">累计交付周期（招标要求 ${scen.flyoff_days_budget} 天）</div><div class="k-val" style="color:${STATE.schedDays > scen.flyoff_days_budget ? "var(--accent-red)" : "var(--text-primary)"}">${STATE.schedDays}<small>天</small></div></div>
+        <button class="btn btn-green lg block" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">★ 提交原型机并开始竞飞</button>
       </div>
     </div>
 
@@ -947,121 +1055,140 @@ function renderPropulsionWorkspace(host) {
 
   const quotes = K.quoteCustomEngines(58.0, true, 9.5, scen.year);
   const vendorCards = quotes.map(function (q) {
-    return `<div class="card">
-      <div style="font-weight:700;color:#00f0ff;font-size:13px;">${q.vendor.name}</div>
-      <div style="font-size:11.5px;color:#98b0d4;margin:5px 0 8px;">${q.vendor.specialty_zh}</div>
-      <div style="font-family:var(--font-mono);font-size:11.5px;display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-        <div>研发立项费：<b style="color:#e09f3e">$${(q.nre_cost_usd / 1e6).toFixed(2)}M</b></div>
-        <div>预计周期：<b>${q.dev_months} 个月</b></div>
-        <div>单台采购价：<b>$${(q.unit_cost_usd / 1e3).toFixed(0)}k</b></div>
-        <div>预估干重：<b>${q.est_mass_kg} kg</b></div>
-        <div>研发延期风险：<b style="color:${q.failure_risk_pct > 25 ? "#d94a38" : "#3bceac"}">${q.failure_risk_pct}%</b></div>
+    const abbr = q.vendor.name.split("(")[0].split(/[\s&-]+/).filter((w) => /^[A-Za-z]/.test(w) && !/^(of|and)$/i.test(w)).map((w) => w[0]).join("").slice(0, 3).toUpperCase();
+    const riskHigh = q.failure_risk_pct > 25;
+    return `<div class="card vendor-card">
+      <div class="vendor-head"><span class="vendor-logo">${abbr}</span><div><div style="font-weight:650">${q.vendor.name}</div><div class="muted" style="font-size:11.5px">${q.vendor.specialty_zh}</div></div></div>
+      <div class="kv">
+        <div><span>研发立项费</span><b class="c-brass">$${(q.nre_cost_usd / 1e6).toFixed(2)}M</b></div>
+        <div><span>预计周期</span><b>${q.dev_months} 个月</b></div>
+        <div><span>单台采购价</span><b>$${(q.unit_cost_usd / 1e3).toFixed(0)}k</b></div>
+        <div><span>预估干重</span><b>${q.est_mass_kg} kg</b></div>
       </div>
-      <button class="btn btn-brass" style="margin-top:8px;width:100%" onclick="window.MIC_UI.commissionEngine('${q.vendor.id}', '${q.vendor.name}', ${q.nre_cost_usd})">点名委托 ${q.vendor.name.split(" ")[0]} 定制研发 &rarr;</button>
+      <div class="statbar" style="grid-template-columns:70px 1fr 40px;margin-bottom:12px"><span>延期风险</span><span class="b"><i style="width:${q.failure_risk_pct}%;background:${riskHigh ? "var(--accent-red)" : "var(--accent-green)"}"></i></span><span class="v" style="color:${riskHigh ? "var(--accent-red)" : "var(--accent-green)"}">${q.failure_risk_pct}%</span></div>
+      <button class="btn btn-brass block" onclick="window.MIC_UI.commissionEngine('${q.vendor.id}', '${q.vendor.name}', ${q.nre_cost_usd})">委托定制研发</button>
     </div>`;
   }).join("");
 
-  const catalogRows = Object.keys(A1.DATA.engines_hist || {}).map(function (ek) {
-    const e = A1.DATA.engines_hist[ek];
-    const dryKn = ((e.thrust_dry_sl_N || 30000) / 1000).toFixed(1);
-    const abKn = e.thrust_ab_sl_N ? (e.thrust_ab_sl_N / 1000).toFixed(1) + " kN" : "无加力";
-    return `<tr>
-      <td><b>${e.name || ek}</b></td>
-      <td>${e.manufacturer || "US Vendor"}</td>
-      <td>${dryKn} kN</td>
-      <td><span style="color:#00f0ff">${abKn}</span></td>
-      <td>${e.mass_kg || 1200} kg</td>
-      <td><button class="btn" onclick="window.MIC_UI.equipCatalogEngine('${ek}')">装机选用</button></td>
+  const engs = A1.DATA.engines_hist || {};
+  const maxAb = Math.max.apply(null, Object.keys(engs).map((k) => engs[k].thrust_ab_sl_N || engs[k].thrust_dry_sl_N || 0));
+  const curEng = STATE.design && STATE.design.propulsion ? STATE.design.propulsion.engine_id : "";
+  const catalogRows = Object.keys(engs).map(function (ek) {
+    const e = engs[ek];
+    const dry = e.thrust_dry_sl_N || 30000;
+    const ab = e.thrust_ab_sl_N || 0;
+    const isCur = ek === curEng;
+    return `<tr class="${isCur ? "me" : ""}">
+      <td><b>${e.name || ek}</b>${isCur ? ` <span class="badge badge-tunnel">装机中</span>` : ""}</td>
+      <td class="sec">${e.manufacturer || "—"}</td>
+      <td style="min-width:200px">
+        <div style="position:relative;height:8px;background:#13243f;border-radius:5px;overflow:hidden">
+          ${ab ? `<i style="position:absolute;left:0;top:0;bottom:0;width:${(ab / maxAb) * 100}%;background:rgba(230,169,72,0.55)"></i>` : ""}
+          <i style="position:absolute;left:0;top:0;bottom:0;width:${(dry / maxAb) * 100}%;background:var(--accent-cyan)"></i>
+        </div>
+        <div class="mono" style="font-size:11px;margin-top:3px"><span class="c-cyan">${(dry / 1000).toFixed(1)}</span>${ab ? ` / <span class="c-brass">${(ab / 1000).toFixed(1)}</span>` : ""} kN</div>
+      </td>
+      <td class="num">${e.mass_kg || "—"} kg</td>
+      <td><button class="btn sm ${isCur ? "ghost" : ""}" ${isCur ? "disabled" : ""} onclick="window.MIC_UI.equipCatalogEngine('${ek}')">${isCur ? "已装机" : "装机"}</button></td>
     </tr>`;
   }).join("");
 
   host.innerHTML = `
     <div class="panel-header">
       <div>
-        <div class="panel-title">3. 航空发动机目录与五巨头点名定制研发 (PROPULSION & VENDOR R&D // SCREEN 3 — DECISION D9)</div>
-        <div style="font-size:12px;color:#98b0d4;">可直接选用 12 款史实成熟航发，或显式点名委托【普惠 / 通用电气 / 艾里逊 / 柯蒂斯-赖特 / 西屋】五大巨头定制新核心机！</div>
+        <div class="panel-title"><span class="step">4</span>航发定制 <span class="eyebrow" style="margin-left:4px">Propulsion · D9</span></div>
+        <div class="panel-sub">直接选用史实成熟航发，或点名委托五大巨头定制新核心机。</div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-title">五大美国航发巨头定制委托报价对比 (NAMED ENGINE VENDOR COMMISSIONING — DECISION D9)</div>
+    <div>
+      <div class="card-title" style="padding:0 2px">五巨头定制报价<span class="eyebrow">Named vendors</span></div>
       <div class="grid-3">${vendorCards}</div>
     </div>
     <div class="card">
-      <div class="card-title">1945–1960 史实航空发动机目录 (HISTORICAL ENGINE CATALOG)</div>
-      <table class="bp-table">
-        <thead><tr><th>型号</th><th>原厂</th><th>最大军用推力 (Dry)</th><th>全加力推力 (Wet)</th><th>干重</th><th>操作</th></tr></thead>
+      <div class="card-title">1945–1960 史实发动机目录<span class="eyebrow"><span class="c-cyan">■</span> 军用 <span class="c-brass">■</span> 加力</span></div>
+      <div style="overflow-x:auto"><table class="bp-table">
+        <thead><tr><th>型号</th><th>厂商</th><th>海平面推力</th><th>干重</th><th></th></tr></thead>
         <tbody>${catalogRows}</tbody>
-      </table>
+      </table></div>
     </div>
   `;
+}
+
+function prettyTechName(id) {
+  const parts = String(id).split("_");
+  const rest = parts.slice(2).join(" ") || id;
+  return rest
+    .replace(/\b(\d+)pct\b/g, "$1%")
+    .replace(/\b(\d+)deg\b/g, "$1°")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/\b(Le|Blc|Ab|Ww2|Hvar|Ai|Ibm|Fcs|Sas|Vhf|Scr720|Ffar|Labs|Fm|Rof|Mtbf|Tbo|Nc|Cnc|Mig|Usn|Usaf)\b/g, (m) => m.toUpperCase());
 }
 
 function renderTechAndCompanyWorkspace(host) {
   const A1 = window.MIC_APP_PART1;
   const STATE = A1.STATE;
+  const scenYear = A1.SHOWDOWN_SCENARIOS[STATE.scenarioId].year;
   const rawNodes = (A1.DATA.tech_nodes && (A1.DATA.tech_nodes.nodes || A1.DATA.tech_nodes)) || [];
-  const nodeList = Array.isArray(rawNodes) ? rawNodes.slice(0, 18) : [];
+  const nodeList = Array.isArray(rawNodes) ? rawNodes : [];
+  const branches = Array.from(new Set(nodeList.map((t) => t.branch || "aero")));
+  const BR_ZH = { aero: "气动", structures: "结构", propulsion: "推进", avionics: "航电", armament: "武器", manufacturing: "制造", testing: "试验" };
+  const curBr = STATE.techBranch || "all";
+  const filtered = nodeList.filter((t) => curBr === "all" || t.branch === curBr);
 
-  const techRows = nodeList.map(function (t) {
-    const yr = t.unlock_year || t.historical_year || 1950;
-    const aot = yr > A1.SHOWDOWN_SCENARIOS[STATE.scenarioId].year;
-    return `<tr>
-      <td><b style="color:#00f0ff">${t.name || t.id}</b></td>
-      <td>${t.branch || t.category || "Aero"}</td>
-      <td>${yr} 年</td>
-      <td><span class="badge ${aot ? "badge-uncharted" : "badge-flight"}">${aot ? "超前研发 (+惩罚)" : "时代已成熟"}</span></td>
-    </tr>`;
+  const byYear = {};
+  filtered.forEach(function (t) {
+    const y = Math.floor(Number(t.historical_year || 1950));
+    (byYear[y] = byYear[y] || []).push(t);
+  });
+  const esc = (s) => String(s || "").replace(/"/g, "&quot;");
+  const timelineHtml = Object.keys(byYear).sort().map(function (y) {
+    const fut = Number(y) > scenYear;
+    const nodes = byYear[y].map((t) => `<span class="tnode ${fut ? "future" : ""}" title="${esc(t.historical_note)}"><span class="br">${BR_ZH[t.branch] || t.branch}</span>${prettyTechName(t.id)}</span>`).join("");
+    return `<div class="tl-year ${fut ? "future" : ""}"><span class="y">${y}</span><div class="tl-nodes">${nodes}</div></div>`;
   }).join("");
+
+  const brBtn = (id, label) => `<button class="${curBr === id ? "on" : ""}" onclick="window.MIC_UI.setTechBranch('${id}')">${label}</button>`;
 
   const progRows = (A1.DATA.programs || []).map(function (p) {
     return `<tr>
       <td><b>${p.program_name || p.id}</b></td>
-      <td>${p.customer || "USAF"}</td>
-      <td>${p.issue_date || "1950"}</td>
-      <td><span class="badge badge-tunnel">${STATE.forceFlyoffMode ? "两阶段真机竞飞 (D6 Default)" : (p.acquisition && p.acquisition.style) || "flyoff"}</span></td>
+      <td><span class="badge ${p.customer === "USN" ? "badge-tunnel" : "badge-sim"}">${p.customer || "USAF"}</span></td>
+      <td class="num">${p.issue_date || "—"}</td>
+      <td><span class="badge badge-muted">${STATE.forceFlyoffMode ? "两阶段竞飞" : (p.acquisition && p.acquisition.style) || "flyoff"}</span></td>
     </tr>`;
   }).join("");
 
   host.innerHTML = `
     <div class="panel-header">
       <div>
-        <div class="panel-title">6 & 7. 全貌科技树 (1945–1960)、战役规则开关与 1960 沙盒延续 (DECISIONS D6, D7, D8)</div>
+        <div class="panel-title"><span class="step">5</span>科技树与战役规则 <span class="eyebrow" style="margin-left:4px">Tech · D6 D7 D8</span></div>
+        <div class="panel-sub">科技树开局全貌可见；当前剧本年份（${scenYear}）之后的节点为“超前研发”，带惩罚。悬停节点查看史实注释。</div>
       </div>
     </div>
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">已锁定的五大口味机制实时开关 (CAMPAIGN RULE TOGGLES D6–D10)</div>
-        <div style="display:flex;flex-direction:column;gap:10px;font-size:12.5px;">
-          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-            <input type="checkbox" ${STATE.forceFlyoffMode ? "checked" : ""} onchange="window.MIC_UI.toggleRule('forceFlyoffMode', this.checked)">
-            <span><b>D6 采购模式：</b>默认将全部 16 个主战项目统一为【两阶段真机同台竞飞 (Fly-Off)】</span>
-          </label>
-          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-            <input type="checkbox" ${STATE.hindsightMode ? "checked" : ""} onchange="window.MIC_UI.toggleRule('hindsightMode', this.checked)">
-            <span><b>D7 历史后见之明开关：</b>关闭时，超前时代的隐患显示为【未知高速领域风险】直至风洞/试飞揭晓</span>
-          </label>
-          <div style="margin-top:6px;padding:10px;background:#091529;border:1px solid #3bceac;border-radius:4px;">
-            <div style="font-weight:700;color:#3bceac;margin-bottom:6px;">D8 1960 战役终局与沙盒延续 (POST-1960 SANDBOX CONTINUATION)：</div>
-            <button class="btn btn-green" onclick="window.MIC_UI.trigger1960Sandbox()">模拟推进至 1960-12-31 结算并生成 1961+ 动态沙盒招标书 &rarr;</button>
-          </div>
+        <div class="card-title">战役规则开关<span class="eyebrow">Rules</span></div>
+        <label class="switch-row"><span class="txt"><b>D6 统一两阶段真机竞飞</b><small>全部 16 个主战项目统一为 Fly-Off 定标</small></span><input type="checkbox" ${STATE.forceFlyoffMode ? "checked" : ""} onchange="window.MIC_UI.toggleRule('forceFlyoffMode', this.checked)"></label>
+        <label class="switch-row"><span class="txt"><b>D7 历史后见之明</b><small>关闭时，超前隐患显示为「未知高速领域风险」直至风洞/试飞揭晓</small></span><input type="checkbox" ${STATE.hindsightMode ? "checked" : ""} onchange="window.MIC_UI.toggleRule('hindsightMode', this.checked)"></label>
+        <div class="card sunken accent-green" style="margin-top:12px">
+          <div class="card-title" style="margin-bottom:6px">D8 · 1960 终局与沙盒延续</div>
+          <div class="muted" style="font-size:12px;margin-bottom:10px">结算 1960-12-31 战役评分，并生成 1961+ 程序化招标书。</div>
+          <button class="btn btn-green" onclick="window.MIC_UI.trigger1960Sandbox()">推进至 1960 结算 →</button>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">1945–1960 全部 16 个史实军方招标项目库</div>
-        <div style="max-height:240px;overflow-y:auto;">
-          <table class="bp-table">
-            <thead><tr><th>项目代号</th><th>军种</th><th>发布日期</th><th>定标流程 (D6)</th></tr></thead>
-            <tbody>${progRows}</tbody>
-          </table>
+        <div class="card-title">史实招标项目库<span class="eyebrow">${(A1.DATA.programs || []).length} programs</span></div>
+        <div style="max-height:300px;overflow-y:auto">
+          <table class="bp-table"><thead><tr><th>项目</th><th>军种</th><th>发布</th><th>定标 (D6)</th></tr></thead><tbody>${progRows}</tbody></table>
         </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">1945–1960 全貌科技树节点预览 (开局全貌可见 — DECISION D7)</div>
-      <table class="bp-table">
-        <thead><tr><th>科技节点</th><th>学科分支</th><th>史实年份</th><th>超前状态</th></tr></thead>
-        <tbody>${techRows}</tbody>
-      </table>
+      <div class="card-title" style="flex-wrap:wrap">1945–1960 科技时间线<span class="eyebrow" style="margin-left:6px;margin-right:auto">${filtered.length} / ${nodeList.length} nodes</span>
+        <div class="seg">${brBtn("all", "全部")}${branches.map((b) => brBtn(b, BR_ZH[b] || b)).join("")}</div>
+      </div>
+      <div style="display:flex;gap:14px;font-size:11.5px;margin-bottom:6px" class="muted"><span><span class="c-green">●</span> 时代已成熟</span><span><span style="color:var(--accent-pink)">●</span> 超前研发（${scenYear} 年后）</span></div>
+      <div class="timeline">${timelineHtml}</div>
     </div>
   `;
 }
@@ -1207,6 +1334,7 @@ function bindInteractiveCanvasEvents(cvs) {
 
   cvs.addEventListener("mousedown", function (ev) {
     const pos = getCanvasPos(ev);
+    cvs._lockScale = true;
     activeHandle = findHitHandle(pos);
     cvs._activeHandleId = activeHandle ? activeHandle.id : null;
     isDragging = true;
@@ -1229,16 +1357,21 @@ function bindInteractiveCanvasEvents(cvs) {
     applyPointerSculpt(pos);
   });
 
-  window.addEventListener("mouseup", function () {
+  if (window._micCanvasMouseUp && window.removeEventListener) window.removeEventListener("mouseup", window._micCanvasMouseUp);
+  window._micCanvasMouseUp = function () {
     if (isDragging) {
       isDragging = false;
       activeHandle = null;
+      cvs._lockScale = false;
       cvs.style.cursor = "crosshair";
+      drawActiveDesignCanvas(cvs);
     }
-  });
+  };
+  window.addEventListener("mouseup", window._micCanvasMouseUp);
 
   cvs.addEventListener("touchstart", function (ev) {
     const pos = getCanvasPos(ev);
+    cvs._lockScale = true;
     activeHandle = findHitHandle(pos);
     cvs._activeHandleId = activeHandle ? activeHandle.id : null;
     isDragging = true;
@@ -1256,6 +1389,8 @@ function bindInteractiveCanvasEvents(cvs) {
   cvs.addEventListener("touchend", function () {
     isDragging = false;
     activeHandle = null;
+    cvs._lockScale = false;
+    drawActiveDesignCanvas(cvs);
   });
 }
 
@@ -1347,17 +1482,37 @@ function renderAll() {
   } else if (STATE.activeWorkspace === "procurement") {
     renderProcurementWorkspace(host);
     const bp = document.getElementById("inp-bid-price");
-    if (bp) bp.addEventListener("input", (e) => { STATE.bidPriceUsd = Number(e.target.value); renderAll(); });
+    if (bp) {
+      bp.addEventListener("input", (e) => {
+        STATE.bidPriceUsd = Number(e.target.value);
+        syncRangeFills(host);
+        const lbl = bp.parentNode && bp.parentNode.querySelector(".s-val");
+        const scen = A1.SHOWDOWN_SCENARIOS[STATE.scenarioId];
+        if (lbl) {
+          lbl.style.color = STATE.bidPriceUsd > scen.unit_price_ceiling_usd ? "var(--accent-red)" : "var(--accent-brass)";
+          lbl.innerHTML = `$${(STATE.bidPriceUsd / 1e3).toFixed(0)}k <span class="muted">/ 上限 $${(scen.unit_price_ceiling_usd / 1e3).toFixed(0)}k</span>`;
+        }
+      });
+    }
   } else if (STATE.activeWorkspace === "propulsion") {
     renderPropulsionWorkspace(host);
   } else {
     renderTechAndCompanyWorkspace(host);
   }
+  syncRangeFills(host);
 }
 
 window.MIC_UI = {
-  goWorkspace: function (ws) { window.MIC_APP_PART1.STATE.activeWorkspace = ws; renderAll(); },
+  goWorkspace: function (ws) { window.MIC_APP_PART1.STATE.activeWorkspace = ws; renderAll(); if (window.scrollTo) window.scrollTo(0, 0); },
   setCanvasTab: function (tab) { window.MIC_APP_PART1.STATE.activeCanvasTab = tab; renderAll(); },
+  setTechBranch: function (b) { window.MIC_APP_PART1.STATE.techBranch = b; renderAll(); },
+  toggleFeed: function (force) {
+    const S = window.MIC_APP_PART1.STATE;
+    const open = typeof force === "boolean" ? force : !document.body.classList.contains("feed-open");
+    document.body.classList.toggle("feed-open", open);
+    if (open) S.unreadEvents = 0;
+    renderTopBarAndRightFeed();
+  },
   setAirfoilBrush: function (mode) { window.MIC_APP_PART1.STATE.airfoilBrushMode = mode; renderAll(); },
   applyAirfoilPreset: function (presetId) {
     const K = window.MIC_KERNEL;
@@ -1434,7 +1589,25 @@ window.MIC_UI = {
 };
 
 window.addEventListener("DOMContentLoaded", function () {
+  // Deep-link support: #<workspace>[/<canvasTab>], e.g. #design/3view, #testing
+  const hash = (window.location.hash || "").replace(/^#/, "");
+  const parts = hash.split("/");
+  const S = window.MIC_APP_PART1.STATE;
+  if (["design", "testing", "procurement", "propulsion", "tech"].indexOf(parts[0]) !== -1) S.activeWorkspace = parts[0];
+  if (["airfoil", "area_rule", "3view", "ps_contour", "drag_polar"].indexOf(parts[1]) !== -1) S.activeCanvasTab = parts[1];
   window.MIC_APP_ACTIONS.loadScenario("1952_interceptor");
+  S.unreadEvents = 0;
+  S.booted = true;
+  renderTopBarAndRightFeed();
+  // Canvases use JetBrains Mono; redraw once the webfont is ready
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { if (S.activeWorkspace === "design") renderAll(); });
+  }
+});
+window.addEventListener("keydown", function (e) {
+  const map = { F2: "design", F3: "propulsion", F4: "testing", F5: "procurement", F6: "tech" };
+  if (map[e.key]) { e.preventDefault(); window.MIC_UI.goWorkspace(map[e.key]); }
+  if (e.key === "Escape") window.MIC_UI.toggleFeed(false);
 });
 window.addEventListener("resize", function () {
   if (window.MIC_APP_PART1.STATE.activeWorkspace === "design") renderAll();

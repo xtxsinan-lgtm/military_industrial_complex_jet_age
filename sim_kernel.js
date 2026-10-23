@@ -57,13 +57,63 @@
   function getEngineSpec(engine_id) {
     const engines = (window.MIC_DATA && window.MIC_DATA.engines_hist) || {};
     if (engines[engine_id]) return engines[engine_id];
-    // Fuzzy match
+    const resolved = resolveEngineKey(engine_id);
+    if (resolved && engines[resolved]) return engines[resolved];
     const keys = Object.keys(engines);
-    for (let k of keys) {
-      if (k.indexOf(engine_id) !== -1 || engine_id.indexOf(k) !== -1) return engines[k];
-    }
     return engines["j57_p_21"] || engines[keys[0]];
   }
+
+  // Map historical variant ids (e.g. "J57-P-11", "VK-1") to the nearest catalog key ("j57_p_21", "vk_1")
+  function resolveEngineKey(engine_id) {
+    const engines = (window.MIC_DATA && window.MIC_DATA.engines_hist) || {};
+    if (!engine_id) return null;
+    if (engines[engine_id]) return engine_id;
+    const norm = String(engine_id).toLowerCase().replace(/[^a-z0-9]+/g, "_");
+    if (engines[norm]) return norm;
+    const family = norm.split("_")[0]; // "j57", "vk", "rd"
+    const famKeys = Object.keys(engines).filter((k) => k.split("_")[0] === family);
+    if (famKeys.length === 0) return null;
+    // Prefer same manufacturer suffix token (e.g. "p", "ge", "a"), then first in family
+    const mfr = norm.split("_")[1];
+    return famKeys.find((k) => k.split("_")[1] === mfr) || famKeys[0];
+  }
+
+  // Normalize schema drift between data_bundle (Python oracle field names) and the JS kernel
+  function normalizeDesign(design) {
+    if (!design || design._normalized) return design;
+    const w = design.wing = design.wing || {};
+    if (w.sweep_quarter_chord_deg === undefined && w.sweep_qc_deg !== undefined) w.sweep_quarter_chord_deg = Number(w.sweep_qc_deg);
+    if (w.t_c_root === undefined && w.tc_root !== undefined) w.t_c_root = Number(w.tc_root);
+    const p = design.propulsion = design.propulsion || {};
+    const key = resolveEngineKey(p.engine_id);
+    if (key && key !== p.engine_id) {
+      p.engine_hist_variant = p.engine_id;
+      p.engine_id = key;
+    }
+    design._normalized = true;
+    return design;
+  }
+
+  (function normalizeAllHistDesigns() {
+    // Engines: data_bundle keeps SLS thrust/mass under historical_reference.*; the kernel expects flat fields
+    const engines = (window.MIC_DATA && window.MIC_DATA.engines_hist) || {};
+    Object.keys(engines).forEach(function (k) {
+      const e = engines[k];
+      const hr = e.historical_reference || {};
+      const ci = e.cycle_input || {};
+      if (e.thrust_dry_sl_N === undefined && hr.sls_dry_thrust_N) e.thrust_dry_sl_N = Number(hr.sls_dry_thrust_N);
+      const hasAb = Boolean(ci.has_afterburner && hr.sls_ab_thrust_N);
+      e.afterburner_capable = hasAb;
+      if (e.thrust_ab_sl_N === undefined) e.thrust_ab_sl_N = hasAb ? Number(hr.sls_ab_thrust_N) : null;
+      if (e.mass_kg === undefined && hr.mass_kg) e.mass_kg = Number(hr.mass_kg);
+      if (e.tsfc_dry_kg_N_s === undefined && hr.sls_dry_tsfc_kg_per_Ns) e.tsfc_dry_kg_N_s = Number(hr.sls_dry_tsfc_kg_per_Ns);
+      if (e.tsfc_ab_kg_N_s === undefined && hr.sls_ab_tsfc_kg_per_Ns) e.tsfc_ab_kg_N_s = Number(hr.sls_ab_tsfc_kg_per_Ns);
+    });
+    const hist = (window.MIC_DATA && window.MIC_DATA.aircraft_hist) || {};
+    Object.keys(hist).forEach(function (k) {
+      if (hist[k] && hist[k].design) normalizeDesign(hist[k].design);
+    });
+  })();
 
   // Evaluate Engine Thrust [N] and TSFC [kg/(N*s)] at (mach, alt_m, ab)
   function evalEngineAt(eng, mach, alt_m, ab) {
@@ -72,7 +122,9 @@
     const theta = atm.T / 288.15;
     const dry_sl = (eng.thrust_dry_sl_N || (eng.cycle && eng.cycle.design_thrust_dry_N) || 40000.0);
     const ab_sl = (eng.thrust_ab_sl_N || (eng.cycle && eng.cycle.design_thrust_ab_N) || dry_sl * 1.45);
-    const has_ab = Boolean(eng.afterburner_capable || (eng.cycle && eng.cycle.afterburner_capable) || ab_sl > dry_sl * 1.05);
+    const has_ab = eng.afterburner_capable !== undefined
+      ? Boolean(eng.afterburner_capable)
+      : Boolean((eng.cycle && eng.cycle.afterburner_capable) || ab_sl > dry_sl * 1.05);
     const use_ab = Boolean(ab && has_ab);
     const base_thrust = use_ab ? ab_sl : dry_sl;
 
@@ -512,6 +564,8 @@
     createRng,
     isaAtmosphere,
     getEngineSpec,
+    resolveEngineKey,
+    normalizeDesign,
     evalEngineAt,
     AIRFOIL_X_CTRL,
     AIRFOIL_PRESETS,
