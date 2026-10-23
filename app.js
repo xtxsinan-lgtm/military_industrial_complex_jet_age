@@ -147,7 +147,8 @@
   // Global Reactive Application State
   const STATE = {
     activeWorkspace: "design", // design | testing | procurement | propulsion | tech | company
-    activeCanvasTab: "area_rule", // 3view | area_rule | ps_contour | drag_polar
+    activeCanvasTab: "airfoil", // airfoil | area_rule | 3view | ps_contour | drag_polar
+    airfoilBrushMode: "nodes",  // nodes | free_upper | free_lower
     scenarioId: "1952_interceptor",
     templateStem: "yf102_pre_area_rule",
     design: null,
@@ -204,6 +205,8 @@
     if (!hist) return;
     STATE.templateStem = stem;
     STATE.design = JSON.parse(JSON.stringify(hist.design));
+    K.ensureCustomAirfoil(STATE.design);
+    K.ensureFuselageStations(STATE.design);
     recalculateDesign(true);
     if (!keepScenario) {
       logEvent(null, "DESIGN", `已载入机体气动模板：【${STATE.design.name || stem}】`);
@@ -320,6 +323,11 @@
     if (fl.triggers_area_rule) {
       STATE.design.fuselage = STATE.design.fuselage || {};
       STATE.design.fuselage.area_ruled = true;
+      STATE.design.fuselage.station_radii = K.buildDefaultFuselageRadii(
+        STATE.design,
+        true,
+        K.getMinClearanceRadii(STATE.design)
+      );
       if (STATE.templateStem === "yf102_pre_area_rule" && STATE.design.fuel && STATE.design.fuel.internal_kg < 3200) {
         STATE.design.fuel.internal_kg = 3340;
       }
@@ -496,156 +504,260 @@ function renderTopBarAndRightFeed() {
   }
 }
 
-function renderDesignWorkspace(host) {
-  const A1 = window.MIC_APP_PART1;
-  const K = window.MIC_KERNEL;
-  const STATE = A1.STATE;
-  const scen = A1.SHOWDOWN_SCENARIOS[STATE.scenarioId];
-  const d = STATE.design;
-  const wing = d.wing || {};
-  const fus = d.fuselage || {};
-  const prop = d.propulsion || {};
-  const fuel = d.fuel || {};
-  const struct = d.structure || {};
+  function buildPerfAndDiagHtml() {
+    const A1 = window.MIC_APP_PART1;
+    const K = window.MIC_KERNEL;
+    const STATE = A1.STATE;
+    const scen = A1.SHOWDOWN_SCENARIOS[STATE.scenarioId];
+    const d = STATE.design;
+    const fus = d.fuselage || {};
+    const estObj = K.computeEstimates(STATE.perf, STATE.flaws, STATE.sigmaMult, STATE.sourceBadge);
+    const est = estObj.estimates;
+    const afEval = STATE.perf.airfoilEval || K.evaluateAirfoilSpline(d);
+    const ad = STATE.perf.areaDist;
 
-  const estObj = K.computeEstimates(STATE.perf, STATE.flaws, STATE.sigmaMult, STATE.sourceBadge);
-  const est = estObj.estimates;
+    const rows = [
+      { lbl: "高空最大马赫数 (Max Mach)", key: "max_mach_alt", scale: 1.0, unit: "M", fmt: 2 },
+      { lbl: "实用升限 (Service Ceiling)", key: "service_ceiling_m", scale: K.M_TO_FT, unit: "ft", fmt: 0 },
+      { lbl: "海平面爬升率 (Climb Rate)", key: "climb_rate_sl_mps", scale: K.M_TO_FT * 60, unit: "fpm", fmt: 0 },
+      { lbl: "作战半径 (Combat Radius)", key: "combat_radius_m", scale: K.M_TO_NMI, unit: "nmi", fmt: 0 },
+      { lbl: "M0.8 持续盘旋率 (Turn Rate)", key: "sustained_turn_dps_m08_4572m", scale: 1.0, unit: "°/s", fmt: 1 },
+    ];
 
-  const histKeys = Object.keys(A1.DATA.aircraft_hist || {});
-  const templateOpts = histKeys.map(function (k) {
-    const item = A1.DATA.aircraft_hist[k];
-    const sel = k === STATE.templateStem ? "selected" : "";
-    return `<option value="${k}" ${sel}>${item.design.name || k} (${item.id})</option>`;
-  }).join("");
+    const perfRowsHtml = rows.map(function (r) {
+      const e = est[r.key];
+      const v = (e.value * r.scale).toFixed(r.fmt);
+      const s = (e.sigma * r.scale).toFixed(r.fmt);
+      const t = (scen.thresholds[r.key] * r.scale).toFixed(r.fmt);
+      const o = (scen.objectives[r.key] * r.scale).toFixed(r.fmt);
+      const pass = e.value >= scen.thresholds[r.key];
+      return `<tr>
+        <td>${r.lbl}</td>
+        <td><b style="color:${pass ? "#3bceac" : "#d94a38"}">${v}</b> <span style="color:#98b0d4">±${s} ${r.unit}</span></td>
+        <td>${t} / ${o} ${r.unit}</td>
+        <td><span class="badge" style="background:${pass ? "#0e3d33" : "#451a16"};color:${pass ? "#54f5cf" : "#ff9c8f"}">${pass ? "达标 OK" : "未达标 LOW"}</span></td>
+      </tr>`;
+    }).join("");
 
-  const engKeys = Object.keys(A1.DATA.engines_hist || {});
-  const engOpts = engKeys.map(function (ek) {
-    const e = A1.DATA.engines_hist[ek];
-    const sel = (prop.engine_id === ek || ek.indexOf(prop.engine_id) !== -1) ? "selected" : "";
-    return `<option value="${ek}" ${sel}>${e.name || ek} (${((e.thrust_ab_sl_N || e.thrust_dry_sl_N || 35000)/1000).toFixed(1)} kN)</option>`;
-  }).join("");
+    const vitalsHtml = `
+      <div class="vital-pill"><span class="lbl">空重 Empty:</span><span class="val">${STATE.perf.empty_mass_kg.toFixed(0)} kg</span></div>
+      <div class="vital-pill"><span class="lbl">最大起飞 MTOW:</span><span class="val">${STATE.perf.mtow_kg.toFixed(0)} kg</span></div>
+      <div class="vital-pill"><span class="lbl">起飞滑跑距离:</span><span class="val">${(STATE.perf.takeoff_distance_m * 3.28084).toFixed(0)} ft</span></div>
+      <div class="vital-pill"><span class="lbl">单机出厂成本:</span><span class="val brass">$${(STATE.perf.unit_flyaway_cost_usd / 1e3).toFixed(0)}k</span></div>
+    `;
 
-  const rows = [
-    { lbl: "高空最大马赫数 (Max Mach)", key: "max_mach_alt", scale: 1.0, unit: "M", fmt: 2 },
-    { lbl: "实用升限 (Service Ceiling)", key: "service_ceiling_m", scale: K.M_TO_FT, unit: "ft", fmt: 0 },
-    { lbl: "海平面爬升率 (Climb Rate)", key: "climb_rate_sl_mps", scale: K.M_TO_FT * 60, unit: "fpm", fmt: 0 },
-    { lbl: "作战半径 (Combat Radius)", key: "combat_radius_m", scale: K.M_TO_NMI, unit: "nmi", fmt: 0 },
-    { lbl: "M0.8 持续盘旋率 (Turn Rate)", key: "sustained_turn_dps_m08_4572m", scale: 1.0, unit: "°/s", fmt: 1 },
-  ];
+    const isSmooth = ad.r_area <= 1.18;
+    const diagHtml = `
+      <div style="color:#e09f3e;font-weight:700;margin-bottom:4px;">总师实时手绘气动诊断 (LIVE AIRFOIL & FUSELAGE DIAGNOSTICS)：</div>
+      <div>• <b>手绘翼型：</b>(t/c)_max = ${(afEval.tc_max * 100).toFixed(2)}% (@ ${(afEval.x_tc_max * 100).toFixed(0)}%c) | 弯度 = ${(afEval.camber_max * 100).toFixed(2)}% | 2D M_dd = ${afEval.m_dd_2d.toFixed(2)} | CL_max = ${afEval.cl_max_2d.toFixed(2)}</div>
+      <div>• <b>手绘机身与面积律：</b>波阻系数 R_area = <b style="color:${isSmooth ? "#3bceac" : "#ff5a47"}">${ad.r_area.toFixed(2)}</b> (蜂腰修形吻合度 ${(ad.waist_quality * 100).toFixed(0)}% | 机身容积 ${ad.fus_vol_m3.toFixed(1)} m³)</div>
+      <div>• <b>纵向静稳定裕度：</b>${(STATE.perf.static_margin * 100).toFixed(1)}% MAC | <b>预估研发总费：</b>$${(STATE.perf.dev_cost_usd_estimate / 1e6).toFixed(2)}M</div>
+    `;
 
-  const perfRowsHtml = rows.map(function (r) {
-    const e = est[r.key];
-    const v = (e.value * r.scale).toFixed(r.fmt);
-    const s = (e.sigma * r.scale).toFixed(r.fmt);
-    const t = (scen.thresholds[r.key] * r.scale).toFixed(r.fmt);
-    const o = (scen.objectives[r.key] * r.scale).toFixed(r.fmt);
-    const pass = e.value >= scen.thresholds[r.key];
-    return `<tr>
-      <td>${r.lbl}</td>
-      <td><b style="color:${pass ? "#3bceac" : "#d94a38"}">${v}</b> <span style="color:#98b0d4">±${s} ${r.unit}</span></td>
-      <td>${t} / ${o} ${r.unit}</td>
-      <td><span class="badge" style="background:${pass ? "#0e3d33" : "#451a16"};color:${pass ? "#54f5cf" : "#ff9c8f"}">${pass ? "达标 OK" : "未达标 LOW"}</span></td>
-    </tr>`;
-  }).join("");
+    return { perfRowsHtml, vitalsHtml, diagHtml };
+  }
 
-  host.innerHTML = `
-    <div class="panel-header">
-      <div>
-        <div class="panel-title">2. 飞机总体气动设计局 (AIRFRAME DESIGN BUREAU // SCREEN 2)</div>
-        <div style="font-size:12px;color:#98b0d4;">拖动左侧气动滑块，实时观察中间【三视图 / 面积律 A(x) 曲线 / Boyd 能量包线】及右侧带 ±1σ 误差棒的性能评估！</div>
+  function drawActiveDesignCanvas(cvs) {
+    if (!cvs) cvs = document.getElementById("design-main-canvas");
+    if (!cvs) return;
+    const STATE = window.MIC_APP_PART1.STATE;
+    const P = window.MIC_PLOTS;
+    if (STATE.activeCanvasTab === "airfoil") P.drawAirfoilStudio(cvs, STATE.design, STATE.perf);
+    else if (STATE.activeCanvasTab === "3view") P.draw3ViewBlueprint(cvs, STATE.design, STATE.perf);
+    else if (STATE.activeCanvasTab === "ps_contour") P.drawPsContourPlot(cvs, STATE.design, STATE.perf);
+    else if (STATE.activeCanvasTab === "drag_polar") P.drawDragPolarPlot(cvs, STATE.design, STATE.perf);
+    else P.drawAreaRulePlot(cvs, STATE.design, STATE.perf);
+  }
+
+  function refreshDesignInPlace() {
+    const STATE = window.MIC_APP_PART1.STATE;
+    const d = STATE.design;
+    const wing = d.wing || {};
+    const fus = d.fuselage || {};
+    const fuel = d.fuel || {};
+
+    // Update slider readouts without destroying DOM or interrupting pointer drag
+    const setTxt = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+    const setVal = (id, val) => { const el = document.getElementById(id); if (el && document.activeElement !== el) el.value = val; };
+    setTxt("lbl-area", `${Number(wing.area_m2).toFixed(1)} m² (${(wing.area_m2 * 10.764).toFixed(0)} sq.ft)`);
+    setVal("inp-area", wing.area_m2);
+    setTxt("lbl-sweep", `${Number(wing.sweep_quarter_chord_deg).toFixed(1)}°`);
+    setVal("inp-sweep", wing.sweep_quarter_chord_deg);
+    setTxt("lbl-ar", `${Number(wing.aspect_ratio).toFixed(2)}`);
+    setVal("inp-ar", wing.aspect_ratio);
+    setTxt("lbl-tc", `${(Number(wing.t_c_root) * 100).toFixed(1)}%`);
+    setVal("inp-tc", wing.t_c_root);
+    setTxt("lbl-fuel", `${Number(fuel.internal_kg).toFixed(0)} kg (${(fuel.internal_kg * 2.2046).toFixed(0)} lb)`);
+    setVal("inp-fuel", fuel.internal_kg);
+    const arChk = document.getElementById("inp-arearule");
+    if (arChk) arChk.checked = Boolean(fus.area_ruled);
+
+    const { perfRowsHtml, vitalsHtml, diagHtml } = buildPerfAndDiagHtml();
+    const tbody = document.getElementById("design-perf-tbody");
+    if (tbody) tbody.innerHTML = perfRowsHtml;
+    const vitals = document.getElementById("design-vital-pills");
+    if (vitals) vitals.innerHTML = vitalsHtml;
+    const diag = document.getElementById("design-diag-box");
+    if (diag) diag.innerHTML = diagHtml;
+
+    drawActiveDesignCanvas();
+    renderTopBarAndRightFeed();
+  }
+
+  function renderDesignWorkspace(host) {
+    const A1 = window.MIC_APP_PART1;
+    const K = window.MIC_KERNEL;
+    const STATE = A1.STATE;
+    const d = STATE.design;
+    const wing = d.wing || {};
+    const fus = d.fuselage || {};
+    const prop = d.propulsion || {};
+    const fuel = d.fuel || {};
+
+    const histKeys = Object.keys(A1.DATA.aircraft_hist || {});
+    const templateOpts = histKeys.map(function (k) {
+      const item = A1.DATA.aircraft_hist[k];
+      const sel = k === STATE.templateStem ? "selected" : "";
+      return `<option value="${k}" ${sel}>${item.design.name || k} (${item.id})</option>`;
+    }).join("");
+
+    const engKeys = Object.keys(A1.DATA.engines_hist || {});
+    const engOpts = engKeys.map(function (ek) {
+      const e = A1.DATA.engines_hist[ek];
+      const sel = (prop.engine_id === ek || ek.indexOf(prop.engine_id) !== -1) ? "selected" : "";
+      return `<option value="${ek}" ${sel}>${e.name || ek} (${((e.thrust_ab_sl_N || e.thrust_dry_sl_N || 35000)/1000).toFixed(1)} kN)</option>`;
+    }).join("");
+
+    const { perfRowsHtml, vitalsHtml, diagHtml } = buildPerfAndDiagHtml();
+
+    // Context-sensitive sculpting toolbar above the interactive canvas
+    let sculptToolbarHtml = "";
+    if (STATE.activeCanvasTab === "airfoil") {
+      sculptToolbarHtml = `
+        <div style="background:#0d213f;border:1px solid #00f0ff;border-radius:4px;padding:7px 10px;display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+            <span style="font-size:11.5px;color:#00f0ff;font-weight:700;">✏️ 翼型画笔模式：</span>
+            <button class="btn ${STATE.airfoilBrushMode === "nodes" ? "btn-brass" : ""}" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.setAirfoilBrush('nodes')">🎯 拖拽控制点 (U1-U5 / L1-L5)</button>
+            <button class="btn ${STATE.airfoilBrushMode === "free_upper" ? "btn-brass" : ""}" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.setAirfoilBrush('free_upper')">🖌️ 自由涂抹手绘：上翼面</button>
+            <button class="btn ${STATE.airfoilBrushMode === "free_lower" ? "btn-brass" : ""}" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.setAirfoilBrush('free_lower')">🖌️ 自由涂抹手绘：下翼面</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;">
+            <span style="font-size:11px;color:#98b0d4;">经典翼型一键载入：</span>
+            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('naca_64a210')">NACA 64A-210 (F-86 亚音速高升力)</button>
+            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('naca_65a006')">NACA 65A-006 (F-102 跨音速薄翼)</button>
+            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('biconvex_34')">3.4% 双弧刀锋超音速翼 (F-104)</button>
+            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('supercritical_early')">平顶超临界减波阻翼 (Supercritical)</button>
+            <button class="btn" style="padding:2px 7px;font-size:11px;" onclick="window.MIC_UI.applyAirfoilPreset('high_camber_navy')">高弯度舰载机翼 (低失速)</button>
+          </div>
+        </div>
+      `;
+    } else if (STATE.activeCanvasTab === "area_rule" || STATE.activeCanvasTab === "3view") {
+      sculptToolbarHtml = `
+        <div style="background:#0d213f;border:1px solid #3bceac;border-radius:4px;padding:7px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+          <span style="font-size:11.5px;color:#3bceac;font-weight:700;">✏️ 机身与机翼手绘塑形工具：</span>
+          <span style="font-size:11px;color:#98b0d4;">直接在画布上按住鼠标拖拽 S0–S10 站位捏出蜂腰（或在三视图拖拽翼尖改后掠角/展长）！</span>
+          <button class="btn" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('tube')">还原直筒机身 (无蜂腰)</button>
+          <button class="btn btn-green" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('waist')">✨ 一键惠特科姆蜂腰修形 (Coke-Bottle)</button>
+          <button class="btn" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('fatten')">机身扩容加粗 +6%</button>
+          <button class="btn" style="padding:3px 8px;font-size:11px;" onclick="window.MIC_UI.sculptFuselagePreset('slim')">机身减阻收窄 -6%</button>
+        </div>
+      `;
+    }
+
+    host.innerHTML = `
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">2. 飞机总体气动设计局与手绘塑形工作台 (AIRFRAME & FREEHAND SCULPTING BUREAU // SCREEN 2)</div>
+          <div style="font-size:12px;color:#98b0d4;">支持在中央画布<b>直接用鼠标手绘/拖拽翼型上下表面 (U1–U5 / L1–L5)、捏合机身 11 个轴向站位 (S0–S10 蜂腰修形)、拖拽三视图翼尖</b>，实时解算激波分布与性能误差棒！</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-brass" onclick="window.MIC_UI.goWorkspace('testing')">前往风洞与试飞中心 (收窄 ±1σ & 排雷) &rarr;</button>
+          <button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">直接提交爱德华兹真机竞飞 &rarr;</button>
+        </div>
       </div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-brass" onclick="window.MIC_UI.goWorkspace('testing')">前往风洞与试飞中心 (收窄 ±1σ & 排雷) &rarr;</button>
-        <button class="btn btn-green" onclick="window.MIC_APP_ACTIONS.runHardwareFlyOff()">直接提交爱德华兹真机竞飞 &rarr;</button>
-      </div>
-    </div>
 
-    <div class="design-grid">
-      <!-- Left Column: Parametric Sliders -->
-      <div class="card">
-        <div class="card-title">总体气动与推进参数 (PARAMETRIC INPUTS)</div>
-        <div class="slider-row">
-          <div class="slider-header"><span>史实基准模板 (Baseline Template)</span></div>
-          <select id="inp-template">${templateOpts}</select>
+      <div class="design-grid">
+        <!-- Left Column: Parametric Sliders -->
+        <div class="card">
+          <div class="card-title">总体气动与推进参数 (PARAMETRIC INPUTS)</div>
+          <div class="slider-row">
+            <div class="slider-header"><span>史实基准模板 (Baseline Template)</span></div>
+            <select id="inp-template">${templateOpts}</select>
+          </div>
+          <div class="slider-row">
+            <div class="slider-header"><span>机翼参考面积 S (Wing Area)</span><span class="s-val" id="lbl-area">${Number(wing.area_m2).toFixed(1)} m² (${(wing.area_m2 * 10.764).toFixed(0)} sq.ft)</span></div>
+            <input type="range" id="inp-area" min="14" max="68" step="0.5" value="${wing.area_m2}">
+          </div>
+          <div class="slider-row">
+            <div class="slider-header"><span>1/4弦线后掠角 Λ (Quarter-Chord Sweep)</span><span class="s-val" id="lbl-sweep">${Number(wing.sweep_quarter_chord_deg).toFixed(1)}°</span></div>
+            <input type="range" id="inp-sweep" min="0" max="60" step="1" value="${wing.sweep_quarter_chord_deg}">
+          </div>
+          <div class="slider-row">
+            <div class="slider-header"><span>展弦比 AR (Aspect Ratio)</span><span class="s-val" id="lbl-ar">${Number(wing.aspect_ratio).toFixed(2)}</span></div>
+            <input type="range" id="inp-ar" min="1.8" max="6.5" step="0.05" value="${wing.aspect_ratio}">
+          </div>
+          <div class="slider-row">
+            <div class="slider-header"><span>翼根相对厚度 t/c (缩放手绘翼型厚度)</span><span class="s-val" id="lbl-tc">${(Number(wing.t_c_root) * 100).toFixed(1)}%</span></div>
+            <input type="range" id="inp-tc" min="0.034" max="0.13" step="0.002" value="${wing.t_c_root}">
+          </div>
+          <div class="slider-row" style="background:#17345c;padding:8px;border-radius:4px;border:1px solid #00f0ff;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;color:#00f0ff;">
+              <input type="checkbox" id="inp-arearule" ${fus.area_ruled ? "checked" : ""}>
+              <span>启用惠特科姆跨音速面积律修形 (Wasp-Waist Area Rule)</span>
+            </label>
+            <div style="font-size:11px;color:#98b0d4;margin-top:3px;">勾选自动生成蜂腰，或在【Tab C】亲手拖拽 S0–S10 捏合机身！</div>
+          </div>
+          <div class="slider-row">
+            <div class="slider-header"><span>发动机型号 (Engine Model)</span></div>
+            <select id="inp-engine">${engOpts}</select>
+          </div>
+          <div class="slider-row" style="display:flex;gap:12px;align-items:center;">
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
+              <input type="checkbox" id="inp-ab" ${prop.afterburner ? "checked" : ""}> <span>加力燃烧室 (Afterburner)</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
+              <input type="checkbox" id="inp-twin" ${Number(prop.count) === 2 ? "checked" : ""}> <span>双发构型 (2x Engines)</span>
+            </label>
+          </div>
+          <div class="slider-row">
+            <div class="slider-header"><span>内部燃油重量 (Internal Fuel)</span><span class="s-val" id="lbl-fuel">${Number(fuel.internal_kg).toFixed(0)} kg (${(fuel.internal_kg * 2.2046).toFixed(0)} lb)</span></div>
+            <input type="range" id="inp-fuel" min="800" max="6500" step="50" value="${fuel.internal_kg}">
+          </div>
         </div>
-        <div class="slider-row">
-          <div class="slider-header"><span>机翼参考面积 S (Wing Area)</span><span class="s-val">${Number(wing.area_m2).toFixed(1)} m² (${(wing.area_m2 * 10.764).toFixed(0)} sq.ft)</span></div>
-          <input type="range" id="inp-area" min="14" max="68" step="0.5" value="${wing.area_m2}">
-        </div>
-        <div class="slider-row">
-          <div class="slider-header"><span>1/4弦线后掠角 Λ (Quarter-Chord Sweep)</span><span class="s-val">${Number(wing.sweep_quarter_chord_deg).toFixed(1)}°</span></div>
-          <input type="range" id="inp-sweep" min="0" max="60" step="1" value="${wing.sweep_quarter_chord_deg}">
-        </div>
-        <div class="slider-row">
-          <div class="slider-header"><span>展弦比 AR (Aspect Ratio)</span><span class="s-val">${Number(wing.aspect_ratio).toFixed(2)}</span></div>
-          <input type="range" id="inp-ar" min="1.8" max="6.5" step="0.05" value="${wing.aspect_ratio}">
-        </div>
-        <div class="slider-row">
-          <div class="slider-header"><span>翼根相对厚度 t/c (Thickness Ratio)</span><span class="s-val">${(Number(wing.t_c_root) * 100).toFixed(1)}%</span></div>
-          <input type="range" id="inp-tc" min="0.034" max="0.13" step="0.002" value="${wing.t_c_root}">
-        </div>
-        <div class="slider-row" style="background:#17345c;padding:8px;border-radius:4px;border:1px solid #00f0ff;">
-          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;color:#00f0ff;">
-            <input type="checkbox" id="inp-arearule" ${fus.area_ruled ? "checked" : ""}>
-            <span>启用惠特科姆跨音速面积律修形 (Wasp-Waist Area Rule)</span>
-          </label>
-          <div style="font-size:11px;color:#98b0d4;margin-top:3px;">平滑机翼-机身截面积二阶导数 d²A/dx²，消除跨音速波阻激增！</div>
-        </div>
-        <div class="slider-row">
-          <div class="slider-header"><span>发动机型号 (Engine Model)</span></div>
-          <select id="inp-engine">${engOpts}</select>
-        </div>
-        <div class="slider-row" style="display:flex;gap:12px;align-items:center;">
-          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
-            <input type="checkbox" id="inp-ab" ${prop.afterburner ? "checked" : ""}> <span>加力燃烧室 (Afterburner)</span>
-          </label>
-          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
-            <input type="checkbox" id="inp-twin" ${Number(prop.count) === 2 ? "checked" : ""}> <span>双发构型 (2x Engines)</span>
-          </label>
-        </div>
-        <div class="slider-row">
-          <div class="slider-header"><span>内部燃油重量 (Internal Fuel)</span><span class="s-val">${Number(fuel.internal_kg).toFixed(0)} kg (${(fuel.internal_kg * 2.2046).toFixed(0)} lb)</span></div>
-          <input type="range" id="inp-fuel" min="800" max="6500" step="50" value="${fuel.internal_kg}">
-        </div>
-      </div>
 
-      <!-- Center Column: 4 Interactive Blueprint Canvases -->
-      <div class="card" style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-          <button class="btn ${STATE.activeCanvasTab === "area_rule" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('area_rule')">Tab C: 面积律截面积分布 A(x)</button>
-          <button class="btn ${STATE.activeCanvasTab === "3view" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('3view')">Tab A: 正交三视图蓝图 (3-View)</button>
-          <button class="btn ${STATE.activeCanvasTab === "ps_contour" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('ps_contour')">Tab D: Boyd 能量机动包线 Ps</button>
-          <button class="btn ${STATE.activeCanvasTab === "drag_polar" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('drag_polar')">Tab B: 跨音速波阻曲线 CD0(M)</button>
+        <!-- Center Column: 5 Interactive Blueprint & Freehand Sculpting Canvases -->
+        <div class="card" style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <button class="btn ${STATE.activeCanvasTab === "airfoil" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('airfoil')">✏️ Tab E: 手绘翼型与激波台 (Airfoil Studio)</button>
+            <button class="btn ${STATE.activeCanvasTab === "area_rule" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('area_rule')">✏️ Tab C: 手绘机身蜂腰与面积律 A(x)</button>
+            <button class="btn ${STATE.activeCanvasTab === "3view" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('3view')">✏️ Tab A: 正交三视图与机翼手绘蓝图</button>
+            <button class="btn ${STATE.activeCanvasTab === "ps_contour" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('ps_contour')">Tab D: Boyd 能量包线 Ps</button>
+            <button class="btn ${STATE.activeCanvasTab === "drag_polar" ? "btn-brass" : ""}" onclick="window.MIC_UI.setCanvasTab('drag_polar')">Tab B: 跨音速波阻 CD0(M)</button>
+          </div>
+          ${sculptToolbarHtml}
+          <canvas id="design-main-canvas" class="blueprint-canvas" style="cursor:crosshair;"></canvas>
+          <div id="design-vital-pills" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-family:var(--font-mono);font-size:11.5px;">
+            ${vitalsHtml}
+          </div>
         </div>
-        <canvas id="design-main-canvas" class="blueprint-canvas"></canvas>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-family:var(--font-mono);font-size:11.5px;">
-          <div class="vital-pill"><span class="lbl">空重 Empty:</span><span class="val">${STATE.perf.empty_mass_kg.toFixed(0)} kg</span></div>
-          <div class="vital-pill"><span class="lbl">最大起飞 MTOW:</span><span class="val">${STATE.perf.mtow_kg.toFixed(0)} kg</span></div>
-          <div class="vital-pill"><span class="lbl">起飞滑跑距离:</span><span class="val">${(STATE.perf.takeoff_distance_m * 3.28084).toFixed(0)} ft</span></div>
-          <div class="vital-pill"><span class="lbl">单机出厂成本:</span><span class="val brass">$${(STATE.perf.unit_flyaway_cost_usd / 1e3).toFixed(0)}k</span></div>
-        </div>
-      </div>
 
-      <!-- Right Column: PerformanceReport with EstimateBadge Error Bars -->
-      <div class="card">
-        <div class="card-title">性能报告与误差棒 (PERFORMANCE REPORT & ±1σ)</div>
-        <div style="margin-bottom:8px;font-size:11.8px;">
-          当前置信度来源：<span class="badge ${STATE.flightPhaseRun > 0 ? "badge-flight" : STATE.tunnelLevelRun > 0 ? "badge-tunnel" : "badge-sim"}">${STATE.sourceBadge}</span>
-        </div>
-        <table class="bp-table">
-          <thead><tr><th>指标</th><th>当前估值 (±1σ)</th><th>招标门槛/目标</th><th>状态</th></tr></thead>
-          <tbody>${perfRowsHtml}</tbody>
-        </table>
-        <div style="margin-top:12px;padding:9px;background:#091529;border:1px solid #244778;border-radius:4px;font-size:11.8px;">
-          <div style="color:#e09f3e;font-weight:700;margin-bottom:4px;">总师诊断建议 (CHIEF DESIGNER DIAGNOSTICS)：</div>
-          <div>• 波阻粗糙度系数 $R_{\\text{area}} = ${STATE.perf.areaDist.r_area.toFixed(2)}$ ${fus.area_ruled ? "（已启用蜂腰面积律，跨音速阻力极低）" : "（⚠️ 未修面积律，M 0.95–1.15 波阻暴增！）"}</div>
-          <div>• 纵向静稳定度裕度：${(STATE.perf.static_margin * 100).toFixed(1)}% MAC</div>
-          <div>• 预估研发总费 (RDT&E)：$${(STATE.perf.dev_cost_usd_estimate / 1e6).toFixed(2)}M</div>
+        <!-- Right Column: PerformanceReport with EstimateBadge Error Bars -->
+        <div class="card">
+          <div class="card-title">性能报告与误差棒 (PERFORMANCE REPORT & ±1σ)</div>
+          <div style="margin-bottom:8px;font-size:11.8px;">
+            当前置信度来源：<span class="badge ${STATE.flightPhaseRun > 0 ? "badge-flight" : STATE.tunnelLevelRun > 0 ? "badge-tunnel" : "badge-sim"}">${STATE.sourceBadge}</span>
+          </div>
+          <table class="bp-table">
+            <thead><tr><th>指标</th><th>当前估值 (±1σ)</th><th>招标门槛/目标</th><th>状态</th></tr></thead>
+            <tbody id="design-perf-tbody">${perfRowsHtml}</tbody>
+          </table>
+          <div id="design-diag-box" style="margin-top:12px;padding:9px;background:#091529;border:1px solid #244778;border-radius:4px;font-size:11.8px;line-height:1.5;">
+            ${diagHtml}
+          </div>
         </div>
       </div>
-    </div>
-  `;
-}
+    `;
+  }
 
 function renderTestingWorkspace(host) {
   const A1 = window.MIC_APP_PART1;
@@ -954,10 +1066,203 @@ function renderTechAndCompanyWorkspace(host) {
   `;
 }
 
+function bindInteractiveCanvasEvents(cvs) {
+  if (!cvs) return;
+  const A1 = window.MIC_APP_PART1;
+  const K = window.MIC_KERNEL;
+  const STATE = A1.STATE;
+
+  let isDragging = false;
+  let activeHandle = null;
+
+  function getCanvasPos(ev) {
+    const rect = cvs.getBoundingClientRect();
+    const clientX = ev.touches && ev.touches.length ? ev.touches[0].clientX : ev.clientX;
+    const clientY = ev.touches && ev.touches.length ? ev.touches[0].clientY : ev.clientY;
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+    };
+  }
+
+  function findHitHandle(pos) {
+    const inter = cvs._interactive;
+    if (!inter || !inter.handles) return null;
+    let best = null;
+    let bestDist = 18.0; // 18px hit radius
+    for (let i = 0; i < inter.handles.length; i++) {
+      const h = inter.handles[i];
+      const d = Math.hypot(pos.x - h.x, pos.y - h.y);
+      if (d < bestDist) {
+        bestDist = d;
+        best = h;
+      }
+    }
+    return best;
+  }
+
+  function applyPointerSculpt(pos) {
+    const inter = cvs._interactive;
+    if (!inter) return;
+    const d = STATE.design;
+
+    // 1. Airfoil Cross-Section Sculpting (Control Point Drag OR Freehand Brush)
+    if (inter.mode === "airfoil") {
+      const af = K.ensureCustomAirfoil(d);
+      const yc = inter.fromY(pos.y);
+      const xc = inter.fromX(pos.x);
+
+      if (activeHandle && activeHandle.kind === "af_upper") {
+        const k = activeHandle.index;
+        af.upper[k] = Number(Math.max(af.lower[k] + 0.015, Math.min(0.135, yc)).toFixed(4));
+        af.preset_name = "Custom 手绘翼型";
+      } else if (activeHandle && activeHandle.kind === "af_lower") {
+        const k = activeHandle.index;
+        af.lower[k] = Number(Math.min(af.upper[k] - 0.015, Math.max(-0.135, yc)).toFixed(4));
+        af.preset_name = "Custom 手绘翼型";
+      } else if (pos.y >= inter.box.y && pos.y <= inter.box.y + inter.box.h) {
+        // Freehand brush stroke across airfoil chord! Find nearest x_ctrl index
+        let nearestK = 0;
+        let minDx = 999;
+        for (let k = 0; k < K.AIRFOIL_X_CTRL.length; k++) {
+          const dx = Math.abs(xc - K.AIRFOIL_X_CTRL[k]);
+          if (dx < minDx) {
+            minDx = dx;
+            nearestK = k;
+          }
+        }
+        const mode = STATE.airfoilBrushMode;
+        const editUpper = mode === "free_upper" || (mode === "nodes" && yc >= 0);
+        if (editUpper) {
+          af.upper[nearestK] = Number(Math.max(af.lower[nearestK] + 0.015, Math.min(0.135, yc)).toFixed(4));
+        } else {
+          af.lower[nearestK] = Number(Math.min(af.upper[nearestK] - 0.015, Math.max(-0.135, yc)).toFixed(4));
+        }
+        af.preset_name = "Custom 手绘翼型";
+      }
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+      return;
+    }
+
+    // 2. Fuselage Station Lofting & Area-Rule Waist Sculpting
+    if (inter.mode === "fuselage_area") {
+      const radii = K.ensureFuselageStations(d);
+      const minR = inter.minRadii || K.getMinClearanceRadii(d);
+      let targetIdx = activeHandle && activeHandle.kind === "fus_station" ? activeHandle.index : -1;
+      if (targetIdx < 0 && pos.y >= inter.box.y - 12 && pos.y <= inter.box.y + inter.box.h + 12) {
+        // Freehand fuselage sculpting along x/L!
+        const u = Math.max(0.0, Math.min(1.0, (pos.x - inter.box.x) / Math.max(1, inter.box.w)));
+        targetIdx = Math.round(u * 10);
+      }
+      if (targetIdx >= 0 && targetIdx <= 10) {
+        const newR = inter.fromFusY(pos.y);
+        radii[targetIdx] = Number(Math.max(minR[targetIdx], Math.min(1.45, newR)).toFixed(3));
+        // Smoothlysync max_diameter_m & area_ruled flag from sculpted waist
+        d.fuselage.max_diameter_m = Number((Math.max(...radii) * 2.0).toFixed(2));
+        window.MIC_APP_ACTIONS.recalculateDesign(false);
+        d.fuselage.area_ruled = STATE.perf.areaDist.r_area <= 1.18;
+        window.MIC_APP_ACTIONS.recalculateDesign(false);
+        refreshDesignInPlace();
+      }
+      return;
+    }
+
+    // 3. 3-View Blueprint Interactive Wing Planform & Fuselage Waist Dragging
+    if (inter.mode === "blueprint_3view" && activeHandle) {
+      if (activeHandle.kind === "wing_le") {
+        // Vertical distance from centerline -> half_span -> Aspect Ratio AR
+        const halfSpanM = Math.max(2.6, Math.min(11.0, Math.abs(pos.y - inter.cy) / inter.scale));
+        const spanM = halfSpanM * 2.0;
+        const S = Number(d.wing.area_m2 || 30.0);
+        d.wing.aspect_ratio = Number(Math.max(1.8, Math.min(6.5, (spanM * spanM) / S)).toFixed(2));
+
+        // Horizontal distance from wing root LE -> Sweep angle
+        const dxM = (pos.x - inter.x_wing_le) / inter.scale;
+        const sweepRad = Math.atan2(Math.max(0.0, dxM), halfSpanM);
+        d.wing.sweep_quarter_chord_deg = Number(Math.max(0.0, Math.min(60.0, (sweepRad * 180.0) / Math.PI)).toFixed(1));
+      } else if (activeHandle.kind === "wing_te") {
+        // Horizontal drag of wingtip TE -> changes wingtip chord -> Wing Area S & Taper ratio
+        const wLe = inter.handles.find((h) => h.id === "planform_wing_le");
+        if (wLe) {
+          const cTipM = Math.max(0.45, Math.min(4.8, (pos.x - wLe.x) / inter.scale));
+          const newTaper = Math.max(0.12, Math.min(0.85, cTipM / Math.max(1.2, inter.c_root)));
+          d.wing.taper_ratio = Number(newTaper.toFixed(2));
+          const spanM = Math.sqrt(Number(d.wing.area_m2 || 30.0) * Number(d.wing.aspect_ratio || 3.5));
+          const newArea = Math.max(14.0, Math.min(68.0, 0.5 * spanM * inter.c_root * (1.0 + newTaper)));
+          d.wing.area_m2 = Number(newArea.toFixed(1));
+        }
+      } else if (activeHandle.kind === "fus_station_3view") {
+        const k = activeHandle.index;
+        const radii = K.ensureFuselageStations(d);
+        const rM = Math.abs(pos.y - inter.cy) / inter.scale;
+        radii[k] = Number(Math.max(activeHandle.rMin || 0.25, Math.min(1.4, rM)).toFixed(3));
+        window.MIC_APP_ACTIONS.recalculateDesign(false);
+        d.fuselage.area_ruled = STATE.perf.areaDist.r_area <= 1.18;
+      }
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+    }
+  }
+
+  cvs.addEventListener("mousedown", function (ev) {
+    const pos = getCanvasPos(ev);
+    activeHandle = findHitHandle(pos);
+    cvs._activeHandleId = activeHandle ? activeHandle.id : null;
+    isDragging = true;
+    applyPointerSculpt(pos);
+  });
+
+  cvs.addEventListener("mousemove", function (ev) {
+    const pos = getCanvasPos(ev);
+    if (!isDragging) {
+      const hover = findHitHandle(pos);
+      const newHoverId = hover ? hover.id : null;
+      if (cvs._activeHandleId !== newHoverId) {
+        cvs._activeHandleId = newHoverId;
+        cvs.style.cursor = newHoverId ? "grab" : "crosshair";
+        drawActiveDesignCanvas(cvs);
+      }
+      return;
+    }
+    cvs.style.cursor = "grabbing";
+    applyPointerSculpt(pos);
+  });
+
+  window.addEventListener("mouseup", function () {
+    if (isDragging) {
+      isDragging = false;
+      activeHandle = null;
+      cvs.style.cursor = "crosshair";
+    }
+  });
+
+  cvs.addEventListener("touchstart", function (ev) {
+    const pos = getCanvasPos(ev);
+    activeHandle = findHitHandle(pos);
+    cvs._activeHandleId = activeHandle ? activeHandle.id : null;
+    isDragging = true;
+    applyPointerSculpt(pos);
+    ev.preventDefault();
+  }, { passive: false });
+
+  cvs.addEventListener("touchmove", function (ev) {
+    if (!isDragging) return;
+    const pos = getCanvasPos(ev);
+    applyPointerSculpt(pos);
+    ev.preventDefault();
+  }, { passive: false });
+
+  cvs.addEventListener("touchend", function () {
+    isDragging = false;
+    activeHandle = null;
+  });
+}
+
 function renderAll() {
   const A1 = window.MIC_APP_PART1;
+  const K = window.MIC_KERNEL;
   const STATE = A1.STATE;
-  const P = window.MIC_PLOTS;
 
   renderTopBarAndRightFeed();
   const host = document.getElementById("workspace-host");
@@ -965,7 +1270,6 @@ function renderAll() {
 
   if (STATE.activeWorkspace === "design") {
     renderDesignWorkspace(host);
-    // Bind Sliders & Draw Canvas
     const bindSlider = function (id, fn) {
       const el = document.getElementById(id);
       if (el) el.addEventListener("input", fn);
@@ -977,27 +1281,66 @@ function renderAll() {
         renderAll();
       });
     }
-    bindSlider("inp-area", (e) => { STATE.design.wing.area_m2 = Number(e.target.value); window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
-    bindSlider("inp-sweep", (e) => { STATE.design.wing.sweep_quarter_chord_deg = Number(e.target.value); window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
-    bindSlider("inp-ar", (e) => { STATE.design.wing.aspect_ratio = Number(e.target.value); window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
-    bindSlider("inp-tc", (e) => { STATE.design.wing.t_c_root = Number(e.target.value); window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
-    bindSlider("inp-fuel", (e) => { STATE.design.fuel.internal_kg = Number(e.target.value); window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
+    bindSlider("inp-area", (e) => {
+      STATE.design.wing.area_m2 = Number(e.target.value);
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+    });
+    bindSlider("inp-sweep", (e) => {
+      STATE.design.wing.sweep_quarter_chord_deg = Number(e.target.value);
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+    });
+    bindSlider("inp-ar", (e) => {
+      STATE.design.wing.aspect_ratio = Number(e.target.value);
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+    });
+    bindSlider("inp-tc", (e) => {
+      const targetTc = Number(e.target.value);
+      const af = K.ensureCustomAirfoil(STATE.design);
+      const curEval = K.evaluateAirfoilSpline(STATE.design);
+      const ratio = targetTc / Math.max(0.02, curEval.tc_max);
+      for (let k = 0; k < 5; k++) {
+        const cam = 0.5 * (af.upper[k] + af.lower[k]);
+        const halfT = 0.5 * (af.upper[k] - af.lower[k]) * ratio;
+        af.upper[k] = Number(Math.min(0.135, cam + halfT).toFixed(4));
+        af.lower[k] = Number(Math.max(-0.135, cam - halfT).toFixed(4));
+      }
+      STATE.design.wing.t_c_root = targetTc;
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+    });
+    bindSlider("inp-fuel", (e) => {
+      STATE.design.fuel.internal_kg = Number(e.target.value);
+      window.MIC_APP_ACTIONS.recalculateDesign(false);
+      refreshDesignInPlace();
+    });
 
     const arChk = document.getElementById("inp-arearule");
-    if (arChk) arChk.addEventListener("change", (e) => { STATE.design.fuselage.area_ruled = e.target.checked; window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
+    if (arChk) {
+      arChk.addEventListener("change", (e) => {
+        STATE.design.fuselage.area_ruled = e.target.checked;
+        STATE.design.fuselage.station_radii = K.buildDefaultFuselageRadii(
+          STATE.design,
+          e.target.checked,
+          K.getMinClearanceRadii(STATE.design)
+        );
+        window.MIC_APP_ACTIONS.recalculateDesign(false);
+        refreshDesignInPlace();
+      });
+    }
     const abChk = document.getElementById("inp-ab");
-    if (abChk) abChk.addEventListener("change", (e) => { STATE.design.propulsion.afterburner = e.target.checked; window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
+    if (abChk) abChk.addEventListener("change", (e) => { STATE.design.propulsion.afterburner = e.target.checked; window.MIC_APP_ACTIONS.recalculateDesign(false); refreshDesignInPlace(); });
     const twChk = document.getElementById("inp-twin");
-    if (twChk) twChk.addEventListener("change", (e) => { STATE.design.propulsion.count = e.target.checked ? 2 : 1; window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
+    if (twChk) twChk.addEventListener("change", (e) => { STATE.design.propulsion.count = e.target.checked ? 2 : 1; window.MIC_APP_ACTIONS.recalculateDesign(false); refreshDesignInPlace(); });
     const engSel = document.getElementById("inp-engine");
-    if (engSel) engSel.addEventListener("change", (e) => { STATE.design.propulsion.engine_id = e.target.value; window.MIC_APP_ACTIONS.recalculateDesign(false); renderAll(); });
+    if (engSel) engSel.addEventListener("change", (e) => { STATE.design.propulsion.engine_id = e.target.value; window.MIC_APP_ACTIONS.recalculateDesign(false); refreshDesignInPlace(); });
 
     const cvs = document.getElementById("design-main-canvas");
     if (cvs) {
-      if (STATE.activeCanvasTab === "3view") P.draw3ViewBlueprint(cvs, STATE.design, STATE.perf);
-      else if (STATE.activeCanvasTab === "ps_contour") P.drawPsContourPlot(cvs, STATE.design, STATE.perf);
-      else if (STATE.activeCanvasTab === "drag_polar") P.drawDragPolarPlot(cvs, STATE.design, STATE.perf);
-      else P.drawAreaRulePlot(cvs, STATE.design, STATE.perf);
+      drawActiveDesignCanvas(cvs);
+      bindInteractiveCanvasEvents(cvs);
     }
   } else if (STATE.activeWorkspace === "testing") {
     renderTestingWorkspace(host);
@@ -1015,6 +1358,48 @@ function renderAll() {
 window.MIC_UI = {
   goWorkspace: function (ws) { window.MIC_APP_PART1.STATE.activeWorkspace = ws; renderAll(); },
   setCanvasTab: function (tab) { window.MIC_APP_PART1.STATE.activeCanvasTab = tab; renderAll(); },
+  setAirfoilBrush: function (mode) { window.MIC_APP_PART1.STATE.airfoilBrushMode = mode; renderAll(); },
+  applyAirfoilPreset: function (presetId) {
+    const K = window.MIC_KERNEL;
+    const S = window.MIC_APP_PART1.STATE;
+    const p = K.AIRFOIL_PRESETS[presetId];
+    if (!p) return;
+    S.design.custom_airfoil = {
+      preset_name: p.name,
+      upper: p.upper.slice(),
+      lower: p.lower.slice(),
+    };
+    window.MIC_APP_ACTIONS.recalculateDesign(false);
+    window.MIC_APP_ACTIONS.logEvent(null, "AIRFOIL", `已载入并应用翼型截面：【${p.name}】((t/c)_max = ${(S.perf.airfoilEval.tc_max * 100).toFixed(1)}%)`);
+    renderAll();
+  },
+  sculptFuselagePreset: function (action) {
+    const K = window.MIC_KERNEL;
+    const S = window.MIC_APP_PART1.STATE;
+    const d = S.design;
+    const minR = K.getMinClearanceRadii(d);
+    const maxD = Number((d.fuselage && d.fuselage.max_diameter_m) || 1.5);
+    if (action === "tube") {
+      d.fuselage.area_ruled = false;
+      d.fuselage.station_radii = K.buildDefaultFuselageRadii(d, false, minR);
+      window.MIC_APP_ACTIONS.logEvent(null, "FUSELAGE", "已还原为直筒纺锤机身（无蜂腰面积律修形）。");
+    } else if (action === "waist") {
+      d.fuselage.area_ruled = true;
+      d.fuselage.station_radii = K.buildDefaultFuselageRadii(d, true, minR);
+      window.MIC_APP_ACTIONS.logEvent(null, "FUSELAGE", "✨ 已完成惠特科姆面积律蜂腰修形 (Coke-Bottle Waist)，跨音速激波阻力大幅下降！");
+    } else if (action === "fatten" || action === "slim") {
+      const mult = action === "fatten" ? 1.06 : 0.94;
+      const radii = K.ensureFuselageStations(d);
+      for (let k = 0; k < 11; k++) {
+        radii[k] = Number(Math.max(minR[k], Math.min(1.45, radii[k] * mult)).toFixed(3));
+      }
+      d.fuselage.max_diameter_m = Number((Math.max(...radii) * 2.0).toFixed(2));
+    }
+    window.MIC_APP_ACTIONS.recalculateDesign(false);
+    d.fuselage.area_ruled = S.perf.areaDist.r_area <= 1.18;
+    window.MIC_APP_ACTIONS.recalculateDesign(false);
+    renderAll();
+  },
   selectPilot: function (idx) { window.MIC_APP_PART1.STATE.selectedPilotIdx = idx; renderAll(); },
   setInquiry: function (lvl) {
     const S = window.MIC_APP_PART1.STATE;
