@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>军工复合体：喷气时代 (1945–1960) — 交互验证原型 | Military-Industrial Complex: Jet Age</title>
+  <title>军工复合体：喷气时代 · 试玩原型</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -13,61 +13,44 @@
   <!-- Persistent Global Top Bar HUD (TopBarHUD.tscn) -->
   <header class="topbar-hud">
     <div class="brand-block">
-      <div class="brand-emblem" aria-hidden="true">
-        <svg viewBox="0 0 32 32" fill="none">
-          <path d="M16 3 L19 15 L29 19 L29 21 L19 19.5 L18 26 L21.5 28.5 L21.5 30 L16 28.6 L10.5 30 L10.5 28.5 L14 26 L13 19.5 L3 21 L3 19 L13 15 Z" fill="#3fe0ff" fill-opacity="0.18" stroke="#3fe0ff" stroke-width="1.3" stroke-linejoin="round"/>
-          <circle cx="16" cy="16" r="14.5" stroke="#e6a948" stroke-opacity="0.55" stroke-dasharray="2 3"/>
-        </svg>
-      </div>
-      <div>
-        <div class="brand-title">军工复合体：喷气时代<span class="en">MIC // Jet Age</span></div>
-        <div class="brand-sub">1945–1960 · Interactive Playability Prototype · Python-oracle calibrated</div>
-      </div>
+      <span class="brand-mark">军</span>
+      <span class="brand-title">军工复合体：喷气时代</span>
+      <span class="brand-sep"></span>
+      <span class="brand-sub">1945–1960 试玩原型</span>
     </div>
     <div class="vitals-strip">
-      <div class="hud-stat"><span class="ico">📅</span><div><span class="lbl">日期 Date</span><span class="val c-cyan" id="hud-date">—</span></div></div>
-      <div class="hud-stat green"><span class="ico">💵</span><div><span class="lbl">现金 Cash</span><span class="val c-green" id="hud-cash">—</span></div></div>
-      <div class="hud-stat brass"><span class="ico">✈️</span><div><span class="lbl">空军声望 USAF</span><span class="val c-brass" id="hud-rep-usaf">—</span></div></div>
-      <div class="hud-stat brass"><span class="ico">⚓</span><div><span class="lbl">海军声望 USN</span><span class="val c-brass" id="hud-rep-usn">—</span></div></div>
-      <div class="hud-stat"><span class="ico">🏛️</span><div><span class="lbl">政治资本 Pol</span><span class="val c-cyan" id="hud-pol">—</span></div></div>
-      <div class="hud-stat green"><span class="ico">🏆</span><div><span class="lbl">已赢合同 Won</span><span class="val c-green" id="hud-won">—</span></div></div>
-      <button class="btn hud-feed-toggle" onclick="window.MIC_UI.toggleFeed()">📟 电传日志 <span class="count" id="hud-feed-count">0</span></button>
+      <div class="hud-stat"><span class="lbl">日期</span><span class="val" id="hud-date">—</span></div>
+      <div class="hud-stat"><span class="lbl">现金</span><span class="val" id="hud-cash">—</span></div>
+      <div class="hud-stat"><span class="lbl">空军声望</span><span class="val" id="hud-rep-usaf">—</span></div>
+      <div class="hud-stat"><span class="lbl">海军声望</span><span class="val" id="hud-rep-usn">—</span></div>
+      <div class="hud-stat"><span class="lbl">政治资本</span><span class="val" id="hud-pol">—</span></div>
+      <div class="hud-stat"><span class="lbl">已获合同</span><span class="val" id="hud-won">—</span></div>
+      <button class="btn sm hud-feed-toggle" onclick="window.MIC_UI.toggleFeed()">动态 <span class="count" id="hud-feed-count">0</span></button>
     </div>
   </header>
 
   <!-- 1-Click Historical Showdown Scenario Selector Bar (rendered by app.js) -->
   <section class="scenario-bar">
-    <span class="eyebrow">历史竞标剧本<br>Scenarios</span>
+    <span class="eyebrow">剧本</span>
     <div class="scenario-buttons" id="scenario-buttons"></div>
   </section>
 
   <!-- Main Shell (Left Navigation Dock + Center Active Workspace + Right Event/Alert Feed) -->
   <main class="main-shell">
     <aside class="left-nav">
-      <div class="nav-section-title">工作台 Workspaces</div>
-      <button class="nav-btn active" data-ws="design" onclick="window.MIC_UI.goWorkspace('design')">
-        <span class="n">1</span><span class="lab">飞机设计局<small>AIRFRAME</small></span><span class="kbd">F2</span>
-      </button>
-      <button class="nav-btn" data-ws="testing" onclick="window.MIC_UI.goWorkspace('testing')">
-        <span class="n">2</span><span class="lab">风洞与试飞<small>TEST & FLAWS</small></span><span class="kbd">F4</span>
-      </button>
-      <button class="nav-btn" data-ws="procurement" onclick="window.MIC_UI.goWorkspace('procurement')">
-        <span class="n">3</span><span class="lab">情报与竞飞<small>PROCUREMENT</small></span><span class="kbd">F5</span>
-      </button>
-      <button class="nav-btn" data-ws="propulsion" onclick="window.MIC_UI.goWorkspace('propulsion')">
-        <span class="n">4</span><span class="lab">航发定制<small>PROPULSION</small></span><span class="kbd">F3</span>
-      </button>
-      <button class="nav-btn" data-ws="tech" onclick="window.MIC_UI.goWorkspace('tech')">
-        <span class="n">5</span><span class="lab">科技树与规则<small>TECH & RULES</small></span><span class="kbd">F6</span>
-      </button>
+      <button class="nav-btn active" data-ws="design" onclick="window.MIC_UI.goWorkspace('design')"><span class="n">1</span><span class="lab">飞机设计</span><span class="kbd">F2</span></button>
+      <button class="nav-btn" data-ws="testing" onclick="window.MIC_UI.goWorkspace('testing')"><span class="n">2</span><span class="lab">风洞与试飞</span><span class="kbd">F4</span></button>
+      <button class="nav-btn" data-ws="procurement" onclick="window.MIC_UI.goWorkspace('procurement')"><span class="n">3</span><span class="lab">投标与竞飞</span><span class="kbd">F5</span></button>
+      <button class="nav-btn" data-ws="propulsion" onclick="window.MIC_UI.goWorkspace('propulsion')"><span class="n">4</span><span class="lab">发动机</span><span class="kbd">F3</span></button>
+      <button class="nav-btn" data-ws="tech" onclick="window.MIC_UI.goWorkspace('tech')"><span class="n">5</span><span class="lab">科技与规则</span><span class="kbd">F6</span></button>
 
       <details class="guide-box" open>
-        <summary><span class="eyebrow">快速试玩 Guide</span></summary>
+        <summary>上手指引</summary>
         <ol class="guide-steps">
-          <li>在<b>设计局</b>观察 YF-102 未修面积律时的红色波阻尖峰（极速卡在 M 1.05）。</li>
-          <li>切到<b>手绘机身</b>，亲手把 S4–S7 往下拉捏出蜂腰，或进<b>风洞</b>跑 L2 跨音速风洞揭开隐患。</li>
-          <li>修形后极速跃升至 <b>M 1.35+</b>；再去<b>手绘翼型</b>试试刀锋薄翼。</li>
-          <li>在<b>情报与竞飞</b>打探对手、设定报价，启动<b>真机同台竞飞</b>。</li>
+          <li>YF-102 没有做面积律，最大马赫数卡在 1.05 左右。</li>
+          <li>在<b>机身</b>画布里把 S4–S7 往下拉，收出蜂腰；或者去<b>风洞</b>做一次跨音速试验找原因。</li>
+          <li>修好后马赫数能到 1.35 以上。再到<b>翼型</b>画布试试更薄的翼型。</li>
+          <li>最后去<b>投标与竞飞</b>定价，和对手同场比试。</li>
         </ol>
       </details>
     </aside>

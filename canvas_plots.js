@@ -24,10 +24,10 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     // Prussian Blueprint Background + Grid
-    ctx.fillStyle = "#081224";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, w, h);
 
-    ctx.strokeStyle = "rgba(0, 240, 255, 0.07)";
+    ctx.strokeStyle = "rgba(15, 23, 42, 0.045)";
     ctx.lineWidth = 1;
     for (let x = 0; x < w; x += 24) {
       ctx.beginPath();
@@ -50,20 +50,20 @@
     ctx.save();
     ctx.beginPath();
     ctx.arc(x, y, isHovered ? r + 3.5 : r + 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = isHovered ? "rgba(255, 255, 255, 0.32)" : "rgba(0, 240, 255, 0.16)";
+    ctx.fillStyle = isHovered ? "rgba(30, 64, 175, 0.15)" : "rgba(30, 64, 175, 0.16)";
     ctx.fill();
 
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.fillStyle = isHovered ? "#FFFFFF" : color;
+    ctx.fillStyle = isHovered ? "#0F172A" : color;
     ctx.fill();
     ctx.lineWidth = 1.8;
-    ctx.strokeStyle = "#06101E";
+    ctx.strokeStyle = "#FFFFFF";
     ctx.stroke();
 
     if (label) {
-      ctx.fillStyle = isHovered ? "#FFFFFF" : color;
-      ctx.font = "bold 10px 'JetBrains Mono', monospace";
+      ctx.fillStyle = isHovered ? "#0F172A" : color;
+      ctx.font = "bold 10px Inter, 'PingFang SC', sans-serif";
       ctx.fillText(label, x - 7, y - r - 5);
     }
     ctx.restore();
@@ -84,7 +84,7 @@
     // Layout: Top 55% = Interactive Airfoil Cross-Section Editor; Bottom 45% = Chordwise Cp(x/c) Plot
     const padL = 58, padR = 28;
     const pw = w - padL - padR;
-    const topY = 44, topH = Math.round((h - 76) * 0.54);
+    const topY = 54, topH = Math.round((h - 86) * 0.54);
     const midY = topY + Math.round(topH * 0.50);
     // Adaptive vertical scale so thin supersonic sections stay legible (snaps to 4/6/8/10/14 %c)
     const maxAbsY = Math.max.apply(null, af.upper.concat(af.lower).map(Math.abs));
@@ -99,45 +99,41 @@
     const fromY = (py) => ((midY - py) / Math.max(1, topH * 0.48)) * yMax;
 
     // Header
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "bold 12px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#0F172A";
+    ctx.font = "600 13px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText(`翼型截面 · ${af.preset_name || "自定义"}`, 14, 21);
+    ctx.fillStyle = "#64748B";
+    ctx.font = "12px Inter, 'PingFang SC', sans-serif";
     ctx.fillText(
-      "INTERACTIVE AIRFOIL CROSS-SECTION SCULPTOR & TRANSONIC PRESSURE Cp(x/c) // 拖拽控制点或按住鼠标直接手绘翼型",
+      `最大厚度 ${(afEval.tc_max * 100).toFixed(1)}%（${(afEval.x_tc_max * 100).toFixed(0)}% 弦长处）   弯度 ${(afEval.camber_max * 100).toFixed(1)}%   M_cr ${afEval.m_cr.toFixed(2)}   M_dd ${afEval.m_dd_2d.toFixed(2)}   CL_max ${afEval.cl_max_2d.toFixed(2)}`,
       14,
-      19
-    );
-    ctx.fillStyle = "#E09F3E";
-    ctx.font = "11px 'JetBrains Mono', monospace";
-    ctx.fillText(
-      `Preset: ${af.preset_name || "Custom"} | (t/c)_max: ${(afEval.tc_max * 100).toFixed(2)}% @ ${(afEval.x_tc_max * 100).toFixed(0)}%c | Camber: ${(afEval.camber_max * 100).toFixed(2)}% | M_cr: ${afEval.m_cr.toFixed(2)} | M_dd(2D): ${afEval.m_dd_2d.toFixed(2)} | CL_max: ${afEval.cl_max_2d.toFixed(2)}`,
-      14,
-      35
+      38
     );
 
     // Airfoil Editor Box & Grid
-    ctx.strokeStyle = "rgba(74, 107, 156, 0.55)";
+    ctx.strokeStyle = "#E2E8F0";
     ctx.lineWidth = 1.0;
     ctx.strokeRect(padL, topY, pw, topH);
 
     // Horizontal y/c grid lines (scaled to current view)
     [-1, -0.5, 0, 0.5, 1].map((f) => f * yMax * 0.75).forEach(function (yg) {
       const py = toY(yg);
-      ctx.strokeStyle = yg === 0.0 ? "rgba(224, 159, 62, 0.45)" : "rgba(0, 240, 255, 0.10)";
+      ctx.strokeStyle = yg === 0.0 ? "rgba(161, 98, 7, 0.45)" : "rgba(30, 64, 175, 0.10)";
       ctx.setLineDash(yg === 0.0 ? [5, 4] : []);
       ctx.beginPath();
       ctx.moveTo(padL, py);
       ctx.lineTo(padL + pw, py);
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = "#6E88AD";
-      ctx.font = "9px 'JetBrains Mono', monospace";
+      ctx.fillStyle = "#94A3B8";
+      ctx.font = "9px Inter, 'PingFang SC', sans-serif";
       ctx.fillText(`${(yg * 100).toFixed(1)}%c`, 10, py + 3);
     });
 
     // Chordwise station grid lines (0%, 20%, 40%, 60%, 80%, 100% c)
     [0.0, 0.2, 0.4, 0.6, 0.8, 1.0].forEach(function (xg) {
       const px = toX(xg);
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.10)";
+      ctx.strokeStyle = "rgba(30, 64, 175, 0.10)";
       ctx.beginPath();
       ctx.moveTo(px, topY);
       ctx.lineTo(px, topY + topH);
@@ -145,7 +141,7 @@
     });
 
     // Shade Internal Wing Box & Fuel Volume (between front spar 18%c and rear spar 68%c)
-    ctx.fillStyle = "rgba(59, 206, 172, 0.13)";
+    ctx.fillStyle = "rgba(21, 128, 61, 0.13)";
     ctx.beginPath();
     const N = afEval.xs.length;
     let startedBox = false;
@@ -174,19 +170,19 @@
       const sx = toX(xSpar);
       const syTop = toY(afEval.yu[idxGrid]);
       const syBot = toY(afEval.yl[idxGrid]);
-      ctx.strokeStyle = "#3BCEAC";
+      ctx.strokeStyle = "#15803D";
       ctx.lineWidth = 2.4;
       ctx.beginPath();
       ctx.moveTo(sx, syTop);
       ctx.lineTo(sx, syBot);
       ctx.stroke();
-      ctx.fillStyle = "#3BCEAC";
-      ctx.font = "9px 'JetBrains Mono', monospace";
+      ctx.fillStyle = "#15803D";
+      ctx.font = "9px Inter, 'PingFang SC', sans-serif";
       ctx.fillText(idx === 0 ? "前梁 18%c" : "后梁 68%c", sx + 4, (syTop + syBot) * 0.5 + 3);
     });
 
     // Shade Full Airfoil Cross Section
-    ctx.fillStyle = "rgba(0, 240, 255, 0.11)";
+    ctx.fillStyle = "rgba(30, 64, 175, 0.11)";
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
       const px = toX(afEval.xs[i]), py = toY(afEval.yu[i]);
@@ -200,7 +196,7 @@
     ctx.fill();
 
     // Draw Mean Camber Line (dashed gold)
-    ctx.strokeStyle = "#E09F3E";
+    ctx.strokeStyle = "#A16207";
     ctx.lineWidth = 1.5;
     ctx.setLineDash([4, 4]);
     ctx.beginPath();
@@ -213,7 +209,7 @@
     ctx.setLineDash([]);
 
     // Draw Upper Surface Curve (cyan)
-    ctx.strokeStyle = "#00F0FF";
+    ctx.strokeStyle = "#1E40AF";
     ctx.lineWidth = 2.6;
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
@@ -224,7 +220,7 @@
     ctx.stroke();
 
     // Draw Lower Surface Curve (amber)
-    ctx.strokeStyle = "#F59E0B";
+    ctx.strokeStyle = "#B45309";
     ctx.lineWidth = 2.4;
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
@@ -244,16 +240,16 @@
     if (shockIdx > 0) {
       const sx = toX(afEval.xs[shockIdx]);
       const sy = toY(afEval.yu[shockIdx]);
-      ctx.strokeStyle = "#FF4757";
+      ctx.strokeStyle = "#B91C1C";
       ctx.lineWidth = 2.2;
       ctx.beginPath();
       ctx.moveTo(sx, sy);
       ctx.lineTo(sx - 6, sy - 28);
       ctx.lineTo(sx + 4, sy - 46);
       ctx.stroke();
-      ctx.fillStyle = "#FF4757";
-      ctx.font = "bold 10px 'JetBrains Mono', monospace";
-      ctx.fillText("⚡ 局部激波 (Shock)", sx + 6, sy - 26);
+      ctx.fillStyle = "#B91C1C";
+      ctx.font = "bold 10px Inter, 'PingFang SC', sans-serif";
+      ctx.fillText("局部激波", sx + 6, sy - 26);
     }
 
     // Build & Render 10 Interactive Control Handles (U1..U5 and L1..L5)
@@ -267,8 +263,8 @@
       const lId = `af_l_${k}`;
       handles.push({ id: uId, kind: "af_upper", index: k, x: ux, y: uy, xc });
       handles.push({ id: lId, kind: "af_lower", index: k, x: lx, y: ly, xc });
-      drawHandleNode(ctx, ux, uy, "#00F0FF", `U${k + 1}`, activeId === uId, 6.2);
-      drawHandleNode(ctx, lx, ly, "#F59E0B", `L${k + 1}`, activeId === lId, 6.2);
+      drawHandleNode(ctx, ux, uy, "#1E40AF", `U${k + 1}`, activeId === uId, 6.2);
+      drawHandleNode(ctx, lx, ly, "#B45309", `L${k + 1}`, activeId === lId, 6.2);
     }
 
     // ========================================================================
@@ -279,14 +275,14 @@
     const cpMin = -0.5, cpMax = 1.45; // plotting -Cp so suction is UPWARD
     const toCpY = (negCp) => cpTop + cpH - ((Math.max(cpMin, Math.min(cpMax, negCp)) - cpMin) / (cpMax - cpMin)) * cpH;
 
-    ctx.strokeStyle = "rgba(74, 107, 156, 0.55)";
+    ctx.strokeStyle = "#E2E8F0";
     ctx.lineWidth = 1.0;
     ctx.strokeRect(padL, cpTop, pw, cpH);
 
     // Sonic Rooftop Limit Line (-Cp_crit)
     const negCpCrit = -afEval.cp_crit;
     const yCrit = toCpY(negCpCrit);
-    ctx.strokeStyle = "#FF4757";
+    ctx.strokeStyle = "#B91C1C";
     ctx.lineWidth = 1.5;
     ctx.setLineDash([6, 4]);
     ctx.beginPath();
@@ -294,12 +290,12 @@
     ctx.lineTo(padL + pw, yCrit);
     ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = "#FF4757";
-    ctx.font = "10px 'JetBrains Mono', monospace";
-    ctx.fillText(`--- 音速临界压力线 -Cp,crit = ${negCpCrit.toFixed(2)} (高于此线即形成超音速激波阻力)`, padL + 10, yCrit - 5);
+    ctx.fillStyle = "#B91C1C";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText(`临界压力 −Cp* = ${negCpCrit.toFixed(2)}，超过即出现激波`, padL + 10, yCrit - 5);
 
     // Shade Supersonic Shock Pocket where -Cp_upper > -Cp_crit
-    ctx.fillStyle = "rgba(255, 71, 87, 0.25)";
+    ctx.fillStyle = "rgba(185, 28, 28, 0.25)";
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
       const px = toX(afEval.xs[i]);
@@ -313,7 +309,7 @@
     ctx.fill();
 
     // Draw Upper Surface Suction Curve -Cp_upper(x/c)
-    ctx.strokeStyle = "#00F0FF";
+    ctx.strokeStyle = "#1E40AF";
     ctx.lineWidth = 2.2;
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
@@ -324,7 +320,7 @@
     ctx.stroke();
 
     // Draw Lower Surface Curve -Cp_lower(x/c)
-    ctx.strokeStyle = "#F59E0B";
+    ctx.strokeStyle = "#B45309";
     ctx.lineWidth = 1.8;
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
@@ -334,12 +330,12 @@
     }
     ctx.stroke();
 
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "10px 'JetBrains Mono', monospace";
-    ctx.fillText("-Cp (Suction)", 4, cpTop + 12);
-    ctx.fillText("0%c (前缘 LE)", padL, h - 6);
+    ctx.fillStyle = "#64748B";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("−Cp", 4, cpTop + 12);
+    ctx.fillText("前缘", padL, h - 6);
     ctx.fillText("50%c", padL + pw * 0.48, h - 6);
-    ctx.fillText("100%c (后缘 TE)", padL + pw - 95, h - 6);
+    ctx.fillText("后缘", padL + pw - 26, h - 6);
 
     canvas._interactive = {
       mode: "airfoil",
@@ -389,23 +385,19 @@
     const cy = h * 0.48;
 
     // Title block
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "bold 12px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#0F172A";
+    ctx.font = "600 13px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("俯视图与侧视图", 14, 21);
+    ctx.fillStyle = "#64748B";
+    ctx.font = "12px Inter, 'PingFang SC', sans-serif";
     ctx.fillText(
-      "ORTHOGRAPHIC 3-VIEW & PLANFORM SCULPTOR // 可直接拖拽翼尖(改后掠角/展弦比/梯形比)与机身蜂腰控制点",
+      `翼展 ${span.toFixed(2)} m   机长 ${L.toFixed(2)} m   翼面积 ${S.toFixed(1)} m²   后掠 ${sweep_deg.toFixed(1)}°   梢根比 ${taper.toFixed(2)}`,
       14,
-      19
-    );
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "11px 'JetBrains Mono', monospace";
-    ctx.fillText(
-      `Span: ${span.toFixed(2)}m | L: ${L.toFixed(2)}m | S: ${S.toFixed(1)}m² | Sweep: ${sweep_deg.toFixed(1)}° | Taper: ${taper.toFixed(2)} | R_area: ${ad.r_area.toFixed(2)} (Waist Fit: ${(ad.waist_quality * 100).toFixed(0)}%)`,
-      14,
-      35
+      38
     );
 
     // Centerline
-    ctx.strokeStyle = "rgba(224, 159, 62, 0.45)";
+    ctx.strokeStyle = "rgba(161, 98, 7, 0.45)";
     ctx.setLineDash([6, 4]);
     ctx.beginPath();
     ctx.moveTo(ox - 10, cy);
@@ -422,8 +414,8 @@
     const x_root_te = x_wing_le + c_root * scale;
 
     // Draw Upper & Lower Wing Halves
-    ctx.fillStyle = "rgba(0, 240, 255, 0.13)";
-    ctx.strokeStyle = "#00F0FF";
+    ctx.fillStyle = "rgba(30, 64, 175, 0.13)";
+    ctx.strokeStyle = "#1E40AF";
     ctx.lineWidth = 1.8;
     [-1, 1].forEach(function (dir) {
       const rRootPx = K.sampleFuselageRadius(stationRadii, 0.45) * scale * 0.85;
@@ -459,8 +451,8 @@
     }
 
     // Draw Sculpted Fuselage Contour from 11-station spline!
-    ctx.fillStyle = "rgba(14, 34, 64, 0.92)";
-    ctx.strokeStyle = ad.r_area <= 1.18 ? "#3BCEAC" : "#00F0FF";
+    ctx.fillStyle = "#F8FAFC";
+    ctx.strokeStyle = ad.r_area <= 1.18 ? "#15803D" : "#1E40AF";
     ctx.lineWidth = 2.2;
     ctx.beginPath();
     const N = ad.xs.length;
@@ -482,7 +474,7 @@
     ctx.stroke();
 
     // Draw Minimum Engine/Cockpit Clearance Envelope inside Fuselage (dashed red)
-    ctx.strokeStyle = "rgba(255, 71, 87, 0.55)";
+    ctx.strokeStyle = "rgba(185, 28, 28, 0.55)";
     ctx.lineWidth = 1.2;
     ctx.setLineDash([3, 3]);
     [-1, 1].forEach(function (dir) {
@@ -502,17 +494,17 @@
     const x_cg = x_wing_le + 0.38 * c_root * scale + 0.35 * dx_qc;
     const sm = perf ? perf.static_margin : 0.06;
     const x_ac = x_cg + sm * c_root * scale * 2.2;
-    ctx.fillStyle = "#E09F3E";
+    ctx.fillStyle = "#A16207";
     ctx.beginPath();
     ctx.arc(x_cg, cy, 4.5, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillText("CG", x_cg - 8, cy - 8);
+    ctx.fillText("重心", x_cg - 10, cy - 8);
 
-    ctx.fillStyle = "#3BCEAC";
+    ctx.fillStyle = "#15803D";
     ctx.beginPath();
     ctx.arc(x_ac, cy, 4.5, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillText("AC", x_ac + 4, cy + 14);
+    ctx.fillText("气动中心", x_ac + 4, cy + 16);
 
     // Interactive Handles on Top-View Blueprint:
     // 1. Wingtip Leading-Edge Handle (drag X -> Sweep, drag Y -> Span/AR)
@@ -534,15 +526,15 @@
       y: cy - half_span_px,
     };
     handles.push(wLeHandle, wTeHandle);
-    drawHandleNode(ctx, wLeHandle.x, wLeHandle.y, "#00F0FF", "", activeId === wLeHandle.id, 6.5);
-    drawHandleNode(ctx, wTeHandle.x, wTeHandle.y, "#F59E0B", "", activeId === wTeHandle.id, 6.0);
-    ctx.font = "bold 10px 'JetBrains Mono', monospace";
+    drawHandleNode(ctx, wLeHandle.x, wLeHandle.y, "#1E40AF", "", activeId === wLeHandle.id, 6.5);
+    drawHandleNode(ctx, wTeHandle.x, wTeHandle.y, "#B45309", "", activeId === wTeHandle.id, 6.0);
+    ctx.font = "bold 10px Inter, 'PingFang SC', sans-serif";
     ctx.textAlign = "right";
-    ctx.fillStyle = activeId === wLeHandle.id ? "#FFFFFF" : "#00F0FF";
-    ctx.fillText("翼尖前缘 · 后掠/展长", wLeHandle.x - 12, wLeHandle.y - 10);
+    ctx.fillStyle = activeId === wLeHandle.id ? "#0F172A" : "#1E40AF";
+    ctx.fillText("翼尖前缘：后掠 / 翼展", wLeHandle.x - 12, wLeHandle.y - 10);
     ctx.textAlign = "left";
-    ctx.fillStyle = activeId === wTeHandle.id ? "#FFFFFF" : "#F59E0B";
-    ctx.fillText("翼尖后缘 · 梢弦/面积", wTeHandle.x + 12, wTeHandle.y + 4);
+    ctx.fillStyle = activeId === wTeHandle.id ? "#0F172A" : "#B45309";
+    ctx.fillText("翼尖后缘：梢弦 / 面积", wTeHandle.x + 12, wTeHandle.y + 4);
 
     for (let k = 1; k <= 9; k++) {
       const u = k / 10.0;
@@ -557,7 +549,7 @@
         y: hy,
         rMin: minRadii[k],
       });
-      drawHandleNode(ctx, hx, hy, "#3BCEAC", k === 5 ? "腰部S5" : "", activeId === hId, 4.8);
+      drawHandleNode(ctx, hx, hy, "#1E40AF", "", activeId === hId, 4.8);
     }
 
     // ========================================================================
@@ -566,8 +558,8 @@
     const sx0 = w * 0.63;
     const sy0 = h * 0.36;
     const sScale = scale * 0.78;
-    ctx.strokeStyle = "#00F0FF";
-    ctx.fillStyle = "rgba(0, 240, 255, 0.12)";
+    ctx.strokeStyle = "#1E40AF";
+    ctx.fillStyle = "rgba(30, 64, 175, 0.12)";
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
       const u = i / (N - 1);
@@ -605,18 +597,18 @@
     const afBoxY = h * 0.62;
     const afBoxW = w * 0.33;
     const afBoxH = h * 0.26;
-    ctx.strokeStyle = "rgba(0, 240, 255, 0.35)";
+    ctx.strokeStyle = "rgba(30, 64, 175, 0.35)";
     ctx.strokeRect(afBoxX, afBoxY, afBoxW, afBoxH);
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "bold 10px 'JetBrains Mono', monospace";
-    ctx.fillText(`机翼根部实测手绘翼型截面 (t/c=${(tc * 100).toFixed(1)}%, Camber=${(afEval.camber_max * 100).toFixed(1)}%)`, afBoxX + 8, afBoxY + 14);
+    ctx.fillStyle = "#1E40AF";
+    ctx.font = "bold 10px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText(`翼根截面  t/c ${(tc * 100).toFixed(1)}%  弯度 ${(afEval.camber_max * 100).toFixed(1)}%`, afBoxX + 8, afBoxY + 14);
 
     const afMidY = afBoxY + afBoxH * 0.58;
     const afPadX = afBoxX + 14;
     const afDrawW = afBoxW - 28;
     const afScaleY = afDrawW * 1.45; // slight vertical exaggeration for blueprint visibility
-    ctx.fillStyle = "rgba(245, 158, 11, 0.18)";
-    ctx.strokeStyle = "#F59E0B";
+    ctx.fillStyle = "rgba(180, 83, 9, 0.18)";
+    ctx.strokeStyle = "#B45309";
     ctx.lineWidth = 1.8;
     ctx.beginPath();
     for (let i = 0; i < afEval.xs.length; i++) {
@@ -635,10 +627,10 @@
     ctx.stroke();
 
     // Static Margin & Stability Footer
-    ctx.fillStyle = "#E09F3E";
-    ctx.font = "11px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#64748B";
+    ctx.font = "12px Inter, 'PingFang SC', sans-serif";
     ctx.fillText(
-      `Static Margin: ${(sm * 100).toFixed(1)}% MAC (${sm >= 0.02 ? "STABLE" : "RELAXED/PITCH-UP RISK"}) | Root t/c: ${(tc * 100).toFixed(1)}% | Fuselage Vol: ${ad.fus_vol_m3.toFixed(1)} m³`,
+      `静稳定裕度 ${(sm * 100).toFixed(1)}% MAC（${sm >= 0.02 ? "稳定" : "放宽 / 有上仰风险"}）   翼根厚度 ${(tc * 100).toFixed(1)}%   机身容积 ${ad.fus_vol_m3.toFixed(1)} m³`,
       14,
       h - 12
     );
@@ -684,8 +676,8 @@
     const pw = w - padL - padR;
 
     // Top Panel (42% height): Interactive Fuselage Radius Sculptor R_fus(x)
-    const fusTop = 42;
-    const fusH = Math.round((h - 76) * 0.42);
+    const fusTop = 54;
+    const fusH = Math.round((h - 88) * 0.42);
     const autoFusMaxR = Math.max(1.35, Number((design.fuselage && design.fuselage.max_diameter_m) || 1.5) * 0.68);
     const fusMaxR = (canvas._lockScale && canvas._lastFusMaxR) ? canvas._lastFusMaxR : autoFusMaxR;
     canvas._lastFusMaxR = fusMaxR;
@@ -693,42 +685,38 @@
     const toFusY = (r) => fusTop + fusH - (Math.max(0.0, Math.min(fusMaxR, r)) / fusMaxR) * fusH;
     const fromFusY = (py) => Math.max(0.08, Math.min(fusMaxR, ((fusTop + fusH - py) / Math.max(1, fusH)) * fusMaxR));
 
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "bold 12px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#0F172A";
+    ctx.font = "600 13px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("机身半径与截面积分布", 14, 21);
+    ctx.fillStyle = isSmooth ? "#15803D" : "#B91C1C";
+    ctx.font = "12px Inter, 'PingFang SC', sans-serif";
     ctx.fillText(
-      "INTERACTIVE FUSELAGE WAIST SCULPTOR & SEARS–HAACK AREA DISTRIBUTION A(x) // 拖拽 S0-S10 捏出可口可乐瓶蜂腰",
+      `波阻系数 R_area ${ad.r_area.toFixed(2)}   蜂腰吻合 ${(ad.waist_quality * 100).toFixed(0)}%   机身容积 ${ad.fus_vol_m3.toFixed(1)} m³   ${isSmooth ? "截面积过渡平顺" : "机翼处截面积突增，跨音速波阻偏高"}`,
       14,
-      19
-    );
-    ctx.fillStyle = isSmooth ? "#3BCEAC" : "#FF5A47";
-    ctx.font = "11px 'JetBrains Mono', monospace";
-    ctx.fillText(
-      `Wave-Drag Factor R_area = ${ad.r_area.toFixed(2)} | 蜂腰吻合度: ${(ad.waist_quality * 100).toFixed(0)}% | 机身容积: ${ad.fus_vol_m3.toFixed(1)} m³ | 状态: ${isSmooth ? "✅ 面积律修形达标 (消除跨音速激波墙)" : "⚠️ 截面积二阶导数突变 (触发跨音速波阻墙!)"}`,
-      14,
-      35
+      38
     );
 
     // Fuselage Sculptor Frame
-    ctx.strokeStyle = "rgba(74, 107, 156, 0.55)";
+    ctx.strokeStyle = "#E2E8F0";
     ctx.lineWidth = 1.0;
     ctx.strokeRect(padL, fusTop, pw, fusH);
 
     // Shade Wing Axial Footprint inside Fuselage Sculptor so player knows WHERE to pinch!
     const N = ad.xs.length;
-    ctx.fillStyle = "rgba(0, 240, 255, 0.08)";
+    ctx.fillStyle = "rgba(15, 23, 42, 0.035)";
     for (let i = 0; i < N - 1; i++) {
       if (ad.a_wing[i] > 0.02) {
         const x1 = toX(i / (N - 1)), x2 = toX((i + 1) / (N - 1));
         ctx.fillRect(x1, fusTop, x2 - x1 + 0.5, fusH);
       }
     }
-    ctx.fillStyle = "rgba(0, 240, 255, 0.55)";
-    ctx.font = "10px 'JetBrains Mono', monospace";
-    ctx.fillText("◀── 机翼厚度叠加区 (在此区间向内向下拉动控制点 S4~S7 即可补偿机翼截面积，捏出蜂腰!) ──▶", padL + pw * 0.24, fusTop + 14);
+    ctx.fillStyle = "#94A3B8";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("机翼所在区段", padL + pw * 0.45, fusTop + 14);
 
     // Shade Sculpted Fuselage Half-Profile R_fus(x)
-    ctx.fillStyle = "rgba(0, 240, 255, 0.16)";
-    ctx.strokeStyle = "#00F0FF";
+    ctx.fillStyle = "rgba(30, 64, 175, 0.16)";
+    ctx.strokeStyle = "#1E40AF";
     ctx.lineWidth = 2.4;
     ctx.beginPath();
     ctx.moveTo(toX(0), fusTop + fusH);
@@ -741,9 +729,9 @@
     ctx.stroke();
 
     // Draw Minimum Clearance Boundary R_min(x) (Cockpit + Engine clearance) in Red Dashed
-    ctx.fillStyle = "rgba(255, 71, 87, 0.16)";
-    ctx.strokeStyle = "#FF4757";
-    ctx.lineWidth = 1.6;
+    ctx.fillStyle = "rgba(100, 116, 139, 0.10)";
+    ctx.strokeStyle = "#B91C1C";
+    ctx.lineWidth = 1.2;
     ctx.setLineDash([5, 4]);
     ctx.beginPath();
     ctx.moveTo(toX(0), fusTop + fusH);
@@ -755,11 +743,11 @@
     ctx.fill();
     ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = "#FF6B81";
-    ctx.font = "10px 'JetBrains Mono', monospace";
-    ctx.fillText("--- 红色虚线禁区: 座舱与发动机最小净空包线 R_min(x)", padL + 10, fusTop + fusH - 6);
-    ctx.fillStyle = "#94A8C8";
-    ctx.fillText("R_fus(m)", 6, fusTop + 14);
+    ctx.fillStyle = "#B91C1C";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("虚线：座舱与发动机所需最小半径", padL + 10, fusTop + fusH - 6);
+    ctx.fillStyle = "#64748B";
+    ctx.fillText("半径 m", 6, fusTop + 14);
 
     // Render 11 Interactive Fuselage Station Handles S0..S10
     const handles = [];
@@ -778,7 +766,7 @@
         u,
         rMin: minRadii[k],
       });
-      const color = (k >= 4 && k <= 7) ? "#3BCEAC" : "#00F0FF";
+      const color = "#1E40AF";
       P1.drawHandleNode(ctx, hx, hy, color, `S${k}`, activeId === hId, 5.8);
     }
 
@@ -790,12 +778,12 @@
     const maxA = Math.max(ad.peak_total * 1.18, 2.5);
     const toAreaY = (a) => areaTop + areaH - (Math.max(0.0, Math.min(maxA, a)) / maxA) * areaH;
 
-    ctx.strokeStyle = "rgba(74, 107, 156, 0.55)";
+    ctx.strokeStyle = "#E2E8F0";
     ctx.lineWidth = 1.0;
     ctx.strokeRect(padL, areaTop, pw, areaH);
 
     // Shade Excess Bump between A_total(x) and Ideal Sears-Haack A_SH(x)
-    ctx.fillStyle = isSmooth ? "rgba(59, 206, 172, 0.15)" : "rgba(217, 74, 56, 0.25)";
+    ctx.fillStyle = isSmooth ? "rgba(21, 128, 61, 0.15)" : "rgba(194, 65, 12, 0.25)";
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
       const x = toX(i / (N - 1)), y = toAreaY(ad.a_total[i]);
@@ -809,7 +797,7 @@
     ctx.fill();
 
     // Draw Fuselage A_fus(x)
-    ctx.strokeStyle = "rgba(0, 240, 255, 0.65)";
+    ctx.strokeStyle = "rgba(30, 64, 175, 0.65)";
     ctx.lineWidth = 1.6;
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
@@ -820,7 +808,7 @@
     ctx.stroke();
 
     // Draw Ideal Sears-Haack Spindle A_SH(x) (dashed brass)
-    ctx.strokeStyle = "#E09F3E";
+    ctx.strokeStyle = "#A16207";
     ctx.lineWidth = 2.0;
     ctx.setLineDash([6, 4]);
     ctx.beginPath();
@@ -833,7 +821,7 @@
     ctx.setLineDash([]);
 
     // Draw Total A(x) = Fuselage + Wing + Tail
-    ctx.strokeStyle = isSmooth ? "#3BCEAC" : "#FF5A47";
+    ctx.strokeStyle = isSmooth ? "#15803D" : "#C2410C";
     ctx.lineWidth = 2.6;
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
@@ -844,17 +832,17 @@
     ctx.stroke();
 
     // Legend & Labels
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "10px 'JetBrains Mono', monospace";
-    ctx.fillText(`0.0 m (机头 Nose)`, padL, h - 6);
-    ctx.fillText(`${ad.L.toFixed(1)} m (尾喷管 Nozzle)`, padL + pw - 125, h - 6);
-    ctx.fillText(`A(x) m²`, 6, areaTop + 14);
-    ctx.fillStyle = "#E09F3E";
-    ctx.fillText("--- 理想西尔斯-哈克纺锤体 A_SH(x)", padL + 12, areaTop + 14);
-    ctx.fillStyle = isSmooth ? "#3BCEAC" : "#FF5A47";
-    ctx.fillText("─── 全机实际总截面积 A_total(x) = 机身 + 机翼 + 尾翼", padL + 235, areaTop + 14);
-    ctx.fillStyle = "#00F0FF";
-    ctx.fillText("─── 机身截面积 A_fus(x)", padL + 545, areaTop + 14);
+    ctx.fillStyle = "#64748B";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText(`机头`, padL, h - 6);
+    ctx.fillText(`尾喷口 ${ad.L.toFixed(1)} m`, padL + pw - 80, h - 6);
+    ctx.fillText(`面积 m²`, 6, areaTop + 14);
+    ctx.fillStyle = "#A16207";
+    ctx.fillText("虚线  理想 Sears–Haack 分布", padL + 12, areaTop + 14);
+    ctx.fillStyle = isSmooth ? "#15803D" : "#C2410C";
+    ctx.fillText("实线  全机总截面积", padL + 210, areaTop + 14);
+    ctx.fillStyle = "#1E40AF";
+    ctx.fillText("细线  机身截面积", padL + 350, areaTop + 14);
 
     canvas._interactive = {
       mode: "fuselage_area",
@@ -874,19 +862,19 @@
     const { ctx, w, h } = env;
     canvas._interactive = null;
 
-    const padL = 56, padR = 24, padT = 44, padB = 36;
+    const padL = 56, padR = 24, padT = 54, padB = 36;
     const pw = w - padL - padR;
     const ph = h - padT - padB;
 
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "bold 12px 'JetBrains Mono', monospace";
-    ctx.fillText("BOYD ENERGY-MANEUVERABILITY // 1G SPECIFIC EXCESS POWER Ps(Mach, Alt)", 14, 20);
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "11px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#0F172A";
+    ctx.font = "600 13px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("1g 单位剩余功率 Ps（马赫数 × 高度）", 14, 21);
+    ctx.fillStyle = "#64748B";
+    ctx.font = "12px Inter, 'PingFang SC', sans-serif";
     ctx.fillText(
-      `Max Mach: M ${perf.max_mach_alt.toFixed(2)} | Ceiling: ${(perf.service_ceiling_m * 3.28084).toFixed(0)} ft | Climb (SL): ${(perf.climb_rate_sl_mps * 196.85).toFixed(0)} ft/min | M0.8 Turn: ${perf.sustained_turn_dps_m08_4572m.toFixed(1)} deg/s`,
+      `最大马赫 ${perf.max_mach_alt.toFixed(2)}   升限 ${(perf.service_ceiling_m * 3.28084).toFixed(0)} ft   海平面爬升 ${(perf.climb_rate_sl_mps * 196.85).toFixed(0)} ft/min   M0.8 盘旋 ${perf.sustained_turn_dps_m08_4572m.toFixed(1)}°/s`,
       14,
-      36
+      38
     );
 
     const cols = 38, rows = 22;
@@ -910,27 +898,25 @@
 
         if (psMps > 0) {
           const intensity = Math.min(1.0, psMps / 140.0);
-          const g = Math.round(90 + 145 * intensity);
-          const b = Math.round(140 + 100 * intensity);
-          ctx.fillStyle = `rgba(18, ${g}, ${b}, 0.58)`;
+          ctx.fillStyle = `rgba(30, 64, 175, ${(0.06 + 0.55 * intensity).toFixed(3)})`;
         } else {
-          ctx.fillStyle = "rgba(217, 74, 56, 0.14)";
+          ctx.fillStyle = "rgba(194, 65, 12, 0.14)";
         }
         ctx.fillRect(padL + c * cellW, padT + r * cellH, cellW + 0.5, cellH + 0.5);
       }
     }
 
-    ctx.strokeStyle = "#00F0FF";
+    ctx.strokeStyle = "#1E40AF";
     ctx.strokeRect(padL, padT, pw, ph);
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "10px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#64748B";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
     for (let m = 0.4; m <= 2.2; m += 0.3) {
       const x = padL + ((m - minM) / (maxM - minM)) * pw;
       ctx.fillText(`M${m.toFixed(1)}`, x - 12, padT + ph + 15);
     }
     [0, 20000, 40000, 60000].forEach(function (ft) {
       const y = padT + ph * (1.0 - ft / maxAltFt);
-      ctx.fillText(`${ft / 1000}k ft`, 8, y + 4);
+      ctx.fillText(`${ft / 1000}k`, 8, y + 4);
     });
   }
 
@@ -941,16 +927,16 @@
     const { ctx, w, h } = env;
     canvas._interactive = null;
 
-    const padL = 56, padR = 26, padT = 44, padB = 36;
+    const padL = 56, padR = 26, padT = 54, padB = 36;
     const pw = w - padL - padR;
     const ph = h - padT - padB;
 
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "bold 12px 'JetBrains Mono', monospace";
-    ctx.fillText("TRANSONIC WAVE-DRAG RISE // ZERO-LIFT DRAG COEFFICIENT CD0(Mach)", 14, 20);
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "11px 'JetBrains Mono', monospace";
-    ctx.fillText("Solid Cyan: Current Sculpted Airfoil & Fuselage | Dashed Amber: Counterfactual Area-Rule Comparison", 14, 36);
+    ctx.fillStyle = "#0F172A";
+    ctx.font = "600 13px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("零升阻力系数 CD0 随马赫数变化", 14, 21);
+    ctx.fillStyle = "#64748B";
+    ctx.font = "12px Inter, 'PingFang SC', sans-serif";
+    ctx.fillText("实线：当前设计      虚线：切换面积律后的对比", 14, 38);
 
     const altDesign = JSON.parse(JSON.stringify(design));
     altDesign.fuselage = altDesign.fuselage || {};
@@ -968,7 +954,7 @@
     const toY = (cd) => padT + ph - Math.min(1.0, cd / maxCD) * ph;
 
     // Draw Counterfactual Curve (dashed)
-    ctx.strokeStyle = "#E09F3E";
+    ctx.strokeStyle = "#A16207";
     ctx.lineWidth = 1.8;
     ctx.setLineDash([5, 4]);
     ctx.beginPath();
@@ -982,7 +968,7 @@
     ctx.setLineDash([]);
 
     // Draw Current Design Curve
-    ctx.strokeStyle = "#00F0FF";
+    ctx.strokeStyle = "#1E40AF";
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     for (let i = 0; i <= 60; i++) {
@@ -993,10 +979,10 @@
     }
     ctx.stroke();
 
-    ctx.strokeStyle = "#4A6B9C";
+    ctx.strokeStyle = "#CBD5E1";
     ctx.strokeRect(padL, padT, pw, ph);
-    ctx.fillStyle = "#94A8C8";
-    ctx.font = "10px 'JetBrains Mono', monospace";
+    ctx.fillStyle = "#64748B";
+    ctx.font = "10px Inter, 'PingFang SC', sans-serif";
     [0.5, 0.8, 1.0, 1.2, 1.5, 1.8, 2.1].forEach(function (m) {
       ctx.fillText(`M${m.toFixed(1)}`, toX(m) - 12, padT + ph + 15);
     });
