@@ -86,7 +86,12 @@
     const pw = w - padL - padR;
     const topY = 44, topH = Math.round((h - 76) * 0.54);
     const midY = topY + Math.round(topH * 0.50);
-    const yMax = 0.14; // +/- 14% chord vertical scale
+    // Adaptive vertical scale so thin supersonic sections stay legible (snaps to 4/6/8/10/14 %c)
+    const maxAbsY = Math.max.apply(null, af.upper.concat(af.lower).map(Math.abs));
+    const autoYMax = [0.04, 0.06, 0.08, 0.10, 0.14].find((v) => v >= maxAbsY * 1.6) || 0.14;
+    // Freeze the scale while the player is dragging so nodes don't jump under the cursor
+    const yMax = (canvas._lockScale && canvas._lastYMax) ? canvas._lastYMax : autoYMax;
+    canvas._lastYMax = yMax;
 
     const toX = (xc) => padL + xc * pw;
     const toY = (yc) => midY - (yc / yMax) * (topH * 0.48);
@@ -114,8 +119,8 @@
     ctx.lineWidth = 1.0;
     ctx.strokeRect(padL, topY, pw, topH);
 
-    // Horizontal y/c grid lines (+10%, +5%, 0%, -5%, -10%)
-    [-0.10, -0.05, 0.0, 0.05, 0.10].forEach(function (yg) {
+    // Horizontal y/c grid lines (scaled to current view)
+    [-1, -0.5, 0, 0.5, 1].map((f) => f * yMax * 0.75).forEach(function (yg) {
       const py = toY(yg);
       ctx.strokeStyle = yg === 0.0 ? "rgba(224, 159, 62, 0.45)" : "rgba(0, 240, 255, 0.10)";
       ctx.setLineDash(yg === 0.0 ? [5, 4] : []);
@@ -126,7 +131,7 @@
       ctx.setLineDash([]);
       ctx.fillStyle = "#6E88AD";
       ctx.font = "9px 'JetBrains Mono', monospace";
-      ctx.fillText(`${(yg * 100).toFixed(0)}%c`, 10, py + 3);
+      ctx.fillText(`${(yg * 100).toFixed(1)}%c`, 10, py + 3);
     });
 
     // Chordwise station grid lines (0%, 20%, 40%, 60%, 80%, 100% c)
@@ -376,7 +381,10 @@
     const sweep_rad = (sweep_deg * Math.PI) / 180.0;
 
     // Scale meters to pixels for Top View (left 62% of canvas)
-    const scale = Math.min((w * 0.52) / Math.max(12.0, L * 1.15), (h * 0.62) / Math.max(8.0, span * 1.18));
+    const autoScale = Math.min((w * 0.52) / Math.max(12.0, L * 1.15), (h * 0.62) / Math.max(8.0, span * 1.18));
+    // Freeze scale during a drag so the grabbed handle tracks the cursor 1:1
+    const scale = (canvas._lockScale && canvas._lastScale) ? canvas._lastScale : autoScale;
+    canvas._lastScale = scale;
     const ox = w * 0.06;
     const cy = h * 0.48;
 
@@ -526,8 +534,15 @@
       y: cy - half_span_px,
     };
     handles.push(wLeHandle, wTeHandle);
-    drawHandleNode(ctx, wLeHandle.x, wLeHandle.y, "#00F0FF", "翼尖前缘(后掠/展长)", activeId === wLeHandle.id, 6.5);
-    drawHandleNode(ctx, wTeHandle.x, wTeHandle.y, "#F59E0B", "翼尖后缘(弦长/面积)", activeId === wTeHandle.id, 6.0);
+    drawHandleNode(ctx, wLeHandle.x, wLeHandle.y, "#00F0FF", "", activeId === wLeHandle.id, 6.5);
+    drawHandleNode(ctx, wTeHandle.x, wTeHandle.y, "#F59E0B", "", activeId === wTeHandle.id, 6.0);
+    ctx.font = "bold 10px 'JetBrains Mono', monospace";
+    ctx.textAlign = "right";
+    ctx.fillStyle = activeId === wLeHandle.id ? "#FFFFFF" : "#00F0FF";
+    ctx.fillText("翼尖前缘 · 后掠/展长", wLeHandle.x - 12, wLeHandle.y - 10);
+    ctx.textAlign = "left";
+    ctx.fillStyle = activeId === wTeHandle.id ? "#FFFFFF" : "#F59E0B";
+    ctx.fillText("翼尖后缘 · 梢弦/面积", wTeHandle.x + 12, wTeHandle.y + 4);
 
     for (let k = 1; k <= 9; k++) {
       const u = k / 10.0;
@@ -671,7 +686,9 @@
     // Top Panel (42% height): Interactive Fuselage Radius Sculptor R_fus(x)
     const fusTop = 42;
     const fusH = Math.round((h - 76) * 0.42);
-    const fusMaxR = Math.max(1.35, Number((design.fuselage && design.fuselage.max_diameter_m) || 1.5) * 0.68);
+    const autoFusMaxR = Math.max(1.35, Number((design.fuselage && design.fuselage.max_diameter_m) || 1.5) * 0.68);
+    const fusMaxR = (canvas._lockScale && canvas._lastFusMaxR) ? canvas._lastFusMaxR : autoFusMaxR;
+    canvas._lastFusMaxR = fusMaxR;
     const toX = (u) => padL + u * pw;
     const toFusY = (r) => fusTop + fusH - (Math.max(0.0, Math.min(fusMaxR, r)) / fusMaxR) * fusH;
     const fromFusY = (py) => Math.max(0.08, Math.min(fusMaxR, ((fusTop + fusH - py) / Math.max(1, fusH)) * fusMaxR));
